@@ -4,61 +4,81 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float forwardMoveSpeed;
-    public bool stopForwardMovement = false;
-    public bool stopSideMovement = false;
-    Vector3 cursor_pos;
-    Vector3 start_pos;
-    public bool isTouching = false;
-    public GameObject EndLine;
-    public enum PLATFORM { PC, MOBILE };
-    [SerializeField] PLATFORM platform = PLATFORM.PC;
-    public static PlayerController Instance;
-    // Start is called before the first frame update
+    private GameManager gm;
+    [SerializeField] private LayerMask Wall;
+    private float minXBound = -4.75f;
+    private float maxXBound = 4.75f;
+    public float speed = 15f;
+
     private void Awake()
     {
-        if (Instance == null)
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    }
+
+    private void Update()
+    {
+        if (gm.gameStart)
         {
-            Instance = this;
+            if (Input.GetMouseButton(0))
+            {
+                Move();
+            }
+
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, minXBound, maxXBound), transform.position.y, transform.position.z);
+            CheckXBound();
         }
     }
-    void Start()
-    { 
-    }
-    // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
-        if (platform == PLATFORM.PC)
+        if (gm.gameStart)
         {
-            cursor_pos = Camera.main.ScreenToViewportPoint(Input.mousePosition) * 900; // Instead of getting pixels, we are getting viewport coordinates which is resolution independent
+            transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
+        }
+    }
+
+    public void Move()
+    {
+        float swipeSpeed = 15;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.transform.localPosition.z;
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 50))
+        {
+            Vector3 hitPoint = hit.point;
+            hitPoint.y = transform.position.y;
+            hitPoint.z = transform.position.z;
+
+            transform.position = Vector3.MoveTowards(transform.position, hitPoint, Time.deltaTime * swipeSpeed);
+        }
+    }
+
+    private void CheckXBound()
+    {
+        float minX = transform.position.x;
+        float maxX = transform.position.x;
+
+        Vector3 LeftControl = new Vector3(minX, transform.position.y, transform.position.z);
+        Vector3 RightControl = new Vector3(maxX, transform.position.y, transform.position.z);
+
+        if (Physics.Raycast(LeftControl, Vector3.left, 0.5f, Wall))
+        {
+            minXBound = transform.position.x;
         }
         else
         {
-            if (Input.touchCount > 0) cursor_pos = Camera.main.ScreenToViewportPoint(Input.GetTouch(0).position) * 900; // Instead of getting pixels, we are getting viewport coordinates which is resolution independent
+            minXBound = -4.75f;
         }
-        if (stopForwardMovement == false)
+
+        if (Physics.Raycast(RightControl, Vector3.right, 0.5f, Wall))
         {
-            transform.position += Vector3.forward * forwardMoveSpeed * Time.deltaTime;//regular go forward
+            maxXBound = transform.position.x;
         }
-        if (stopSideMovement == false)
+        else
         {
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
-            { // This is actions when finger/cursor hit screen
-                start_pos = cursor_pos;
-                isTouching = true;
-            }
-            if ((Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)) || Input.GetMouseButton(0))
-            { // This is actions when finger/cursor pressed on screen
-                HorizontalMove(cursor_pos);
-            }
+            maxXBound = 4.75f;
         }
-    }
-    public void HorizontalMove(Vector3 cursor_pos)
-    {
-        Vector3 pos =transform.localPosition;
-        pos.x = (cursor_pos - start_pos).x / 60;
-        if (pos.x >= 4.75f) { pos.x = 4.75f; }
-        if (pos.x <= -4.75f) { pos.x = -4.75f; }
-        transform.position = new Vector3(pos.x, transform.position.y, transform.position.z);
     }
 }
