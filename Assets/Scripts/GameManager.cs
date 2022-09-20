@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
             tapToStartText.gameObject.SetActive(false);
         }
 
-
         float newDistance = GetDistance();
         float progressValue = Mathf.InverseLerp(fullDistance,0,newDistance);
         UpdateProgressFill(progressValue);

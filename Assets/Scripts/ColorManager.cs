@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NailPolishManager : MonoBehaviour
+public class ColorManager : MonoBehaviour
 {
     [SerializeField] Material[] Pattern;
     [SerializeField] GameObject Brush;
     [SerializeField] Texture[] myColor;
     [SerializeField] Texture[] myPattern;
     [SerializeField] GameObject[] nailsArray;
-    public static NailPolishManager Instance;
+    public static ColorManager Instance;
     int colorIndex;
+
     public static int NAIL_COLOR_INDEX=0;
 
     private void Awake()
@@ -19,11 +20,6 @@ public class NailPolishManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-    void Start()
-    {
-      
-        
     }
 
     public Material GetColorMaterialByIndex(int colorIndex)
