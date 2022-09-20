@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
             other.transform.DOLocalRotate(new Vector3(-30,0,0),1));
         }
     }
+    
     private void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        float swipeSpeed = 15;
+        float swipeSpeed = 5;
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.transform.localPosition.z;
 

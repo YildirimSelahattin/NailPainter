@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorMachineManager : MonoBehaviour
+public class BrushManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    [SerializeField]int colorIndex = 1;
+    [SerializeField] int colorIndex = 1;
     Material brushMaterial;
-    
+    [SerializeField] GameObject headMaterial;
+
     void Start()
     {
-        brushMaterial=NailPolishManager.Instance.GetColorMaterialByIndex(colorIndex);
+        brushMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
+
         //Find the Standard Shader
         Material[] matArray = GetComponent<MeshRenderer>().materials;
-        matArray[NailPolishManager.NAIL_COLOR_INDEX] = brushMaterial;
+        matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
         GetComponent<MeshRenderer>().materials = matArray;
+
+        Material[] matArrays = headMaterial.GetComponent<MeshRenderer>().materials;
+        matArrays[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
+        headMaterial.GetComponent<MeshRenderer>().materials = matArrays;
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush
@@ -23,14 +27,9 @@ public class ColorMachineManager : MonoBehaviour
         if (other.transform.CompareTag("Nail"))
         {
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
-            matArray[NailPolishManager.NAIL_COLOR_INDEX] = brushMaterial;
+            matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             Debug.Log("print!!");
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
