@@ -14,7 +14,6 @@ public class NailPolishManager : MonoBehaviour
     [SerializeField] Texture[] myColor;
     [SerializeField] Texture[] myPattern;
     int colorIndex;
-    public Material test;
 
     void Start()
     {
@@ -29,18 +28,15 @@ public class NailPolishManager : MonoBehaviour
 
         //if(Collision)
         Brush.GetComponent<MeshRenderer>().material = myNewColorMaterial;
-        Brush.GetComponent<MeshRenderer>().materials[0] = test;
+        
+        Material[] matArray = Brush.GetComponent<MeshRenderer>().materials;
+        matArray[1] = myNewPatternMaterial;
+        Brush.GetComponent<MeshRenderer>().materials = matArray;
 
         Nail1.GetComponent<MeshRenderer>().material = myNewColorMaterial;
         Nail2.GetComponent<MeshRenderer>().material = myNewColorMaterial;
         Nail3.GetComponent<MeshRenderer>().material = myNewColorMaterial;
         Nail4.GetComponent<MeshRenderer>().material = myNewColorMaterial;
         Nail5.GetComponent<MeshRenderer>().material = myNewColorMaterial;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Brush.GetComponent<MeshRenderer>().materials[1] = test;
     }
 }
