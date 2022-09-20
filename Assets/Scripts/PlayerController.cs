@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     private GameManager gm;
@@ -10,6 +10,14 @@ public class PlayerController : MonoBehaviour
     private float maxXBound = 4.75f;
     public float speed = 15f;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("NailVanish"))
+        {
+            other.transform.DOLocalMoveY(transform.position.y, 1).OnComplete(() =>
+            other.transform.DOLocalRotate(new Vector3(-30,0,0),1));
+        }
+    }
     private void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
