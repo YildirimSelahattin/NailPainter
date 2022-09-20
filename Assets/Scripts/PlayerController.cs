@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float minXBound = -4.75f;
     private float maxXBound = 4.75f;
     public float speed = 15f;
-    
+
     private void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
             }
 
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, minXBound, maxXBound), transform.position.y, transform.position.z);
-            CheckXBound();  
+            CheckXBound();
         }
     }
 
@@ -34,18 +34,18 @@ public class PlayerController : MonoBehaviour
         if (gm.gameStart)
         {
             transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
-        }        
+        }
     }
 
     public void Move()
     {
-        float swipeSpeed = 5;
+        float swipeSpeed = 15;
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.transform.localPosition.z;
 
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
-        if (Physics.Raycast(ray,out RaycastHit hit, 50))
+        if (Physics.Raycast(ray, out RaycastHit hit, 50))
         {
             Vector3 hitPoint = hit.point;
             hitPoint.y = transform.position.y;
