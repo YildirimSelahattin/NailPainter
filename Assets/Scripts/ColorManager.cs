@@ -6,11 +6,13 @@ public class ColorManager : MonoBehaviour
 {
     [SerializeField] Texture[] colorsArray;
     [SerializeField] Texture[] patternsArray;
+    [SerializeField] Texture[] patternsColorArray;
     public static ColorManager Instance;
     int colorIndex;
 
     public static int NAIL_COLOR_INDEX=0;
     public static int NAIL_PATTERN_INDEX = 1;
+    public static int NAIL_PATTERN_COLOR_INDEX = 2;
 
     private void Awake()
     {
@@ -36,5 +38,13 @@ public class ColorManager : MonoBehaviour
         //Set Texture on the material
         myNewPatternMaterial.SetTexture("_MainTex", patternsArray[patternIndex]);
         return myNewPatternMaterial;
+    }
+
+    public Material GetPatternColorMaterialByIndex(int patternColorIndex)
+    {
+        Material myNewPatternColorMaterial = new Material(Shader.Find("Transparent/Diffuse"));
+        //Set Texture on the material
+        myNewPatternColorMaterial.SetTexture("_MainTex", patternsColorArray[patternColorIndex]);
+        return myNewPatternColorMaterial;
     }
 }
