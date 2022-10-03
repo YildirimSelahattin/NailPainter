@@ -11,6 +11,6 @@ public class Finish : MonoBehaviour
     {
         successPanel.SetActive(true);       
         gm.UpdateProgressFill(1);
-        gm.gameStart = false;
+        PlayerController.Instance.stopForwardMovement = true;
     }
 }
