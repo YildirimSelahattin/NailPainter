@@ -8,7 +8,7 @@ public class PatternMachineManager : MonoBehaviour
     Material patternMaterial;
     Vector3 standartPosition;
     [SerializeField] GameObject patternSign;
-    [SerializeField] int patternIndex;
+    public int patternIndex;
     // Start is called before the first frame update
     void Start()
     {

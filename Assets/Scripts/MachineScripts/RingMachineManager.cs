@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RingMachineManager : MonoBehaviour
 {
+    
     [SerializeField]public int whichFingerIndex;
     [SerializeField] GameObject handParent;
     GameObject nailParent;

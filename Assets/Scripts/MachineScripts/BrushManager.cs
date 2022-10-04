@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BrushManager : MonoBehaviour
 {
-    [SerializeField] int colorIndex = 1;
+    public int colorIndex = 1;
     Material brushMaterial;
     [SerializeField] GameObject headPart;
     [SerializeField] GameObject brushPart;

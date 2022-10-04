@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,48 +13,45 @@ public class GameManager : MonoBehaviour
     public Image fillImage;
     public TextMeshProUGUI tapToStartText;
     [Header("Transform References :")]
+
     public Transform player;
     public Transform end;
-  
-    private float fullDistance;
+
+     
+    // array that depends on players choices
+     public int[] currentColorIndexArray = new int[5] ;
+     public int[] currentPatternIndexArray = new int[5];
+     public int[] currentPatternColorIndexArray =new  int[5];
+     public int[] currentBraceletIndexArray =new  int[5];
+     public int[] currentRingIndexArray = new int[5];
+     public bool isCleaned;
+     public bool isManicured;
+
+    [Header("Target Index Arrays")] // based on per nail
+    [SerializeField] public int[] targetColorIndexArray = new int[5]; // color array
+    [SerializeField] public int[] targetPatternIndexArray = new int[5]; // pattern array 
+    [SerializeField] public int[] targetPatternColorIndexArray = new int[5]; // pattern color array
+    [SerializeField] public int[] targetBraceletIndexArray = new int[5]; // bracelet array
+    [SerializeField] public int[] targetRingIndex = new int[5]; // ring array 
+
+
+    [Header("No Name")]
+    int spawnIndex = 0;
+    int progress;
+    public static GameManager Instance;
+
     [HideInInspector] public bool gameStart = false;
-
-    private void Awake()
+    private void Start()
     {
-        fullDistance = GetDistance();
-    }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0))
+        if (Instance == null)
         {
-            gameStart = true;
-            tapToStartText.gameObject.SetActive(false);
+            Instance = this;
         }
-
-        float newDistance = GetDistance();
-        float progressValue = Mathf.InverseLerp(fullDistance,0,newDistance);
-        UpdateProgressFill(progressValue);
     }
 
-    private float GetDistance()
+    public void CompareTwoHands()
     {
-        Vector3 zPlayer = new Vector3(0, 0, player.position.z);
-        Vector3 zEnd = new Vector3(0, 0, end.position.z);
-        return Vector3.Distance(zPlayer, zEnd);
-    }
 
-    public void UpdateProgressFill(float value)
-    {
-        if (gameStart)
-        {
-            fillImage.fillAmount = value;
-        }     
-    }
-
-    public void RestartGame()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

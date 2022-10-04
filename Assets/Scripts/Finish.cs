@@ -10,7 +10,6 @@ public class Finish : MonoBehaviour
     private void OnTriggerEnter(Collider other)//on player get to the finish level
     {
         successPanel.SetActive(true);       
-        gm.UpdateProgressFill(1);
         PlayerController.Instance.stopForwardMovement = true;
     }
 }

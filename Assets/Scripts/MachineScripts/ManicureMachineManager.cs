@@ -41,6 +41,7 @@ public class ManicureMachineManager : MonoBehaviour
         }
         nailParent.transform.GetChild(index).gameObject.SetActive(false);
         newNailParent.transform.GetChild(index).gameObject.SetActive(true);
+        GameManager.Instance.isManicured = true; // to notify game manager that player get in manicure machine
 
     }
 }
