@@ -1,7 +1,9 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class BrushManager : MonoBehaviour
 {
@@ -32,6 +34,7 @@ public class BrushManager : MonoBehaviour
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             Debug.Log("print!!");
+            
         }
     }
     private void OnTriggerEnter(Collider other)

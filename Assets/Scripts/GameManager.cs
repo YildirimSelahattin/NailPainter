@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
      public int[] currentColorIndexArray = new int[5] ;
      public int[] currentPatternIndexArray = new int[5];
      public int[] currentPatternColorIndexArray =new  int[5];
-     public int[] currentBraceletIndexArray =new  int[5];
-     public int[] currentRingIndexArray = new int[5];
+     public int[] currentBraceletIndexArray;
+     public int[] currentRingIndexArray ;
      public bool isCleaned;
      public bool isManicured;
 
@@ -32,8 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int[] targetPatternIndexArray = new int[5]; // pattern array 
     [SerializeField] public int[] targetPatternColorIndexArray = new int[5]; // pattern color array
     [SerializeField] public int[] targetBraceletIndexArray = new int[5]; // bracelet array
-    [SerializeField] public int[] targetRingIndex = new int[5]; // ring array 
-
+    [SerializeField] public int[] targetRingIndexArray; // ring array 
 
     [Header("No Name")]
     int spawnIndex = 0;
@@ -48,10 +47,69 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        
     }
 
-    public void CompareTwoHands()
+    public float CompareTwoHands()
     {
+        int totalParameterNumber = 0;
+        int progress = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            //nail color compare
+            if (targetColorIndexArray[i] == currentBraceletIndexArray[i])
+            {
+                progress += 1;
+            }
 
+
+            //nail pattern color compare
+            if (targetPatternColorIndexArray[i] == currentPatternColorIndexArray[i])
+            {
+                progress += 1;
+
+            }
+            //nail pattern compare
+            if (targetPatternIndexArray[i] == currentPatternColorIndexArray[i])
+            {
+                progress += 1;
+
+            }
+            totalParameterNumber += 3;
+        }
+        //Ring compare
+        for(int i = 0;i < currentRingIndexArray.Length; i++)
+        {
+            if (currentRingIndexArray[i] == targetRingIndexArray[i])
+            {
+                progress += 1;
+            }
+            totalParameterNumber += 1;
+        }
+        //bracelet compare
+        for (int i = 0; i < currentBraceletIndexArray.Length; i++)
+        {
+            if (currentBraceletIndexArray[i] == targetBraceletIndexArray[i])
+            {
+                progress += 1;
+            }
+            totalParameterNumber += 1;
+        }
+
+        if(isManicured == true)
+        {
+            progress += 1;
+        }
+        if(isCleaned == true)
+        {
+            progress += 1;
+        }
+        totalParameterNumber += 2;
+        return progress / totalParameterNumber;
+    }
+
+    public void NailPainted(GameObject nail,int colorIndex)
+    {
+        
     }
 }
