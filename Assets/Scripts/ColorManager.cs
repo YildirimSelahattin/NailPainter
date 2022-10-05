@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,8 @@ public class ColorManager : MonoBehaviour
         Material myNewPatternMaterial = new Material(Shader.Find("Transparent/Diffuse"));
         //Set Texture on the material
         myNewPatternMaterial.SetTexture("_MainTex", patternsArray[patternIndex]);
+        myNewPatternMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));      
+        myNewPatternMaterial.DOTiling(new Vector2(2f, 2f), 0.1f);
         return myNewPatternMaterial;
     }
 
@@ -45,6 +48,7 @@ public class ColorManager : MonoBehaviour
         Material myNewPatternColorMaterial = new Material(Shader.Find("Transparent/Diffuse"));
         //Set Texture on the material
         myNewPatternColorMaterial.SetTexture("_MainTex", patternsColorArray[patternColorIndex]);
+        myNewPatternColorMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));
         return myNewPatternColorMaterial;
     }
 }
