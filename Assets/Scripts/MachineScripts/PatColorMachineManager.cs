@@ -7,16 +7,16 @@ public class PatColorMachineManager : MonoBehaviour
 {
     Material patternColorMaterial;
     Vector3 standartPosition;
-    [SerializeField] GameObject roller;
+    //[SerializeField] GameObject roller;
     [SerializeField] int patternColorIndex;
     // Start is called before the first frame update
     void Start()
     {
         standartPosition = transform.position;
         patternColorMaterial = ColorManager.Instance.GetPatternColorMaterialByIndex(patternColorIndex);
-        Material[] matArrays = roller.GetComponent<MeshRenderer>().materials;
+        Material[] matArrays = gameObject.GetComponent<MeshRenderer>().materials;
         matArrays[0] = patternColorMaterial;
-        roller.GetComponent<MeshRenderer>().materials = matArrays;
+        gameObject.GetComponent<MeshRenderer>().materials = matArrays;
     }
 
 
@@ -26,6 +26,7 @@ public class PatColorMachineManager : MonoBehaviour
         {
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_COLOR_INDEX] = patternColorMaterial;
+
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             Debug.Log("cikti");
         }
