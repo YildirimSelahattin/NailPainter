@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,48 +13,103 @@ public class GameManager : MonoBehaviour
     public Image fillImage;
     public TextMeshProUGUI tapToStartText;
     [Header("Transform References :")]
+
     public Transform player;
     public Transform end;
-  
-    private float fullDistance;
-    [HideInInspector] public bool gameStart = false;
 
-    private void Awake()
+     
+    // array that depends on players choices
+     public int[] currentColorIndexArray = new int[5] ;
+     public int[] currentPatternIndexArray = new int[5];
+     public int[] currentPatternColorIndexArray =new  int[5];
+     public int[] currentBraceletIndexArray;
+     public int[] currentRingIndexArray ;
+     public bool isCleaned;
+     public bool isManicured;
+
+    [Header("Target Index Arrays")] // based on per nail
+    [SerializeField] public int[] targetColorIndexArray = new int[5]; // color array
+    [SerializeField] public int[] targetPatternIndexArray = new int[5]; // pattern array 
+    [SerializeField] public int[] targetPatternColorIndexArray = new int[5]; // pattern color array
+    [SerializeField] public int[] targetBraceletIndexArray = new int[5]; // bracelet array
+    [SerializeField] public int[] targetRingIndexArray; // ring array 
+
+    [Header("No Name")]
+    int spawnIndex = 0;
+    int progress;
+    public static GameManager Instance;
+
+    [HideInInspector] public bool gameStart = false;
+    private void Start()
     {
-        fullDistance = GetDistance();
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        
     }
 
-    private void Update()
+    public float CompareTwoHands()
     {
-        if (Input.GetMouseButtonUp(0))
+        int totalParameterNumber = 0;
+        int progress = 0;
+        for (int i = 0; i < 5; i++)
         {
-            gameStart = true;
-            tapToStartText.gameObject.SetActive(false);
+            //nail color compare
+            if (targetColorIndexArray[i] == currentBraceletIndexArray[i])
+            {
+                progress += 1;
+            }
+
+
+            //nail pattern color compare
+            if (targetPatternColorIndexArray[i] == currentPatternColorIndexArray[i])
+            {
+                progress += 1;
+
+            }
+            //nail pattern compare
+            if (targetPatternIndexArray[i] == currentPatternColorIndexArray[i])
+            {
+                progress += 1;
+
+            }
+            totalParameterNumber += 3;
+        }
+        //Ring compare
+        for(int i = 0;i < currentRingIndexArray.Length; i++)
+        {
+            if (currentRingIndexArray[i] == targetRingIndexArray[i])
+            {
+                progress += 1;
+            }
+            totalParameterNumber += 1;
+        }
+        //bracelet compare
+        for (int i = 0; i < currentBraceletIndexArray.Length; i++)
+        {
+            if (currentBraceletIndexArray[i] == targetBraceletIndexArray[i])
+            {
+                progress += 1;
+            }
+            totalParameterNumber += 1;
         }
 
-        float newDistance = GetDistance();
-        float progressValue = Mathf.InverseLerp(fullDistance,0,newDistance);
-        UpdateProgressFill(progressValue);
-    }
-
-    private float GetDistance()
-    {
-        Vector3 zPlayer = new Vector3(0, 0, player.position.z);
-        Vector3 zEnd = new Vector3(0, 0, end.position.z);
-        return Vector3.Distance(zPlayer, zEnd);
-    }
-
-    public void UpdateProgressFill(float value)
-    {
-        if (gameStart)
+        if(isManicured == true)
         {
-            fillImage.fillAmount = value;
-        }     
+            progress += 1;
+        }
+        if(isCleaned == true)
+        {
+            progress += 1;
+        }
+        totalParameterNumber += 2;
+        return progress / totalParameterNumber;
     }
 
-    public void RestartGame()
+    public void NailPainted(GameObject nail,int colorIndex)
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 }
