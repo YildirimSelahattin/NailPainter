@@ -9,6 +9,7 @@ public class PatternMachineManager : MonoBehaviour
     Vector3 standartPosition;
     [SerializeField] GameObject patternSign;
     public int patternIndex;
+    public static bool nail1iscollerd = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +19,16 @@ public class PatternMachineManager : MonoBehaviour
         matArrays[0] = patternMaterial;
         patternSign.GetComponent<MeshRenderer>().materials = matArrays;
     }
-   
+
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.CompareTag("Nail"))
         {
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = patternMaterial;
+
+            nail1iscollerd = true;
+
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             transform.DOLocalMoveY(standartPosition.y, 0.1f);
             Debug.Log("cikti");
@@ -34,13 +38,8 @@ public class PatternMachineManager : MonoBehaviour
     {
         if (other.transform.CompareTag("Nail"))
         {
-            transform.DOLocalMoveY(other.transform.position.y,0.1f);
+            transform.DOLocalMoveY(other.transform.position.y, 0.1f);
             Debug.Log("girdi");
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
