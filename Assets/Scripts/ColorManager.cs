@@ -9,9 +9,10 @@ public class ColorManager : MonoBehaviour
     [SerializeField] Texture[] patternsArray;
     [SerializeField] Texture[] patternsColorArray;
     public static ColorManager Instance;
+    Shader transParentShader;
     int colorIndex;
 
-    public static int NAIL_COLOR_INDEX=0;
+    public static int NAIL_COLOR_INDEX = 0;
     public static int NAIL_PATTERN_INDEX = 1;
     public static int NAIL_PATTERN_COLOR_INDEX = 2;
 
@@ -35,20 +36,47 @@ public class ColorManager : MonoBehaviour
 
     public Material GetPatternMaterialByIndex(int patternIndex)
     {
-        Material myNewPatternMaterial = new Material(Shader.Find("Transparent/Diffuse"));
+        Material myNewPatternMaterial = new Material(Shader.Find("Legacy Shaders/Transparent/Cutout/Diffuse"));
+        //Set Texture on the mater
         //Set Texture on the material
         myNewPatternMaterial.SetTexture("_MainTex", patternsArray[patternIndex]);
-        myNewPatternMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));      
-        myNewPatternMaterial.DOTiling(new Vector2(2f, 2f), 0.1f);
+        myNewPatternMaterial.SetTextureOffset("_MainTex", new Vector2(0f, 0f));
+        myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         return myNewPatternMaterial;
     }
 
     public Material GetPatternColorMaterialByIndex(int patternColorIndex)
     {
-        Material myNewPatternColorMaterial = new Material(Shader.Find("Transparent/Diffuse"));
+        Material myNewPatternColorMaterial = new Material(Shader.Find("Legacy Shaders/Transparent/Cutout/Diffuse"));
+        //Set Texture on the mater
         //Set Texture on the material
         myNewPatternColorMaterial.SetTexture("_MainTex", patternsColorArray[patternColorIndex]);
-        myNewPatternColorMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));
+        myNewPatternColorMaterial.SetTextureOffset("_MainTex", new Vector2(0f, 0f));
+        myNewPatternColorMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         return myNewPatternColorMaterial;
     }
 }
+
+
+
+
+//to color the machine itself
+
+/*
+public Material GetPatternMachineMaterialByIndex(int patternIndex)
+{
+    Material myNewPatternMaterial = new Material(Shader.Find("Transparent/Diffuse"));
+    //Set Texture on the material
+    myNewPatternMaterial.SetTexture("_MainTex", patternsArray[patternIndex]);
+    return myNewPatternMaterial;
+}
+
+public Material GetPatternColorMachineMaterialByIndex(int patternColorIndex)
+{
+    Material myNewPatternColorMaterial = new Material(Shader.Find("Transparent/Diffuse"));
+    //Set Texture on the material
+    myNewPatternColorMaterial.SetTexture("_MainTex", patternsColorArray[patternColorIndex]);
+    return myNewPatternColorMaterial;
+}
+}
+*/

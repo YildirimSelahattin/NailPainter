@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class ManicureMachineManager : MonoBehaviour
 {
+    enum NailType
+    {
+        Badem,
+        Kut,
+     
+    }
     [SerializeField]GameObject handParent;
     [SerializeField] GameObject nailParent;
     [SerializeField] GameObject newNailParent;
@@ -20,7 +26,7 @@ public class ManicureMachineManager : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.transform.CompareTag("Nail"))
+        if (other.transform.tag.Contains("Nail"))
         {
                if (usedOnce == false ) // parenting and move
                 {
