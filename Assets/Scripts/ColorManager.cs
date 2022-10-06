@@ -40,8 +40,8 @@ public class ColorManager : MonoBehaviour
         //Set Texture on the mater
         //Set Texture on the material
         myNewPatternMaterial.SetTexture("_MainTex", patternsArray[patternIndex]);
-        myNewPatternMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));      
-        myNewPatternMaterial.DOTiling(new Vector2(2f, 2f), 0.1f);
+        myNewPatternMaterial.SetTextureOffset("_MainTex", new Vector2(0f, 0f));      
+        myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         return myNewPatternMaterial;
     }
 
@@ -51,8 +51,8 @@ public class ColorManager : MonoBehaviour
         //Set Texture on the mater
         //Set Texture on the material
         myNewPatternColorMaterial.SetTexture("_MainTex", patternsColorArray[patternColorIndex]);
-        myNewPatternColorMaterial.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));
-        myNewPatternColorMaterial.DOTiling(new Vector2(2f, 2f), 0.1f);
+        myNewPatternColorMaterial.SetTextureOffset("_MainTex", new Vector2(0f, 0f));
+        myNewPatternColorMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         return myNewPatternColorMaterial;
     }
 }
