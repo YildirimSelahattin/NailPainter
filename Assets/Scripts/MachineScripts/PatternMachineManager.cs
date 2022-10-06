@@ -22,21 +22,21 @@ public class PatternMachineManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("Nail"))
+        if (other.transform.tag.Contains("Nail"))
         {
+            string currentTag = other.transform.tag;
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = patternMaterial;
-
             nail1iscollerd = true;
-
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
+            GameManager.Instance.currentPatternIndexArray[currentTag[currentTag.Length - 1] - '0'] = patternIndex;
             transform.DOLocalMoveY(standartPosition.y, 0.1f);
             Debug.Log("cikti");
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Nail"))
+        if (other.transform.tag.Contains("Nail"))
         {
             transform.DOLocalMoveY(other.transform.position.y, 0.1f);
             Debug.Log("girdi");

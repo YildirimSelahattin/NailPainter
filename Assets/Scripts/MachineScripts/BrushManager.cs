@@ -18,21 +18,23 @@ public class BrushManager : MonoBehaviour
 
         //Find the Standard Shader
         Material[] matArray = brushPart.GetComponent<MeshRenderer>().materials;
-        matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
+        matArray[0] = brushMaterial;
         brushPart.GetComponent<MeshRenderer>().materials = matArray;
 
         Material[] matArrays = headPart.GetComponent<MeshRenderer>().materials;
-        matArrays[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
+        matArrays[0] = brushMaterial;
         headPart.GetComponent<MeshRenderer>().materials = matArrays;
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
-        if (other.transform.CompareTag("Nail"))
-        {   
+        if (other.transform.tag.Contains("Nail"))
+        {
+            string currentTag = other.transform.tag;
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
+            GameManager.Instance.currentColorIndexArray[currentTag[currentTag.Length - 1] - '0'] = colorIndex;
             Debug.Log("print!!");
             
         }
