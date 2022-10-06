@@ -12,9 +12,9 @@ public class ColorManager : MonoBehaviour
     Shader transParentShader;
     int colorIndex;
 
-    public static int NAIL_COLOR_INDEX = 0;
-    public static int NAIL_PATTERN_INDEX = 1;
-    public static int NAIL_PATTERN_COLOR_INDEX = 2;
+    public static int NAIL_COLOR_INDEX = 1;
+    public static int NAIL_PATTERN_INDEX = 2;
+    public static int NAIL_PATTERN_COLOR_INDEX = 3;
 
     private void Awake()
     {
