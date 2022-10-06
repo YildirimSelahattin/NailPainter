@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     public float forwardMoveSpeed;
     public float horizontalSpeed;
 
-
+    [SerializeField] TextMeshProUGUI tapToStartText;
     public bool stopForwardMovement = true;
     public bool stopSideMovement = false;
     Vector3 cursor_pos;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
             {
                 firstTouch = true;
                 start_pos = cursor_pos;
+                tapToStartText.gameObject.SetActive(false);
             }
         }
 
