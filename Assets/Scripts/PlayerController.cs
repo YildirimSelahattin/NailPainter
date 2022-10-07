@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 using DG.Tweening;
+
 public class PlayerController : MonoBehaviour
 {
     public float forwardMoveSpeed;
     public float horizontalSpeed;
-
-    [SerializeField] TextMeshProUGUI tapToStartText;
+    public TextMeshProUGUI startText;
     public bool stopForwardMovement = true;
     public bool stopSideMovement = false;
     Vector3 cursor_pos;
@@ -45,9 +44,9 @@ public class PlayerController : MonoBehaviour
         { // This is actions when finger/cursor hit screen
             if (stopSideMovement == false)
             {
+                startText.gameObject.SetActive(false);
                 firstTouch = true;
                 start_pos = cursor_pos;
-                tapToStartText.gameObject.SetActive(false);
             }
         }
 
@@ -64,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
         if (stopForwardMovement == false && firstTouch == true)
         {
+           
             transform.position += Vector3.forward * forwardMoveSpeed * Time.deltaTime;//regular go forward
         }
 
