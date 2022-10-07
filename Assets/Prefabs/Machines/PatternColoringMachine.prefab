@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7819371739372998587}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.04, z: 75.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3.2784421, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7819371741113835816}
@@ -98,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.9180248, y: 2.0000005, z: 1}
-  m_Center: {x: -1.4590126, y: -6.522965e-15, z: 0}
+  m_Size: {x: 3.9180248, y: 2.4468784, z: 1}
+  m_Center: {x: -1.4590126, y: -0.05758337, z: 0}
 --- !u!54 &495947921
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39fc7a9881e8c7408eaf9e1853066c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patternColorIndex: 1
+  patternColorIndex: 0
 --- !u!1 &7819371741113835817
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 7819371741113835813}
   - component: {fileID: 7819371741113835818}
   - component: {fileID: 7819371741113835819}
+  - component: {fileID: 1395180484}
   m_Layer: 0
   m_Name: headPart
   m_TagString: Untagged
@@ -226,3 +227,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1395180484
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7819371741113835817}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

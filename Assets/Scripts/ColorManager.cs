@@ -8,6 +8,7 @@ public class ColorManager : MonoBehaviour
     [SerializeField] Texture[] colorsArray;
     [SerializeField] Texture[] patternsArray;
     [SerializeField] Texture[] patternsColorArray;
+    [SerializeField] GameObject[] diamondsArray;
     [SerializeField] Material baseMat;
     public static ColorManager Instance;
     Shader transParentShader;
@@ -61,7 +62,12 @@ public class ColorManager : MonoBehaviour
         myNewPatternColorMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         return myNewPatternColorMaterial;
     }
+    public GameObject GetDiamondObjectByIndex(int index)
+    {
+        return diamondsArray[index];
+    }
 }
+   
 
 //to color the machine itself
 
