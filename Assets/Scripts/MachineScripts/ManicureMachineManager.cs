@@ -43,9 +43,6 @@ public class ManicureMachineManager : MonoBehaviour
         newNailIndex = index;
         newNailParent = handParent.transform.GetChild(newNailIndex).gameObject;
     }
-    
-        
-    
 
     private void MoveManicureMachine()
     {
