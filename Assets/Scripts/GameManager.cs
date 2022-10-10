@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
      public int[] currentColorIndexArray = new int[5]  { -1,  -1, -1, -1, -1}; 
      public int[] currentPatternIndexArray = new int[5] { -1, -1, -1, -1, -1 };
      public int[] currentPatternColorIndexArray = new int[5]  { -1,  -1, -1, -1, -1};
+     public int[] currentDiamondIndexArray = new int[5] { -1,-1,-1,-1,-1}; // pattern color array
      public List<int> currentBraceletIndexArray;
      public List<int> currentRingIndexArray;
      public bool isCleaned;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int[] targetColorIndexArray = new int[5]; // color array
     [SerializeField] public int[] targetPatternIndexArray = new int[5]; // pattern array 
     [SerializeField] public int[] targetPatternColorIndexArray = new int[5]; // pattern color array
+    [SerializeField] public int[] targetDiamondIndexArray = new int[5]; // pattern color array
     [SerializeField] public List<int> targetBraceletIndexArray; // bracelet array
     [SerializeField] public List<int> targetRingIndexArray; // ring array 
 
@@ -50,8 +52,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        //Control which level to start, if level is below 30, open levels from level child
-
+        //diamond index array is passed to the machine to do
+        DiamondMachineManager.diamondIndexArray = targetDiamondIndexArray;
     }
 
     public float CompareTwoHands()
@@ -81,6 +83,12 @@ public class GameManager : MonoBehaviour
 
             }
             totalParameterNumber += 3;
+            //look for diamond
+            if (targetDiamondIndexArray[i] == currentDiamondIndexArray[i])
+            {
+                progress += 1;
+            }
+            totalParameterNumber += 4;
         }
         /*
          * 

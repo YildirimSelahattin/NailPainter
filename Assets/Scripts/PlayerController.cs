@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (platform == PLATFORM.PC)
         {
             cursor_pos = Camera.main.ScreenToViewportPoint(Input.mousePosition) * 900; // Instead of getting pixels, we are getting viewport coordinates which is resolution independent
@@ -44,14 +43,14 @@ public class PlayerController : MonoBehaviour
         { // This is actions when finger/cursor hit screen
             if (stopSideMovement == false)
             {
+                start_pos = cursor_pos;
                 startText.gameObject.SetActive(false);
                 firstTouch = true;
-                start_pos = cursor_pos;
             }
         }
-
         if ((Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)) || Input.GetMouseButton(0))
         { // This is actions when finger/cursor pressed on screen
+            
             if (stopSideMovement == false)
             {
                 HorizontalMove(cursor_pos);
@@ -68,7 +67,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
- 
     public void HorizontalMove(Vector3 cursor_pos)
     {
         Vector3 pos = transform.localPosition;
@@ -76,7 +74,6 @@ public class PlayerController : MonoBehaviour
         if (pos.x >= 3.50F) { pos.x = 3.50F; }
         if (pos.x <= -3.50F) { pos.x = -3.50F; }
         transform.DOLocalMoveX(pos.x, Time.deltaTime);
+        
     }
-
-
 }

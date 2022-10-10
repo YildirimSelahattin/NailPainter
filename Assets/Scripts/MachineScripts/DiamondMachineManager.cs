@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class DiamondMachineManager : MonoBehaviour
 {
-    [SerializeField]public int[] diamondIndexArray = new int[5];
+    public static int[] diamondIndexArray = new int[5];
     GameObject nailParent;
     
     // Start is called before the first frame update
@@ -24,10 +24,10 @@ public class DiamondMachineManager : MonoBehaviour
             int index = currentTag[currentTag.Length - 1] - '0';
             if (diamondIndexArray[index] > -1)
             {
-                Debug.Log("sonpiþmanlýk");
                 GameObject diamondObject = ColorManager.Instance.GetDiamondObjectByIndex(diamondIndexArray[index]);
                 GameObject curDiamondObject = Instantiate(diamondObject, other.transform.position,other.transform.rotation);
                 curDiamondObject.transform.parent = other.transform;
+                GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
             }
         }
     }
