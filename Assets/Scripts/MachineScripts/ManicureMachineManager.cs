@@ -16,14 +16,20 @@ public class ManicureMachineManager : MonoBehaviour
     }
     [SerializeField]GameObject handParent;
     [SerializeField] GameObject nailParent;
-    GameObject newNailParent;
-    public int newNailIndex = 2;
+    [SerializeField] GameObject nailParticle;
+    public GameObject  currentNailParent;
+    public int currentNailparentIndex = 2;
+    public static ManicureMachineManager Instance;
     bool usedOnce = false;
     // Start is called before the first frame update
     void Start()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
         MoveManicureMachine();
-        newNailParent = handParent.transform.GetChild(newNailIndex).gameObject;
+        currentNailParent = handParent.transform.GetChild(currentNailparentIndex).gameObject;
     }
 
     // Update is called once per frame
@@ -35,13 +41,24 @@ public class ManicureMachineManager : MonoBehaviour
             int index = currentTag[currentTag.Length - 1] - '0';
             Debug.Log(index);
             nailParent.transform.GetChild(index).gameObject.SetActive(false);
-            newNailParent.transform.GetChild(index).gameObject.SetActive(true);
+            currentNailParent.transform.GetChild(index).gameObject.SetActive(true);
+
+        }
+    }
+    private void OnTriggerEnter(Collider other)// when nail enters the collider, play nail particle on it
+    {
+        if (other.transform.tag.Contains("Nail"))
+        {
+            Debug.Log("giriyonmu");
+
+
+            Instantiate(nailParticle, other.transform.position,other.transform.rotation);
         }
     }
     public void ChangeManicureAfterNailType(int index)
     {
-        newNailIndex = index;
-        newNailParent = handParent.transform.GetChild(newNailIndex).gameObject;
+        currentNailparentIndex = index;
+        currentNailParent = handParent.transform.GetChild(currentNailparentIndex).gameObject;
     }
 
     private void MoveManicureMachine()

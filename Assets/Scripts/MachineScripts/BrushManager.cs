@@ -41,7 +41,7 @@ public class BrushManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Hand"))//When HandRigged Gets Triggered Because ColorMachine
+        if (other.transform.CompareTag("PlayerBase"))//When HandRigged Gets Triggered Because ColorMachine
         {
             transform.DORotate(new Vector3(-30, 0, 0), 1);
             Debug.Log("colormachinemove");

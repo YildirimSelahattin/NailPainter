@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1303046060612214277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.686, y: 0, z: 0}
-  m_LocalScale: {x: 0.57078, y: 0.55765, z: 0.69109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1303046060911270883}
@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303046060612214277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 1303046060911270886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.89, y: 1.31, z: 18.9}
-  m_LocalScale: {x: 3.5155747, y: 0.5271516, z: 0.5271516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1303046060612214278}
@@ -127,7 +127,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303046060911270886}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: 9b59e7b5c87e2ea4ca0db1f578ffe48b, type: 3}
 --- !u!23 &1303046060911270881
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -148,7 +148,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ac945a8d6029894da917f4c8ac37ee7, type: 2}
+  - {fileID: 4218046369211427024, guid: 9b59e7b5c87e2ea4ca0db1f578ffe48b, type: 3}
+  - {fileID: 4875329586141879171, guid: 9b59e7b5c87e2ea4ca0db1f578ffe48b, type: 3}
+  - {fileID: 7922251121040759823, guid: 9b59e7b5c87e2ea4ca0db1f578ffe48b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,8 +183,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.96073645, y: 9.357479, z: 1}
-  m_Center: {x: 0.019630712, y: -4.178742, z: 0}
+  m_Size: {x: 1.6736847, y: 9.357479, z: 9.83448}
+  m_Center: {x: -0.08468044, y: -4.1787415, z: -0.06780076}
 --- !u!114 &1303046060911270887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handParent: {fileID: 0}
   nailParent: {fileID: 0}
-  newNailParent: {fileID: 0}
+  nailParticle: {fileID: 5232543733051524367, guid: d21bbad8691f45548870dd5a208273a7,
+    type: 3}
+  newNailIndex: 2
 --- !u!54 &1303046060911270892
 Rigidbody:
   m_ObjectHideFlags: 0
