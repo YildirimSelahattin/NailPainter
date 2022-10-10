@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class WashMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        MoveWashMachine();
-    }
+    public Material transparentMat;
 
-    private void MoveWashMachine()
+    private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
-        transform.DOLocalMoveX(1, 1f).OnComplete(() => transform.DOLocalMoveX(-1, 1f).OnComplete(() => MoveWashMachine()));
+        if (other.transform.tag.Contains("Hand"))
+        {
+            string currentTag = other.transform.tag;
+            Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
+            matArray[1] = transparentMat;
+            other.gameObject.GetComponent<MeshRenderer>().materials = matArray; 
+        }
     }
 }
