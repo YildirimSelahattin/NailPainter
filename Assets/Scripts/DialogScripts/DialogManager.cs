@@ -12,7 +12,6 @@ public class DialogManager : MonoBehaviour
     void Start()
     {
         rateText.text = "%"+GameManager.Instance.matchRate.ToString();
-
     }
 
     // Update is called once per frame

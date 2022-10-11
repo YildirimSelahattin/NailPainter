@@ -6,16 +6,7 @@ public class DiamondMachineManager : MonoBehaviour
 {
     public static int[] diamondIndexArray = new int[5];
     GameObject nailParent;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.tag.Contains("Nail"))
@@ -25,11 +16,12 @@ public class DiamondMachineManager : MonoBehaviour
             if (diamondIndexArray[index] > -1)
             {
                 GameObject diamondObject = ColorManager.Instance.GetDiamondObjectByIndex(diamondIndexArray[index]);
-                GameObject curDiamondObject = Instantiate(diamondObject, other.transform.position,other.transform.rotation);
+                Vector3 vect = other.transform.position;
+                GameObject curDiamondObject = Instantiate(diamondObject, vect, other.transform.rotation);
                 curDiamondObject.transform.parent = other.transform;
                 GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
             }
         }
     }
-    
+
 }

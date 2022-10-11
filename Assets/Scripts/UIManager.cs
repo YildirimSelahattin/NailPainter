@@ -31,8 +31,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         UpdateSound();
         UpdateMusic();
+
     }
     /*
         public async void LoadScene(int sceneID)

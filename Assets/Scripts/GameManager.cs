@@ -84,11 +84,12 @@ public class GameManager : MonoBehaviour
             }
             totalParameterNumber += 3;
             //look for diamond
+           /*
             if (targetDiamondIndexArray[i] == currentDiamondIndexArray[i])
             {
                 progress += 1;
-            }
-            totalParameterNumber += 4;
+            }*/
+            //totalParameterNumber += 3;
         }
         /*
          * 
