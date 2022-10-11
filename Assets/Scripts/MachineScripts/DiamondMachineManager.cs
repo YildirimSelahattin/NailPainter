@@ -17,6 +17,7 @@ public class DiamondMachineManager : MonoBehaviour
             {
                 GameObject diamondObject = ColorManager.Instance.GetDiamondObjectByIndex(diamondIndexArray[index]);
                 Vector3 vect = other.transform.position;
+                Debug.Log(vect);
                 GameObject curDiamondObject = Instantiate(diamondObject, vect, other.transform.rotation);
                 curDiamondObject.transform.parent = other.transform;
                 GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
