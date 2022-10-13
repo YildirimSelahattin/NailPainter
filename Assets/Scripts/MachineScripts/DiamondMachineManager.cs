@@ -22,6 +22,7 @@ public class DiamondMachineManager : MonoBehaviour
                 curDiamondObject.transform.parent = other.transform;
                 GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
             }
+            //0.00011
         }
     }
 
