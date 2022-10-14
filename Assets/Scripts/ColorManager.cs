@@ -7,7 +7,7 @@ public class ColorManager : MonoBehaviour
 {
     [SerializeField] Texture[] colorsArray;
     [SerializeField] Texture[] patternsArray;
-    [SerializeField] Texture[] patternsColorArray;
+    //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] GameObject[] diamondsArray;
     [SerializeField] Material baseMat;
     public static ColorManager Instance;
@@ -50,13 +50,13 @@ public class ColorManager : MonoBehaviour
         return myNewPatternMaterial;
     }
 
-    public Material GetPatternColorMaterialByIndex(int patternColorIndex)
+    public Material GetPatternColorMaterialByIndex(int patternColorIndex)//NOT IN USE
     {
         Material myNewPatternColorMaterial = new Material(baseMat);
         //Set Texture on the mater
 
         //Set Texture on the material
-        myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
+        //myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
         //myNewPatternColorMaterial.SetFloat("_Surface", 1);
         myNewPatternColorMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
         myNewPatternColorMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
