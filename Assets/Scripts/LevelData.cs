@@ -8,6 +8,7 @@ public class LevelData : MonoBehaviour
     public int[] nailPatternArray;
     public int[] nailColorArray;
     public int[]nailDiamondArray;
+    public int nailTypeAfterManicure;
     // Start is called before the first frame update
 
 }

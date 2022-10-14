@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
     [SerializeField] int levelIndex;
-
+    [Header("Shuffling Levels References")]
+    GameObject[] spawnPoints;
+    GameObject  nailColorMachine;
     [Header("UI References :")]
     public Image fillImage;
 
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     public int[] currentPatternIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentPatternColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentDiamondIndexArray = new int[5] { -1, -1, -1, -1, -1 }; // pattern color array
+    public int currentNailType;
     public List<int> currentBraceletIndexArray;
     public List<int> currentRingIndexArray;
     public bool isCleaned;
@@ -40,27 +43,22 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool gameStart = false;
     private void Start()
     {
-
         if (Instance == null)
         {
             Instance = this;
         }
-
-        //diamond index array is passed to the machine to do
-        ReadCSVAndFillTargetArrays(levelIndex);
-        //diamond index array is passed to the machine to do
-        DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
-        
+         ReadCSVAndFillTargetArrays(levelIndex);
+         //diamond index array is passed to the machine to do
+         DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
     }
 
     public float CompareTwoHands()
     {
-
-
         float totalParameterNumber = 0;
         float progress = 0;
         for (int i = 0; i < 5; i++)
         {
+            
             //nail color compare
             if (currentLevel.nailColorArray[i] == currentColorIndexArray[i])
             {
@@ -115,7 +113,11 @@ public class GameManager : MonoBehaviour
         {
             progress += 1;
         }
-        totalParameterNumber += 2;
+        if(currentNailType == currentLevel.nailTypeAfterManicure)
+        {
+            progress += 1;
+        }
+        totalParameterNumber += 3;
         Debug.Log(progress);
         Debug.Log(totalParameterNumber);
         matchRate = (int)((progress / totalParameterNumber) * 100);
@@ -131,6 +133,8 @@ public class GameManager : MonoBehaviour
         int csvoffset = 7;
         int colorPartIndex = 0;
         int patternPartIndex = 1;
+        int diamondPartIndex = 2;
+        int shapePartIndex = 3;
         string[] wholeLevelData = levelDataAsset.text.Split(new string[] { "\n" }, System.StringSplitOptions.None);
         string[] levelRowData = wholeLevelData[(levelIndex * 2) + 3].Split(new string[] { "," }, System.StringSplitOptions.None);
 
@@ -146,8 +150,9 @@ public class GameManager : MonoBehaviour
             string[] nailData = levelRowData[i + csvoffset].Split(new string[] { "-" }, System.StringSplitOptions.None);
             currentLevel.nailColorArray[i] = Int16.Parse( nailData[colorPartIndex].Substring(1));
             currentLevel.nailPatternArray[i] = Int16.Parse(nailData[patternPartIndex].Substring(1));
-            //currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
+            currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
         }
+        currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5+csvoffset].Substring(1));
     }
 
 }

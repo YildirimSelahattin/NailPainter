@@ -14,11 +14,10 @@ public class ManicureMachineManager : MonoBehaviour
         Oval,
         Kut,
     }
-    [SerializeField]GameObject handParent;
-    [SerializeField] GameObject nailParent;
+    GameObject handParent;
     [SerializeField] GameObject nailParticle;
-    public GameObject  currentNailParent;
-    public int currentNailparentIndex = 2;
+    GameObject newNailParent;
+    public int nailTypeAfterManicure = 2;
     public static ManicureMachineManager Instance;
     bool usedOnce = false;
     // Start is called before the first frame update
@@ -29,7 +28,8 @@ public class ManicureMachineManager : MonoBehaviour
             Instance = this;
         }
         MoveManicureMachine();
-        currentNailParent = handParent.transform.GetChild(currentNailparentIndex).gameObject;
+        handParent= GameObject.FindGameObjectWithTag("PlayerBase");
+        newNailParent = handParent.transform.GetChild(nailTypeAfterManicure).gameObject;
     }
 
     // Update is called once per frame
@@ -40,9 +40,9 @@ public class ManicureMachineManager : MonoBehaviour
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
             Debug.Log(index);
-            nailParent.transform.GetChild(index).gameObject.SetActive(false);
-            currentNailParent.transform.GetChild(index).gameObject.SetActive(true);
-
+            other.gameObject.SetActive(false);
+            newNailParent.transform.GetChild(index).gameObject.SetActive(true);
+            GameManager.Instance.currentNailType = nailTypeAfterManicure;
         }
     }
     private void OnTriggerEnter(Collider other)// when nail enters the collider, play nail particle on it
@@ -50,15 +50,8 @@ public class ManicureMachineManager : MonoBehaviour
         if (other.transform.tag.Contains("Nail"))
         {
             Debug.Log("giriyonmu");
-
-
             Instantiate(nailParticle, other.transform.position,other.transform.rotation);
         }
-    }
-    public void ChangeManicureAfterNailType(int index)
-    {
-        currentNailparentIndex = index;
-        currentNailParent = handParent.transform.GetChild(currentNailparentIndex).gameObject;
     }
 
     private void MoveManicureMachine()
