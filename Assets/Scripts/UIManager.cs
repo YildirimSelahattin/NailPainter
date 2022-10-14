@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
@@ -34,8 +35,16 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         UpdateSound();
         UpdateMusic();
-
     }
+
+    void Update()
+    {
+        if (PlayerController.Instance.firstTouch == true)
+        {
+            targetPicAnimator.SetBool("isStart", true);
+        }
+    }
+
     /*
         public async void LoadScene(int sceneID)
         {
