@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
     [SerializeField] GameObject musicOff;
-    //[SerializeField] GameObject loaderCanvas;
+    [SerializeField] GameObject loaderCanvas;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -43,13 +43,21 @@ public class UIManager : MonoBehaviour
         {
             targetPicAnimator.SetBool("isStart", true);
         }
+
+                    if (Application.platform == RuntimePlatform.Android)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    //validateCanvas.gameObject.SetActive(true);
+                }
+            }
     }
 
-    /*
+    
         public async void LoadScene(int sceneID)
         {
-            _target = 0;
-            progressBar.fillAmount = 0;
+            //_target = 0;
+            //progressBar.fillAmount = 0;
 
             var scene = SceneManager.LoadSceneAsync(sceneID);
             Time.timeScale = 1;
@@ -60,7 +68,7 @@ public class UIManager : MonoBehaviour
             do
             {
                 await Task.Delay(100);
-                _target = scene.progress;
+                //_target = scene.progress;
             }
             while (scene.progress < 0.9f);
 
@@ -69,20 +77,13 @@ public class UIManager : MonoBehaviour
             scene.allowSceneActivation = true;
             //loaderCanvas.SetActive(false);
         }
-
+    /*
         void Update()
         {
-            progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
-
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    //validateCanvas.gameObject.SetActive(true);
-                }
-            }
+            //progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
         }
     */
+    
     public void UpdateSound()
     {
         isSoundOn = PlayerPrefs.GetInt("IsSoundOnKey", 1);
