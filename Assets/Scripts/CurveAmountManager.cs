@@ -1,36 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CurveAmountManager : MonoBehaviour
 {
     [SerializeField] GameObject ground;
-    Material groundMat;
+    [SerializeField]Material[] allMats;
+    float bendX;
+    float bendY;
 
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        groundMat = ground.GetComponent<MeshRenderer>().material;
+        //Turn right
+        if (other.gameObject.CompareTag ("turnRight"))
+        {
+            bendX= - 0.002f;
+            TweakCurvesForAllMats();
+        }
+        //Turn right
+        if (other.gameObject.CompareTag("turnLeft"))
+        {
+            bendX =0.002f;
+            TweakCurvesForAllMats();
+        }
+        if (other.gameObject.CompareTag("turnDown") )
+        {
+            bendY = -0.002f;
+            TweakCurvesForAllMats();
+        }
+        if (other.gameObject.CompareTag("turnUp"))
+        {
+            bendY = 0.002f;
+            TweakCurvesForAllMats();
+        }
+
+
+      
     }
 
-    void OnTriggerEnter(Collider collision)
+    public void TweakCurvesForAllMats()
     {
-        //Turn right
-        if (collision.gameObject.tag == "turnRight")
+        foreach(Material m in allMats)
         {
-            groundMat.SetFloat(Shader.PropertyToID("CurveX"), -0.002f);
-        }
-        //Turn right
-        if (collision.gameObject.tag == "turnLeft")
-        {
-            groundMat.SetFloat(Shader.PropertyToID("CurveX"), -0.002f);
-        }
-        if (collision.gameObject.tag == "turnDown")
-        {
-            groundMat.SetFloat(Shader.PropertyToID("CurveY"), -0.002f);
-        }
-        if (collision.gameObject.tag == "turnUp")
-        {
-            groundMat.SetFloat(Shader.PropertyToID("CurveY"), -0.002f);
+            m.SetFloat(Shader.PropertyToID("CurveY"), bendY);
+            m.SetFloat(Shader.PropertyToID("CurveX"), bendX);
         }
     }
 }

@@ -24,7 +24,6 @@ public class EnviromentMoveManager : MonoBehaviour
     {
             if (stopForwardMovement == false)
             {
-            Debug.Log("basd");
                 transform.position -= Vector3.forward * forwardMoveSpeed * Time.deltaTime;//regular go forward
             }
         
