@@ -6,14 +6,12 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    public float forwardMoveSpeed;
     public float horizontalSpeed;
     public TextMeshProUGUI startText;
-    public bool stopForwardMovement = true;
+    [SerializeField] Animator targetPicAnimator;
     public bool stopSideMovement = false;
     Vector3 cursor_pos;
     Vector3 start_pos;
-    public GameObject EndLine;
     public bool firstTouch = false;
     public enum PLATFORM { PC, MOBILE };
     [SerializeField] PLATFORM platform = PLATFORM.PC;
@@ -45,7 +43,8 @@ public class PlayerController : MonoBehaviour
             {
                 start_pos = cursor_pos;
                 startText.gameObject.SetActive(false);
-                firstTouch = true;
+                targetPicAnimator.SetBool("isStart", true);
+                EnviromentMoveManager.Instance.stopForwardMovement = false;
             }
         }
         if ((Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)) || Input.GetMouseButton(0))
@@ -59,13 +58,6 @@ public class PlayerController : MonoBehaviour
         if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetMouseButtonUp(0)))
         { // This is actions when finger/cursor get out from screen
         }
-
-        if (stopForwardMovement == false && firstTouch == true)
-        {
-           
-            transform.position += Vector3.forward * forwardMoveSpeed * Time.deltaTime;//regular go forward
-        }
-
     }
     public void HorizontalMove(Vector3 cursor_pos)
     {

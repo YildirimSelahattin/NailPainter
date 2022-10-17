@@ -12,7 +12,7 @@ public class Finish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)//on player get to the finish level
     {
-        PlayerController.Instance.stopForwardMovement = true;
+        //PlayerController.Instance.stopForwardMovement = true;
         rate = GameManager.Instance.CompareTwoHands();
         Debug.Log(rate);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Animator targetPicAnimator;
+   
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
@@ -39,10 +39,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerController.Instance.firstTouch == true)
-        {
-            targetPicAnimator.SetBool("isStart", true);
-        }
+        
 
                     if (Application.platform == RuntimePlatform.Android)
             {
