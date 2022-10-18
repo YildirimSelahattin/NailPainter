@@ -48,7 +48,8 @@ public class ColorManager : MonoBehaviour
         return myNewPatternMaterial;
     }
 
-    public Material GetPatternColorMaterialByIndex(int patternColorIndex)//NOT IN USE
+    //NOT IN USE
+    public Material GetPatternColorMaterialByIndex(int patternColorIndex)
     {
         Material myNewPatternColorMaterial = new Material(baseMat);
         //Set Texture on the mater

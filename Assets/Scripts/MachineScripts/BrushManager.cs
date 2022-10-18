@@ -2,18 +2,20 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
 
 public class BrushManager : MonoBehaviour
 {
     public int colorIndex = 1;
-    Material brushMaterial;
-
+    Material machineMaterial;
+    Material paintMaterial;
     void Start()
     {
-
-        CurveAmountManager.Instance.materialArray.Add(brushMaterial);
+        paintMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
+        machineMaterial=gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material ;
+        CurveAmountManager.Instance.materialArray.Add(machineMaterial);
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush
@@ -22,7 +24,7 @@ public class BrushManager : MonoBehaviour
         {
             string currentTag = other.transform.tag;
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
-            matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
+            matArray[ColorManager.NAIL_COLOR_INDEX] = paintMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.currentColorIndexArray[currentTag[currentTag.Length - 1] - '0'] = colorIndex;
             Debug.Log("print!!");
