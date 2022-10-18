@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColorManager : MonoBehaviour
@@ -10,6 +8,7 @@ public class ColorManager : MonoBehaviour
     //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] GameObject[] diamondsArray;
     [SerializeField] Material baseMat;
+    [SerializeField] Material machineBaseMat;
     public static ColorManager Instance;
     Shader transParentShader;
     int colorIndex;
@@ -66,8 +65,20 @@ public class ColorManager : MonoBehaviour
     {
         return diamondsArray[index];
     }
-}
+
+    public Material GetMachineColorMaterialByTexture(Texture texture)
+    {
+        Material myMachineColorMaterial = new Material(machineBaseMat);
+        //Set Texture on the mater
+        //Set Texture on the material
+
+        myMachineColorMaterial.SetTexture("_BaseMap", texture);
+        //myNewPatternMaterial.SetFloat("_Surface", 1);
+        return myMachineColorMaterial;
+    }
    
+}
+
 
 //to color the machine itself
 

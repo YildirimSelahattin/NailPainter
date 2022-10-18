@@ -5,21 +5,21 @@ public class CurveAmountManager : MonoBehaviour
 {
     [SerializeField] GameObject ground;
     [SerializeField]Material[] allMats;
-    float bendX;
-    float bendY;
+    float bendX = 0.002f;
+    float bendY = 0.002f;
 
     void OnTriggerEnter(Collider other)
     {
         //Turn right
         if (other.gameObject.CompareTag ("turnRight"))
         {
-            bendX= - 0.002f;
+            bendX=  0.002f;
             TweakCurvesForAllMats();
         }
         //Turn right
         if (other.gameObject.CompareTag("turnLeft"))
         {
-            bendX =0.002f;
+            bendX = -0.002f;
             TweakCurvesForAllMats();
         }
         if (other.gameObject.CompareTag("turnDown") )

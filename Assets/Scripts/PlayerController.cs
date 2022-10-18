@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         pos.x = (cursor_pos-start_pos ).x / 80;
         if (pos.x >= 3.50F) { pos.x = 3.50F; }
         if (pos.x <= -3.50F) { pos.x = -3.50F; }
-        transform.DOLocalMoveX(pos.x, Time.deltaTime);
+        transform.DOLocalMoveX(pos.x* horizontalSpeed, Time.deltaTime);
         
     }
 }
