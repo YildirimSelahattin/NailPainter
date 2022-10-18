@@ -7,7 +7,6 @@ public class PatternMachineManager : MonoBehaviour
 {
     Material patternMaterial;
     Vector3 standartPosition;
-    [SerializeField] GameObject patternSign;
     public int patternIndex;
     public static bool nail1iscollerd = false;
     // Start is called before the first frame update
@@ -15,9 +14,12 @@ public class PatternMachineManager : MonoBehaviour
     {
         standartPosition = transform.position;
         patternMaterial = ColorManager.Instance.GetPatternMaterialByIndex(patternIndex);
-        Material[] matArrays = patternSign.GetComponent<MeshRenderer>().materials;
-        matArrays[0] = patternMaterial;
-        patternSign.GetComponent<MeshRenderer>().materials = matArrays;
+        //Adding materials to mat list 
+        Material[] matArray = gameObject.GetComponent<MeshRenderer>().materials;
+        CurveAmountManager.Instance.materialArray.Add(matArray[0]);
+        CurveAmountManager.Instance.materialArray.Add(matArray[1]);
+
+
     }
 
     private void OnTriggerExit(Collider other)

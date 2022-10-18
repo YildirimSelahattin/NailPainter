@@ -9,21 +9,11 @@ public class BrushManager : MonoBehaviour
 {
     public int colorIndex = 1;
     Material brushMaterial;
-    [SerializeField] GameObject headPart;
-    [SerializeField] GameObject brushPart;
 
     void Start()
     {
-        brushMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
 
-        //Find the Standard Shader
-        Material[] matArray = brushPart.GetComponent<MeshRenderer>().materials;
-        matArray[0] = brushMaterial;
-        brushPart.GetComponent<MeshRenderer>().materials = matArray;
-
-        Material[] matArrays = headPart.GetComponent<MeshRenderer>().materials;
-        matArrays[0] = brushMaterial;
-        headPart.GetComponent<MeshRenderer>().materials = matArrays;
+        CurveAmountManager.Instance.materialArray.Add(brushMaterial);
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush

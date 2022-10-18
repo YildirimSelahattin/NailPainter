@@ -27,7 +27,16 @@ public class ManicureMachineManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        //adding materials to list , To tweak curves 
+        Material[] matArray =gameObject.GetComponent<MeshRenderer>().materials;
+        for(int i = 0; i < 3; i++)
+        {
+            CurveAmountManager.Instance.materialArray.Add(matArray[i]);
+        }
         MoveManicureMachine();
+
+        //getting hand parent
         handParent= GameObject.FindGameObjectWithTag("PlayerBase");
         newNailParent = handParent.transform.GetChild(nailTypeAfterManicure).gameObject;
     }

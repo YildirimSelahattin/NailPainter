@@ -7,6 +7,11 @@ public class DiamondMachineManager : MonoBehaviour
     public static int[] diamondIndexArray = new int[5];
     GameObject nailParent;
 
+
+    private void Start()
+    {
+        CurveAmountManager.Instance.materialArray.Add(gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material);
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.tag.Contains("Nail"))
