@@ -5,8 +5,8 @@ public class CurveAmountManager : MonoBehaviour
 {
     [SerializeField] GameObject ground;
     [SerializeField]Material[] allMats;
-    float bendX = 0.002f;
-    float bendY = 0.002f;
+    float bendX = 0f;
+    float bendY = 0f;
 
     void OnTriggerEnter(Collider other)
     {
@@ -31,10 +31,7 @@ public class CurveAmountManager : MonoBehaviour
         {
             bendY = 0.002f;
             TweakCurvesForAllMats();
-        }
-
-
-      
+        } 
     }
 
     public void TweakCurvesForAllMats()
