@@ -26,18 +26,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        float tempSpeed;
         if (Input.touchCount > 0)
         {
             Touch curTouch = Input.GetTouch(0);
             h = curTouch.deltaPosition.x;
+            tempSpeed = controllerSpeed;
         }
+        else
+        {
+            tempSpeed = 0;
+        }
+
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
-            xOffset += h * Time.deltaTime * controllerSpeed;
+            xOffset += h * Time.deltaTime * tempSpeed;
 
             transform.position = desiredPoint;
 
