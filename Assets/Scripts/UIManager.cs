@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-   
+
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
     [SerializeField] GameObject musicOff;
     [SerializeField] GameObject loaderCanvas;
+    [SerializeField] GameObject gameStartCanvas;
+    [SerializeField] Animator startButtonAnimator;
+    [SerializeField] GameObject tapToStartCanvas;
+    [SerializeField] Animator targetPicAnimator;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -32,55 +37,68 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1f;
         UpdateSound();
         UpdateMusic();
+
+         tapToStartCanvas.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        
-
-                    if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    //validateCanvas.gameObject.SetActive(true);
-                }
+                //validateCanvas.gameObject.SetActive(true);
             }
+        }
     }
 
-    
-        public async void LoadScene(int sceneID)
+    public void StartGameButton()
+    {
+        startButtonAnimator.SetBool("ClickPlayButton", true);
+        tapToStartCanvas.gameObject.SetActive(true);
+        //appaerAnim ekle
+        StartCoroutine(Delay(3f));
+    }
+
+    public void TapToStart()
+    {
+        tapToStartCanvas.gameObject.SetActive(false);
+        targetPicAnimator.SetBool("isStart", true);
+        EnviromentMoveManager.Instance.stopForwardMovement = false;
+    }
+
+    public async void LoadScene(int sceneID)
+    {
+        //_target = 0;
+        //progressBar.fillAmount = 0;
+
+        var scene = SceneManager.LoadSceneAsync(sceneID);
+        Time.timeScale = 1;
+        scene.allowSceneActivation = false;
+
+        loaderCanvas.SetActive(true);
+
+        do
         {
-            //_target = 0;
-            //progressBar.fillAmount = 0;
-
-            var scene = SceneManager.LoadSceneAsync(sceneID);
-            Time.timeScale = 1;
-            scene.allowSceneActivation = false;
-
-            loaderCanvas.SetActive(true);
-
-            do
-            {
-                await Task.Delay(100);
-                //_target = scene.progress;
-            }
-            while (scene.progress < 0.9f);
-
-            await Task.Delay(1500);
-
-            scene.allowSceneActivation = true;
-            //loaderCanvas.SetActive(false);
+            await Task.Delay(100);
+            //_target = scene.progress;
         }
+        while (scene.progress < 0.9f);
+
+        await Task.Delay(1500);
+
+        scene.allowSceneActivation = true;
+        //loaderCanvas.SetActive(false);
+    }
     /*
         void Update()
         {
             //progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
         }
     */
-    
+
     public void UpdateSound()
     {
         isSoundOn = PlayerPrefs.GetInt("IsSoundOnKey", 1);
@@ -165,5 +183,11 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public IEnumerator Delay(float adDelay)
+    {
+        yield return new WaitForSeconds(adDelay);
+        gameStartCanvas.gameObject.SetActive(false);
     }
 }

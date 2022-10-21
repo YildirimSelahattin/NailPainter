@@ -40,10 +40,7 @@ public class CurveAmountManager : MonoBehaviour
         {
             bendY = 0.002f;
             TweakCurvesForAllMats();
-        }
-
-
-      
+        } 
     }
 
     public void TweakCurvesForAllMats()
