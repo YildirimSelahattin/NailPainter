@@ -6,18 +6,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System;
+using System.Data.SqlTypes;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Level References")]
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
-    [SerializeField] int levelIndex;
+    [SerializeField] int levelIndex =1;
     [Header("Shuffling Levels References")]
     GameObject[] spawnPoints;
     GameObject  nailColorMachine;
     [Header("UI References :")]
     public Image fillImage;
+    public TextMeshProUGUI diamondNumberText;
 
     [Header("Transform References :")]
 
@@ -41,12 +43,26 @@ public class GameManager : MonoBehaviour
     public int matchRate;
     public static GameManager Instance;
     [HideInInspector] public bool gameStart = false;
+
+    [Header("users possesions")]
+    public int numberOfDiamonds;
+    public int NumberOfDiamonds
+    {
+        get { return numberOfDiamonds; }   // get method
+        set { numberOfDiamonds = value;
+              PlayerPrefs.SetInt("NumberOfDiamondsKey",value);
+              diamondNumberText.text = numberOfDiamonds.ToString();
+        }
+    }  // set method
+    
     private void Start()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+         PrepareUI();
          ReadCSVAndFillTargetArrays(levelIndex);
          //diamond index array is passed to the machine to do
          DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
@@ -123,7 +139,7 @@ public class GameManager : MonoBehaviour
         matchRate = (int)((progress / totalParameterNumber) * 100);
         return matchRate;
     }
-    //Have TO DECÝDE WHETHER LEVELS STARTS 1 OR 0
+    //Have TO DECÄ°DE WHETHER LEVELS STARTS 1 OR 0
     public void ReadCSVAndFillTargetArrays(int levelIndex)
     {
         currentLevel.levelNumber = levelIndex;
@@ -144,7 +160,7 @@ public class GameManager : MonoBehaviour
         "ring  " + levelRowData[3 + csvoffset] +
         "pinkie  " + levelRowData[4 + csvoffset]);
 
-        //FOR EVERY NAÝL IN ONE HAND 
+        //FOR EVERY NAÄ°L IN ONE HAND 
         for (int i = 0; i < 5; i++)
         {
             string[] nailData = levelRowData[i + csvoffset].Split(new string[] { "-" }, System.StringSplitOptions.None);
@@ -153,6 +169,18 @@ public class GameManager : MonoBehaviour
             currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
         }
         currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5+csvoffset].Substring(1));
-    }
 
+        for(int i = 0; i < 5; i++)
+        {
+            Debug.Log(currentLevel.nailColorArray[i]);
+        }
+    }
+    public void IncreaseGold()
+    {
+        NumberOfDiamonds++;
+    }
+    public void PrepareUI()
+    {
+        NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
+    }
 }
