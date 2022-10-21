@@ -15,15 +15,6 @@ public class BrushManager : MonoBehaviour
     void Start()
     {
         brushMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
-
-        //Find the Standard Shader
-        Material[] matArray = brushPart.GetComponent<MeshRenderer>().materials;
-        matArray[0] = brushMaterial;
-        brushPart.GetComponent<MeshRenderer>().materials = matArray;
-
-        Material[] matArrays = headPart.GetComponent<MeshRenderer>().materials;
-        matArrays[0] = brushMaterial;
-        headPart.GetComponent<MeshRenderer>().materials = matArrays;
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush
@@ -43,8 +34,11 @@ public class BrushManager : MonoBehaviour
     {
         if (other.transform.CompareTag("PlayerBase"))//When HandRigged Gets Triggered Because ColorMachine
         {
+            // TODO, 
+            /*a
             transform.DORotate(new Vector3(-30, 0, 0), 1);
             Debug.Log("colormachinemove");
+            */
         }
     }
 }

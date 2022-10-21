@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Animator startButtonAnimator;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] Animator targetPicAnimator;
+    [SerializeField] GameObject follower;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -40,7 +41,8 @@ public class UIManager : MonoBehaviour
         UpdateSound();
         UpdateMusic();
 
-         tapToStartCanvas.gameObject.SetActive(false);
+        tapToStartCanvas.gameObject.SetActive(false);
+        follower.GetComponent<PlayerController>().enabled = false;
     }
 
     void Update()
@@ -64,6 +66,7 @@ public class UIManager : MonoBehaviour
 
     public void TapToStart()
     {
+        follower.GetComponent<PlayerController>().enabled = true;
         tapToStartCanvas.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
         EnviromentMoveManager.Instance.stopForwardMovement = false;
@@ -190,4 +193,15 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(adDelay);
         gameStartCanvas.gameObject.SetActive(false);
     }
+
+    public void PlayerStartMovement()
+    {
+        follower.GetComponent<PlayerController>().enabled = true;
+    }
+    /*
+    public void PlayerStopMovement()
+    {
+        
+    }
+    */
 }
