@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         follower.GetComponent<PlayerController>().enabled = false;
         UpdateSound();
         UpdateMusic();
-        tapToStartCanvas.gameObject.SetActive(false);
+        //tapToStartCanvas.gameObject.SetActive(false);
     }
 
     void Update()
@@ -56,13 +56,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void StartGameButton()
-    {
-        startButtonAnimator.SetBool("ClickPlayButton", true);
-        tapToStartCanvas.gameObject.SetActive(true);
-        //appaerAnim ekle
-        StartCoroutine(Delay(3f));
-    }
+    /*
+        public void StartGameButton()
+        {
+            startButtonAnimator.SetBool("ClickPlayButton", true);
+            tapToStartCanvas.gameObject.SetActive(true);
+            //appaerAnim ekle
+            StartCoroutine(Delay(3f));
+        }
+    */
 
     public void TapToStart()
     {
@@ -141,16 +143,17 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 0);
         gameMusicObject.SetActive(false);
-        musicOn.gameObject.SetActive(false);
-        musicOff.gameObject.SetActive(true);
+        musicOff.gameObject.SetActive(false);
+        musicOn.gameObject.SetActive(true);
     }
 
     public void MusicOn()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
         gameMusicObject.SetActive(true);
-        musicOff.gameObject.SetActive(false);
-        musicOn.gameObject.SetActive(true);
+
+        musicOn.gameObject.SetActive(false);
+        musicOff.gameObject.SetActive(true);
     }
 
     public void SoundsOff()
