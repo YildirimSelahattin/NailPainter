@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
-        EnviromentMoveManager.Instance.stopForwardMovement = false;
+        //EnviromentMoveManager.Instance.stopForwardMovement = false;
     }
 
     public async void LoadScene(int sceneID)

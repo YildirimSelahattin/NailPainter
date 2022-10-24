@@ -12,7 +12,7 @@ public class PatternMachineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        standartPosition = transform.position;
+        //standartPosition = transform.position;
         patternMaterial = ColorManager.Instance.GetPatternMaterialByIndex(patternIndex);
     }
 

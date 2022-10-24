@@ -12,7 +12,8 @@ public class LevelDesignManager : MonoBehaviour
 
     void Start()
     {
-        nextLevelNumber =  PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+        // PlayerPrefs.GetInt("NextLevelNumberKey", 0)
+        nextLevelNumber = 0;
         levelPrefab = Instantiate(Levels[nextLevelNumber], transform.position, transform.rotation);
         levelPrefab.transform.parent = transform;
         
