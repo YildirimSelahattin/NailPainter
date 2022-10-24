@@ -14,7 +14,7 @@ public class ColorManager : MonoBehaviour
     int colorIndex;
 
     public static int NAIL_COLOR_INDEX = 0;
-    public static int NAIL_PATTERN_INDEX = 0;
+    public static int NAIL_PATTERN_INDEX = 1;
     public static int NAIL_PATTERN_COLOR_INDEX = 2;
 
     private void Awake()

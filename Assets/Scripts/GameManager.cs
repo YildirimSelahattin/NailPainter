@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
         matchRate = (int)((progress / totalParameterNumber) * 100);
         return matchRate;
     }
-    //Have TO DECÝDE WHETHER LEVELS STARTS 1 OR 0
+    //Have TO DECÄ°DE WHETHER LEVELS STARTS 1 OR 0
     public void ReadCSVAndFillTargetArrays(int levelIndex)
     {
         currentLevel.levelNumber = levelIndex;
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
         "ring  " + levelRowData[3 + csvoffset] +
         "pinkie  " + levelRowData[4 + csvoffset]);
 
-        //FOR EVERY NAÝL IN ONE HAND 
+        //FOR EVERY NAÄ°L IN ONE HAND 
         for (int i = 0; i < 5; i++)
         {
             string[] nailData = levelRowData[i + csvoffset].Split(new string[] { "-" }, System.StringSplitOptions.None);

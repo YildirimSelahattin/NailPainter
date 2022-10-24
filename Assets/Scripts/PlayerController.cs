@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
     float distanceTravelled;
     float xOffset, yOffset;
     [SerializeField] float maxDisatance;
-
     [SerializeField] float controllerSpeed = 5;
     float h;
+    [SerializeField] GameObject LevelParrent;
 
     void Start()
     {
+        pathCreator = LevelParrent.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<PathCreator>();
+
         if (pathCreator != null)
         {
             // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
@@ -42,7 +44,6 @@ public class PlayerController : MonoBehaviour
         {
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            Debug.Log(distanceTravelled);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
             xOffset += h * Time.deltaTime * tempSpeed;
@@ -63,4 +64,6 @@ public class PlayerController : MonoBehaviour
     {
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
     }
+
+
 }

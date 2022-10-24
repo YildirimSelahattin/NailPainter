@@ -19,7 +19,7 @@ public class HandTriggerManager : MonoBehaviour
 
     private void IncreaseMoneyAndDestroy(GameObject diamond)
     {
-        GameManager.Instance.NumberOfDiamonds++;
+        GameManager.Instance.numberOfDiamonds++;
         Destroy(diamond);
     }
     private void MoveMoney(Collider other)
