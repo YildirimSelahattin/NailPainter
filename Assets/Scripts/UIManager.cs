@@ -4,15 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-   
+
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
     [SerializeField] GameObject musicOff;
     [SerializeField] GameObject loaderCanvas;
+    [SerializeField] GameObject gameStartCanvas;
+    [SerializeField] Animator startButtonAnimator;
+    [SerializeField] GameObject tapToStartCanvas;
+    [SerializeField] Animator targetPicAnimator;
+    [SerializeField] GameObject gameMusicObject;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -32,67 +38,80 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1f;
         UpdateSound();
         UpdateMusic();
+
+         tapToStartCanvas.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        
-
-                    if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    //validateCanvas.gameObject.SetActive(true);
-                }
+                //validateCanvas.gameObject.SetActive(true);
             }
+        }
     }
 
-    
-        public async void LoadScene(int sceneID)
+    public void StartGameButton()
+    {
+        startButtonAnimator.SetBool("ClickPlayButton", true);
+        tapToStartCanvas.gameObject.SetActive(true);
+        //appaerAnim ekle
+        StartCoroutine(Delay(3f));
+    }
+
+    public void TapToStart()
+    {
+        tapToStartCanvas.gameObject.SetActive(false);
+        targetPicAnimator.SetBool("isStart", true);
+        EnviromentMoveManager.Instance.stopForwardMovement = false;
+    }
+
+    public async void LoadScene(int sceneID)
+    {
+        //_target = 0;
+        //progressBar.fillAmount = 0;
+
+        var scene = SceneManager.LoadSceneAsync(sceneID);
+        Time.timeScale = 1;
+        scene.allowSceneActivation = false;
+
+        loaderCanvas.SetActive(true);
+
+        do
         {
-            //_target = 0;
-            //progressBar.fillAmount = 0;
-
-            var scene = SceneManager.LoadSceneAsync(sceneID);
-            Time.timeScale = 1;
-            scene.allowSceneActivation = false;
-
-            loaderCanvas.SetActive(true);
-
-            do
-            {
-                await Task.Delay(100);
-                //_target = scene.progress;
-            }
-            while (scene.progress < 0.9f);
-
-            await Task.Delay(1500);
-
-            scene.allowSceneActivation = true;
-            //loaderCanvas.SetActive(false);
+            await Task.Delay(100);
+            //_target = scene.progress;
         }
+        while (scene.progress < 0.9f);
+
+        await Task.Delay(1500);
+
+        scene.allowSceneActivation = true;
+        //loaderCanvas.SetActive(false);
+    }
     /*
         void Update()
         {
             //progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
         }
     */
-    
+
     public void UpdateSound()
     {
         isSoundOn = PlayerPrefs.GetInt("IsSoundOnKey", 1);
         if (isSoundOn == 0)
         {
             soundOff.gameObject.SetActive(true);
-            SoundsOn();
+            SoundsOff();
         }
         if (isSoundOn == 1)
         {
             soundOn.gameObject.SetActive(true);
-            SoundsOff();
+            SoundsOn();
         }
     }
 
@@ -102,12 +121,12 @@ public class UIManager : MonoBehaviour
         if (isMusicOn == 0)
         {
             musicOff.gameObject.SetActive(true);
-            MusicOn();
+            MusicOff();
         }
         if (isMusicOn == 1)
         {
             musicOn.gameObject.SetActive(true);
-            MusicOff();
+            MusicOn();
         }
     }
 
@@ -116,27 +135,28 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void MusicOn()
+    public void MusicOff()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 0);
         //GameMusic.seagull_volume = 0;
         //GameMusic.BGmusic_volume = 0;
         //GameMusic.Instance.OnOffVolume();
+        gameMusicObject.SetActive(false);
         musicOn.gameObject.SetActive(false);
         musicOff.gameObject.SetActive(true);
     }
 
-    public void MusicOff()
+    public void MusicOn()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
         //GameMusic.seagull_volume = 1;
         //GameMusic.BGmusic_volume = 0.50f;
-        //GameMusic.Instance.OnOffVolume();
+        gameMusicObject.SetActive(true);
         musicOff.gameObject.SetActive(false);
         musicOn.gameObject.SetActive(true);
     }
 
-    public void SoundsOn()
+    public void SoundsOff()
     {
         PlayerPrefs.SetInt("IsSoundOnKey", 0);
         //EggsGameManager.play_sound = false;
@@ -144,11 +164,10 @@ public class UIManager : MonoBehaviour
         //TimeCracker.play_sound = false;
         //TimeThrowScript.play_sound = false;
         //EnemyBirdMove.play_sound = false;
-        //DialogHandler.play_sound = false;
         soundOn.gameObject.SetActive(false);
         soundOff.gameObject.SetActive(true);
     }
-    public void SoundsOff()
+    public void SoundsOn()
     {
         PlayerPrefs.SetInt("IsSoundOnKey", 1);
         //EggsGameManager.play_sound = true;
@@ -165,5 +184,11 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public IEnumerator Delay(float adDelay)
+    {
+        yield return new WaitForSeconds(adDelay);
+        gameStartCanvas.gameObject.SetActive(false);
     }
 }

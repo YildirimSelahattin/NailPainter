@@ -14,12 +14,6 @@ public class PatternMachineManager : MonoBehaviour
     {
         standartPosition = transform.position;
         patternMaterial = ColorManager.Instance.GetPatternMaterialByIndex(patternIndex);
-        //Adding materials to mat list 
-        Material[] matArray = gameObject.GetComponent<MeshRenderer>().materials;
-        CurveAmountManager.Instance.materialArray.Add(matArray[0]);
-        CurveAmountManager.Instance.materialArray.Add(matArray[1]);
-
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,10 +23,9 @@ public class PatternMachineManager : MonoBehaviour
             string currentTag = other.transform.tag;
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = patternMaterial;
-            nail1iscollerd = true;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             GameManager.Instance.currentPatternIndexArray[currentTag[currentTag.Length - 1] - '0'] = patternIndex;
-            transform.DOLocalMoveY(standartPosition.y, 0.1f);
+            //transform.DOLocalMoveY(standartPosition.y, 0.1f);
             Debug.Log("cikti");
         }
     }
@@ -40,7 +33,7 @@ public class PatternMachineManager : MonoBehaviour
     {
         if (other.transform.tag.Contains("Nail"))
         {
-            transform.DOLocalMoveY(other.transform.position.y, 0.1f);
+            //transform.DOLocalMoveY(other.transform.position.y, 0.1f);
             Debug.Log("girdi");
         }
     }

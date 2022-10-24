@@ -1,71 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using DG.Tweening;
+using PathCreation;
 
 public class PlayerController : MonoBehaviour
 {
-    public float horizontalSpeed;
-    public TextMeshProUGUI startText;
-    [SerializeField] Animator targetPicAnimator;
-    public bool stopSideMovement = false;
-    Vector3 cursor_pos;
-    Vector3 start_pos;
-    public bool firstTouch = false;
-    public enum PLATFORM { PC, MOBILE };
-    [SerializeField] PLATFORM platform = PLATFORM.PC;
-    public static PlayerController Instance;
-    // Start is called before the first frame update
-    private void Awake()
+    public PathCreator pathCreator;
+    public EndOfPathInstruction endOfPathInstruction;
+    public float speed = 5;
+    float distanceTravelled;
+    float xOffset, yOffset;
+    [SerializeField] float maxDisatance;
+
+    [SerializeField] float controllerSpeed = 5;
+    float h;
+
+    void Start()
     {
-        if (Instance == null)
+        if (pathCreator != null)
         {
-            Instance = this;
+            // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
+            pathCreator.pathUpdated += OnPathChanged;
         }
     }
-    
-    // Update is called once per frame
+
     void Update()
     {
-        if (platform == PLATFORM.PC)
+        float tempSpeed;
+        if (Input.touchCount > 0)
         {
-            cursor_pos = Camera.main.ScreenToViewportPoint(Input.mousePosition) * 900; // Instead of getting pixels, we are getting viewport coordinates which is resolution independent
+            Touch curTouch = Input.GetTouch(0);
+            h = curTouch.deltaPosition.x;
+            tempSpeed = controllerSpeed;
         }
         else
         {
-            if (Input.touchCount > 0) cursor_pos = Camera.main.ScreenToViewportPoint(Input.GetTouch(0).position) * 900; // Instead of getting pixels, we are getting viewport coordinates which is resolution independent
+            tempSpeed = 0;
         }
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
-        { // This is actions when finger/cursor hit screen
-            if (stopSideMovement == false)
-            {
-                start_pos = cursor_pos;
-                startText.gameObject.SetActive(false);
-                targetPicAnimator.SetBool("isStart", true);
-                EnviromentMoveManager.Instance.stopForwardMovement = false;
-            }
-        }
-        if ((Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)) || Input.GetMouseButton(0))
-        { // This is actions when finger/cursor pressed on screen
-            
-            if (stopSideMovement == false)
-            {
-                HorizontalMove(cursor_pos);
-            }
-        }
-        if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetMouseButtonUp(0)))
-        { // This is actions when finger/cursor get out from screen
+        if (pathCreator != null)
+        {
+            distanceTravelled += speed * Time.deltaTime;
+            Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+            Debug.Log(distanceTravelled);
+            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+            xOffset += h * Time.deltaTime * tempSpeed;
+
+            transform.position = desiredPoint;
+
+            xOffset = Mathf.Clamp(xOffset, -maxDisatance, maxDisatance);
+
+            desiredPoint = transform.TransformPoint(new Vector3(0, xOffset, 0));
+
+            transform.position = desiredPoint;
         }
     }
-    public void HorizontalMove(Vector3 cursor_pos)
+
+    // If the path changes during the game, update the distance travelled so that the follower's position on the new path
+    // is as close as possible to its position on the old path
+    void OnPathChanged()
     {
-        Vector3 pos = transform.localPosition;
-        pos.x = (cursor_pos-start_pos ).x / 80;
-        if (pos.x >= 3.50F) { pos.x = 3.50F; }
-        if (pos.x <= -3.50F) { pos.x = -3.50F; }
-        transform.DOLocalMoveX(pos.x* horizontalSpeed, Time.deltaTime);
-        
+        distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
     }
 }

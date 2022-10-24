@@ -8,13 +8,14 @@ public class ColorManager : MonoBehaviour
     //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] GameObject[] diamondsArray;
     [SerializeField] Material baseMat;
+    [SerializeField] Material machineBaseMat;
     public static ColorManager Instance;
     Shader transParentShader;
     int colorIndex;
 
-    public static int NAIL_COLOR_INDEX = 1;
-    public static int NAIL_PATTERN_INDEX = 2;
-    public static int NAIL_PATTERN_COLOR_INDEX = 3;
+    public static int NAIL_COLOR_INDEX = 0;
+    public static int NAIL_PATTERN_INDEX = 0;
+    public static int NAIL_PATTERN_COLOR_INDEX = 2;
 
     private void Awake()
     {
@@ -48,8 +49,7 @@ public class ColorManager : MonoBehaviour
         return myNewPatternMaterial;
     }
 
-    //NOT IN USE
-    public Material GetPatternColorMaterialByIndex(int patternColorIndex)
+    public Material GetPatternColorMaterialByIndex(int patternColorIndex)//NOT IN USE
     {
         Material myNewPatternColorMaterial = new Material(baseMat);
         //Set Texture on the mater
@@ -66,6 +66,17 @@ public class ColorManager : MonoBehaviour
         return diamondsArray[index];
     }
 
+    public Material GetMachineColorMaterialByTexture(Texture texture)
+    {
+        Material myMachineColorMaterial = new Material(machineBaseMat);
+        //Set Texture on the mater
+        //Set Texture on the material
+
+        myMachineColorMaterial.SetTexture("_BaseMap", texture);
+        //myNewPatternMaterial.SetFloat("_Surface", 1);
+        return myMachineColorMaterial;
+    }
+   
 }
 
 
