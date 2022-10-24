@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
+    [SerializeField] TextMeshProUGUI matchRateText;
+    [SerializeField] TextMeshProUGUI definationText;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -115,6 +117,14 @@ public class UIManager : MonoBehaviour
             //progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
         }
     */
+
+    public void ShowEndScreen()
+    {
+        GameManager.Instance.targetMinimap.SetActive(true);
+        GameManager.Instance.currentMinimap.SetActive(true);
+        GameManager.Instance.currentRightMinimap.SetActive(false);
+        matchRateText.text =GameManager.Instance.CompareTwoHands().ToString();
+    }
 
     public void UpdateSound()
     {

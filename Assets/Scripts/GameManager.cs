@@ -21,15 +21,11 @@ public class GameManager : MonoBehaviour
     public Image fillImage;
 
     [Header("Transform References :")]
-
-    public Transform player;
-    public Transform end;
     LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
     public int[] currentColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentPatternIndexArray = new int[5] { -1, -1, -1, -1, -1 };
-    public int[] currentPatternColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentDiamondIndexArray = new int[5] { -1, -1, -1, -1, -1 }; // pattern color array
     public int currentNailType;
     public List<int> currentBraceletIndexArray;
@@ -59,6 +55,7 @@ public class GameManager : MonoBehaviour
          ReadCSVAndFillTargetArrays(levelIndex);
          //diamond index array is passed to the machine to do
          DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
+         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure,currentLevel.nailColorArray,currentLevel.nailPatternArray,currentLevel.nailDiamondArray);
     }
 
     public float CompareTwoHands()
@@ -76,7 +73,7 @@ public class GameManager : MonoBehaviour
 
 
             //nail pattern compare
-            if (currentLevel.nailPatternArray[i] == currentPatternColorIndexArray[i])
+            if (currentLevel.nailPatternArray[i] == currentPatternIndexArray[i])
             {
                 progress += 1;
             }

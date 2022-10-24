@@ -18,10 +18,9 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
-            GameManager.Instance.targetMinimap.SetActive(true);
-            GameManager.Instance.currentMinimap.SetActive(true);
-            GameManager.Instance.currentRightMinimap.SetActive(false);    
-            GameManager.Instance.CompareTwoHands(); 
+
+            UIManager.Instance.ShowEndScreen();
+
         }
     }
 
