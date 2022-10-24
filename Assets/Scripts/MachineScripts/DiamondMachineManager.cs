@@ -7,7 +7,11 @@ public class DiamondMachineManager : MonoBehaviour
     public static int[] diamondIndexArray = new int[5];
     int planeChildIndex = 1;
     GameObject nailParent;
-
+    GameObject diamondParent;
+    private void Start()
+    {
+        diamondParent = GameObject.FindGameObjectWithTag("DiamondParent");
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.tag.Contains("Nail"))
@@ -17,8 +21,8 @@ public class DiamondMachineManager : MonoBehaviour
             if (diamondIndexArray[index] > -1)
             {
                 Debug.Log(index + "diamond");
-                Material diamondMaterial = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndexArray[index]);
-                other.transform.GetChild(planeChildIndex).gameObject.GetComponent<MeshRenderer>().material= diamondMaterial;
+                diamondParent.transform.GetChild(index).gameObject.SetActive(true);
+                diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndexArray[index]);
                 GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
             }
             //0.00011

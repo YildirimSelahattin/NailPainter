@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
+    [SerializeField] TextMeshProUGUI matchRateText;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -182,4 +183,14 @@ public class UIManager : MonoBehaviour
     {
         follower.GetComponent<PlayerController>().enabled = true;
     }
+    public void ShowEndScreen()
+    {
+        GameManager.Instance.targetMinimap.SetActive(true);
+        GameManager.Instance.currentMinimap.SetActive(true);
+        GameManager.Instance.currentRightMinimap.SetActive(false);
+        matchRateText.text =GameManager.Instance.CompareTwoHands().ToString();
+    }
+    
+
+    
 }

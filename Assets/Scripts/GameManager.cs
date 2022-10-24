@@ -170,7 +170,8 @@ public class GameManager : MonoBehaviour
             currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
         }
         //TAKE SHAPE PARAMETER
-        currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5+csvoffset].Substring(1));
+        //Int16.Parse(levelRowData[5+csvoffset].Substring(1))
+        currentLevel.nailTypeAfterManicure = 2;
 
         Debug.Log("shape " + currentLevel.nailTypeAfterManicure);
         for(int i = 0; i < 5; i++)

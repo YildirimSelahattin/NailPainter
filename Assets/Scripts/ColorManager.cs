@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -88,11 +89,14 @@ public class ColorManager : MonoBehaviour
     public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray,int[] nailDiamondArray)
     {
         //OPEN THE WANTED NAÝL SHAPE
-        GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex+1).gameObject;
+        GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex).gameObject;
+        GameObject diamondParent = targetHand.transform.GetChild(0).gameObject;
         nailParent.SetActive(true);
+        diamondParent.SetActive(true);
         //PAÝNT EVERY NAÝL 
         for (int index = 0; index < 5; index++)
         {
+            Debug.Log("index\n" + nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
             //get the material array
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
@@ -102,7 +106,7 @@ public class ColorManager : MonoBehaviour
             //give material array back
             nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
             //diamond nail
-            nailParent.transform.GetChild(index).transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
+            diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
         }
 
     }
