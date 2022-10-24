@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class HandTriggerManager : MonoBehaviour
 {
-    [SerializeField]Transform diamondReachPointReference;
+    [SerializeField] Transform diamondReachPointReference;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -15,18 +15,29 @@ public class HandTriggerManager : MonoBehaviour
             MoveMoney(other);
             Debug.Log("niye olmuyor");
         }
+
+        if (other.transform.CompareTag("EndGame"))
+        {
+            GameManager.Instance.targetMinimap.SetActive(true);
+            GameManager.Instance.currentMinimap.SetActive(true);
+            GameManager.Instance.currentRightMinimap.SetActive(false);    
+            GameManager.Instance.CompareTwoHands(); 
+        }
     }
 
     private void IncreaseMoneyAndDestroy(GameObject diamond)
     {
-        GameManager.Instance.NumberOfDiamonds++;
+        UIManager.Instance.NumberOfDiamonds++;
         Destroy(diamond);
     }
+
     private void MoveMoney(Collider other)
     {
         other.transform.parent = this.transform;
 
         other.transform.DOLocalMove(diamondReachPointReference.localPosition, 1f).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
-        other.transform.DOScale(0.1f,1);
+        other.transform.DOScale(0.1f, 1);
     }
+
+
 }
