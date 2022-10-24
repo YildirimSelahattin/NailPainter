@@ -19,13 +19,11 @@ public class GameManager : MonoBehaviour
     GameObject  nailColorMachine;
     [Header("UI References :")]
     public Image fillImage;
-    public TextMeshProUGUI diamondNumberText;
 
     [Header("Transform References :")]
 
     public Transform player;
     public Transform end;
-
     LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
@@ -40,29 +38,24 @@ public class GameManager : MonoBehaviour
     public bool isManicured;
     
     [Header("No Name")]
-    public int matchRate;
+    public float matchRate;
     public static GameManager Instance;
     [HideInInspector] public bool gameStart = false;
 
-    [Header("users possesions")]
-    public int numberOfDiamonds;
-    public int NumberOfDiamonds
-    {
-        get { return numberOfDiamonds; }   // get method
-        set { numberOfDiamonds = value;
-              PlayerPrefs.SetInt("NumberOfDiamondsKey",value);
-              diamondNumberText.text = numberOfDiamonds.ToString();
-        }
-    }  // set method
-    
+    [Header("End Game")]
+    public GameObject targetMinimap;
+    public GameObject currentMinimap;
+    public GameObject currentRightMinimap;
+    Image currentMinimapImage;
+
     private void Start()
     {
+        currentMinimapImage = currentMinimap.GetComponent<Image>();
         if (Instance == null)
         {
             Instance = this;
         }
-
-         PrepareUI();
+         
          ReadCSVAndFillTargetArrays(levelIndex);
          //diamond index array is passed to the machine to do
          DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
@@ -141,7 +134,8 @@ public class GameManager : MonoBehaviour
         totalParameterNumber += 3;
         Debug.Log(progress);
         Debug.Log(totalParameterNumber);
-        matchRate = (int)((progress / totalParameterNumber) * 100);
+        matchRate = (float)((progress / totalParameterNumber) * 100);
+        currentMinimapImage.fillAmount = matchRate/100;
         return matchRate;
     }
     //Have TO DECİDE WHETHER LEVELS STARTS 1 OR 0
@@ -186,13 +180,5 @@ public class GameManager : MonoBehaviour
             Debug.Log(i + "diamond" + currentLevel.nailDiamondArray[i]);
 
         }
-    }
-    public void IncreaseGold()
-    {
-        NumberOfDiamonds++;
-    }
-    public void PrepareUI()
-    {
-        NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
     }
 }

@@ -47,13 +47,13 @@ public class GamePause : MonoBehaviour
     {
         gamePaused = true;
         pauseMenu.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     public void GameReturn()
     {
         gamePaused = false;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         pauseMenu.SetActive(false);
     }
 
