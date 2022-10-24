@@ -17,7 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameStartCanvas;
     [SerializeField] Animator startButtonAnimator;
     [SerializeField] GameObject tapToStartCanvas;
+    [SerializeField] GameObject follower;
     [SerializeField] Animator targetPicAnimator;
+    [SerializeField] GameObject gameMusicObject;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -37,10 +39,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        follower.GetComponent<PlayerController>().enabled = false;
         UpdateSound();
         UpdateMusic();
-
-         tapToStartCanvas.gameObject.SetActive(false);
+        tapToStartCanvas.gameObject.SetActive(false);
     }
 
     void Update()
@@ -64,6 +66,7 @@ public class UIManager : MonoBehaviour
 
     public void TapToStart()
     {
+        PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
         EnviromentMoveManager.Instance.stopForwardMovement = false;
@@ -105,12 +108,12 @@ public class UIManager : MonoBehaviour
         if (isSoundOn == 0)
         {
             soundOff.gameObject.SetActive(true);
-            SoundsOn();
+            SoundsOff();
         }
         if (isSoundOn == 1)
         {
             soundOn.gameObject.SetActive(true);
-            SoundsOff();
+            SoundsOn();
         }
     }
 
@@ -120,12 +123,12 @@ public class UIManager : MonoBehaviour
         if (isMusicOn == 0)
         {
             musicOff.gameObject.SetActive(true);
-            MusicOn();
+            MusicOff();
         }
         if (isMusicOn == 1)
         {
             musicOn.gameObject.SetActive(true);
-            MusicOff();
+            MusicOn();
         }
     }
 
@@ -134,47 +137,31 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void MusicOn()
+    public void MusicOff()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 0);
-        //GameMusic.seagull_volume = 0;
-        //GameMusic.BGmusic_volume = 0;
-        //GameMusic.Instance.OnOffVolume();
+        gameMusicObject.SetActive(false);
         musicOn.gameObject.SetActive(false);
         musicOff.gameObject.SetActive(true);
     }
 
-    public void MusicOff()
+    public void MusicOn()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
-        //GameMusic.seagull_volume = 1;
-        //GameMusic.BGmusic_volume = 0.50f;
-        //GameMusic.Instance.OnOffVolume();
+        gameMusicObject.SetActive(true);
         musicOff.gameObject.SetActive(false);
         musicOn.gameObject.SetActive(true);
     }
 
-    public void SoundsOn()
+    public void SoundsOff()
     {
         PlayerPrefs.SetInt("IsSoundOnKey", 0);
-        //EggsGameManager.play_sound = false;
-        //TimeFlewAwayAfterCounter.play_sound = false;
-        //TimeCracker.play_sound = false;
-        //TimeThrowScript.play_sound = false;
-        //EnemyBirdMove.play_sound = false;
-        //DialogHandler.play_sound = false;
         soundOn.gameObject.SetActive(false);
         soundOff.gameObject.SetActive(true);
     }
-    public void SoundsOff()
+    public void SoundsOn()
     {
         PlayerPrefs.SetInt("IsSoundOnKey", 1);
-        //EggsGameManager.play_sound = true;
-        //TimeFlewAwayAfterCounter.play_sound = true;
-        //TimeCracker.play_sound = true;
-        //TimeThrowScript.play_sound = true;
-        //DialogHandler.play_sound = true;
-        //EnemyBirdMove.play_sound = true;
         soundOff.gameObject.SetActive(false);
         soundOn.gameObject.SetActive(true);
     }
@@ -189,5 +176,10 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(adDelay);
         gameStartCanvas.gameObject.SetActive(false);
+    }
+
+    public void PlayerStartMovement()
+    {
+        follower.GetComponent<PlayerController>().enabled = true;
     }
 }

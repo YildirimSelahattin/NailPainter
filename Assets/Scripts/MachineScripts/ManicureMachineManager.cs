@@ -20,6 +20,7 @@ public class ManicureMachineManager : MonoBehaviour
     public int nailTypeAfterManicure = 2;
     public static ManicureMachineManager Instance;
     bool usedOnce = false;
+    float realPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,15 +29,9 @@ public class ManicureMachineManager : MonoBehaviour
             Instance = this;
         }
 
-        //adding materials to list , To tweak curves 
-        Material[] matArray =gameObject.GetComponent<MeshRenderer>().materials;
-        for(int i = 0; i < 3; i++)
-        {
-            CurveAmountManager.Instance.materialArray.Add(matArray[i]);
-        }
-        MoveManicureMachine();
+        realPos = transform.position.x;
 
-        //getting hand parent
+        MoveManicureMachine();
         handParent= GameObject.FindGameObjectWithTag("PlayerBase");
         newNailParent = handParent.transform.GetChild(nailTypeAfterManicure).gameObject;
     }
@@ -59,13 +54,14 @@ public class ManicureMachineManager : MonoBehaviour
         if (other.transform.tag.Contains("Nail"))
         {
             Debug.Log("giriyonmu");
-            Instantiate(nailParticle, other.transform.position,other.transform.rotation);
+            GameObject particles = Instantiate(nailParticle, other.transform.position,other.transform.rotation);
+            particles.transform.parent = handParent.transform;
         }
     }
 
     private void MoveManicureMachine()
     {
-        transform.DOLocalMoveX(4,1f).OnComplete(()=>transform.DOLocalMoveX(-4,1f).OnComplete(()=>MoveManicureMachine()));
+        transform.DOLocalMoveX(realPos+2,1f).OnComplete(()=>transform.DOLocalMoveX(realPos-2,1f).OnComplete(()=>MoveManicureMachine()));
     }
 
     /*  private void MoveManicureMachine(int index)

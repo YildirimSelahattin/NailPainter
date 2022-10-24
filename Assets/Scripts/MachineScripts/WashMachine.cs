@@ -6,13 +6,11 @@ using DG.Tweening;
 public class WashMachine : MonoBehaviour
 {
     public Material transparentMat;
-    private void Start()
-    {
-        //Add material list soap and sponge materials 
-        CurveAmountManager.Instance.materialArray.Add(gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material);
-        CurveAmountManager.Instance.materialArray.Add(gameObject.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material);
+    [SerializeField] Texture soapTexture;
+    [SerializeField] Texture spongeTexture;
+    [SerializeField] MeshRenderer soapPart;
+    [SerializeField] MeshRenderer spongePart;
 
-    }
     private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Hand"))
@@ -22,6 +20,7 @@ public class WashMachine : MonoBehaviour
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[1] = transparentMat;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray; 
+            Debug.Log( "asdasd");
         }
     }
 }

@@ -9,11 +9,12 @@ public class BrushManager : MonoBehaviour
 {
     public int colorIndex = 1;
     Material brushMaterial;
+    [SerializeField] GameObject headPart;
+    [SerializeField] GameObject brushPart;
 
     void Start()
     {
-
-        CurveAmountManager.Instance.materialArray.Add(brushMaterial);
+        brushMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
     }
 
     private void OnTriggerExit(Collider other)//if one finger pass the brush
@@ -33,8 +34,11 @@ public class BrushManager : MonoBehaviour
     {
         if (other.transform.CompareTag("PlayerBase"))//When HandRigged Gets Triggered Because ColorMachine
         {
+            // TODO, 
+            /*a
             transform.DORotate(new Vector3(-30, 0, 0), 1);
             Debug.Log("colormachinemove");
+            */
         }
     }
 }
