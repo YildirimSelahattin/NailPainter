@@ -17,7 +17,8 @@ MonoBehaviour:
   materialHashCode: 1349526868
   m_Version: 1.1.0
   m_SourceFontFileGUID: f89efcaa5fec58b4a9a32d3a0233e82b
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: f89efcaa5fec58b4a9a32d3a0233e82b, type: 3}
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: f89efcaa5fec58b4a9a32d3a0233e82b,
+    type: 3}
   m_SourceFontFile: {fileID: 12800000, guid: f89efcaa5fec58b4a9a32d3a0233e82b, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
@@ -361,14 +362,15 @@ MonoBehaviour:
   tabSize: 10
 --- !u!21 &3999111692096807420
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BungeeSpice-Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -392,12 +394,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 4992458325170715039}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1, y: 10}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Ambient: 0.5
     - _Bevel: 0.5

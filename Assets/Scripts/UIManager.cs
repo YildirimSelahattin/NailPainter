@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Animator startButtonAnimator;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
+    [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject losePanel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
@@ -120,10 +122,17 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        GameManager.Instance.targetMinimap.SetActive(true);
-        GameManager.Instance.currentMinimap.SetActive(true);
         GameManager.Instance.currentRightMinimap.SetActive(false);
-        matchRateText.text =GameManager.Instance.CompareTwoHands().ToString();
+        int matchRate = (int)GameManager.Instance.CompareTwoHands();
+        matchRateText.text = matchRate.ToString();
+        if (matchRate > 50)
+        {
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            losePanel.SetActive(true);
+        }
     }
 
     public void UpdateSound()
@@ -173,9 +182,9 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
         gameMusicObject.SetActive(true);
-musicOff.gameObject.SetActive(false);
+        musicOff.gameObject.SetActive(false);
         musicOn.gameObject.SetActive(true);
-        
+
     }
 
     public void SoundsOff()

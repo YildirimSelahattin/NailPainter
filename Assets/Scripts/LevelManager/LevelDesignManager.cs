@@ -24,4 +24,9 @@ public class LevelDesignManager : MonoBehaviour
         PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber+1);
         UIManager.Instance.LoadScene(0);
     }
+
+    public void Restart()
+    {
+        UIManager.Instance.LoadScene(0);
+    }
 }

@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     [Header("Level References")]
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
-    [SerializeField] int levelIndex =1;
+    [SerializeField] int levelIndex = 1;
     [Header("Shuffling Levels References")]
     GameObject[] spawnPoints;
-    GameObject  nailColorMachine;
+    GameObject nailColorMachine;
     [Header("UI References :")]
     public Image fillImage;
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public List<int> currentRingIndexArray;
     public bool isCleaned;
     public bool isManicured;
-    
+
     [Header("No Name")]
     public float matchRate;
     public static GameManager Instance;
@@ -51,11 +51,11 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-         
-         ReadCSVAndFillTargetArrays(levelIndex);
-         //diamond index array is passed to the machine to do
-         DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
-         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure,currentLevel.nailColorArray,currentLevel.nailPatternArray,currentLevel.nailDiamondArray);
+
+        ReadCSVAndFillTargetArrays(levelIndex);
+        //diamond index array is passed to the machine to do
+        DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
+        ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
     }
 
     public float CompareTwoHands()
@@ -64,70 +64,40 @@ public class GameManager : MonoBehaviour
         float progress = 0;
         for (int i = 0; i < 5; i++)
         {
-            
+
             //nail color compare
             if (currentLevel.nailColorArray[i] == currentColorIndexArray[i])
             {
                 progress += 1;
             }
-
-
             //nail pattern compare
             if (currentLevel.nailPatternArray[i] == currentPatternIndexArray[i])
             {
                 progress += 1;
             }
+            //diamond compare
+            if (currentLevel.nailDiamondArray[i] == currentDiamondIndexArray[i])
+            {
+                progress += 1;
+            }
+        }
 
-            totalParameterNumber += 2;
-            /*
-           
-            totalParameterNumber += 3;
-            //look for diamond
-           
-            if (targetDiamondIndexArray[i] == currentDiamondIndexArray[i])
-            {
-                progress += 1;
-            }*/
-            //totalParameterNumber += 3;
-        }
-        /*
-         * 
-         * //Ring compare
-        for (int i = 0; i < currentRingIndexArray.Count; i++)
-        {
-            if (currentRingIndexArray[i] == targetRingIndexArray[i])
-            {
-                progress += 1;
-            }
-            totalParameterNumber += 1;
-        }
-        //bracelet compare
-        for (int i = 0; i < currentBraceletIndexArray.Count; i++)
-        {
-            if (currentBraceletIndexArray[i] == targetBraceletIndexArray[i])
-            {
-                progress += 1;
-            }
-            totalParameterNumber += 1;
-        }*/
-        // manicure compare
+        //nail type compare
         if (isManicured == true)
         {
-            progress += 1;
+            progress += 2.5f;
         }
+        //is washed
         if (isCleaned == true)
         {
-            progress += 1;
+            progress += 2.5f;
         }
-        if(currentNailType == currentLevel.nailTypeAfterManicure)
-        {
-            progress += 1;
-        }
-        totalParameterNumber += 3;
+
+        totalParameterNumber = 20;
         Debug.Log(progress);
         Debug.Log(totalParameterNumber);
         matchRate = (float)((progress / totalParameterNumber) * 100);
-        currentMinimapImage.fillAmount = matchRate/100;
+        currentMinimapImage.fillAmount = matchRate / 100;
         return matchRate;
     }
     //Have TO DECİDE WHETHER LEVELS STARTS 1 OR 0
@@ -155,13 +125,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             string[] nailData = levelRowData[i + csvoffset].Split(new string[] { "-" }, System.StringSplitOptions.None);
-            currentLevel.nailColorArray[i] = Int16.Parse( nailData[colorPartIndex].Substring(1));
+            currentLevel.nailColorArray[i] = Int16.Parse(nailData[colorPartIndex].Substring(1));
             currentLevel.nailPatternArray[i] = Int16.Parse(nailData[patternPartIndex].Substring(1));
-            currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
+            currentLevel.nailDiamondArray[i] = Int16.Parse(nailData[diamondPartIndex].Substring(1));
         }
-        currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5+csvoffset].Substring(1));
+        currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5 + csvoffset].Substring(1));
 
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             Debug.Log(currentLevel.nailColorArray[i]);
         }
