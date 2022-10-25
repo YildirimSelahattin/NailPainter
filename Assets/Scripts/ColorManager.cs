@@ -38,7 +38,7 @@ public class ColorManager : MonoBehaviour
         return myNewColorMaterial;
     }
 
-    public Material GetPatternMaterialByIndex(int patternIndex)
+    public Material GetPatternMaterialByIndex(int patternIndex,bool forThumb)
     {
         Material myNewPatternMaterial = new Material(baseMat);
         //Set Texture on the mater
@@ -47,7 +47,14 @@ public class ColorManager : MonoBehaviour
         myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex]);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
         myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
-        myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
+        if(forThumb == true)
+        {
+            myNewPatternMaterial.DOTiling(new Vector2(1.14f, 8.8f), 0.1f);
+        }
+        else
+        {
+            myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
+        }
         return myNewPatternMaterial;
     }
 
