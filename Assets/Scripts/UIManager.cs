@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
+    [SerializeField] GameObject endPanel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
@@ -125,6 +126,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.currentRightMinimap.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
+        endPanel.SetActive(true);
         if (matchRate > 50)
         {
             winPanel.SetActive(true);

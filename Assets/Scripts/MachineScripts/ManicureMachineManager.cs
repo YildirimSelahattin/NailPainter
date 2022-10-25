@@ -56,6 +56,8 @@ public class ManicureMachineManager : MonoBehaviour
             Debug.Log("giriyonmu");
             GameObject particles = Instantiate(nailParticle, other.transform.position,other.transform.rotation);
             particles.transform.parent = handParent.transform;
+
+            GameManager.Instance.isManicured = true;
         }
     }
 

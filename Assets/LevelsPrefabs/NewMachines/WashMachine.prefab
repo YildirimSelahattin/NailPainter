@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73afd9dc82e0e3d4e9c8d6b854dc3ab5, type: 2}
+  - {fileID: -876546973899608171, guid: f0f06ecbf600acc47bda29ec477ef7d6, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6105891335618134708}
   - component: {fileID: 8965352450387459070}
   - component: {fileID: 5570652213973786474}
+  - component: {fileID: 1732850694}
   m_Layer: 0
   m_Name: Soap
   m_TagString: Untagged
@@ -145,7 +146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec5cb9e629d6e7545930f413275a493d, type: 2}
+  - {fileID: -876546973899608171, guid: d4ab92eedb8b6a545b31f00e47dab483, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,6 +168,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1732850694
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029326812732297615}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40a43a36afff89b4a96169a2b046527c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6577215464364557114
 GameObject:
   m_ObjectHideFlags: 0
