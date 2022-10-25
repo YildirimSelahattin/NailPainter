@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Day2 1
+  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BackTex:
+        m_Texture: {fileID: 2800000, guid: 099fa5563f3bbe5458a84922cc8938b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DownTex:
+        m_Texture: {fileID: 2800000, guid: 98dd08ac932d0ed4885243e04452bd28, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FrontTex:
+        m_Texture: {fileID: 2800000, guid: ed29b37e0bf753748b496ac24077c8a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LeftTex:
+        m_Texture: {fileID: 2800000, guid: 2380500e196c7794f9c3b972e3f60f5c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RightTex:
+        m_Texture: {fileID: 2800000, guid: 29b6086de2fc2574bbd8049843974f22, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 8900000, guid: da17806a14cbc3b44879d4474cc5057f, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UpTex:
+        m_Texture: {fileID: 2800000, guid: 40d836ecca4252741839346631dd42bf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Exposure: 1
+    - _HorizonLineContribution: 0
+    - _HorizonLineExponent: 1
+    - _Rotation: 0
+    - _SkyGradientExponent: 4
+    - _SunDiscContribution: 1
+    - _SunDiscExponent: 100000
+    - _SunDiscMultiplier: 100
+    - _SunHaloContribution: 0.5
+    - _SunHaloExponent: 50
+    - _Title: 0
+    - __dirty: 0
+    m_Colors:
+    - _HorizonLineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SkyGradientBottom: {r: 0.7803922, g: 0.7912915, b: 0.8313726, a: 1}
+    - _SkyGradientTop: {r: 0.45098042, g: 0.6509804, b: 0.7803922, a: 1}
+    - _SunDiscColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SunHaloColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []

@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Animator startButtonAnimator;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
+    [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject losePanel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
@@ -120,18 +122,16 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        GameManager.Instance.targetMinimap.SetActive(true);
-        GameManager.Instance.currentMinimap.SetActive(true);
         GameManager.Instance.currentRightMinimap.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
         if (matchRate > 50)
         {
-            definationText.text = "VICTORY";
+            winPanel.SetActive(true);
         }
         else
         {
-            definationText.text = "DEFEAT";
+            losePanel.SetActive(true);
         }
     }
 
