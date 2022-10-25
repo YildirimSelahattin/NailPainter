@@ -165,17 +165,17 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 0);
         gameMusicObject.SetActive(false);
-        musicOff.gameObject.SetActive(false);
-        musicOn.gameObject.SetActive(true);
+        musicOn.gameObject.SetActive(false);
+        musicOff.gameObject.SetActive(true);
     }
 
     public void MusicOn()
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
         gameMusicObject.SetActive(true);
-
-        musicOn.gameObject.SetActive(false);
-        musicOff.gameObject.SetActive(true);
+musicOff.gameObject.SetActive(false);
+        musicOn.gameObject.SetActive(true);
+        
     }
 
     public void SoundsOff()
