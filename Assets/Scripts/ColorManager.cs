@@ -11,7 +11,7 @@ public class ColorManager : MonoBehaviour
     [SerializeField] Material baseMat;
     [SerializeField] Material machineBaseMat;
     public static ColorManager Instance;
-    [SerializeField]GameObject targetHand;
+    [SerializeField] GameObject targetHand;
     Shader transParentShader;
     int colorIndex;
 
@@ -85,14 +85,17 @@ public class ColorManager : MonoBehaviour
         return myMachineColorMaterial;
     }
 
-    public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray,int[] nailDiamondArray)
+    public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
     {
-        //OPEN THE WANTED NAÝL SHAPE
-        GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex+1).gameObject;
+        //OPEN THE WANTED NAÄ°L SHAPE
+        GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex).gameObject;
+        GameObject diamondParent = targetHand.transform.GetChild(0).gameObject;
         nailParent.SetActive(true);
-        //PAÝNT EVERY NAÝL 
+        diamondParent.SetActive(true);
+        //PAÄ°NT EVERY NAÄ°L 
         for (int index = 0; index < 5; index++)
         {
+            Debug.Log(nailColorArray[index]+nailPatternArray[index]+nailDiamondArray[index]);
             //get the material array
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
@@ -102,7 +105,7 @@ public class ColorManager : MonoBehaviour
             //give material array back
             nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
             //diamond nail
-            nailParent.transform.GetChild(index).transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
+            diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
         }
 
     }

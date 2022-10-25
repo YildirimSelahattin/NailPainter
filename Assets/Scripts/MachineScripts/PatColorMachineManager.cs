@@ -28,7 +28,7 @@ public class PatColorMachineManager : MonoBehaviour
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_COLOR_INDEX] = patternColorMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
-            GameManager.Instance.currentPatternColorIndexArray[currentTag[currentTag.Length - 1] - '0'] = patternColorIndex;
+            
             Debug.Log("cikti");
         }
     }

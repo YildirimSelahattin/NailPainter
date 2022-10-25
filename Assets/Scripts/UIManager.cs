@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
+    [SerializeField] TextMeshProUGUI diamondNumberText;
+    [SerializeField] TextMeshProUGUI matchRateText;
+    [SerializeField] TextMeshProUGUI definationText;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -27,6 +30,17 @@ public class UIManager : MonoBehaviour
     int isMusicOn;
     int LevelNumber;
     public static UIManager Instance;
+    public int numberOfDiamonds;
+    public int NumberOfDiamonds
+    {
+        get { return numberOfDiamonds; }   // get method
+        set
+        {
+            numberOfDiamonds = value;
+            PlayerPrefs.SetInt("NumberOfDiamondsKey", value);
+            diamondNumberText.text = numberOfDiamonds.ToString();
+        }
+    }  // set method
 
     void Awake()
     {
@@ -40,9 +54,10 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         follower.GetComponent<PlayerController>().enabled = false;
+        PrepareUI();
         UpdateSound();
         UpdateMusic();
-        tapToStartCanvas.gameObject.SetActive(false);
+        //tapToStartCanvas.gameObject.SetActive(false);
     }
 
     void Update()
@@ -56,20 +71,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void StartGameButton()
-    {
-        startButtonAnimator.SetBool("ClickPlayButton", true);
-        tapToStartCanvas.gameObject.SetActive(true);
-        //appaerAnim ekle
-        StartCoroutine(Delay(3f));
-    }
+    /*
+        public void StartGameButton()
+        {
+            startButtonAnimator.SetBool("ClickPlayButton", true);
+            tapToStartCanvas.gameObject.SetActive(true);
+            //appaerAnim ekle
+            StartCoroutine(Delay(3f));
+        }
+    */
 
     public void TapToStart()
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
-        //EnviromentMoveManager.Instance.stopForwardMovement = false;
     }
 
     public async void LoadScene(int sceneID)
@@ -101,6 +117,14 @@ public class UIManager : MonoBehaviour
             //progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _target, 3 * Time.deltaTime);
         }
     */
+
+    public void ShowEndScreen()
+    {
+        GameManager.Instance.targetMinimap.SetActive(true);
+        GameManager.Instance.currentMinimap.SetActive(true);
+        GameManager.Instance.currentRightMinimap.SetActive(false);
+        matchRateText.text =GameManager.Instance.CompareTwoHands().ToString();
+    }
 
     public void UpdateSound()
     {
@@ -149,8 +173,9 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("IsMusicOnKey", 1);
         gameMusicObject.SetActive(true);
-        musicOff.gameObject.SetActive(false);
+musicOff.gameObject.SetActive(false);
         musicOn.gameObject.SetActive(true);
+        
     }
 
     public void SoundsOff()
@@ -181,5 +206,14 @@ public class UIManager : MonoBehaviour
     public void PlayerStartMovement()
     {
         follower.GetComponent<PlayerController>().enabled = true;
+    }
+
+    public void IncreaseGold()
+    {
+        NumberOfDiamonds++;
+    }
+    public void PrepareUI()
+    {
+        NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
     }
 }
