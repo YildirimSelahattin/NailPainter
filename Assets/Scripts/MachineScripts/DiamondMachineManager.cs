@@ -30,7 +30,7 @@ public class DiamondMachineManager : MonoBehaviour
     }
 
 }
-//OLD DÝAMOND MACHÝNE CODE, ADDS 3D OBJECT
+//OLD DÄ°AMOND MACHÄ°NE CODE, ADDS 3D OBJECT
 /*private void OnTriggerExit(Collider other)
 {
     if (other.transform.tag.Contains("Nail"))

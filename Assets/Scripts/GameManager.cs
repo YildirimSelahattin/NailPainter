@@ -21,15 +21,11 @@ public class GameManager : MonoBehaviour
     public Image fillImage;
 
     [Header("Transform References :")]
-
-    public Transform player;
-    public Transform end;
     LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
     public int[] currentColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentPatternIndexArray = new int[5] { -1, -1, -1, -1, -1 };
-    public int[] currentPatternColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
     public int[] currentDiamondIndexArray = new int[5] { -1, -1, -1, -1, -1 }; // pattern color array
     public int currentNailType;
     public List<int> currentBraceletIndexArray;
@@ -59,11 +55,7 @@ public class GameManager : MonoBehaviour
          ReadCSVAndFillTargetArrays(levelIndex);
          //diamond index array is passed to the machine to do
          DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
-
-        //TODO must give manicure machine the nail parameter after levels are done 
-
-        //Color Target Array
-        ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure,currentLevel.nailColorArray,currentLevel.nailPatternArray,currentLevel.nailDiamondArray);
+         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure,currentLevel.nailColorArray,currentLevel.nailPatternArray,currentLevel.nailDiamondArray);
     }
 
     public float CompareTwoHands()
@@ -81,7 +73,7 @@ public class GameManager : MonoBehaviour
 
 
             //nail pattern compare
-            if (currentLevel.nailPatternArray[i] == currentPatternColorIndexArray[i])
+            if (currentLevel.nailPatternArray[i] == currentPatternIndexArray[i])
             {
                 progress += 1;
             }
@@ -149,6 +141,7 @@ public class GameManager : MonoBehaviour
         int colorPartIndex = 0;
         int patternPartIndex = 1;
         int diamondPartIndex = 2;
+        int shapePartIndex = 3;
         string[] wholeLevelData = levelDataAsset.text.Split(new string[] { "\n" }, System.StringSplitOptions.None);
         string[] levelRowData = wholeLevelData[(levelIndex * 2) + 3].Split(new string[] { "," }, System.StringSplitOptions.None);
 
@@ -156,11 +149,8 @@ public class GameManager : MonoBehaviour
         "Pointer  " + levelRowData[1 + csvoffset] +
         "Middle  " + levelRowData[2 + csvoffset] +
         "ring  " + levelRowData[3 + csvoffset] +
-        "pinkie  " + levelRowData[4 + csvoffset]+
-        "shape" + levelRowData[5 + csvoffset]);
+        "pinkie  " + levelRowData[4 + csvoffset]);
 
-
-        
         //FOR EVERY NAİL IN ONE HAND 
         for (int i = 0; i < 5; i++)
         {
@@ -169,17 +159,11 @@ public class GameManager : MonoBehaviour
             currentLevel.nailPatternArray[i] = Int16.Parse(nailData[patternPartIndex].Substring(1));
             currentLevel.nailDiamondArray[i] = Int16.Parse( nailData[diamondPartIndex].Substring(1));
         }
-        //TAKE SHAPE PARAMETER
-        //Int16.Parse(levelRowData[5+csvoffset].Substring(1))
-        currentLevel.nailTypeAfterManicure = 2;
+        currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5+csvoffset].Substring(1));
 
-        Debug.Log("shape " + currentLevel.nailTypeAfterManicure);
         for(int i = 0; i < 5; i++)
         {
-            Debug.Log( i + "color" +currentLevel.nailColorArray[i]);
-            Debug.Log(i + "pattern" + currentLevel.nailPatternArray[i]);
-            Debug.Log(i + "diamond" + currentLevel.nailDiamondArray[i]);
-
+            Debug.Log(currentLevel.nailColorArray[i]);
         }
     }
 }

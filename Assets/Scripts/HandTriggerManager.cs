@@ -18,14 +18,15 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
-       
+
             UIManager.Instance.ShowEndScreen();
-            
+
         }
     }
 
     private void IncreaseMoneyAndDestroy(GameObject diamond)
     {
+        UIManager.Instance.NumberOfDiamonds++;
         Destroy(diamond);
     }
 

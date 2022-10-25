@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -12,7 +11,7 @@ public class ColorManager : MonoBehaviour
     [SerializeField] Material baseMat;
     [SerializeField] Material machineBaseMat;
     public static ColorManager Instance;
-    [SerializeField]GameObject targetHand;
+    [SerializeField] GameObject targetHand;
     Shader transParentShader;
     int colorIndex;
 
@@ -86,17 +85,17 @@ public class ColorManager : MonoBehaviour
         return myMachineColorMaterial;
     }
 
-    public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray,int[] nailDiamondArray)
+    public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
     {
-        //OPEN THE WANTED NAÝL SHAPE
+        //OPEN THE WANTED NAÄ°L SHAPE
         GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex).gameObject;
         GameObject diamondParent = targetHand.transform.GetChild(0).gameObject;
         nailParent.SetActive(true);
         diamondParent.SetActive(true);
-        //PAÝNT EVERY NAÝL 
+        //PAÄ°NT EVERY NAÄ°L 
         for (int index = 0; index < 5; index++)
         {
-            Debug.Log("index\n" + nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
+            Debug.Log(nailColorArray[index]+nailPatternArray[index]+nailDiamondArray[index]);
             //get the material array
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
