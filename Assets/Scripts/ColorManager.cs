@@ -38,7 +38,7 @@ public class ColorManager : MonoBehaviour
         return myNewColorMaterial;
     }
 
-    public Material GetPatternMaterialByIndex(int patternIndex)
+    public Material GetPatternMaterialByIndex(int patternIndex, bool forThumb)
     {
         Material myNewPatternMaterial = new Material(baseMat);
         //Set Texture on the mater
@@ -47,7 +47,14 @@ public class ColorManager : MonoBehaviour
         myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex]);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
         myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
-        myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
+        if (forThumb == true)
+        {
+            myNewPatternMaterial.DOTiling(new Vector2(1.14f, 8.8f), 0.1f);
+        }
+        else
+        {
+            myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
+        }
         return myNewPatternMaterial;
     }
 
@@ -95,13 +102,20 @@ public class ColorManager : MonoBehaviour
         //PAİNT EVERY NAİL 
         for (int index = 0; index < 5; index++)
         {
-            Debug.Log(nailColorArray[index]+nailPatternArray[index]+nailDiamondArray[index]);
+            Debug.Log(nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
             //get the material array
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
             matArrayForNail[NAIL_COLOR_INDEX] = GetColorMaterialByIndex(nailColorArray[index]);
-            //pattern nail
-            matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index]);
+            //pattern nail(special if for thumb because tilling)
+            if (index == 0)
+            {
+                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index], true);
+            }
+            else
+            {
+                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index], false);
+            }
             //give material array back
             nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
             //diamond nail
