@@ -18,7 +18,7 @@ public class DiamondMachineManager : MonoBehaviour
         {
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
-            if (diamondIndexArray[index] > -1)
+            if (diamondIndexArray[index] > 0)
             {
                 Debug.Log(index + "diamond");
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);

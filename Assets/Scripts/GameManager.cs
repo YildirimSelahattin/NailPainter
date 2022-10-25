@@ -70,60 +70,30 @@ public class GameManager : MonoBehaviour
             {
                 progress += 1;
             }
-
-
             //nail pattern compare
             if (currentLevel.nailPatternArray[i] == currentPatternIndexArray[i])
             {
                 progress += 1;
             }
+            //diamond compare
+            if (currentLevel.nailDiamondArray[i] == currentDiamondIndexArray[i])
+            {
+                progress += 1;
+            }
+        }
 
-            totalParameterNumber += 2;
-            /*
-           
-            totalParameterNumber += 3;
-            //look for diamond
-           
-            if (targetDiamondIndexArray[i] == currentDiamondIndexArray[i])
-            {
-                progress += 1;
-            }*/
-            //totalParameterNumber += 3;
-        }
-        /*
-         * 
-         * //Ring compare
-        for (int i = 0; i < currentRingIndexArray.Count; i++)
-        {
-            if (currentRingIndexArray[i] == targetRingIndexArray[i])
-            {
-                progress += 1;
-            }
-            totalParameterNumber += 1;
-        }
-        //bracelet compare
-        for (int i = 0; i < currentBraceletIndexArray.Count; i++)
-        {
-            if (currentBraceletIndexArray[i] == targetBraceletIndexArray[i])
-            {
-                progress += 1;
-            }
-            totalParameterNumber += 1;
-        }*/
-        // manicure compare
+        //nail type compare
         if (isManicured == true)
         {
-            progress += 1;
+            progress += 2.5f;
         }
+        //is washed
         if (isCleaned == true)
         {
-            progress += 1;
+            progress += 2.5f;
         }
-        if(currentNailType == currentLevel.nailTypeAfterManicure)
-        {
-            progress += 1;
-        }
-        totalParameterNumber += 3;
+        
+        totalParameterNumber = 20;
         Debug.Log(progress);
         Debug.Log(totalParameterNumber);
         matchRate = (float)((progress / totalParameterNumber) * 100);

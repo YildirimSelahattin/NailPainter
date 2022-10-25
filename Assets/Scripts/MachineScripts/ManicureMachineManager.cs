@@ -47,6 +47,7 @@ public class ManicureMachineManager : MonoBehaviour
             other.gameObject.SetActive(false);
             newNailParent.transform.GetChild(index).gameObject.SetActive(true);
             GameManager.Instance.currentNailType = nailTypeAfterManicure;
+            GameManager.Instance.isManicured = true;
         }
     }
     private void OnTriggerEnter(Collider other)// when nail enters the collider, play nail particle on it

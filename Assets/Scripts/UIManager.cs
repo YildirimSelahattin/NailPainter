@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.targetMinimap.SetActive(true);
         GameManager.Instance.currentMinimap.SetActive(true);
         GameManager.Instance.currentRightMinimap.SetActive(false);
-        matchRateText.text =GameManager.Instance.CompareTwoHands().ToString();
+        matchRateText.text =((int)GameManager.Instance.CompareTwoHands()).ToString();
     }
 
     public void UpdateSound()
