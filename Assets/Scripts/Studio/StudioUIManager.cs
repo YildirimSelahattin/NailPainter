@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -11,10 +12,26 @@ public class StudioUIManager : MonoBehaviour
     private Transform toDrag;
     Camera m_MainCamera;
     Vector3 camOriginPos;
+    [SerializeField] GameObject KomodinParrent;
+    [SerializeField] GameObject MasaParrent;
+    [SerializeField] GameObject PlatformParrent;
+    [SerializeField] GameObject DuvarParrent;
+    [SerializeField] GameObject ZeminParrent;
+
     void Start()
     {
         m_MainCamera = Camera.main;
         camOriginPos = m_MainCamera.transform.position;
+    }
+
+    public void PrevScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void onUpgradeTable()
+    {
+        Debug.Log("dasdfasdasdfadsf");
     }
 
     // Update is called once per frame
@@ -40,14 +57,43 @@ public class StudioUIManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                m_MainCamera.transform.DOLocalMove(new Vector3(hit.transform.position.x, 0.6f, -5), 1);
-                Debug.Log(hit.collider.name);
-
+                if (hit.collider.tag == "ZeminUpgrade")
+                {
+                    ZeminParrent.transform.GetChild(0).gameObject.SetActive(false);
+                    ZeminParrent.transform.GetChild(2).gameObject.SetActive(false);
+                    ZeminParrent.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                if (hit.collider.tag == "KomodinUpgrade")
+                {
+                    KomodinParrent.transform.GetChild(0).gameObject.SetActive(false);
+                    KomodinParrent.transform.GetChild(2).gameObject.SetActive(false);
+                    KomodinParrent.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                if (hit.collider.tag == "DuvarUpgrade")
+                {
+                    DuvarParrent.transform.GetChild(0).gameObject.SetActive(false);
+                    DuvarParrent.transform.GetChild(2).gameObject.SetActive(false);
+                    DuvarParrent.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                if (hit.collider.tag == "PlatformUpgrade")
+                {
+                    PlatformParrent.transform.GetChild(0).gameObject.SetActive(false);
+                    PlatformParrent.transform.GetChild(2).gameObject.SetActive(false);
+                    PlatformParrent.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                if (hit.collider.tag == "MasaUpgrade")
+                {
+                    MasaParrent.transform.GetChild(0).gameObject.SetActive(false);
+                    MasaParrent.transform.GetChild(2).gameObject.SetActive(false);
+                    MasaParrent.transform.GetChild(1).gameObject.SetActive(true);
+                }
             }
             else
             {
-                m_MainCamera.transform.DOLocalMove(camOriginPos,0.5f);
+                //m_MainCamera.transform.DOLocalMove(camOriginPos,1f);
             }
         }
+
+
     }
 }
