@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelDesignManager : MonoBehaviour
-{
+{//masa sandalye koltuk ayna komodin duvar zemin platform, pervaz rengi
     public List<GameObject> Levels = new List<GameObject>();
     public GameObject LevelsParrent;
     GameObject levelPrefab;
