@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424198378925283172}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.033, y: 1.51, z: -0.01}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.032999992, y: 1.51, z: -0.009994507}
   m_LocalScale: {x: 0.20269139, y: 0.20269139, z: 0.20269139}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 424198379435517887}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
 --- !u!33 &424198378925283171
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 424198379435517887}
   - component: {fileID: 424198379435517886}
   - component: {fileID: 424198379435517873}
-  - component: {fileID: 424198379435517872}
   - component: {fileID: 424198379435517875}
   - component: {fileID: 424198379435517884}
+  - component: {fileID: 45242378686706562}
   m_Layer: 0
   m_Name: PatternMachine
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 424198379435517874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.89, y: 3.4689, z: 42.62}
-  m_LocalScale: {x: 1.4212871, y: 1.4212871, z: 1.3164388}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 424198378925283168}
@@ -170,19 +170,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &424198379435517872
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424198379435517874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1519839, y: 4.245054, z: 0.1944542}
-  m_Center: {x: 0.006453972, y: -1.113527, z: 0.07522011}
 --- !u!114 &424198379435517875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +199,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &45242378686706562
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424198379435517874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3756008
+  m_Height: 8.9
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.77, z: 0}

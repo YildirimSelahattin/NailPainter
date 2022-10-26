@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3609131219814128482}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2.38, y: -3.8, z: 17.29}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7466252204415241828}
@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6535888956268218971}
   - component: {fileID: 1949708883226761461}
-  - component: {fileID: 1949708883226761463}
   - component: {fileID: 1949708883226761460}
+  - component: {fileID: 162644712001078767}
   m_Layer: 0
   m_Name: NailColorMachine
   m_TagString: ColorMachine
@@ -135,19 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1949708883226761463
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535888956268218970}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99056244, y: 6.5073757, z: 0.75819397}
-  m_Center: {x: 4.0150757, y: -1.224886, z: 8.937416}
 --- !u!114 &1949708883226761460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,9 +147,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4591e42c271859248a1ff19f3bc84de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorIndex: 5
+  colorIndex: 2
   headPart: {fileID: 0}
   brushPart: {fileID: 0}
+--- !u!136 &162644712001078767
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6535888956268218970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3756008
+  m_Height: 13.18255
+  m_Direction: 1
+  m_Center: {x: 2.4568002, y: 0, z: 11.512253}
 --- !u!1 &7842636666296964318
 GameObject:
   m_ObjectHideFlags: 0

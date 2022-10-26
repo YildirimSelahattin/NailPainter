@@ -9,7 +9,6 @@ public class ColorManager : MonoBehaviour
     //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] Texture[] diamondsArray;
     [SerializeField] Material baseMat;
-    [SerializeField] Material machineBaseMat;
     public static ColorManager Instance;
     [SerializeField] GameObject targetHand;
     Shader transParentShader;
@@ -58,18 +57,6 @@ public class ColorManager : MonoBehaviour
         return myNewPatternMaterial;
     }
 
-    public Material GetPatternColorMaterialByIndex(int patternColorIndex)//NOT IN USE
-    {
-        Material myNewPatternColorMaterial = new Material(baseMat);
-        //Set Texture on the mater
-
-        //Set Texture on the material
-        //myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
-        //myNewPatternColorMaterial.SetFloat("_Surface", 1);
-        myNewPatternColorMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
-        myNewPatternColorMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
-        return myNewPatternColorMaterial;
-    }
     public Material GetDiamondMaterialByIndex(int diamondIndex)
     {
         Material myNewDiamondMaterial = new Material(baseMat);
@@ -81,15 +68,17 @@ public class ColorManager : MonoBehaviour
         return myNewDiamondMaterial;
     }
 
-    public Material GetMachineColorMaterialByTexture(Texture texture)
+    public Material GetPatternMachineMaterialByTexture(int index)
     {
-        Material myMachineColorMaterial = new Material(machineBaseMat);
+        Material myNewPatternMaterial = new Material(baseMat);
         //Set Texture on the mater
         //Set Texture on the material
 
-        myMachineColorMaterial.SetTexture("_BaseMap", texture);
+        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[index]);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
-        return myMachineColorMaterial;
+        myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0.44f, 0f));
+        myNewPatternMaterial.DOTiling(new Vector2(0.1f, 1.09f), 0.1f);
+        return myNewPatternMaterial;
     }
 
     public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
