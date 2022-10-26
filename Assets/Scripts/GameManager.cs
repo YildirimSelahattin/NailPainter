@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public bool isCleaned;
     public bool isManicured;
 
+    [SerializeField] Camera CurrentCam;
+    [SerializeField] Camera TargetCam;
+
     [Header("No Name")]
     public float matchRate;
     public static GameManager Instance;
@@ -53,15 +56,28 @@ public class GameManager : MonoBehaviour
         }
 
         ReadCSVAndFillTargetArrays(levelIndex);
+        StartCoroutine(OffCam());
         //diamond index array is passed to the machine to do
         DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
+    }
+
+    IEnumerator OffCam()
+    {
+        yield return new WaitForSeconds(2);
+        TargetCam.gameObject.SetActive(false);
+        CurrentCam.gameObject.SetActive(false);
     }
 
     public float CompareTwoHands()
     {
         float totalParameterNumber = 0;
         float progress = 0;
+
+        TargetCam.gameObject.SetActive(true);
+        CurrentCam.gameObject.SetActive(true);
+        StartCoroutine(OffCam());
+        
         for (int i = 0; i < 5; i++)
         {
 

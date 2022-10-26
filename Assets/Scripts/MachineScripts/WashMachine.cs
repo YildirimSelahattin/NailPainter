@@ -20,7 +20,7 @@ public class WashMachine : MonoBehaviour
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[1] = transparentMat;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray; 
-            Debug.Log( "asdasd");
+            GameManager.Instance.isCleaned = true;
         }
     }
 }
