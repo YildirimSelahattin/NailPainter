@@ -25,8 +25,7 @@ public class RoomManager : MonoBehaviour
         room = GameDataManager.Instance.dataLists.room;
         for(int i = 0;i< roomParent.Count; i++)
         {
-            switch()
-            roomParent[i].transform.GetChild()
+
         }
     }
 
