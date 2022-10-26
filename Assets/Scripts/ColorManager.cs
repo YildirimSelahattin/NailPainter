@@ -107,8 +107,15 @@ public class ColorManager : MonoBehaviour
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
             matArrayForNail[NAIL_COLOR_INDEX] = GetColorMaterialByIndex(nailColorArray[index]);
-            //pattern nail
-            matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index]);
+            //pattern nail(special if for thumb because tilling)
+            if(index == 0)
+            {
+                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index],true);
+            }
+            else
+            {
+                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index],false);
+            }
             //give material array back
             nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
             //diamond nail

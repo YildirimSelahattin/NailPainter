@@ -705,6 +705,104 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &178752992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178752994}
+  - component: {fileID: 178752993}
+  m_Layer: 0
+  m_Name: Reader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &178752993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178752992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05914e5341d153941be513e7a8b0a8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Instance: {fileID: 0}
+  dataLists:
+    table:
+    - name: table1
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: table2
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: table3
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: table4
+      price: 0
+      power: 0
+      isbuyed: 0
+    chair:
+    - name: chair1
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: chair2
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: chair3
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: chair4
+      price: 0
+      power: 0
+      isbuyed: 0
+    sofa:
+    - name: sofa1
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: sofa2
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: sofa3
+      price: 0
+      power: 0
+      isbuyed: 0
+    - name: sofa4
+      price: 0
+      power: 0
+      isbuyed: 0
+    room: {fileID: 0}
+--- !u!4 &178752994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178752992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3800445, y: -3.5546904, z: -204.01552}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &204997585
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +886,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204997585}
   m_Mesh: {fileID: -3254266456201873136, guid: 88c1d2b4471d490409f59877633eb326, type: 3}
+--- !u!1 &205695413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205695414}
+  m_Layer: 0
+  m_Name: ayna
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205695414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205695413}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 957653959}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215176875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4597,6 +4726,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957653958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957653959}
+  m_Layer: 0
+  m_Name: Room
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &957653959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957653958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 205695414}
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &993509128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4624,7 +4785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993509128}
   m_LocalRotation: {x: -0.065846704, y: 0.000103123464, z: 0.00003813672, w: 0.99782974}
-  m_LocalPosition: {x: -0.016000155, y: -0.06585407, z: 4.075446}
+  m_LocalPosition: {x: 0.009, y: -0.036, z: 4.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5404,8 +5565,8 @@ MonoBehaviour:
   levelDataAsset: {fileID: 4900000, guid: 9ccfc8f3fba0200488f373417f264edd, type: 3}
   levelIndex: 0
   fillImage: {fileID: 1436673284}
-  currentColorIndexArray: ffffffffffffffffffffffffffffffffffffffff
-  currentPatternIndexArray: ffffffffffffffffffffffffffffffffffffffff
+  currentColorIndexArray: 0000000000000000000000000000000000000000
+  currentPatternIndexArray: 0000000000000000000000000000000000000000
   currentDiamondIndexArray: ffffffffffffffffffffffffffffffffffffffff
   currentNailType: 0
   currentBraceletIndexArray: 
@@ -5830,7 +5991,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235657819}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

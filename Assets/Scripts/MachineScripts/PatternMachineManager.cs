@@ -25,6 +25,7 @@ public class PatternMachineManager : MonoBehaviour
             Material materialToAdd;
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
+            // this if else block is for tiling purposes
             if(index == 0)
             {
                 materialToAdd = thumbPatternMaterial;
@@ -37,7 +38,7 @@ public class PatternMachineManager : MonoBehaviour
             Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
-            GameManager.Instance.currentPatternIndexArray[currentTag[currentTag.Length - 1] - '0'] = patternIndex;
+            GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
             //transform.DOLocalMoveY(standartPosition.y, 0.1f);
             Debug.Log("cikti");
         }
