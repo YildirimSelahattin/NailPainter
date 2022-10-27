@@ -20,7 +20,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
+    [SerializeField] GameObject rewardPanel;
     [SerializeField] GameObject endPanel;
+    public GameObject showRewardItem;
+    [SerializeField] GameObject handModel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
@@ -123,13 +126,22 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
+        //Geçiş reklamı
+        if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
+        {
+            InterstitialAdManager.Instance.interstitialEndGame.Show();
+        }
+
         GameManager.Instance.currentRightMinimap.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
         endPanel.SetActive(true);
+        handModel.SetActive(false);
+
         if (matchRate > 50)
         {
             winPanel.SetActive(true);
+            StartCoroutine(Delay(2));
         }
         else
         {
@@ -226,5 +238,13 @@ public class UIManager : MonoBehaviour
     public void PrepareUI()
     {
         NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
+    }
+
+    IEnumerator Delay(int second)
+    {
+        yield return new WaitForSeconds(second);
+        showRewardItem.SetActive(true);
+        rewardPanel.SetActive(true);
+        endPanel.SetActive(false);
     }
 }
