@@ -12,14 +12,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class StudioUIManager : MonoBehaviour
 {
-
-    public static StudioUIManager Instance;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    [SerializeField]List<GameObject> roomParent;
-    public float fillAmount;
-    int mirrorParentIndex=0;
+    //RULES
+    /*int mirrorParentIndex = 0;
     int windowParentIndex = 1;
     int flowerParentIndex = 2;
     int wallParentIndex = 3;
@@ -31,6 +25,14 @@ public class StudioUIManager : MonoBehaviour
     int tabureParentIndex = 9;
     int floorParentIndex = 10;
     int tableParentIndex = 11;
+    */
+    public static StudioUIManager Instance;
+    // Start is called before the first frame update
+
+    // Update is called once per frame
+    [SerializeField]List<GameObject> roomParent;
+    public float fillAmount;
+
 
     public GeneralDataStructure[][] objectsByIndexArray;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapalý baþlamalý
@@ -72,7 +74,8 @@ public class StudioUIManager : MonoBehaviour
                 roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject.SetActive(true);
             }
 
-            //see 
+            //stacked changes TODO
+            
         }
     }
     public void PrevScene()
@@ -118,7 +121,6 @@ public class StudioUIManager : MonoBehaviour
                             roomParent[i].transform.GetChild(upgradeButtonChildIndex).gameObject.SetActive(true);
                         }
                     }
-                    
                     //disable this upgradeObject
                     hit.collider.gameObject.SetActive(false);
                 }
@@ -129,14 +131,9 @@ public class StudioUIManager : MonoBehaviour
             }
         }
     }
-
     public void OpenAndCloseObject(int parentIndex, int currentChildIndex)
     {
         roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject.SetActive(false);
         roomParent[parentIndex].transform.GetChild(currentChildIndex+1).gameObject.SetActive(true);
     }
-
-   
-    
-
 }

@@ -26,7 +26,6 @@ public class DataLists
     public GeneralDataStructure[] picture;
     public GeneralDataStructure[] tabure;
     public GeneralDataStructure[] floor;
-   
     public Room room;
     public List<int> stackedChangeParentIndexes;
 
