@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AppearAnimator : MonoBehaviour {
-    public int ball_index;
     [SerializeField] Vector3 max_scale; // Target scale
     [SerializeField] float grow_speed; // Speed of growing
     [SerializeField] Vector3 start_scale; // Start scale (dont set here 0 for axises, use very small value but not 0)
