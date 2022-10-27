@@ -30,12 +30,12 @@ public class GameDataManager : MonoBehaviour
     }
     private void ReadFromJson()
     {
-        dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(Application.dataPath + "/JSON/JSONText.txt"));
+        dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt"));
     }
 
     private void WriteToJson()
     {
         string serializedData = JsonUtility.ToJson(dataLists);
-        File.WriteAllText(Application.dataPath + "/JSON/JSONText.txt", serializedData);
+        File.WriteAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt", serializedData);
     }
 }
