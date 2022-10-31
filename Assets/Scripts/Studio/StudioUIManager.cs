@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
-using System;
-using System.IO;
-using UnityEditor.Rendering.Universal;
 using TMPro;
 using static DataLists;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Data.SqlTypes;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -39,9 +36,13 @@ public class StudioUIManager : MonoBehaviour
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapalý baþlamalý
     int UPGRADE_CHILD_INDEX = 5;
     [SerializeField] TextMeshProUGUI priceText;
-
+    [SerializeField] TextMeshProUGUI generalThemeText;
+    [SerializeField] TextMeshProUGUI moneyText;
+    
     void Start()
     {
+        
+
         if (Instance == null)
         {
             Instance = this;
@@ -58,8 +59,11 @@ public class StudioUIManager : MonoBehaviour
             GameDataManager.Instance.dataLists.chair,
             GameDataManager.Instance.dataLists.table,
             GameDataManager.Instance.dataLists.mirror};
+            // update money text
+            PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
+            moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
             //if there is no objects to upgrade
-            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 6)
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
             {
                 //open the next upgrades arrow
                 upgradeButton.gameObject.SetActive(false);
@@ -67,6 +71,7 @@ public class StudioUIManager : MonoBehaviour
             }
             else // if there is objects left to upgrade //stacked changes TODO
             {
+                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
                 GameObject upgradeParent = roomParent[upgradeParentIndex];
                 // open the relative arrows
@@ -85,7 +90,7 @@ public class StudioUIManager : MonoBehaviour
             // open the current childs, all the childs should start closed
             for (int i = 0; i < roomParent.Count; i++)
             {
-               FadeIn( roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject);
+                FadeIn(roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject);
             }
 
 
@@ -101,7 +106,10 @@ public class StudioUIManager : MonoBehaviour
     public void OnUpgradeWithMoneyBtnClicked()
     {
         // DECREASE MONEY  TDOO
-        PlayerPrefs.SetInt("NumberOfDiamondsKey", PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) - objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
+
+        int remainingMoney = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) - objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price;
+        PlayerPrefs.SetInt("NumberOfDiamondsKey",remainingMoney);
+        moneyText.text = remainingMoney.ToString();
         Upgrade();
     }
     public void OnUpgradeWithAdButtonClicked()
@@ -122,22 +130,48 @@ public class StudioUIManager : MonoBehaviour
         {
             //this theme is finished, increase general theme number
             GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-            //reset upgrades left
-            GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
-            //increase general theme index
-            generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
+            {
+                priceText.gameObject.SetActive(false);
+                upgradeButton.gameObject.SetActive(false);
+                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+            }
+            else
+            {
+
+
+                //reset upgrades left
+                GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
+                //increase general theme index
+                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+            }
         }
         else // prepare uý for next update
         {
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 6)
+            {
+                //open the next upgrades arrow
+                upgradeButton.gameObject.SetActive(false);
+                priceText.gameObject.SetActive(false);
+            }
+
             roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            float price = objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]].price;
+            priceText.text = price.ToString();
+            if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
+            {
+                upgradeButton.interactable = false;
+            }
             //increase next upgrade parent
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
+
         }
         //disable current parents arrow
         roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
 
-        
-        
+
+
     }
 
     private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
@@ -146,12 +180,12 @@ public class StudioUIManager : MonoBehaviour
         GameObject objectToOpen = roomParent[parentIndex].transform.GetChild(currentChildIndex + 1).gameObject;
         // disappear fade
 
-        StartCoroutine( FadeOut(objectToClose));
+        StartCoroutine(FadeOut(objectToClose));
         FadeIn(objectToOpen);
     }
     public void FadeIn(GameObject objectToOpen)
     {
-        
+
 
         for (int i = 0; i < objectToOpen.transform.childCount; i++)
         {
@@ -165,7 +199,7 @@ public class StudioUIManager : MonoBehaviour
             }
             objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray;
         }
-        
+
         objectToOpen.SetActive(true);
 
         for (int i = 0; i < objectToOpen.transform.childCount; i++)
