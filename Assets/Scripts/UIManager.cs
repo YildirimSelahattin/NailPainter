@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using TMPro;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,15 +37,13 @@ public class UIManager : MonoBehaviour
     int isMusicOn;
     int LevelNumber;
     public static UIManager Instance;
-    public int numberOfDiamonds;
     public int NumberOfDiamonds
     {
-        get { return numberOfDiamonds; }   // get method
+        get { return PlayerPrefs.GetInt("NumberOfDiamondsKey", 0); }   // get method
         set
         {
-            numberOfDiamonds = value;
             PlayerPrefs.SetInt("NumberOfDiamondsKey", value);
-            diamondNumberText.text = numberOfDiamonds.ToString();
+            diamondNumberText.text = value.ToString();
         }
     }  // set method
 

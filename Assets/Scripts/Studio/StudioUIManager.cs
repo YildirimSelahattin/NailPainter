@@ -8,74 +8,88 @@ using System.IO;
 using UnityEditor.Rendering.Universal;
 using TMPro;
 using static DataLists;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UI;
+using DG.Tweening;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class StudioUIManager : MonoBehaviour
 {
     //RULES
-    /*int mirrorParentIndex = 0;
-    int windowParentIndex = 1;
-    int flowerParentIndex = 2;
-    int wallParentIndex = 3;
-    int sofaParentIndex = 4;
-    int komodinParentIndex = 5;
-    int platformParentIndex = 6;
-    int chairParentIndex = 7;
-    int pictureParentIndex = 8;
-    int tabureParentIndex = 9;
-    int floorParentIndex = 10;
-    int tableParentIndex = 11;
-    */
+    /*
+        int wallParentIndex = 0;
+        int floorParentIndex = 1;
+        int platformParentIndex = 2;
+        int pictureParentIndex = 3;
+        int tabureParentIndex = 4;
+        int komodinParentIndex = 5;
+        int sofaParentIndex = 6;
+        int flowerParentIndex = 7;
+        int chairParentIndex = 8;
+        int tableParentIndex = 9;
+        int mirrorParentIndex = 10;
+};
+*/
     public static StudioUIManager Instance;
-    // Start is called before the first frame update
 
-    // Update is called once per frame
-    [SerializeField]List<GameObject> roomParent;
+    [SerializeField] List<GameObject> roomParent;
     public float fillAmount;
-
+    [SerializeField] Button upgradeButton;
 
     public GeneralDataStructure[][] objectsByIndexArray;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapalý baþlamalý
-    int upgradeButtonChildIndex;
+    int UPGRADE_CHILD_INDEX = 5;
+    [SerializeField] TextMeshProUGUI priceText;
 
     void Start()
     {
         if (Instance == null)
         {
-        objectsByIndexArray = new GeneralDataStructure[][] {
-        GameDataManager.Instance.dataLists.mirror,
-        GameDataManager.Instance.dataLists.window,
-        GameDataManager.Instance.dataLists.flower,
-        GameDataManager.Instance.dataLists.wall,
-        GameDataManager.Instance.dataLists.sofa,
-        GameDataManager.Instance.dataLists.komodin,
-        GameDataManager.Instance.dataLists.platform,
-        GameDataManager.Instance.dataLists.chair,
-        GameDataManager.Instance.dataLists.picture,
-        GameDataManager.Instance.dataLists.tabure,
-        GameDataManager.Instance.dataLists.floor,
-        GameDataManager.Instance.dataLists.table,};
             Instance = this;
 
-            for(int i = 0; i < roomParent.Count; i++)
+            objectsByIndexArray = new GeneralDataStructure[][] {
+            GameDataManager.Instance.dataLists.wall,
+            GameDataManager.Instance.dataLists.floor,
+            GameDataManager.Instance.dataLists.platform,
+            GameDataManager.Instance.dataLists.picture,
+            GameDataManager.Instance.dataLists.tabure,
+            GameDataManager.Instance.dataLists.komodin,
+            GameDataManager.Instance.dataLists.sofa,
+            GameDataManager.Instance.dataLists.flower,
+            GameDataManager.Instance.dataLists.chair,
+            GameDataManager.Instance.dataLists.table,
+            GameDataManager.Instance.dataLists.mirror};
+            //if there is no objects to upgrade
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 6)
             {
-                //decide to show or not show the upgrade button depending on if it sreached general theme or not
-                if (GameDataManager.Instance.dataLists.room.currentRoomIndexes[i] < GameDataManager.Instance.dataLists.room.generalThemeIndex)
-                {
-                    GameObject upgradeButton = roomParent[i].transform.GetChild(upgradeButtonChildIndex).gameObject;
-                    upgradeButton.SetActive(true);
-                    //get the next items upgrade  
-                    upgradeButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = objectsByIndexArray[i][GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]+1].price.ToString();
-                }
+                //open the next upgrades arrow
+                upgradeButton.gameObject.SetActive(false);
+                priceText.gameObject.SetActive(false);
             }
-            // open the current childs, all the childs should be closed first
+            else // if there is objects left to upgrade //stacked changes TODO
+            {
+                int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
+                GameObject upgradeParent = roomParent[upgradeParentIndex];
+                // open the relative arrows
+                upgradeParent.transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+
+                float price = objectsByIndexArray[upgradeParentIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex] + 1].price;
+                //show price
+                priceText.text = price.ToString();
+                // if overpriced UIManager.Instance.NumberOfDiamonds
+                /*if (price > PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) )
+                {
+                upgradeButton.interactable = false;
+                }
+                */
+            }
+            // open the current childs, all the childs should start closed
             for (int i = 0; i < roomParent.Count; i++)
             {
-                roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject.SetActive(true);
+               FadeIn( roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject);
             }
 
-            //stacked changes TODO
-            
+
+
         }
     }
     public void PrevScene()
@@ -83,57 +97,99 @@ public class StudioUIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-  
 
-    // Update is called once per frame
-    void Update()
+    public void OnUpgradeWithMoneyBtnClicked()
     {
-
-        Touch touch = Input.touches[0];
-        Vector3 pos = touch.position;
-        //Physics.Raycast(_rayPoint.transform.position, _rayPoint.transform.forward, out _raycastHit, range)
-        if (touch.phase == TouchPhase.Began)
+        // DECREASE MONEY  TDOO
+        PlayerPrefs.SetInt("NumberOfDiamondsKey", PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) - objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
+        Upgrade();
+    }
+    public void OnUpgradeWithAdButtonClicked()
+    {
+        Upgrade();
+    }
+    // Update is called once per frame
+    private void Upgrade()
+    {
+        //get parent object index 
+        int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
+        // open and close indexes 
+        OpenAndCloseObject(parentIndexToUpgrade, GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]);
+        // increase relatve parents current child index
+        GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
+        //CONTROLL ÝF THEME ÝS FÝNÝSHED 
+        if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
         {
-            Ray ray = Camera.main.ScreenPointToRay(pos);
-            RaycastHit hit;
+            //this theme is finished, increase general theme number
+            GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
+            //reset upgrades left
+            GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
+            //increase general theme index
+            generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+        }
+        else // prepare uý for next update
+        {
+            roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            //increase next upgrade parent
+            GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
+        }
+        //disable current parents arrow
+        roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
 
-            if (Physics.Raycast(ray, out hit))
+        
+        
+    }
+
+    private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
+    {
+        GameObject objectToClose = roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject;
+        GameObject objectToOpen = roomParent[parentIndex].transform.GetChild(currentChildIndex + 1).gameObject;
+        // disappear fade
+
+        StartCoroutine( FadeOut(objectToClose));
+        FadeIn(objectToOpen);
+    }
+    public void FadeIn(GameObject objectToOpen)
+    {
+        
+
+        for (int i = 0; i < objectToOpen.transform.childCount; i++)
+        {
+            Material[] matArray = objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
+            for (int j = 0; j < matArray.Length; j++)
             {
-                if (hit.collider.transform.tag.Contains("Upgrade"))
-                {
-                    //get parent object index 
-                    int parentIndexToUpgrade = Int16.Parse(hit.collider.transform.tag.Substring("upgrade".Length-1));
-                    //get open and close indexes 
-                    OpenAndCloseObject(parentIndexToUpgrade, GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]);
-                    // increase relatve parents current child index
-                    GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]+=1;
-                    //decrease the updates left
-                    GameDataManager.Instance.dataLists.room.upgradesLeft -= 1; 
-                    //CONTROLL ÝF THEME ÝS FÝNÝSHED 
-                    if(GameDataManager.Instance.dataLists.room.upgradesLeft == 0)
-                    {
-                        //this theme is finished
-                        GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-                        //reset upgrades left
-                        GameDataManager.Instance.dataLists.room.upgradesLeft = roomParent.Count-2;
-                        for(int i = 0;i < roomParent.Count;i++)
-                        {
-                            roomParent[i].transform.GetChild(upgradeButtonChildIndex).gameObject.SetActive(true);
-                        }
-                    }
-                    //disable this upgradeObject
-                    hit.collider.gameObject.SetActive(false);
-                }
+                Color color = matArray[j].color;
+                color.a = 0;
+                matArray[j].SetColor("_BaseColor", color);
+                Debug.Log(matArray[j].color);
             }
-            else
+            objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray;
+        }
+        
+        objectToOpen.SetActive(true);
+
+        for (int i = 0; i < objectToOpen.transform.childCount; i++)
+        {
+            Material[] matArray = objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
+            for (int j = 0; j < matArray.Length; j++)
             {
-                //m_MainCamera.transform.DOLocalMove(camOriginPos,1f);
+                matArray[j].DOFade(1, 1f);
             }
         }
     }
-    public void OpenAndCloseObject(int parentIndex, int currentChildIndex)
+
+    public IEnumerator FadeOut(GameObject objectToClose)
     {
-        roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject.SetActive(false);
-        roomParent[parentIndex].transform.GetChild(currentChildIndex+1).gameObject.SetActive(true);
+        for (int i = 0; i < objectToClose.transform.childCount; i++)
+        {
+            Material[] matArray = objectToClose.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
+            for (int j = 0; j < matArray.Length; j++)
+            {
+                matArray[j].DOFade(0, 1f);
+                Debug.Log("hi");
+            }
+        }
+        yield return new WaitForSeconds(1);
+        objectToClose.SetActive(false);
     }
 }
