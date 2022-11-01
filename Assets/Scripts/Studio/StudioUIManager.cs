@@ -71,7 +71,7 @@ public class StudioUIManager : MonoBehaviour
             }
             else // if there is objects left to upgrade //stacked changes TODO
             {
-                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+                generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
                 GameObject upgradeParent = roomParent[upgradeParentIndex];
                 // open the relative arrows
@@ -135,7 +135,7 @@ public class StudioUIManager : MonoBehaviour
             {
                 priceText.gameObject.SetActive(false);
                 upgradeButton.gameObject.SetActive(false);
-                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+                generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
             }
             else
             {
@@ -144,7 +144,7 @@ public class StudioUIManager : MonoBehaviour
                 //reset upgrades left
                 GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
                 //increase general theme index
-                generalThemeText.text = GameDataManager.Instance.dataLists.room.generalThemeIndex.ToString();
+                generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
             }
         }
         else // prepare uý for next update

@@ -22,4 +22,5 @@ public class UpgradeButton : MonoBehaviour
         transform.DOLocalMoveY(originalPos.y+1,1f).OnComplete(()=>transform.DOLocalMoveY(originalPos.y,1).OnComplete(()=>Move()));
 
     }
+
 }
