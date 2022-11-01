@@ -76,7 +76,7 @@ public class StudioUIManager : MonoBehaviour
                 GameObject upgradeParent = roomParent[upgradeParentIndex];
                 // open the relative arrows
                 upgradeParent.transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-
+                upgradeParent.transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]+1).gameObject.GetComponent<Outline>().enabled = true;
                 float price = objectsByIndexArray[upgradeParentIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex] + 1].price;
                 //show price
                 priceText.text = price.ToString();
@@ -121,10 +121,10 @@ public class StudioUIManager : MonoBehaviour
     {
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
+        int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
         // open and close indexes 
-        OpenAndCloseObject(parentIndexToUpgrade, GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]);
-        // increase relatve parents current child index
-        GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
+        OpenAndCloseObject(parentIndexToUpgrade, upgradableParentsCurrentObjectIndex);
+       
         //CONTROLL ÝF THEME ÝS FÝNÝSHED 
         if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
         {
@@ -139,8 +139,6 @@ public class StudioUIManager : MonoBehaviour
             }
             else
             {
-
-
                 //reset upgrades left
                 GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
                 //increase general theme index
@@ -155,9 +153,13 @@ public class StudioUIManager : MonoBehaviour
                 upgradeButton.gameObject.SetActive(false);
                 priceText.gameObject.SetActive(false);
             }
-
+            //outline the next updates object 
+            roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).GetComponent<Outline>().enabled = true;
             roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-            float price = objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]].price;
+            //disable current parents arrow and outline
+            roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
+            roomParent[parentIndexToUpgrade + 1].transform.GetChild(upgradableParentsCurrentObjectIndex).GetComponent<Outline>().enabled = false;
+            float price = objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]].price;
             priceText.text = price.ToString();
             if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
             {
@@ -167,11 +169,11 @@ public class StudioUIManager : MonoBehaviour
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
 
         }
-        //disable current parents arrow
+        //disable current parents arrow and outline
         roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
-
-
-
+        roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]).GetComponent<Outline>().enabled = false;
+        // increase relatve parents current child index
+        GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
     }
 
     private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
