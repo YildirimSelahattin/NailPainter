@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         TargetCam.gameObject.SetActive(true);
         CurrentCam.gameObject.SetActive(true);
         StartCoroutine(OffCam());
-
+        
         for (int i = 0; i < 5; i++)
         {
 
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
             currentLevel.nailDiamondArray[i] = Int16.Parse(nailData[diamondPartIndex].Substring(1));
         }
         currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5 + csvoffset].Substring(1));
-
+        
         /*
         for (int i = 0; i < 5; i++)
         {

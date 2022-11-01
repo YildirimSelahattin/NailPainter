@@ -20,8 +20,17 @@ public class LevelDesignManager : MonoBehaviour
     public void Next()
     {
         UIManager.Instance.showRewardItem.SetActive(false);
-        PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber+1);
+        PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
+        UIManager.Instance.showRewardItem.gameObject.SetActive(false);
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(false);
         UIManager.Instance.LoadScene(0);
+    }
+
+    public void StuidoScene()
+    {
+        UIManager.Instance.showRewardItem.gameObject.SetActive(false);
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(false);
+        UIManager.Instance.LoadScene(1);
     }
 
     public void Restart()

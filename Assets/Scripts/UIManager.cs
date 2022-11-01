@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
-    [SerializeField] GameObject rewardPanel;
+    public GameObject rewardPanel;
+    public GameObject earnedRewardPanel;
     [SerializeField] GameObject endPanel;
     public GameObject showRewardItem;
     [SerializeField] GameObject handModel;
@@ -135,7 +136,6 @@ public class UIManager : MonoBehaviour
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
         endPanel.SetActive(true);
-        handModel.SetActive(false);
 
         if (matchRate > 50)
         {
@@ -242,6 +242,7 @@ public class UIManager : MonoBehaviour
     IEnumerator Delay(int second)
     {
         yield return new WaitForSeconds(second);
+        handModel.gameObject.SetActive(false);
         showRewardItem.SetActive(true);
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);
