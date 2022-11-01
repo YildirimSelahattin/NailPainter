@@ -31,7 +31,6 @@ public class BrushManager : MonoBehaviour
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.currentColorIndexArray[currentTag[currentTag.Length - 1] - '0'] = colorIndex;
-            Debug.Log("print!!");
 
         }
     }

@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         TargetCam.gameObject.SetActive(true);
         CurrentCam.gameObject.SetActive(true);
         StartCoroutine(OffCam());
-        
+
         for (int i = 0; i < 5; i++)
         {
 
@@ -110,8 +110,8 @@ public class GameManager : MonoBehaviour
         }
 
         totalParameterNumber = 20;
-        Debug.Log(progress);
-        Debug.Log(totalParameterNumber);
+        //Debug.Log(progress);
+        //Debug.Log(totalParameterNumber);
         matchRate = (float)((progress / totalParameterNumber) * 100);
         currentMinimapImage.fillAmount = matchRate / 100;
         return matchRate;
@@ -147,9 +147,11 @@ public class GameManager : MonoBehaviour
         }
         currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5 + csvoffset].Substring(1));
 
+        /*
         for (int i = 0; i < 5; i++)
         {
             Debug.Log(currentLevel.nailColorArray[i]);
         }
+        */
     }
 }

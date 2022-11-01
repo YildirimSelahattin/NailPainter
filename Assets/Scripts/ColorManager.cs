@@ -91,7 +91,7 @@ public class ColorManager : MonoBehaviour
         //PAİNT EVERY NAİL 
         for (int index = 0; index < 5; index++)
         {
-            Debug.Log(nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
+            //Debug.Log(nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
             //get the material array
             Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail

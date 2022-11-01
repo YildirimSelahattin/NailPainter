@@ -43,7 +43,7 @@ public class ManicureMachineManager : MonoBehaviour
         {  
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
-            Debug.Log(index);
+            //Debug.Log(index);
             other.gameObject.SetActive(false);
             newNailParent.transform.GetChild(index).gameObject.SetActive(true);
             GameManager.Instance.currentNailType = nailTypeAfterManicure;
@@ -54,7 +54,6 @@ public class ManicureMachineManager : MonoBehaviour
     {
         if (other.transform.tag.Contains("Nail"))
         {
-            Debug.Log("giriyonmu");
             GameObject particles = Instantiate(nailParticle, other.transform.position,other.transform.rotation);
             particles.transform.parent = handParent.transform;
 

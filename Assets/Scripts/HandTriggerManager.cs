@@ -13,7 +13,6 @@ public class HandTriggerManager : MonoBehaviour
         if (other.transform.CompareTag("Diamond"))
         {
             MoveMoney(other);
-            Debug.Log("niye olmuyor");
         }
 
         if (other.transform.CompareTag("EndGame"))

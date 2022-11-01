@@ -20,7 +20,6 @@ public class DiamondMachineManager : MonoBehaviour
             int index = currentTag[currentTag.Length - 1] - '0';
             if (diamondIndexArray[index] > 0)
             {
-                Debug.Log(index + "diamond");
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndexArray[index]);
                 GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];

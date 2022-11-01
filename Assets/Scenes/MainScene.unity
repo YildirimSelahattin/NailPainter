@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.48389757, g: 0.18012363, b: 0.8115917, a: 1}
+  m_IndirectSpecularColor: {r: 0.48415303, g: 0.18010315, b: 0.8112604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6388,6 +6388,7 @@ GameObject:
   - component: {fileID: 1280078875}
   - component: {fileID: 1280078874}
   - component: {fileID: 1280078876}
+  - component: {fileID: 1280078877}
   m_Layer: 0
   m_Name: AdManager
   m_TagString: Untagged
@@ -6432,6 +6433,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a32705fa1bf2cd64ab8cf9c2d887562d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1280078877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280078873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb668ef719b1d64a9d9c0550719fb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1290550058
@@ -6784,7 +6797,6 @@ MonoBehaviour:
   diamondNumberText: {fileID: 1054220798}
   matchRateText: {fileID: 849285613}
   definationText: {fileID: 1205451806}
-  numberOfDiamonds: 0
 --- !u!4 &1333296852
 Transform:
   m_ObjectHideFlags: 0
@@ -9502,7 +9514,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2014995289}
   - component: {fileID: 2014995288}
-  - component: {fileID: 2014995287}
   - component: {fileID: 2014995286}
   m_Layer: 0
   m_Name: UICam
@@ -9544,14 +9555,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &2014995287
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014995285}
-  m_Enabled: 1
 --- !u!20 &2014995288
 Camera:
   m_ObjectHideFlags: 0
@@ -9858,7 +9861,7 @@ MonoBehaviour:
     room:
       currentRoomIndexes: 
       generalThemeIndex: 0
-      upgradesLeft: 0
+      nextUpgradeIndex: 0
     stackedChangeParentIndexes: 
 --- !u!4 &2050954083
 Transform:
@@ -9873,7 +9876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074792769
 GameObject:
@@ -10056,7 +10059,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2125027372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1280078877}
+        m_TargetAssemblyTypeName: RewardedAdManager, Assembly-CSharp
+        m_MethodName: FurnitureRewardAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2125027372
 MonoBehaviour:
   m_ObjectHideFlags: 0

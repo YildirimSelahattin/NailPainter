@@ -43,7 +43,6 @@ public class PatternMachineManager : MonoBehaviour
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
             //transform.DOLocalMoveY(standartPosition.y, 0.1f);
-            Debug.Log("cikti");
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -51,7 +50,6 @@ public class PatternMachineManager : MonoBehaviour
         if (other.transform.tag.Contains("Nail"))
         {
             //transform.DOLocalMoveY(other.transform.position.y, 0.1f);
-            Debug.Log("girdi");
         }
     }
 }
