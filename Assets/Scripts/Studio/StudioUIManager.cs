@@ -8,6 +8,8 @@ using static DataLists;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Data.SqlTypes;
+using System.Linq;
+using System.Diagnostics.Tracing;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -26,6 +28,8 @@ public class StudioUIManager : MonoBehaviour
         int mirrorParentIndex = 10;
 };
 */
+
+    [SerializeField]Material shiningMaterial;
     public static StudioUIManager Instance;
 
     [SerializeField] List<GameObject> roomParent;
@@ -73,19 +77,20 @@ public class StudioUIManager : MonoBehaviour
             {
                 generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
-                GameObject upgradeParent = roomParent[upgradeParentIndex];
                 // open the relative arrows
-                upgradeParent.transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-                upgradeParent.transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]+1).gameObject.GetComponent<Outline>().enabled = true;
+                 roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+                //current object outline opened
+                //  OUTLÝNE CODE BELOW
+                //roomParent[upgradeParentIndex].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]).gameObject.GetComponent<Outline>().enabled = true;
+                FadeInFadeOut(roomParent[upgradeParentIndex].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]).gameObject);
                 float price = objectsByIndexArray[upgradeParentIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex] + 1].price;
                 //show price
                 priceText.text = price.ToString();
                 // if overpriced UIManager.Instance.NumberOfDiamonds
-                /*if (price > PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) )
+                if (price > PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) )
                 {
                 upgradeButton.interactable = false;
                 }
-                */
             }
             // open the current childs, all the childs should start closed
             for (int i = 0; i < roomParent.Count; i++)
@@ -122,15 +127,20 @@ public class StudioUIManager : MonoBehaviour
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
+        //disable current parents arrow and outline
+        roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
+        //OUTLÝNE CODE BELOW
+        //roomParent[parentIndexToUpgrade].transform.GetChild(upgradableParentsCurrentObjectIndex).gameObject.GetComponent<Outline>().enabled = false;
         // open and close indexes 
         OpenAndCloseObject(parentIndexToUpgrade, upgradableParentsCurrentObjectIndex);
        
-        //CONTROLL ÝF THEME ÝS FÝNÝSHED 
+
+        //CONTROLL ÝF CURRENT THEME ÝS FÝNÝSHED 
         if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
         {
             //this theme is finished, increase general theme number
             GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-
+            //if all themes finished
             if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
             {
                 priceText.gameObject.SetActive(false);
@@ -141,25 +151,23 @@ public class StudioUIManager : MonoBehaviour
             {
                 //reset upgrades left
                 GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
+                //Open next upgrades button and outline
+                //roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject.GetComponent<Outline>().enabled = true;
+                roomParent[0].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+                FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject); 
                 //increase general theme index
                 generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
             }
         }
-        else // prepare uý for next update
+        else //prepare next update for that theme
         {
-            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 6)
-            {
-                //open the next upgrades arrow
-                upgradeButton.gameObject.SetActive(false);
-                priceText.gameObject.SetActive(false);
-            }
             //outline the next updates object 
-            roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).GetComponent<Outline>().enabled = true;
+            Debug.Log("parent index" + (parentIndexToUpgrade + 1) + "parent child index" + GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]);
+            //roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]).gameObject.GetComponent<Outline>().enabled = true;
+            FadeInFadeOut(roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).gameObject);
             roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-            //disable current parents arrow and outline
-            roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
-            roomParent[parentIndexToUpgrade + 1].transform.GetChild(upgradableParentsCurrentObjectIndex).GetComponent<Outline>().enabled = false;
-            float price = objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]].price;
+          
+            float price = objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] + 1].price;
             priceText.text = price.ToString();
             if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
             {
@@ -169,9 +177,6 @@ public class StudioUIManager : MonoBehaviour
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
 
         }
-        //disable current parents arrow and outline
-        roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
-        roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade]).GetComponent<Outline>().enabled = false;
         // increase relatve parents current child index
         GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
     }
@@ -187,8 +192,6 @@ public class StudioUIManager : MonoBehaviour
     }
     public void FadeIn(GameObject objectToOpen)
     {
-
-
         for (int i = 0; i < objectToOpen.transform.childCount; i++)
         {
             Material[] matArray = objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
@@ -197,7 +200,6 @@ public class StudioUIManager : MonoBehaviour
                 Color color = matArray[j].color;
                 color.a = 0;
                 matArray[j].SetColor("_BaseColor", color);
-                Debug.Log(matArray[j].color);
             }
             objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray;
         }
@@ -221,11 +223,30 @@ public class StudioUIManager : MonoBehaviour
             Material[] matArray = objectToClose.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
             for (int j = 0; j < matArray.Length; j++)
             {
+                matArray[j].DOKill();
                 matArray[j].DOFade(0, 1f);
-                Debug.Log("hi");
             }
+            objectToClose.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray.SkipLast(1).ToArray();
         }
         yield return new WaitForSeconds(1);
         objectToClose.SetActive(false);
+    }
+    private void FadeInFadeOut(GameObject relativeObject)
+    {
+        for (int i = 0; i < relativeObject.transform.childCount; i++)
+        {
+            Debug.Log("sui");
+            Material[] matArray = relativeObject.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
+            List<Material> matList=matArray.ToList();
+            matList.Add(shiningMaterial);
+            relativeObject.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matList.ToArray();
+            matArray = relativeObject.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
+            FadeInFadeOutLoop(matArray[matArray.Length-1]);
+        }
+    }
+    private void FadeInFadeOutLoop(Material mat )
+    {
+        mat.DOFade(0f/255f, 1).OnComplete(() =>mat.DOFade(60f/255f,1).OnComplete(()=>FadeInFadeOutLoop(mat)));
+        
     }
 }

@@ -24,13 +24,14 @@ public class UIManager : MonoBehaviour
     public GameObject rewardPanel;
     public GameObject earnedRewardPanel;
     [SerializeField] GameObject endPanel;
-    public GameObject showRewardItem;
+    public GameObject rewardItem;
     [SerializeField] GameObject handModel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
     [SerializeField] TextMeshProUGUI matchRateText;
     [SerializeField] TextMeshProUGUI definationText;
+    [SerializeField]  
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -243,7 +244,10 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
-        showRewardItem.SetActive(true);
+        //instantiate the relevant upgradable item
+        Transform spawnPoint = rewardItem.transform.GetChild(1);
+        Instantiate(GameDataManager.Instance.GetNextUpgrade(), spawnPoint.position,spawnPoint.rotation,spawnPoint.parent);
+        rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);
     }
