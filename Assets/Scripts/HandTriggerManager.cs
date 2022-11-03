@@ -17,9 +17,7 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
-
             UIManager.Instance.ShowEndScreen();
-
         }
     }
 
@@ -32,9 +30,9 @@ public class HandTriggerManager : MonoBehaviour
     private void MoveMoney(Collider other)
     {
         other.transform.parent = this.transform;
-        other.transform.DOLocalMove(diamondReachPointReference.localPosition, 4).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
+        other.transform.DOLocalMove(diamondReachPointReference.localPosition, 1).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
         Vector3 originalScale = transform.localScale;
-        other.transform.DOScale(originalScale/2, 2);
+        other.transform.DOScale(originalScale/2, 1);
     }
 
 

@@ -9,7 +9,6 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
@@ -17,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject loaderCanvas;
     [SerializeField] GameObject gameStartCanvas;
     [SerializeField] Animator startButtonAnimator;
+    [SerializeField] GameObject studioButton;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI diamondNumberText;
     [SerializeField] TextMeshProUGUI matchRateText;
     [SerializeField] TextMeshProUGUI definationText;
-    [SerializeField]  
+    [SerializeField]
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     int isMusicOn;
     int LevelNumber;
     public static UIManager Instance;
+
     public int NumberOfDiamonds
     {
         get { return PlayerPrefs.GetInt("NumberOfDiamondsKey", 0); }   // get method
@@ -92,6 +93,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
+        studioButton.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
     }
 
@@ -245,8 +247,8 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
         //instantiate the relevant upgradable item
-        Transform spawnPoint = rewardItem.transform.GetChild(1);
-        Instantiate(GameDataManager.Instance.GetNextUpgrade(), spawnPoint.position,spawnPoint.rotation,spawnPoint.parent);
+        //Transform spawnPoint = rewardItem.transform.GetChild(1);
+        //Instantiate(GameDataManager.Instance.GetNextUpgrade(), spawnPoint.position, spawnPoint.rotation, spawnPoint.parent);
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);
