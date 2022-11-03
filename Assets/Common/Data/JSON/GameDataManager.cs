@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static DataLists;
 //THE ONLY DATA READER , READS FROM JSONTEXT
 public class GameDataManager : MonoBehaviour
 {
     public GameObject[] objectPrefabList;
+    public GeneralDataStructure[][] objectsByIndexArray;
     public static GameDataManager Instance;
     public DataLists dataLists;
     // Start is called before the first frame update
@@ -15,6 +17,18 @@ public class GameDataManager : MonoBehaviour
         {
             Instance = this;
             ReadFromJson();
+            objectsByIndexArray = new GeneralDataStructure[][] {
+            GameDataManager.Instance.dataLists.wall,
+            GameDataManager.Instance.dataLists.floor,
+            GameDataManager.Instance.dataLists.platform,
+            GameDataManager.Instance.dataLists.picture,
+            GameDataManager.Instance.dataLists.tabure,
+            GameDataManager.Instance.dataLists.komodin,
+            GameDataManager.Instance.dataLists.sofa,
+            GameDataManager.Instance.dataLists.flower,
+            GameDataManager.Instance.dataLists.chair,
+            GameDataManager.Instance.dataLists.table,
+            GameDataManager.Instance.dataLists.mirror};
             DontDestroyOnLoad(this.gameObject);
         }
         
@@ -39,18 +53,19 @@ public class GameDataManager : MonoBehaviour
         File.WriteAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt", serializedData);
     }
 
-    public GameObject GetNextUpgrade()
-
-    { 
-        //increase current room index and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
-        dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex]+=1;
+    public void AddUpgradeToStack()
+    {
+        //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
+        dataLists.stackedChangeParentIndexes.Add(dataLists.room.nextUpgradeIndex);
         dataLists.room.nextUpgradeIndex += 1;
         if (dataLists.room.nextUpgradeIndex==11)
         {
             dataLists.room.nextUpgradeIndex = 0;
             dataLists.room.generalThemeIndex += 1;
         }
-        return objectPrefabList[(dataLists.room.nextUpgradeIndex+1)*dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex]];
-
+    }
+    public GameObject GetUpgradableObject()
+    {
+        return objectPrefabList[dataLists.room.nextUpgradeIndex * (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
     }
 }
