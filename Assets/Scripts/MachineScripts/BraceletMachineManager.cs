@@ -22,9 +22,4 @@ public class BraceletMachineManager : MonoBehaviour
             GameManager.Instance.currentBraceletIndexArray.Add(braceletIndex);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

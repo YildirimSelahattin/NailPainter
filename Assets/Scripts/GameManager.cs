@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
-    public int[] currentColorIndexArray = new int[5] { -1, -1, -1, -1, -1 };
-    public int[] currentPatternIndexArray = new int[5] { -1, -1, -1, -1, -1 };
-    public int[] currentDiamondIndexArray = new int[5] { -1, -1, -1, -1, -1 }; // pattern color array
+    public int[] currentColorIndexArray = new int[5] { 0, 0, 0, 0, 0 };
+    public int[] currentPatternIndexArray = new int[5] { 0, 0, 0, 0, 0 };
+    public int[] currentDiamondIndexArray = new int[5] { 0, 0, 0, 0, 0 }; // pattern color array
     public int currentNailType;
     public List<int> currentBraceletIndexArray;
     public List<int> currentRingIndexArray;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         TargetCam.gameObject.SetActive(true);
         CurrentCam.gameObject.SetActive(true);
         StartCoroutine(OffCam());
-        
+
         for (int i = 0; i < 5; i++)
         {
 
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
             currentLevel.nailDiamondArray[i] = Int16.Parse(nailData[diamondPartIndex].Substring(1));
         }
         currentLevel.nailTypeAfterManicure = Int16.Parse(levelRowData[5 + csvoffset].Substring(1));
-        
+
         /*
         for (int i = 0; i < 5; i++)
         {
