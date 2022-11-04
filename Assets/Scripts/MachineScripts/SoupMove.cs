@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class SoupMove : MonoBehaviour
 {
+    //delete
     void Start()
     {
         MoveSoup();
