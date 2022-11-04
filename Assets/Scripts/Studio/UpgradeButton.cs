@@ -17,7 +17,6 @@ public class UpgradeButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("after move" + transform.position);
     }
     public void Move()
     {

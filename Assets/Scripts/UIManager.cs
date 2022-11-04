@@ -265,4 +265,10 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);
     }
+
+    public void GetUpgradeWithMoneyBtn()
+    {
+        NumberOfDiamonds -= GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price; ;
+        GameDataManager.Instance.AddUpgradeToStack();
+    }
 }
