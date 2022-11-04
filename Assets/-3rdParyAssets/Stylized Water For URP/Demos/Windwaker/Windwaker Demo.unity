@@ -570,8 +570,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
+      propertyPath: deepColor.a
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: deepColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
       propertyPath: deepColor.g
-      value: 0.42745084
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: waveColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -581,7 +596,17 @@ PrefabInstance:
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: shoreColor.b
-      value: 0.30196065
+      value: 0.32400036
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: shoreColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: shoreColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -605,13 +630,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
+      propertyPath: horizonColor.a
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: horizonColor.b
+      value: 0.3726415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
       propertyPath: horizonColor.g
-      value: 0.22745085
+      value: 0.54793286
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: horizonColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: shallowColor.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: shallowColor.g
-      value: 0.63137245
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -621,7 +666,7 @@ PrefabInstance:
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamBlend
-      value: 0
+      value: 0.179
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -631,27 +676,27 @@ PrefabInstance:
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamCutoff
-      value: 0.41
+      value: 0.142
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamScale1
-      value: 1.69
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamScale2
-      value: 0.33
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamSpeed1
-      value: 1.78
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamSpeed2
-      value: 1.52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -670,53 +715,113 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
+      propertyPath: surfaceFoamTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 59322d9235e3b2a44a08574ae149f003, type: 3}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor1.a
+      value: 0.4627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor1.g
+      value: 0.4811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor1.r
+      value: 0.04311292
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor2.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: surfaceFoamColor2.r
+      value: 0.23201919
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
       propertyPath: surfaceFoamDirection1
-      value: 0.265
+      value: 0.067
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamDirection2
-      value: 0.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamDistortion
-      value: 1.87
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamMovement.w
-      value: 1.52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamMovement.x
-      value: 0.265
+      value: 0.067
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamMovement.y
-      value: 1.78
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamMovement.z
-      value: 0.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamSampling.x
-      value: 0.41
+      value: 0.142
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamSampling.y
-      value: 1.87
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: intersectionFoamColor.b
+      value: 0.11120505
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: intersectionFoamColor.g
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
+        type: 3}
+      propertyPath: intersectionFoamColor.r
+      value: 0.13260157
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamTilingAndOffset.w
-      value: 0.33
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
@@ -731,7 +836,7 @@ PrefabInstance:
     - target: {fileID: 4116252390263242837, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}
       propertyPath: surfaceFoamTilingAndOffset.z
-      value: 1.69
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4724820881417189119, guid: d1a87658e7cd315438ddef4749540b48,
         type: 3}

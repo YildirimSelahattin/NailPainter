@@ -9,6 +9,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
+
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
@@ -16,7 +17,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject loaderCanvas;
     [SerializeField] GameObject gameStartCanvas;
     [SerializeField] Animator startButtonAnimator;
-    [SerializeField] GameObject studioButton;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
@@ -31,7 +31,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI diamondNumberText;
     [SerializeField] TextMeshProUGUI matchRateText;
     [SerializeField] TextMeshProUGUI definationText;
-    [SerializeField]
+    [SerializeField] TextMeshProUGUI rewardPanelObjectPrice;
+    [SerializeField] Image notificationParent;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -39,7 +40,6 @@ public class UIManager : MonoBehaviour
     int isMusicOn;
     int LevelNumber;
     public static UIManager Instance;
-
     public int NumberOfDiamonds
     {
         get { return PlayerPrefs.GetInt("NumberOfDiamondsKey", 0); }   // get method
@@ -93,7 +93,6 @@ public class UIManager : MonoBehaviour
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
-        studioButton.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
     }
 
@@ -238,8 +237,20 @@ public class UIManager : MonoBehaviour
         NumberOfDiamonds++;
     }
     public void PrepareUI()
-    {
+    { 
+        //reload number of diamonds;
         NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
+        //reload number of stacked changes, if 0 , close notification tab
+        if(GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count == 0)
+        {
+            notificationParent.gameObject.SetActive(false);
+        }
+        else
+        {
+            notificationParent.gameObject.SetActive(true);
+            //notificationParent.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count.ToString();
+        }
+       
     }
 
     IEnumerator Delay(int second)
@@ -247,10 +258,17 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
         //instantiate the relevant upgradable item
-        //Transform spawnPoint = rewardItem.transform.GetChild(1);
-        //Instantiate(GameDataManager.Instance.GetNextUpgrade(), spawnPoint.position, spawnPoint.rotation, spawnPoint.parent);
+        rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
+        Transform spawnPoint = rewardItem.transform.GetChild(1);
+        Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position,spawnPoint.rotation,spawnPoint.parent);
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);
+    }
+
+    public void GetUpgradeWithMoneyBtn()
+    {
+        NumberOfDiamonds -= GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price; ;
+        GameDataManager.Instance.AddUpgradeToStack();
     }
 }
