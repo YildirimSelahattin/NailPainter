@@ -5,8 +5,6 @@ using DG.Tweening;
 public class DiamondMachineManager : MonoBehaviour
 {
     public static int[] diamondIndexArray = new int[5];
-    int planeChildIndex = 1;
-    GameObject nailParent;
     GameObject diamondParent;
     private void Start()
     {

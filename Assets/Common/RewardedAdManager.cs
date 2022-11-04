@@ -80,8 +80,8 @@ public class RewardedAdManager : MonoBehaviour
     public void HandleUserEarnedReward(object sender, Reward args)
     {
         UIManager.Instance.rewardPanel.gameObject.SetActive(false);
-     
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
+        GameDataManager.Instance.AddUpgradeToStack();
     }
 
     public void FurnitureRewardAd()
