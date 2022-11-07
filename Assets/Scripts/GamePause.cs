@@ -14,35 +14,6 @@ public class GamePause : MonoBehaviour
         gamePaused = false;
     }
 
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (gamePaused == true)
-            {
-                GameReturn();
-            }
-            else
-            {
-                PauseGame();
-            }
-        }
-
-    }
-
-    public void KeyDownPause()
-    {
-        if (gamePaused == true)
-        {
-            GameReturn();
-        }
-        else
-        {
-            PauseGame();
-        }
-    }
-
     public void PauseGame()
     {
         gamePaused = true;

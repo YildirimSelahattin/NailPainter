@@ -29,7 +29,7 @@ public class ColorManager : MonoBehaviour
     public Material GetColorMaterialByIndex(int colorIndex)
     {
         //Find the Standard Shader
-        Material myNewColorMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        Material myNewColorMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
         //Set Texture on the material
         myNewColorMaterial.SetTexture("_BaseMap", colorsArray[colorIndex]);
         

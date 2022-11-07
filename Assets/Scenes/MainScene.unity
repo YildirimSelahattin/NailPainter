@@ -6661,6 +6661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191119094}
   - component: {fileID: 1191119095}
+  - component: {fileID: 1191119096}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -6713,6 +6714,20 @@ MonoBehaviour:
   targetMinimap: {fileID: 1847142692}
   currentMinimap: {fileID: 1445554495}
   currentRightMinimap: {fileID: 357499745}
+--- !u!114 &1191119096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191119093}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa875cf4b0f169e439d732bc1f84d664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  gameState: 0
 --- !u!1 &1196850639
 GameObject:
   m_ObjectHideFlags: 0
