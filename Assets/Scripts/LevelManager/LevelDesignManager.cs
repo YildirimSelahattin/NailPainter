@@ -26,11 +26,6 @@ public class LevelDesignManager : MonoBehaviour
         UIManager.Instance.LoadScene(0);
     }
 
-    public void SkipLevel()
-    {
-        //dasdsa
-    }
-
     public void StuidoScene()
     {
         UIManager.Instance.rewardItem.gameObject.SetActive(false);

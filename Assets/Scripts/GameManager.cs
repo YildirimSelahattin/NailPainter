@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
+        levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+
         ReadCSVAndFillTargetArrays(levelIndex);
         StartCoroutine(OffCam());
         //diamond index array is passed to the machine to do
