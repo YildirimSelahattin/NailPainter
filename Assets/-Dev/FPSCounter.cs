@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class FPSCounter : MonoBehaviour
 {
+    //Usually, the default frame rate on mobile platforms is 30 fps.
+
     string label = "";
     float count;
     private GUIStyle guiStyle = new GUIStyle();
 
     IEnumerator Start()
     {
+        Application.targetFrameRate = 30;
+
         GUI.depth = 50;
         while (true)
         {

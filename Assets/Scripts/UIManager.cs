@@ -250,7 +250,6 @@ public class UIManager : MonoBehaviour
             notificationParent.gameObject.SetActive(true);
             //notificationParent.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count.ToString();
         }
-       
     }
 
     IEnumerator Delay(int second)
@@ -258,7 +257,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
         //instantiate the relevant upgradable item
-        //rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.//currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
+        //rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
         Transform spawnPoint = rewardItem.transform.GetChild(1);
         //Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position,spawnPoint.rotation,spawnPoint.parent);
         rewardItem.SetActive(true);
