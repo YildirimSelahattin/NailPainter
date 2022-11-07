@@ -5,10 +5,17 @@ using DG.Tweening;
 public class DiamondMachineManager : MonoBehaviour
 {
     public static int[] diamondIndexArray = new int[5];
+    Material diamondMat;
     GameObject diamondParent;
+    public int diamondIndex;
+    [SerializeField]ParticleSystem diamondParticles;
+    
     private void Start()
     {
+       
         diamondParent = GameObject.FindGameObjectWithTag("DiamondParrent");
+        diamondMat = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndex);
+        diamondParticles.GetComponent<ParticleSystemRenderer>().material = diamondMat;
     }
     private void OnTriggerExit(Collider other)
     {
