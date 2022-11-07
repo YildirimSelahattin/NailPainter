@@ -68,7 +68,7 @@ public class ColorManager : MonoBehaviour
         return myNewDiamondMaterial;
     }
 
-    public Material GetPatternMachineMaterialByTexture(int index)
+    public Material GetPatternMachineMaterialByIndex(int index)
     {
         Material myNewPatternMaterial = new Material(baseMat);
         //Set Texture on the mater
