@@ -126,6 +126,7 @@ public class RewardedAdManager : MonoBehaviour
     {
         UIManager.Instance.losePanel.SetActive(false);
         PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
+        PlayerPrefs.DeleteAll(); ///
         UIManager.Instance.LoadScene(0);
     }
 

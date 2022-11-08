@@ -40,7 +40,7 @@ public class GameDataManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        WriteToJson();
+        //WriteToJson();
     }
     private void ReadFromJson()
     {

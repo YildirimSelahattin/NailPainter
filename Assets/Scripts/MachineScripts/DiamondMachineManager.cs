@@ -15,7 +15,6 @@ public class DiamondMachineManager : MonoBehaviour
        
         diamondParent = GameObject.FindGameObjectWithTag("DiamondParrent");
         diamondMat = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndex);
-        diamondParticles.GetComponent<ParticleSystemRenderer>().material = diamondMat;
     }
     private void OnTriggerExit(Collider other)
     {
