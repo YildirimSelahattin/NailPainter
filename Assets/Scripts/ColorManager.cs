@@ -9,6 +9,7 @@ public class ColorManager : MonoBehaviour
     //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] Texture[] diamondsArray;
     [SerializeField] Material baseMat;
+    [SerializeField] Material patternSignBaseMat;
     public static ColorManager Instance;
     [SerializeField] GameObject targetHand;
     Shader transParentShader;
@@ -37,6 +38,25 @@ public class ColorManager : MonoBehaviour
         return myNewColorMaterial;
     }
 
+
+
+    public Material GetDiamondMaterialByIndex(int diamondIndex)
+    {
+        Material myNewDiamondMaterial = new Material(baseMat);
+        //Set Texture on the mater
+        //Set Texture on the material
+        //myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
+        //myNewPatternColorMaterial.SetFloat("_Surface", 1);
+        myNewDiamondMaterial.SetTexture("_BaseMap", diamondsArray[diamondIndex]);
+        return myNewDiamondMaterial;
+    }
+
+    public Material GetPatternSignMaterialByIndex(int index)
+    {
+        Material myNewPatternMaterial = new Material(patternSignBaseMat);
+        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[index]);
+        return myNewPatternMaterial;
+    }
     public Material GetPatternMaterialByIndex(int patternIndex, bool forThumb)
     {
         Material myNewPatternMaterial = new Material(baseMat);
@@ -54,30 +74,6 @@ public class ColorManager : MonoBehaviour
         {
             myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
         }
-        return myNewPatternMaterial;
-    }
-
-    public Material GetDiamondMaterialByIndex(int diamondIndex)
-    {
-        Material myNewDiamondMaterial = new Material(baseMat);
-        //Set Texture on the mater
-        //Set Texture on the material
-        //myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
-        //myNewPatternColorMaterial.SetFloat("_Surface", 1);
-        myNewDiamondMaterial.SetTexture("_BaseMap", diamondsArray[diamondIndex]);
-        return myNewDiamondMaterial;
-    }
-
-    public Material GetPatternMachineMaterialByIndex(int index)
-    {
-        Material myNewPatternMaterial = new Material(baseMat);
-        //Set Texture on the mater
-        //Set Texture on the material
-
-        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[index]);
-        //myNewPatternMaterial.SetFloat("_Surface", 1);
-        myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0.44f, 0f));
-        myNewPatternMaterial.DOTiling(new Vector2(0.1f, 1.09f), 0.1f);
         return myNewPatternMaterial;
     }
 

@@ -13,7 +13,7 @@ public class PatternMachineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetPatternMachineMaterialByIndex(patternIndex);
+        gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetPatternSignMaterialByIndex(patternIndex);
         //standartPosition = transform.position;
         patternMaterial = ColorManager.Instance.GetPatternMaterialByIndex(patternIndex, false);
         thumbPatternMaterial = ColorManager.Instance.GetPatternMaterialByIndex(patternIndex, true);
