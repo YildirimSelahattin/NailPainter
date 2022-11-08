@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Image fillImage;
 
     [Header("Transform References :")]
-    LevelData currentLevel = new LevelData();
+    public LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
     public int[] currentColorIndexArray = new int[5] { 0, 0, 0, 0, 0 };
@@ -56,11 +56,8 @@ public class GameManager : MonoBehaviour
         }
 
         levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
-
         ReadCSVAndFillTargetArrays(levelIndex);
         StartCoroutine(OffCam());
-        //diamond index array is passed to the machine to do
-        DiamondMachineManager.diamondIndexArray = currentLevel.nailDiamondArray;
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
     }
 

@@ -17,7 +17,7 @@ public class ManicureMachineManager : MonoBehaviour
     GameObject handParent;
     [SerializeField] GameObject nailParticle;
     GameObject newNailParent;
-    public int nailTypeAfterManicure = 2;
+    public static int nailTypeAfterManicure = 2;
     public static ManicureMachineManager Instance;
     bool usedOnce = false;
     float realPos;
@@ -43,9 +43,8 @@ public class ManicureMachineManager : MonoBehaviour
         {  
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
-            //Debug.Log(index);
             other.gameObject.SetActive(false);
-            newNailParent.transform.GetChild(index).gameObject.SetActive(true);
+            newNailParent.transform.GetChild(GameManager.Instance.currentLevel.nailTypeAfterManicure).gameObject.SetActive(true);
             GameManager.Instance.currentNailType = nailTypeAfterManicure;
             GameManager.Instance.isManicured = true;
         }

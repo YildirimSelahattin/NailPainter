@@ -4,18 +4,12 @@ using UnityEngine;
 using DG.Tweening;
 public class DiamondMachineManager : MonoBehaviour
 {
-    public static int[] diamondIndexArray = new int[5];
-    Material diamondMat;
     GameObject diamondParent;
-    public int diamondIndex;
     [SerializeField]ParticleSystem diamondParticles;
     
     private void Start()
     {
-       
         diamondParent = GameObject.FindGameObjectWithTag("DiamondParrent");
-        diamondMat = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndex);
-        diamondParticles.GetComponent<ParticleSystemRenderer>().material = diamondMat;
     }
     private void OnTriggerExit(Collider other)
     {
@@ -23,13 +17,11 @@ public class DiamondMachineManager : MonoBehaviour
         {
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
-            if (diamondIndexArray[index] > 0)
-            {
+            if (GameManager.Instance.currentLevel.nailDiamondArray[index]!=0){
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
-                diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndexArray[index]);
-                GameManager.Instance.currentDiamondIndexArray[index] = diamondIndexArray[index];
+                diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(GameManager.Instance.currentLevel.nailDiamondArray[index]);
             }
-            //0.00011
+            GameManager.Instance.currentDiamondIndexArray[index] = GameManager.Instance.currentLevel.nailDiamondArray[index];
         }
     }
 

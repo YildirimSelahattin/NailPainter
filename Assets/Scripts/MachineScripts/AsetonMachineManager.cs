@@ -7,6 +7,7 @@ public class AsetonMachineManager : MonoBehaviour
     [SerializeField] Material[] matArray;
     string currentTag;
 
+    GameObject diamondParent;
     private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Nail"))
@@ -17,6 +18,8 @@ public class AsetonMachineManager : MonoBehaviour
             GameManager.Instance.currentDiamondIndexArray[currentTag[currentTag.Length - 1] - '0'] = 0;
 
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
+
         }
+
     }
 }

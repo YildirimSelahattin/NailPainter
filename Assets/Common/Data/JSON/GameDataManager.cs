@@ -66,6 +66,7 @@ public class GameDataManager : MonoBehaviour
     }
     public GameObject GetUpgradableObject()
     {
-        return objectPrefabList[dataLists.room.nextUpgradeIndex * (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+        return objectPrefabList[(dataLists.room.nextUpgradeIndex*4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+
     }
 }
