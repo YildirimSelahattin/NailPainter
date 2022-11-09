@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
     [SerializeField] int levelIndex = 1;
-    [Header("Shuffling Levels References")]
-    GameObject[] spawnPoints;
-    GameObject nailColorMachine;
+
     [Header("UI References :")]
     public Image fillImage;
-
+    [Header("Ring And Bracelet References")]
+    [SerializeField] GameObject ringParent;
+    [SerializeField] GameObject braceletParent;
     [Header("Transform References :")]
     public LevelData currentLevel = new LevelData();
 
@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         ReadCSVAndFillTargetArrays(levelIndex);
         StartCoroutine(OffCam());
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
+        //open relative ring and bracelet
+        ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
+        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
     }
 
     IEnumerator OffCam()
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public float CompareTwoHands()
     {
-        float totalParameterNumber = 0;
+        float totalParameterNumber = 20 ;
         float progress = 0;
 
         TargetCam.gameObject.SetActive(true);
@@ -108,9 +111,6 @@ public class GameManager : MonoBehaviour
             progress += 2.5f;
         }
 
-        totalParameterNumber = 20;
-        //Debug.Log(progress);
-        //Debug.Log(totalParameterNumber);
         matchRate = (float)((progress / totalParameterNumber) * 100);
         currentMinimapImage.fillAmount = matchRate / 100;
         return matchRate;

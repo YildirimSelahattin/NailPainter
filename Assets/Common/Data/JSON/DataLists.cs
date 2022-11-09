@@ -28,6 +28,7 @@ public class DataLists
     public GeneralDataStructure[] floor;
     public Room room;
     public List<int> stackedChangeParentIndexes;
+    public int showThemeFinishedPanel;
 
     // Start is called before the first frame update
 

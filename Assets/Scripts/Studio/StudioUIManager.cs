@@ -43,6 +43,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI generalThemeText;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Slider percentBar;
+    [SerializeField] GameObject themeFinishedPanel;
     
     void Start()
     {
@@ -51,7 +52,11 @@ public class StudioUIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-
+            if(GameDataManager.Instance.dataLists.showThemeFinishedPanel == 1)
+            {
+                themeFinishedPanel.SetActive(true);
+                GameDataManager.Instance.dataLists.showThemeFinishedPanel = 0;
+            }
             // update money text
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
@@ -133,27 +138,9 @@ public class StudioUIManager : MonoBehaviour
         //CONTROLL ÝF CURRENT THEME ÝS FÝNÝSHED 
         if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
         {
-            //this theme is finished, increase general theme number
-            GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-            //if all themes finished
-            if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
-            {
-                priceText.gameObject.SetActive(false);
-                upgradeButton.gameObject.SetActive(false);
-                generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
-            }
-            else
-            {
-                //reset upgrades left
-                GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
-                //Open next upgrades button and outline
-                //roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject.GetComponent<Outline>().enabled = true;
-                roomParent[0].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-                FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject); 
-                //increase general theme index
-                generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex-1).ToString();
-                percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
-            }
+            percentBar.DOValue(1, 1f);
+            // theme finished parts done here;
+            themeFinishedPanel.SetActive(true);
         }
         else //prepare next update for that theme
         {
@@ -268,5 +255,30 @@ public class StudioUIManager : MonoBehaviour
         }
         //empty stacked changes;
         GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
+    }
+
+    public void OnCloseThemeFinishedPanelBtnClicked()
+    {
+        //this theme is finished, increase general theme number
+        GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
+        //if all themes finished
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
+        {
+            priceText.gameObject.SetActive(false);
+            upgradeButton.gameObject.SetActive(false);
+            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+        }
+        else
+        {
+            //reset upgrades left
+            GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
+            //Open next upgrades button and outline
+            //roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject.GetComponent<Outline>().enabled = true;
+            roomParent[0].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject);
+            //increase general theme index
+            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+            percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
+        }
     }
 }

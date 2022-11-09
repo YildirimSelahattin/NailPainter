@@ -7,9 +7,12 @@ using static DataLists;
 public class GameDataManager : MonoBehaviour
 {
     public GameObject[] objectPrefabList;
+    public GameObject[] ringArray;
+    public GameObject[] braceletArray;
     public GeneralDataStructure[][] objectsByIndexArray;
     public static GameDataManager Instance;
     public DataLists dataLists;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,11 +65,23 @@ public class GameDataManager : MonoBehaviour
         {
             dataLists.room.nextUpgradeIndex = 0;
             dataLists.room.generalThemeIndex += 1;
+            dataLists.showThemeFinishedPanel = 1;
         }
     }
     public GameObject GetUpgradableObject()
     {
         return objectPrefabList[(dataLists.room.nextUpgradeIndex*4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
 
+ 
+    }
+
+    public GameObject GetGiftRing()
+    {
+        return braceletArray[dataLists.room.generalThemeIndex ];
+    }
+
+    public GameObject GetGiftBracelet()
+    {
+        return ringArray[dataLists.room.generalThemeIndex ];
     }
 }
