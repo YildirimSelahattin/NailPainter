@@ -66,6 +66,7 @@ public class ColorManager : MonoBehaviour
         myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex]);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
         myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
+        
         if (forThumb == true)
         {
             myNewPatternMaterial.DOTiling(new Vector2(1.14f, 8.8f), 0.1f);

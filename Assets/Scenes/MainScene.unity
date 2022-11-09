@@ -524,7 +524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &90376575
 Transform:
   m_ObjectHideFlags: 0
@@ -3357,7 +3357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &636354386
 Transform:
   m_ObjectHideFlags: 0
@@ -4222,7 +4222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &749437908
 Transform:
   m_ObjectHideFlags: 0
@@ -6801,7 +6801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1162652751
 Transform:
   m_ObjectHideFlags: 0
@@ -6929,6 +6929,8 @@ MonoBehaviour:
   levelDataAsset: {fileID: 4900000, guid: 9ccfc8f3fba0200488f373417f264edd, type: 3}
   levelIndex: 0
   fillImage: {fileID: 0}
+  ringParent: {fileID: 0}
+  braceletParent: {fileID: 0}
   currentColorIndexArray: 0000000000000000000000000000000000000000
   currentPatternIndexArray: 0000000000000000000000000000000000000000
   currentDiamondIndexArray: 0000000000000000000000000000000000000000
@@ -9016,7 +9018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1537063068
 Transform:
   m_ObjectHideFlags: 0
@@ -10800,7 +10802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973860123
 Transform:
   m_ObjectHideFlags: 0
@@ -11063,6 +11065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefabList: []
+  ringArray: []
+  braceletArray: []
   dataLists:
     table: []
     chair: []
@@ -11081,6 +11085,7 @@ MonoBehaviour:
       generalThemeIndex: 0
       nextUpgradeIndex: 0
     stackedChangeParentIndexes: 
+    showThemeFinishedPanel: 0
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0

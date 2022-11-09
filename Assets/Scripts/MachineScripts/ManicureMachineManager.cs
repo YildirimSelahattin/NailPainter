@@ -33,7 +33,7 @@ public class ManicureMachineManager : MonoBehaviour
 
         MoveManicureMachine();
         handParent= GameObject.FindGameObjectWithTag("PlayerBase");
-        newNailParent = handParent.transform.GetChild(nailTypeAfterManicure).gameObject;
+        newNailParent = handParent.transform.GetChild(GameManager.Instance.currentLevel.nailTypeAfterManicure).gameObject;
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class ManicureMachineManager : MonoBehaviour
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
             other.gameObject.SetActive(false);
-            newNailParent.transform.GetChild(GameManager.Instance.currentLevel.nailTypeAfterManicure).gameObject.SetActive(true);
+            newNailParent.transform.GetChild(index).gameObject.SetActive(true);
             GameManager.Instance.currentNailType = nailTypeAfterManicure;
             GameManager.Instance.isManicured = true;
         }
