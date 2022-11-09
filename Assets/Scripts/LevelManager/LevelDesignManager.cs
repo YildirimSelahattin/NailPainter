@@ -23,6 +23,7 @@ public class LevelDesignManager : MonoBehaviour
         PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
         UIManager.Instance.rewardItem.gameObject.SetActive(false);
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(false);
+        PlayerPrefs.DeleteAll(); ///
         UIManager.Instance.LoadScene(0);
     }
 
@@ -35,6 +36,7 @@ public class LevelDesignManager : MonoBehaviour
 
     public void Restart()
     {
+        PlayerPrefs.DeleteAll(); ///
         UIManager.Instance.LoadScene(0);
     }
 }

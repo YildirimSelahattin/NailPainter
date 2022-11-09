@@ -54,7 +54,7 @@ public class ColorManager : MonoBehaviour
     public Material GetPatternSignMaterialByIndex(int index)
     {
         Material myNewPatternMaterial = new Material(patternSignBaseMat);
-        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[index]);
+        myNewPatternMaterial.SetTexture("_MainTex", patternsArray[index]);
         return myNewPatternMaterial;
     }
     public Material GetPatternMaterialByIndex(int patternIndex, bool forThumb)
