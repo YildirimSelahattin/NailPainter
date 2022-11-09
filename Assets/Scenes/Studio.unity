@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.96808434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1369,8 +1369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GiftBraceletArray: []
   GiftRingArray: []
-  braceletSpawnPoint: {fileID: 645385503}
-  ringSpawnPoint: {fileID: 286808018}
+  braceletSpawnPoint: {fileID: 645385504}
+  ringSpawnPoint: {fileID: 286808019}
 --- !u!1 &280072247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &286808019
 Transform:
   m_ObjectHideFlags: 0
@@ -3574,7 +3574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &645385504
 Transform:
   m_ObjectHideFlags: 0
@@ -4948,7 +4948,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: -76.1
   m_Depth: 0
   m_CullingMask:

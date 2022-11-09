@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI definationText;
     [SerializeField] TextMeshProUGUI rewardPanelObjectPrice;
     [SerializeField] Image notificationParent;
+    [SerializeField] GameObject popArtParent;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -269,5 +270,14 @@ public class UIManager : MonoBehaviour
     {
         NumberOfDiamonds -= GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price; ;
         GameDataManager.Instance.AddUpgradeToStack();
+    }
+
+    public void CreateCelebrationPopUp()
+    {
+        if (popArtParent.transform.GetChild(0).gameObject.active == false)
+        {
+            Debug.Log("hey");
+            popArtParent.transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 }

@@ -40,7 +40,10 @@ public class PatternMachineManager : MonoBehaviour
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
-            //transform.DOLocalMoveY(standartPosition.y, 0.1f);
+            if (patternIndex == GameManager.Instance.currentLevel.nailPatternArray[index])
+            {
+                UIManager.Instance.CreateCelebrationPopUp();
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

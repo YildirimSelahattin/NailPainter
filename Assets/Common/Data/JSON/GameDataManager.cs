@@ -71,17 +71,15 @@ public class GameDataManager : MonoBehaviour
     public GameObject GetUpgradableObject()
     {
         return objectPrefabList[(dataLists.room.nextUpgradeIndex*4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
-
- 
     }
 
     public GameObject GetGiftRing()
     {
-        return braceletArray[dataLists.room.generalThemeIndex ];
+        return braceletArray[dataLists.room.generalThemeIndex];
     }
 
     public GameObject GetGiftBracelet()
     {
-        return ringArray[dataLists.room.generalThemeIndex ];
+        return ringArray[dataLists.room.generalThemeIndex];
     }
 }
