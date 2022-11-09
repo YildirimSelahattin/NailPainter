@@ -33,12 +33,12 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 2048
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.48415303, g: 0.18010315, b: 0.8112604, a: 1}
+  m_IndirectSpecularColor: {r: 0.99999946, g: 0.99999946, b: 0.99999946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 2a2f95e3220a19647bcdc4ae424eba72,
+  m_LightingDataAsset: {fileID: 112000000, guid: 4341f7e6cb5af754185f9029ea1952c9,
     type: 2}
   m_LightingSettings: {fileID: 2107478843}
 --- !u!196 &4
@@ -2571,7 +2571,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 485733636}
         m_TargetAssemblyTypeName: GamePause, Assembly-CSharp
-        m_MethodName: KeyDownPause
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 485733636}
+        m_TargetAssemblyTypeName: GamePause, Assembly-CSharp
+        m_MethodName: GameReturn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
