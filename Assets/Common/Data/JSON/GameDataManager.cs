@@ -70,7 +70,13 @@ public class GameDataManager : MonoBehaviour
     }
     public GameObject GetUpgradableObject()
     {
-        return objectPrefabList[(dataLists.room.nextUpgradeIndex*4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+        GameObject upgradableObject = objectPrefabList[(dataLists.room.nextUpgradeIndex * 4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+        upgradableObject.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
+        foreach(Transform child in upgradableObject.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        return upgradableObject;
     }
 
     public GameObject GetGiftRing()

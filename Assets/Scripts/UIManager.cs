@@ -258,9 +258,9 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
         //instantiate the relevant upgradable item
-        //rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
+        rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
         Transform spawnPoint = rewardItem.transform.GetChild(1);
-        //Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position,spawnPoint.rotation,spawnPoint.parent);
+        Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position,spawnPoint.rotation,spawnPoint);
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
         endPanel.SetActive(false);

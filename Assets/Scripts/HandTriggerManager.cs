@@ -17,7 +17,9 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
+            other.gameObject.SetActive(false);
             UIManager.Instance.ShowEndScreen();
+
         }
     }
 
