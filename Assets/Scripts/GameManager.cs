@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
         levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         //5 i değiştir
-        ReadCSVAndFillTargetArrays(3);
+        ReadCSVAndFillTargetArrays(levelIndex);
         StartCoroutine(OffCam());
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
         //open relative ring and bracelet

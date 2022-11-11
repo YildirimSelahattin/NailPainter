@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject studioButton;
     [SerializeField] public GameObject losePanel;
     public GameObject rewardPanel;
     public GameObject earnedRewardPanel;
@@ -94,6 +95,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
+        studioButton.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
     }
 
