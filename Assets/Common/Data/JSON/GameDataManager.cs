@@ -70,8 +70,12 @@ public class GameDataManager : MonoBehaviour
     }
     public GameObject GetUpgradableObject()
     {
-        GameObject upgradableObject = objectPrefabList[(dataLists.room.nextUpgradeIndex * 4) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+        GameObject upgradableObject = objectPrefabList[(dataLists.room.nextUpgradeIndex * 5) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
         upgradableObject.transform.localScale = new Vector3(0.12f,0.12f,0.12f);
+        if(dataLists.room.nextUpgradeIndex > 2)
+        {
+            upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
+        }
         foreach(Transform child in upgradableObject.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");

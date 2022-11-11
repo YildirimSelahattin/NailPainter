@@ -14,8 +14,24 @@ namespace CloudOnce
     /// </summary>
     public static class Achievements
     {
+        private static readonly UnifiedAchievement s_firstNail = new UnifiedAchievement("FirstNail",
+#if !UNITY_EDITOR && (UNITY_IOS || UNITY_TVOS)
+            ""
+#elif !UNITY_EDITOR && UNITY_ANDROID && CLOUDONCE_GOOGLE
+            "CgkIgIqP-tsKEAIQAQ"
+#else
+            "FirstNail"
+#endif
+            );
+
+        public static UnifiedAchievement FirstNail
+        {
+            get { return s_firstNail; }
+        }
+
         public static readonly UnifiedAchievement[] All =
         {
+            s_firstNail,
         };
 
         public static string GetPlatformID(string internalId)
@@ -27,7 +43,7 @@ namespace CloudOnce
 
         private static readonly Dictionary<string, UnifiedAchievement> s_achievementDictionary = new Dictionary<string, UnifiedAchievement>
         {
-
+            { "FirstNail", s_firstNail },
         };
     }
 }
