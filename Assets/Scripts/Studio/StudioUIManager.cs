@@ -134,7 +134,7 @@ public class StudioUIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         //empty stacked changes;
-        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
+        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = new List<int>();
     }
 
     public void OnCloseThemeFinishedPanelBtnClicked()

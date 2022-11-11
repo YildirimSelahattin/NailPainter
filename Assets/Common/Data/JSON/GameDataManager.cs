@@ -61,6 +61,7 @@ public class GameDataManager : MonoBehaviour
         //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
         dataLists.stackedChangeParentIndexes.Add(dataLists.room.nextUpgradeIndex);
         dataLists.room.nextUpgradeIndex += 1;
+        Debug.Log("gel");
         if (dataLists.room.nextUpgradeIndex==11)
         {
             dataLists.room.nextUpgradeIndex = 0;
