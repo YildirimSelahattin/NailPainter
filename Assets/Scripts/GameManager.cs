@@ -61,8 +61,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(OffCam());
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
         //open relative ring and bracelet
-        ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
-        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
+        //ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
+        //braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
     }
 
     IEnumerator OffCam()
