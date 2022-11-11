@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CloudOnce;
 public class CloudOnceServices : MonoBehaviour
 {
     public static CloudOnceServices instance;
@@ -22,7 +22,8 @@ public class CloudOnceServices : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SubmitScoreLeaderBoard(int score)
+    public void UnlockAchievement()
     {
+        //Achievements.blabla.Unlock();
     }
 }

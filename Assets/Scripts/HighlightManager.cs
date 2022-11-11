@@ -8,11 +8,10 @@ public class HighlightManager : MonoBehaviour
     [SerializeField] Material TransparrentMat;
 
 
-        private void OnTriggerStay (Collider other)//if one finger pass the brush
+        private void OnTriggerEnter (Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Nail"))
         {
-            string currentTag = other.transform.tag;
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[3] = highlightMat;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
@@ -23,7 +22,6 @@ public class HighlightManager : MonoBehaviour
     {
         if (other.transform.tag.Contains("Nail"))
         {
-            string currentTag = other.transform.tag;
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[3] = TransparrentMat;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;

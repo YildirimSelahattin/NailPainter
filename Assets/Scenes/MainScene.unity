@@ -1129,6 +1129,66 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10554049, y: 0.028575927, z: 0.1192159}
   m_Center: {x: -0.012078953, y: 0.002720994, z: -0.02285721}
+--- !u!1 &223974226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223974229}
+  - component: {fileID: 223974228}
+  - component: {fileID: 223974227}
+  m_Layer: 0
+  m_Name: CloudOnceServices
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &223974227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3553c8c65b56f094cb3dbd7b77678002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &223974228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9cbee2052be1944a62dbcb0ced7aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudSaveEnabled: 0
+  autoSignIn: 1
+  autoCloudLoad: 0
+--- !u!4 &223974229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &256906194
 GameObject:
   m_ObjectHideFlags: 0
@@ -11535,8 +11595,10 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 8a91ce90e8e22f84286c1959fa6f39f3, type: 3}
   - {fileID: 919132149155446097, guid: 7e98471385e67f24f90fbfa6621cd5f4, type: 3}
   - {fileID: 919132149155446097, guid: bff5f627516b53c4ab790ef0baf6b073, type: 3}
-  ringArray: []
-  braceletArray: []
+  ringArray:
+  - {fileID: 919132149155446097, guid: d0fe4cfbc530e2041a8675270aa08fbe, type: 3}
+  braceletArray:
+  - {fileID: 919132149155446097, guid: 73fcafee0acf2bc47a7b719d8f286c0a, type: 3}
   dataLists:
     table: []
     chair: []

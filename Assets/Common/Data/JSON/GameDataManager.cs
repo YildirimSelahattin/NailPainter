@@ -81,11 +81,22 @@ public class GameDataManager : MonoBehaviour
 
     public GameObject GetGiftRing()
     {
-        return braceletArray[dataLists.room.generalThemeIndex];
+        GameObject ring = ringArray[0];
+        foreach (Transform child in ring.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        return ring ;
     }
 
     public GameObject GetGiftBracelet()
     {
-        return ringArray[dataLists.room.generalThemeIndex];
+        //dataLists.room.generalThemeIndex
+        GameObject bracelet = braceletArray[0];
+        foreach (Transform child in bracelet.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        return bracelet ;
     }
 }

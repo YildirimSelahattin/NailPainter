@@ -92,7 +92,8 @@ public class StudioUIManager : MonoBehaviour
             // open the current childs, all the childs should start closed
             for (int i = 0; i < roomParent.Count; i++)
             {
-                FadeIn(roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject);
+                //FadeIn(roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject);
+                roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject.SetActive(true);
             }
             //stackedchanges
             
@@ -119,6 +120,45 @@ public class StudioUIManager : MonoBehaviour
     public void OnUpgradeWithAdButtonClicked()
     {
         Upgrade();
+    }
+    private IEnumerator UpgradeStackedChanges()
+    {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count; i++)
+        {
+            int upgradeIndex = GameDataManager.Instance.dataLists.stackedChangeParentIndexes[i];
+            OpenAndCloseObject(upgradeIndex, GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex]);
+            GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex] += 1;
+            yield return new WaitForSeconds(1);
+        }
+        //empty stacked changes;
+        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
+    }
+
+    public void OnCloseThemeFinishedPanelBtnClicked()
+    {
+        themeFinishedPanel.SetActive(false);
+        //this theme is finished, increase general theme number
+        GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
+        //if all themes finished
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
+        {
+            priceText.gameObject.SetActive(false);
+            upgradeButton.gameObject.SetActive(false);
+            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+        }
+        else
+        {
+            //reset upgrades left
+            GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
+            //Open next upgrades button and outline
+            //roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject.GetComponent<Outline>().enabled = true;
+            roomParent[0].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject);
+            //increase general theme index
+            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+            percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
+        }
     }
     // Update is called once per frame
     private void Upgrade()
@@ -167,41 +207,8 @@ public class StudioUIManager : MonoBehaviour
 
     private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
     {
-        GameObject objectToClose = roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject;
+        GameObject objectToClose= roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject;
         GameObject objectToOpen = roomParent[parentIndex].transform.GetChild(currentChildIndex + 1).gameObject;
-        // disappear fade
-
-        StartCoroutine(FadeOut(objectToClose));
-        FadeIn(objectToOpen);
-    }
-    public void FadeIn(GameObject objectToOpen)
-    {
-        for (int i = 0; i < objectToOpen.transform.childCount; i++)
-        {
-            Material[] matArray = objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
-            for (int j = 0; j < matArray.Length; j++)
-            {
-                Color color = matArray[j].color;
-                color.a = 0;
-                matArray[j].SetColor("_BaseColor", color);
-            }
-            objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray;
-        }
-
-        objectToOpen.SetActive(true);
-
-        for (int i = 0; i < objectToOpen.transform.childCount; i++)
-        {
-            Material[] matArray = objectToOpen.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
-            for (int j = 0; j < matArray.Length; j++)
-            {
-                matArray[j].DOFade(1, 1f);
-            }
-        }
-    }
-
-    public IEnumerator FadeOut(GameObject objectToClose)
-    {
         for (int i = 0; i < objectToClose.transform.childCount; i++)
         {
             Material[] matArray = objectToClose.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
@@ -212,9 +219,13 @@ public class StudioUIManager : MonoBehaviour
             }
             objectToClose.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials = matArray.SkipLast(1).ToArray();
         }
-        yield return new WaitForSeconds(1);
         objectToClose.SetActive(false);
+        objectToOpen.SetActive(true);
+        // disappear fade
+
+       
     }
+
     private void FadeInFadeOut(GameObject relativeObject)
     {
         if (relativeObject.GetComponent<MeshRenderer>() != null)
@@ -245,43 +256,5 @@ public class StudioUIManager : MonoBehaviour
         mat.DOFade(0f/255f, 1).OnComplete(() =>mat.DOFade(60f/255f,1).OnComplete(()=>FadeInFadeOutLoop(mat)));
         
     }
-    private IEnumerator UpgradeStackedChanges()
-    {
-        yield return new WaitForSeconds(1);
-        for(int i = 0; i < GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count; i++)
-        {
-            int upgradeIndex = GameDataManager.Instance.dataLists.stackedChangeParentIndexes[i];
-            OpenAndCloseObject(upgradeIndex, GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex]);
-            GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex] += 1;
-            yield return new WaitForSeconds(1);
-        }
-        //empty stacked changes;
-        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
-    }
-
-    public void OnCloseThemeFinishedPanelBtnClicked()
-    {
-        //this theme is finished, increase general theme number
-        GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-        //if all themes finished
-        if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
-        {
-            priceText.gameObject.SetActive(false);
-            upgradeButton.gameObject.SetActive(false);
-            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
-        }
-        else
-        {
-            //reset upgrades left
-            GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
-            //Open next upgrades button and outline
-            //roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject.GetComponent<Outline>().enabled = true;
-            roomParent[0].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-            FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject);
-            //increase general theme index
-            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
-            percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
-
-        }
-    }
+  
 }
