@@ -281,6 +281,7 @@ public class StudioUIManager : MonoBehaviour
             //increase general theme index
             generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
             percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
+
         }
     }
 }

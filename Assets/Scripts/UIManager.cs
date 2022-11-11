@@ -274,10 +274,11 @@ public class UIManager : MonoBehaviour
 
     public void CreateCelebrationPopUp()
     {
-        if (popArtParent.transform.GetChild(0).gameObject.active == false)
+        int index = Random.Range(0, popArtParent.transform.childCount);
+        if (popArtParent.transform.GetChild(index).gameObject.active == false)
         {
             Debug.Log("hey");
-            popArtParent.transform.GetChild(0).gameObject.SetActive(true);
+            popArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
     }
 }

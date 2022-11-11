@@ -26,9 +26,8 @@ public class BrushManager : MonoBehaviour
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.currentColorIndexArray[index] = colorIndex;
-            UIManager.Instance.CreateCelebrationPopUp();
             if (colorIndex == GameManager.Instance.currentLevel.nailColorArray[index]){
-                //UIManager.Instance.CreateCelebrationPopUp();
+                UIManager.Instance.CreateCelebrationPopUp();
             }
 
         }
