@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Level References")]
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
-    [SerializeField] int levelIndex = 1;
+    public int levelIndex = 1;
 
     [Header("UI References :")]
     public Image fillImage;
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     public float CompareTwoHands()
     {
-        float totalParameterNumber = 20 ;
+        float totalParameterNumber = 20;
         float progress = 0;
 
         TargetCam.gameObject.SetActive(true);

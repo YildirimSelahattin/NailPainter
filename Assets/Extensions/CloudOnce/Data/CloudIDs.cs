@@ -20,6 +20,25 @@ namespace CloudOnce
         /// </summary>
         public static class AchievementIDs
         {
+            public static string FirstNail
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkIgIqP-tsKEAIQAQ";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "";
+#elif UNITY_EDITOR
+                    return "FirstNail";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
         }
 
         /// <summary>

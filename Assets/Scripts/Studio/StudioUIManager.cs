@@ -96,11 +96,13 @@ public class StudioUIManager : MonoBehaviour
                 roomParent[i].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[i]).gameObject.SetActive(true);
             }
             //stackedchanges
-            
-            
-
-            
+            StartCoroutine(UpgradeStackedChanges());
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log(GameDataManager.Instance.dataLists.room.generalThemeIndex);
     }
     public void PrevScene()
     {
@@ -129,7 +131,7 @@ public class StudioUIManager : MonoBehaviour
             int upgradeIndex = GameDataManager.Instance.dataLists.stackedChangeParentIndexes[i];
             OpenAndCloseObject(upgradeIndex, GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex]);
             GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeIndex] += 1;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
         //empty stacked changes;
         GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
@@ -137,6 +139,8 @@ public class StudioUIManager : MonoBehaviour
 
     public void OnCloseThemeFinishedPanelBtnClicked()
     {
+        upgradeButton.gameObject.SetActive(true);
+        priceText.gameObject.SetActive(true);
         themeFinishedPanel.SetActive(false);
         //this theme is finished, increase general theme number
         GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
@@ -180,6 +184,8 @@ public class StudioUIManager : MonoBehaviour
         {
             percentBar.DOValue(1, 1f);
             // theme finished parts done here;
+            upgradeButton.gameObject.SetActive(false);
+            priceText.gameObject.SetActive(false);
             themeFinishedPanel.SetActive(true);
         }
         else //prepare next update for that theme
