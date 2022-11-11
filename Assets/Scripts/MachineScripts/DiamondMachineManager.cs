@@ -20,9 +20,12 @@ public class DiamondMachineManager : MonoBehaviour
             if (GameManager.Instance.currentLevel.nailDiamondArray[index]!=0){
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(GameManager.Instance.currentLevel.nailDiamondArray[index]);
+                UIManager.Instance.CreateCelebrationPopUp();
             }
             GameManager.Instance.currentDiamondIndexArray[index] = GameManager.Instance.currentLevel.nailDiamondArray[index];
         }
+
+        
     }
 
 }
