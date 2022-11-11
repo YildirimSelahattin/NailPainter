@@ -104,4 +104,11 @@ public class GameDataManager : MonoBehaviour
         }
         return bracelet ;
     }
+    public void JSONSifirla()
+    {
+        DataLists temizjson = JsonUtility.FromJson<DataLists>(File.ReadAllText(Application.dataPath + "/Common/Data/JSON/ClearJSONText.txt"));
+        string serializedData = JsonUtility.ToJson(temizjson);
+        File.WriteAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt", serializedData);
+
+    }
 }
