@@ -51,6 +51,8 @@ public class RewardedAdManager : MonoBehaviour
                 // Called when the ad is closed.
                 this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
         */
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
@@ -90,6 +92,7 @@ public class RewardedAdManager : MonoBehaviour
         UIManager.Instance.rewardPanel.gameObject.SetActive(false);
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
         GameDataManager.Instance.AddUpgradeToStack();
+
     }
 
     public void FurnitureRewardAd()

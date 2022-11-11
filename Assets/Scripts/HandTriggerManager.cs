@@ -17,9 +17,10 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
+            //disable path following mode
+            gameObject.transform.parent.gameObject.GetComponent<PlayerController>().enabled = false;
             other.gameObject.SetActive(false);
-            UIManager.Instance.ShowEndScreen();
-
+            gameObject.transform.parent.gameObject.GetComponent<StraightMoveManager>().enabled = true;
         }
     }
 

@@ -65,6 +65,7 @@ public class InterstitialAdManager : MonoBehaviour
 
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
+
         MonoBehaviour.print("HandleAdClosed event received");
     }
 }
