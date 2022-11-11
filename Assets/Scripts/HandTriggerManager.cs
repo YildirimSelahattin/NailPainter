@@ -34,7 +34,7 @@ public class HandTriggerManager : MonoBehaviour
         other.transform.parent = this.transform;
         other.transform.DOLocalMove(diamondReachPointReference.localPosition, 1).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
         Vector3 originalScale = transform.localScale;
-        other.transform.DOScale(originalScale/2, 1);
+        other.transform.DOScale(0.02f/4, 1);
     }
 
 
