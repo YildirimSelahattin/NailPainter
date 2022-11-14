@@ -29,13 +29,13 @@ public class GameDataManager : MonoBehaviour
             
 
             dir = Application.persistentDataPath + directory;
-            if (PlayerPrefs.GetString("unity.player_session_count") == "1")
-            {
-                File.Delete(dir + fileName);
-            }
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
+            }
+            if (PlayerPrefs.GetString("unity.player_session_count") == "1")
+            {
+                File.Delete(dir + fileName);
             }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
