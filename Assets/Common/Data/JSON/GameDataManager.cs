@@ -25,11 +25,17 @@ public class GameDataManager : MonoBehaviour
         {
             
             Instance = this;
+            //if it is first time playing this game, delete and write default values to the json file 
+            
+
             dir = Application.persistentDataPath + directory;
-            Debug.Log(dir);
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
+            }
+            if (PlayerPrefs.GetString("unity.player_session_count") == "1")
+            {
+                File.Delete(dir + fileName);
             }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
@@ -59,18 +65,17 @@ public class GameDataManager : MonoBehaviour
     }
     private void ReadFromJson()
     {
+        
         string fullPath = dir+ fileName;
-        //if there is no file, use the default values and create a file 
+        //if there is no file, use the default values 
         if (!File.Exists(fullPath))
         {
+            File.WriteAllText(fullPath, JSONText.text);
             dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
-            string serializedData = JsonUtility.ToJson(dataLists);
-            File.WriteAllText(dir + fileName, serializedData);
         }
         //if there is file to read 
         else
         {
-            Debug.Log("dogru");
             dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(fullPath));
         }
     }
@@ -108,7 +113,6 @@ public class GameDataManager : MonoBehaviour
         }
         return upgradableObject;
     }
-
     public GameObject GetGiftRing()
     {
         GameObject ring = ringArray[0];
@@ -118,7 +122,6 @@ public class GameDataManager : MonoBehaviour
         }
         return ring ;
     }
-
     public GameObject GetGiftBracelet()
     {
         //dataLists.room.generalThemeIndex
@@ -131,6 +134,7 @@ public class GameDataManager : MonoBehaviour
     }
     public void JSONSifirla()
     {
+        File.Delete(dir + fileName);
         dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
     }
 }
