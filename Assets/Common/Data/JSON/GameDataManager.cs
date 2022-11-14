@@ -30,8 +30,6 @@ public class GameDataManager : MonoBehaviour
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
-                dir = Application.persistentDataPath + directory;
-                Debug.Log(dir);
             }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
@@ -57,17 +55,17 @@ public class GameDataManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        //WriteToJson();
+        WriteToJson();
     }
     private void ReadFromJson()
     {
         string fullPath = dir+ fileName;
-        //if there is no file, use the default values 
+        //if there is no file, use the default values and create a file 
         if (!File.Exists(fullPath))
         {
-            File.Create(fullPath);
-            File.WriteAllText(fullPath, JSONText.text);
-            dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(JSONText.text));
+            dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
+            string serializedData = JsonUtility.ToJson(dataLists);
+            File.WriteAllText(dir + fileName, serializedData);
         }
         //if there is file to read 
         else
