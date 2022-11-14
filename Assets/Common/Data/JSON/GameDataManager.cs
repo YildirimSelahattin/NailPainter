@@ -1,24 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using static DataLists;
 //THE ONLY DATA READER , READS FROM JSONTEXT
 public class GameDataManager : MonoBehaviour
 {
+    [SerializeField]TextAsset JSONText;
     public GameObject[] objectPrefabList;
     public GameObject[] ringArray;
     public GameObject[] braceletArray;
     public GeneralDataStructure[][] objectsByIndexArray;
     public static GameDataManager Instance;
     public DataLists dataLists;
-    
+    public static string directory = "/SaveData/";
+    public static string fileName = "JSONText";
+    string dir;
     // Start is called before the first frame update
     void Awake()
     {
         if(Instance == null)
         {
+            
             Instance = this;
+            dir = Application.persistentDataPath + directory;
+            Debug.Log(dir);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+                dir = Application.persistentDataPath + directory;
+                Debug.Log(dir);
+            }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
             GameDataManager.Instance.dataLists.wall,
@@ -47,13 +61,26 @@ public class GameDataManager : MonoBehaviour
     }
     private void ReadFromJson()
     {
-        dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt"));
+        string fullPath = dir+ fileName;
+        //if there is no file, use the default values 
+        if (!File.Exists(fullPath))
+        {
+            File.Create(fullPath);
+            File.WriteAllText(fullPath, JSONText.text);
+            dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(JSONText.text));
+        }
+        //if there is file to read 
+        else
+        {
+            Debug.Log("dogru");
+            dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(fullPath));
+        }
     }
 
     private void WriteToJson()
     {
         string serializedData = JsonUtility.ToJson(dataLists);
-        File.WriteAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt", serializedData);
+        File.WriteAllText(dir + fileName, serializedData);
     }
 
     public void AddUpgradeToStack()
@@ -106,9 +133,6 @@ public class GameDataManager : MonoBehaviour
     }
     public void JSONSifirla()
     {
-        DataLists temizjson = JsonUtility.FromJson<DataLists>(File.ReadAllText(Application.dataPath + "/Common/Data/JSON/ClearJSONText.txt"));
-        string serializedData = JsonUtility.ToJson(temizjson);
-        File.WriteAllText(Application.dataPath + "/Common/Data/JSON/JSONText.txt", serializedData);
-
+        dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
     }
 }
