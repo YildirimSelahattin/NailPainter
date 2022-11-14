@@ -27,7 +27,7 @@ public class GameDataManager : MonoBehaviour
             Instance = this;
             
             dir = Application.persistentDataPath + directory;
-            //File.Delete(dir + fileName);
+            File.Delete(dir + fileName);
             Debug.Log(dir);
             if (!Directory.Exists(dir))
             {
@@ -61,6 +61,7 @@ public class GameDataManager : MonoBehaviour
     }
     private void ReadFromJson()
     {
+        
         string fullPath = dir+ fileName;
         //if there is no file, use the default values 
         if (!File.Exists(fullPath))
