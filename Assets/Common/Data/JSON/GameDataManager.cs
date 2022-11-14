@@ -25,10 +25,14 @@ public class GameDataManager : MonoBehaviour
         {
             
             Instance = this;
+            //if it is first time playing this game, delete and write default values to the json file 
             
+
             dir = Application.persistentDataPath + directory;
-            File.Delete(dir + fileName);
-            Debug.Log(dir);
+            if (PlayerPrefs.GetString("unity.player_session_count") == "1")
+            {
+                File.Delete(dir + fileName);
+            }
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -109,7 +113,6 @@ public class GameDataManager : MonoBehaviour
         }
         return upgradableObject;
     }
-
     public GameObject GetGiftRing()
     {
         GameObject ring = ringArray[0];
@@ -119,7 +122,6 @@ public class GameDataManager : MonoBehaviour
         }
         return ring ;
     }
-
     public GameObject GetGiftBracelet()
     {
         //dataLists.room.generalThemeIndex
