@@ -25,13 +25,13 @@ public class GameDataManager : MonoBehaviour
         {
             
             Instance = this;
+            
             dir = Application.persistentDataPath + directory;
+            //File.Delete(dir + fileName);
             Debug.Log(dir);
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
-                dir = Application.persistentDataPath + directory;
-                Debug.Log(dir);
             }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
@@ -57,7 +57,7 @@ public class GameDataManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        //WriteToJson();
+        WriteToJson();
     }
     private void ReadFromJson()
     {
@@ -65,14 +65,12 @@ public class GameDataManager : MonoBehaviour
         //if there is no file, use the default values 
         if (!File.Exists(fullPath))
         {
-            File.Create(fullPath);
             File.WriteAllText(fullPath, JSONText.text);
-            dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(JSONText.text));
+            dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         }
         //if there is file to read 
         else
         {
-            Debug.Log("dogru");
             dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(fullPath));
         }
     }
@@ -133,6 +131,7 @@ public class GameDataManager : MonoBehaviour
     }
     public void JSONSifirla()
     {
+        File.Delete(dir + fileName);
         dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
     }
 }
