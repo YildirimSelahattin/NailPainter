@@ -24,7 +24,7 @@ namespace CloudOnce.QuickStart
 
         private void Start()
         {
-            Cloud.Initialize(cloudSaveEnabled, autoSignIn, autoCloudLoad);
+            Cloud.Initialize(autoSignIn);
         }
     }
 }

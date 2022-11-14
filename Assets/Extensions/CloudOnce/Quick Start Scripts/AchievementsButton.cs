@@ -18,6 +18,8 @@ namespace CloudOnce.QuickStart
 
         private static void OnSignedInChanged(bool isSignedIn)
         {
+            Debug.Log(isSignedIn + " asdsdasdadsd ");
+
             Cloud.OnSignedInChanged -= OnSignedInChanged;
             if (isSignedIn)
             {
