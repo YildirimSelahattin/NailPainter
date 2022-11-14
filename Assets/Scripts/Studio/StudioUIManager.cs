@@ -52,11 +52,11 @@ public class StudioUIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            if(GameDataManager.Instance.dataLists.showThemeFinishedPanel == 1)
+            /*if(GameDataManager.Instance.dataLists.showThemeFinishedPanel == 1)
             {
                 themeFinishedPanel.SetActive(true);
                 GameDataManager.Instance.dataLists.showThemeFinishedPanel = 0;
-            }
+            }*/
             // update money text
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
@@ -134,7 +134,7 @@ public class StudioUIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         //empty stacked changes;
-        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = null;
+        GameDataManager.Instance.dataLists.stackedChangeParentIndexes = new List<int>();
     }
 
     public void OnCloseThemeFinishedPanelBtnClicked()

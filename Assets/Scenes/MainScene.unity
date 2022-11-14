@@ -2459,7 +2459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0010375977, y: 0}
+  m_AnchoredPosition: {x: 0.0010986328, y: 0}
   m_SizeDelta: {x: -573.5, y: -3084.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &454590331
@@ -9137,7 +9137,7 @@ MonoBehaviour:
   tapToStartCanvas: {fileID: 1296797175}
   follower: {fileID: 1822642420259460039}
   winPanel: {fileID: 684573362}
-  studioButton: {fileID: 1648790635}
+  studioButton: {fileID: 0}
   losePanel: {fileID: 1680843838}
   rewardPanel: {fileID: 1709392959}
   earnedRewardPanel: {fileID: 1834519246}
@@ -12226,6 +12226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05914e5341d153941be513e7a8b0a8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JSONText: {fileID: 4900000, guid: 0aa8c408e1dfc3644835d30e1e47387d, type: 3}
   objectPrefabList:
   - {fileID: 0}
   - {fileID: 919132149155446097, guid: 88e3deb0512e93d4aadeb5cf7f6b807c, type: 3}
@@ -13042,7 +13043,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.5246529, g: 0.8490566, b: 0.77672243, a: 0}
+  m_BackGroundColor: {r: 0, g: 1, b: 0.8477473, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -13158,7 +13159,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822542282678604615}
-  m_LocalRotation: {x: -0.00009949505, y: -0.15671086, z: 0.00056022406, w: 0.9876444}
+  m_LocalRotation: {x: 0.00000006332993, y: -0.056175847, z: 0.00083482254, w: 0.99842054}
   m_LocalPosition: {x: -1.9, y: -0.2, z: 0.2}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
@@ -13171,7 +13172,7 @@ Transform:
   - {fileID: 1710377728}
   m_Father: {fileID: 1819561057495766141}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -0.001, y: -18.032, z: 0.065}
+  m_LocalEulerAnglesHint: {x: 0.005, y: -6.441, z: 0.096}
 --- !u!65 &1828300970283926866
 BoxCollider:
   m_ObjectHideFlags: 0
