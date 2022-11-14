@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject studioButton;
+    [SerializeField] GameObject settingsButton;
     [SerializeField] public GameObject losePanel;
     public GameObject rewardPanel;
     public GameObject earnedRewardPanel;
@@ -145,11 +146,13 @@ public class UIManager : MonoBehaviour
 
         if (matchRate >70)
         {
+            settingsButton.SetActive(false);
             winPanel.SetActive(true);
             StartCoroutine(Delay(2));
         }
         else
         {
+            settingsButton.SetActive(false);
             losePanel.SetActive(true);
         }
     }
