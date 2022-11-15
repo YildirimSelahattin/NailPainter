@@ -144,11 +144,14 @@ public class UIManager : MonoBehaviour
         matchRateText.text = matchRate.ToString();
         endPanel.SetActive(true);
 
-        if (matchRate >70)
+        if (matchRate >50)
         {
             settingsButton.SetActive(false);
-            winPanel.SetActive(true);
-            StartCoroutine(Delay(2));
+            //winPanel.SetActive(true);
+            //StartCoroutine(Delay(2));
+            endPanel.SetActive(false);
+            GameManager.Instance.EnableMovingPolish();
+
         }
         else
         {
