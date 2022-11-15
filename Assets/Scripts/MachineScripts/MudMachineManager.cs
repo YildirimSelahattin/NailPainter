@@ -24,6 +24,7 @@ public class MudMachineManager : MonoBehaviour
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[1] = MudMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
+            GameManager.Instance.isCleaned = false;
         }
     }
 }
