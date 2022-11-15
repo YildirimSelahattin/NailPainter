@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
     public int levelIndex = 1;
+    [SerializeField]GameObject movingBrush;
+    [SerializeField] GameObject handModel;
+    [SerializeField] GameObject follower;
 
     [Header("UI References :")]
     public Image fillImage;
@@ -153,5 +156,13 @@ public class GameManager : MonoBehaviour
             Debug.Log(currentLevel.nailColorArray[i]);
         }
         */
+    }
+
+    public void EnableMovingPolish()
+    {
+
+        follower.GetComponent<MovingPolishManager>().enabled = true;
+        handModel.SetActive(false);
+        movingBrush.SetActive(true);
     }
 }
