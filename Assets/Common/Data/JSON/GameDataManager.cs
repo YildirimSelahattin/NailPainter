@@ -26,8 +26,6 @@ public class GameDataManager : MonoBehaviour
             
             Instance = this;
             //if it is first time playing this game, delete and write default values to the json file 
-            
-
             dir = Application.persistentDataPath + directory;
             if (!Directory.Exists(dir))
             {
