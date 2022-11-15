@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.ComponentModel.Design;
+
 public class MovingPolishManager : MonoBehaviour
 {
     [SerializeField]Vector3 targetCameraPosition;
@@ -22,9 +24,9 @@ public class MovingPolishManager : MonoBehaviour
         startPos = transform.position;
         startTime = Time.time;
         int index = (int)GameManager.Instance.matchRate / 2;
-        endPos = colorableObjectsParent.transform.GetChild(index).transform.position;
+        endPos = colorableObjectsParent.transform.GetChild(10).transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
-        camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(()=>transform.DOLocalMoveZ(endPos.z,index));
+        camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(()=>transform.DOLocalMoveZ(endPos.z,10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
       
     }
@@ -46,5 +48,11 @@ public class MovingPolishManager : MonoBehaviour
             // Set our position as a fraction of the distance between the markers.
             transform.position = Vector3.Lerp(startPos, endPos, fractionOfJourney);
         }*/
+    }
+    private void CloseBrushAndOpenRewarPanel()
+    {
+        GameManager.Instance.DisableMovingPolish();
+        UIManager.Instance.OpenRewardPanel();
+
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MovingPolishTriggerManager : MonoBehaviour
 {
-
+    [SerializeField] GameObject brushParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +22,11 @@ public class MovingPolishTriggerManager : MonoBehaviour
     {
         if (other.transform.CompareTag("colorable"))
         {
-            Debug.Log("hey");
+            Instantiate(brushParticle, other.transform.position+2*Vector3.up, other.transform.rotation, other.transform.parent);
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray= matArray.SkipLast(1).ToArray();
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
+
         }
     }
 }
