@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class MovingPolishTriggerManager : MonoBehaviour
+public class MudMachineManager : MonoBehaviour
 {
-    [SerializeField] GameObject brushParticle;
+    [SerializeField] Material MudMaterial;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,16 +16,15 @@ public class MovingPolishTriggerManager : MonoBehaviour
     {
         
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("colorable"))
-        {
-            Instantiate(brushParticle, other.transform.position+2*Vector3.up, other.transform.rotation, other.transform.parent);
-            Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
-            matArray= matArray.SkipLast(1).ToArray();
-            other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
 
+        if (other.transform.CompareTag("Hand"))
+        {
+            Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
+            matArray[1] = MudMaterial;
+            other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
+            GameManager.Instance.isCleaned = false;
         }
     }
 }

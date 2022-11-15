@@ -162,7 +162,11 @@ public class GameManager : MonoBehaviour
     {
 
         follower.GetComponent<MovingPolishManager>().enabled = true;
-        handModel.SetActive(false);
         movingBrush.SetActive(true);
+    }
+
+    public void DisableMovingPolish()
+    {
+        movingBrush.SetActive(false);
     }
 }

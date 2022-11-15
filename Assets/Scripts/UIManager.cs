@@ -143,15 +143,12 @@ public class UIManager : MonoBehaviour
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
         endPanel.SetActive(true);
-
-        if (matchRate >50)
+        //BU 0 OLMAMALI
+        if (true)
         {
             settingsButton.SetActive(false);
-            //winPanel.SetActive(true);
-            //StartCoroutine(Delay(2));
-            endPanel.SetActive(false);
-            GameManager.Instance.EnableMovingPolish();
-
+            winPanel.SetActive(true);
+            StartCoroutine(DelayAndStartMovingLastAnim(2));
         }
         else
         {
@@ -262,25 +259,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    IEnumerator Delay(int second)
+    IEnumerator DelayAndStartMovingLastAnim(int second)
     {
-        Debug.Log(".......1.......");
         yield return new WaitForSeconds(second);
-        Debug.Log(".......2.......");
         handModel.gameObject.SetActive(false);
-        Debug.Log(".......3.......");
+        winPanel.SetActive(false);
+        endPanel.SetActive(false);
+        GameManager.Instance.EnableMovingPolish();
+    }
+    public void OpenRewardPanel()
+    {
         //instantiate the relevant upgradable item
-        //rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
-        Debug.Log(".......4.......");
+        rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
         Transform spawnPoint = rewardItem.transform.GetChild(1);
-        Debug.Log(".......5.......");
-        Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position,spawnPoint.rotation,spawnPoint);
-        Debug.Log(".......6.......");
+        Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position, spawnPoint.rotation, spawnPoint);
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
-        endPanel.SetActive(false);
     }
-
     public void GetUpgradeWithMoneyBtn()
     {
         NumberOfDiamonds -= GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price; ;
