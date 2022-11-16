@@ -98,7 +98,6 @@ public class UIManager : MonoBehaviour
         tapToStartCanvas.gameObject.SetActive(false);
         studioButton.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
-        CloudOnceServices.instance.UnlockAchievement();
     }
 
     public async void LoadScene(int sceneID)
