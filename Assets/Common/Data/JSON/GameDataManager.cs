@@ -8,7 +8,7 @@ using static DataLists;
 //THE ONLY DATA READER , READS FROM JSONTEXT
 public class GameDataManager : MonoBehaviour
 {
-    [SerializeField]TextAsset JSONText;
+    [SerializeField] TextAsset JSONText;
     public GameObject[] objectPrefabList;
     public GameObject[] ringArray;
     public GameObject[] braceletArray;
@@ -18,12 +18,11 @@ public class GameDataManager : MonoBehaviour
     public static string directory = "/SaveData/";
     public static string fileName = "JSONText";
     string dir;
-    // Start is called before the first frame update
+
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
-            
             Instance = this;
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
@@ -50,21 +49,16 @@ public class GameDataManager : MonoBehaviour
             GameDataManager.Instance.dataLists.mirror};
             DontDestroyOnLoad(this.gameObject);
         }
-        
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     private void OnDisable()
     {
         WriteToJson();
     }
+
     private void ReadFromJson()
     {
-        
-        string fullPath = dir+ fileName;
+        string fullPath = dir + fileName;
         //if there is no file, use the default values 
         if (!File.Exists(fullPath))
         {
@@ -90,27 +84,29 @@ public class GameDataManager : MonoBehaviour
         dataLists.stackedChangeParentIndexes.Add(dataLists.room.nextUpgradeIndex);
         dataLists.room.nextUpgradeIndex += 1;
         Debug.Log("gel");
-        if (dataLists.room.nextUpgradeIndex==11)
+        if (dataLists.room.nextUpgradeIndex == 11)
         {
             dataLists.room.nextUpgradeIndex = 0;
             dataLists.room.generalThemeIndex += 1;
             dataLists.showThemeFinishedPanel = 1;
         }
     }
+
     public GameObject GetUpgradableObject()
     {
         GameObject upgradableObject = objectPrefabList[(dataLists.room.nextUpgradeIndex * 5) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
-        upgradableObject.transform.localScale = new Vector3(0.12f,0.12f,0.12f);
-        if(dataLists.room.nextUpgradeIndex > 2)
+        upgradableObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
+        if (dataLists.room.nextUpgradeIndex > 2)
         {
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
-        foreach(Transform child in upgradableObject.transform)
+        foreach (Transform child in upgradableObject.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
         return upgradableObject;
     }
+
     public GameObject GetGiftRing()
     {
         GameObject ring = ringArray[0];
@@ -118,8 +114,9 @@ public class GameDataManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
-        return ring ;
+        return ring;
     }
+
     public GameObject GetGiftBracelet()
     {
         //dataLists.room.generalThemeIndex
@@ -128,8 +125,9 @@ public class GameDataManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
-        return bracelet ;
+        return bracelet;
     }
+
     public void JSONSifirla()
     {
         File.Delete(dir + fileName);

@@ -94,7 +94,6 @@ public class RewardedAdManager : MonoBehaviour
         Debug.Log("Hey");
         GameDataManager.Instance.AddUpgradeToStack();
         RequestRewarded();
-
     }
 
     public void FurnitureRewardAd()

@@ -13,15 +13,9 @@ public class FinishedThemeDialogManager : MonoBehaviour
     void Start()
     {
         bracelet = Instantiate(GameDataManager.Instance.GetGiftBracelet(), braceletSpawnPoint.position, braceletSpawnPoint.rotation, braceletSpawnPoint.parent);
-        ring =Instantiate(GameDataManager.Instance.GetGiftRing(), ringSpawnPoint.position, ringSpawnPoint.rotation, ringSpawnPoint.parent);
+        ring = Instantiate(GameDataManager.Instance.GetGiftRing(), ringSpawnPoint.position, ringSpawnPoint.rotation, ringSpawnPoint.parent);
         //make them rotate
         //ring.AddComponent<RotateFurniture>();
         //bracelet.AddComponent<RotateFurniture>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

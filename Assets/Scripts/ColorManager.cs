@@ -33,12 +33,10 @@ public class ColorManager : MonoBehaviour
         Material myNewColorMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
         //Set Texture on the material
         myNewColorMaterial.SetTexture("_BaseMap", colorsArray[colorIndex]);
-        
+
         //Find the Standard Shader
         return myNewColorMaterial;
     }
-
-
 
     public Material GetDiamondMaterialByIndex(int diamondIndex)
     {
@@ -57,6 +55,7 @@ public class ColorManager : MonoBehaviour
         myNewPatternMaterial.SetTexture("_MainTex", patternsArray[index]);
         return myNewPatternMaterial;
     }
+
     public Material GetPatternMaterialByIndex(int patternIndex, bool forThumb)
     {
         Material myNewPatternMaterial = new Material(baseMat);
@@ -66,7 +65,7 @@ public class ColorManager : MonoBehaviour
         myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex]);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
         myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
-        
+
         if (forThumb == true)
         {
             myNewPatternMaterial.DOTiling(new Vector2(1.14f, 8.8f), 0.1f);

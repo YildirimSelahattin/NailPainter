@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using GoogleMobileAds.Api;
 using UnityEngine.UI;
 
-
 public class InterstitialAdManager : MonoBehaviour
 {
     public InterstitialAd interstitialEndGame;
@@ -65,7 +64,6 @@ public class InterstitialAdManager : MonoBehaviour
 
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
-
         MonoBehaviour.print("HandleAdClosed event received");
     }
 }

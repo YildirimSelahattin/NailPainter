@@ -18,8 +18,6 @@ public class AsetonMachineManager : MonoBehaviour
             GameManager.Instance.currentDiamondIndexArray[currentTag[currentTag.Length - 1] - '0'] = 0;
 
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
-
         }
-
     }
 }

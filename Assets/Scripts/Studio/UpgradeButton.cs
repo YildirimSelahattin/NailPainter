@@ -14,17 +14,15 @@ public class UpgradeButton : MonoBehaviour
         Move();
         Fade();
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
+
     public void Move()
     {
-        transform.DOLocalMoveY(originalPos.y+3,1f).OnComplete(()=>transform.DOLocalMoveY(originalPos.y,1).OnComplete(()=>Move()));
+        transform.DOLocalMoveY(originalPos.y + 3, 1f).OnComplete(() => transform.DOLocalMoveY(originalPos.y, 1).OnComplete(() => Move()));
     }
+
     public void Fade()
     {
-        material.DOFade(0.5f, 0.5f).OnComplete(() => material.DOFade(1f, 0.5f).OnComplete(()=>Fade())); 
+        material.DOFade(0.5f, 0.5f).OnComplete(() => material.DOFade(1f, 0.5f).OnComplete(() => Fade()));
     }
 
 }

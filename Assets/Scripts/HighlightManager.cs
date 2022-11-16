@@ -8,7 +8,7 @@ public class HighlightManager : MonoBehaviour
     [SerializeField] Material TransparrentMat;
 
 
-        private void OnTriggerEnter (Collider other)//if one finger pass the brush
+    private void OnTriggerEnter(Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Nail"))
         {
@@ -18,7 +18,7 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit (Collider other)//if one finger pass the brush
+    private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Nail"))
         {
@@ -27,5 +27,5 @@ public class HighlightManager : MonoBehaviour
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
         }
     }
-    
+
 }
