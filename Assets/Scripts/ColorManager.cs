@@ -106,7 +106,6 @@ public class ColorManager : MonoBehaviour
             //diamond nail
             if (nailDiamondArray[index] != 0)
             {
-                Debug.Log("yeas");
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
             }

@@ -31,10 +31,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI matchRateText;
     [SerializeField] TextMeshProUGUI definationText;
     [SerializeField] TextMeshProUGUI rewardPanelObjectPrice;
+    [SerializeField] TextMeshProUGUI levelCounterText;
     [SerializeField] Image notificationParent;
     [SerializeField] GameObject popArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
+
+    int CurrentLevelNumber;
 
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
@@ -68,29 +71,9 @@ public class UIManager : MonoBehaviour
         PrepareUI();
         UpdateSound();
         UpdateMusic();
-        //tapToStartCanvas.gameObject.SetActive(false);
+        CurrentLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+        levelCounterText.text = ("LEVEL-" + CurrentLevelNumber.ToString());
     }
-
-    void Update()
-    {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                //validateCanvas.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    /*
-        public void StartGameButton()
-        {
-            startButtonAnimator.SetBool("ClickPlayButton", true);
-            tapToStartCanvas.gameObject.SetActive(true);
-            //appaerAnim ekle
-            StartCoroutine(Delay(3f));
-        }
-    */
 
     public void TapToStart()
     {
@@ -295,7 +278,6 @@ public class UIManager : MonoBehaviour
         int index = Random.Range(0, popArtParent.transform.childCount);
         if (popArtParent.transform.GetChild(index).gameObject.active == false)
         {
-            Debug.Log("hey");
             popArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
     }
