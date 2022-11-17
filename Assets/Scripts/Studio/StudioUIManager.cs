@@ -44,6 +44,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Slider percentBar;
     [SerializeField] GameObject themeFinishedPanel;
+    [SerializeField] ParticleSystem cloudParticle;
 
     void Start()
     {
@@ -117,10 +118,12 @@ public class StudioUIManager : MonoBehaviour
         moneyText.text = remainingMoney.ToString();
         Upgrade();
     }
+
     public void OnUpgradeWithAdButtonClicked()
     {
         Upgrade();
     }
+
     private IEnumerator UpgradeStackedChanges()
     {
         yield return new WaitForSeconds(1);
@@ -165,7 +168,6 @@ public class StudioUIManager : MonoBehaviour
     // Update is called once per frame
     private void Upgrade()
     {
-
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
@@ -175,7 +177,6 @@ public class StudioUIManager : MonoBehaviour
         //roomParent[parentIndexToUpgrade].transform.GetChild(upgradableParentsCurrentObjectIndex).gameObject.GetComponent<Outline>().enabled = false;
         // open and close indexes 
         OpenAndCloseObject(parentIndexToUpgrade, upgradableParentsCurrentObjectIndex);
-
 
         //CONTROLL �F CURRENT THEME �S F�N�SHED 
         if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
@@ -211,6 +212,8 @@ public class StudioUIManager : MonoBehaviour
 
     private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
     {
+        //Particles
+        cloudParticle.Play();
         GameObject objectToClose = roomParent[parentIndex].transform.GetChild(currentChildIndex).gameObject;
         GameObject objectToOpen = roomParent[parentIndex].transform.GetChild(currentChildIndex + 1).gameObject;
         for (int i = 0; i < objectToClose.transform.childCount; i++)
