@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public List<int> currentRingIndexArray;
     public bool isCleaned;
     public bool isManicured;
-
+    public int moneyColletectedThisSession;
     [SerializeField] Camera CurrentCam;
     [SerializeField] Camera TargetCam;
 
@@ -160,7 +160,6 @@ public class GameManager : MonoBehaviour
 
     public void EnableMovingPolish()
     {
-
         follower.GetComponent<MovingPolishManager>().enabled = true;
         movingBrush.SetActive(true);
     }
