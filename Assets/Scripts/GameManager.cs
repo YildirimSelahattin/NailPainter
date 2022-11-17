@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextAsset levelDataAsset;
     GameObject LevelsParent;
     public int levelIndex = 1;
-    [SerializeField]GameObject movingBrush;
+    [SerializeField] GameObject movingBrush;
     [SerializeField] GameObject handModel;
     [SerializeField] GameObject follower;
 

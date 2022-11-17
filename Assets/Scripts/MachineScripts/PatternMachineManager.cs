@@ -46,11 +46,4 @@ public class PatternMachineManager : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag.Contains("Nail"))
-        {
-            //transform.DOLocalMoveY(other.transform.position.y, 0.1f);
-        }
-    }
 }

@@ -6,7 +6,8 @@ using DG.Tweening;
 public class HandTriggerManager : MonoBehaviour
 {
     [SerializeField] Transform diamondReachPointReference;
-    // Start is called before the first frame update
+
+    //Player(Hand) in trigger islevleri
     private void OnTriggerEnter(Collider other)
     {
         //if hand hit a diamond
@@ -24,19 +25,19 @@ public class HandTriggerManager : MonoBehaviour
         }
     }
 
+    //Elmas toplaninca sayiyi artıran fonk.
     private void IncreaseMoneyAndDestroy(GameObject diamond)
     {
         UIManager.Instance.NumberOfDiamonds++;
         Destroy(diamond);
     }
 
+    //Toplanan elmaslarin ekranın sag üstüne gitmesini saglayan fonk.
     private void MoveMoney(Collider other)
     {
         other.transform.parent = this.transform;
         other.transform.DOLocalMove(diamondReachPointReference.localPosition, 1).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
         Vector3 originalScale = transform.localScale;
-        other.transform.DOScale(0.02f/4, 1);
+        other.transform.DOScale(0.02f / 4, 1);
     }
-
-
 }

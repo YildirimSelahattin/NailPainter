@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelData 
+public class LevelData
 {
     public int levelNumber;
     public int[] nailPatternArray;
     public int[] nailColorArray;
-    public int[]nailDiamondArray;
+    public int[] nailDiamondArray;
     public int nailTypeAfterManicure;
-    // Start is called before the first frame update
-
 }

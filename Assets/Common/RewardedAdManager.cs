@@ -91,10 +91,8 @@ public class RewardedAdManager : MonoBehaviour
     {
         UIManager.Instance.rewardPanel.gameObject.SetActive(false);
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
-        Debug.Log("Hey");
         GameDataManager.Instance.AddUpgradeToStack();
         RequestRewarded();
-
     }
 
     public void FurnitureRewardAd()
@@ -131,7 +129,6 @@ public class RewardedAdManager : MonoBehaviour
     {
         UIManager.Instance.losePanel.SetActive(false);
         PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
-        PlayerPrefs.DeleteAll(); ///
         UIManager.Instance.LoadScene(0);
     }
 

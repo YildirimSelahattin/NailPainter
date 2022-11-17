@@ -14,6 +14,7 @@ public class ManicureMachineManager : MonoBehaviour
         Oval,
         Kut,
     }
+
     GameObject handParent;
     [SerializeField] GameObject nailParticle;
     GameObject newNailParent;
@@ -21,10 +22,11 @@ public class ManicureMachineManager : MonoBehaviour
     public static ManicureMachineManager Instance;
     bool usedOnce = false;
     float realPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -32,7 +34,7 @@ public class ManicureMachineManager : MonoBehaviour
         realPos = transform.position.x;
 
         MoveManicureMachine();
-        handParent= GameObject.FindGameObjectWithTag("PlayerBase");
+        handParent = GameObject.FindGameObjectWithTag("PlayerBase");
         newNailParent = handParent.transform.GetChild(GameManager.Instance.currentLevel.nailTypeAfterManicure).gameObject;
     }
 
@@ -40,7 +42,7 @@ public class ManicureMachineManager : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.tag.Contains("Nail"))
-        {  
+        {
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
             other.gameObject.SetActive(false);
@@ -49,11 +51,12 @@ public class ManicureMachineManager : MonoBehaviour
             GameManager.Instance.isManicured = true;
         }
     }
+
     private void OnTriggerEnter(Collider other)// when nail enters the collider, play nail particle on it
     {
         if (other.transform.tag.Contains("Nail"))
         {
-            GameObject particles = Instantiate(nailParticle, other.transform.position,other.transform.rotation);
+            GameObject particles = Instantiate(nailParticle, other.transform.position, other.transform.rotation);
             particles.transform.parent = handParent.transform;
 
             GameManager.Instance.isManicured = true;
@@ -62,7 +65,7 @@ public class ManicureMachineManager : MonoBehaviour
 
     private void MoveManicureMachine()
     {
-        transform.DOLocalMoveX(realPos+2,1f).OnComplete(()=>transform.DOLocalMoveX(realPos-2,1f).OnComplete(()=>MoveManicureMachine()));
+        transform.DOLocalMoveX(realPos + 2, 1f).OnComplete(() => transform.DOLocalMoveX(realPos - 2, 1f).OnComplete(() => MoveManicureMachine()));
     }
 
     /*  private void MoveManicureMachine(int index)

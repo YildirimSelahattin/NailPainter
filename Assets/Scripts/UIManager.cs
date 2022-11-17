@@ -9,14 +9,11 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField] GameObject soundOn;
     [SerializeField] GameObject soundOff;
     [SerializeField] GameObject musicOn;
     [SerializeField] GameObject musicOff;
     [SerializeField] GameObject loaderCanvas;
-    [SerializeField] GameObject gameStartCanvas;
-    [SerializeField] Animator startButtonAnimator;
     [SerializeField] GameObject tapToStartCanvas;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
@@ -34,8 +31,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI matchRateText;
     [SerializeField] TextMeshProUGUI definationText;
     [SerializeField] TextMeshProUGUI rewardPanelObjectPrice;
+    [SerializeField] TextMeshProUGUI levelCounterText;
     [SerializeField] Image notificationParent;
     [SerializeField] GameObject popArtParent;
+    [SerializeField] GameObject infoPanel;
+    [SerializeField] GameObject pauseScreen;
+
+    int CurrentLevelNumber;
+
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -68,29 +71,9 @@ public class UIManager : MonoBehaviour
         PrepareUI();
         UpdateSound();
         UpdateMusic();
-        //tapToStartCanvas.gameObject.SetActive(false);
+        CurrentLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+        levelCounterText.text = ("LEVEL-" + CurrentLevelNumber.ToString());
     }
-
-    void Update()
-    {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                //validateCanvas.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    /*
-        public void StartGameButton()
-        {
-            startButtonAnimator.SetBool("ClickPlayButton", true);
-            tapToStartCanvas.gameObject.SetActive(true);
-            //appaerAnim ekle
-            StartCoroutine(Delay(3f));
-        }
-    */
 
     public void TapToStart()
     {
@@ -130,6 +113,7 @@ public class UIManager : MonoBehaviour
         }
     */
 
+    //Run bittikten sonra calisan fonk.
     public void ShowEndScreen()
     {
         //Geçiş reklamı
@@ -139,23 +123,26 @@ public class UIManager : MonoBehaviour
         }
 
         GameManager.Instance.currentRightMinimap.SetActive(false);
+        settingsButton.SetActive(false);
+        infoPanel.SetActive(false);
+        pauseScreen.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = matchRate.ToString();
         endPanel.SetActive(true);
-        //BU 0 OLMAMALI
-        if (true)
+
+        //Basariya göre win-lose
+        if (matchRate >= 70)
         {
-            settingsButton.SetActive(false);
             winPanel.SetActive(true);
             StartCoroutine(DelayAndStartMovingLastAnim(2));
         }
         else
         {
-            settingsButton.SetActive(false);
             losePanel.SetActive(true);
         }
     }
 
+    //Muzik ve Sound Ayarları
     public void UpdateSound()
     {
         isSoundOn = PlayerPrefs.GetInt("IsSoundOnKey", 1);
@@ -186,10 +173,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //-del-
     public void QuitGame()
     {
         Application.Quit();
     }
+    //
 
     public void MusicOff()
     {
@@ -227,27 +216,25 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public IEnumerator Delays(float adDelay)
-    {
-        yield return new WaitForSeconds(adDelay);
-        gameStartCanvas.gameObject.SetActive(false);
-    }
-
+    //Oyun basinda ekrana dokunma ile cagirilan fonk.
     public void PlayerStartMovement()
     {
         follower.GetComponent<PlayerController>().enabled = true;
     }
 
+    //Elmasları toplayınca calisan fonk.
     public void IncreaseGold()
     {
         NumberOfDiamonds++;
     }
+
+    //Eger kazanılmış bir gelistirme varsa studio buttonunda bildirim veren fonk.
     public void PrepareUI()
-    { 
+    {
         //reload number of diamonds;
         NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
         //reload number of stacked changes, if 0 , close notification tab
-        if(GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count == 0)
+        if (GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count == 0)
         {
             notificationParent.gameObject.SetActive(false);
         }
@@ -266,6 +253,8 @@ public class UIManager : MonoBehaviour
         endPanel.SetActive(false);
         GameManager.Instance.EnableMovingPolish();
     }
+
+    //Run sonrası win ile bitmişse cagirilan fonk.
     public void OpenRewardPanel()
     {
         //instantiate the relevant upgradable item
@@ -275,18 +264,20 @@ public class UIManager : MonoBehaviour
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
     }
+
+    //Studio'da elmas ile geliştirme yapmak icin upgrade button'dan cagirilan fonk.
     public void GetUpgradeWithMoneyBtn()
     {
         NumberOfDiamonds -= GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price; ;
         GameDataManager.Instance.AddUpgradeToStack();
     }
 
+    //Dogru tırnak boyadıktan sonra ekranda gösterilen yazi icin calisan fonk.
     public void CreateCelebrationPopUp()
     {
         int index = Random.Range(0, popArtParent.transform.childCount);
         if (popArtParent.transform.GetChild(index).gameObject.active == false)
         {
-            Debug.Log("hey");
             popArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
     }

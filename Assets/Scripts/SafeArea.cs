@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SafeArea : MonoBehaviour
 {
+    //Responsive Settings
     void Update()
     {
         var rectTransform = GetComponent<RectTransform>();

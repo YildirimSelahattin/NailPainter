@@ -21,15 +21,15 @@ public class BrushManager : MonoBehaviour
         if (other.transform.tag.Contains("Nail"))
         {
             string currentTag = other.transform.tag;
-            int index = currentTag[currentTag.Length - 1]-'0';
+            int index = currentTag[currentTag.Length - 1] - '0';
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.currentColorIndexArray[index] = colorIndex;
-            if (colorIndex == GameManager.Instance.currentLevel.nailColorArray[index]){
+            if (colorIndex == GameManager.Instance.currentLevel.nailColorArray[index])
+            {
                 UIManager.Instance.CreateCelebrationPopUp();
             }
-
         }
     }
     private void OnTriggerEnter(Collider other)
