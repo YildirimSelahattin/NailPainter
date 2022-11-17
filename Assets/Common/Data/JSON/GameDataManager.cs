@@ -131,6 +131,7 @@ public class GameDataManager : MonoBehaviour
     public void JSONSifirla()
     {
         File.Delete(dir + fileName);
+        PlayerPrefs.DeleteAll();
         dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
     }
 }
