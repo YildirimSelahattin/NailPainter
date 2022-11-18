@@ -88,7 +88,7 @@ public class GameDataManager : MonoBehaviour
 
     public GameObject GetUpgradableObject()
     {
-        int nextUpgradeIndex = (dataLists.room.nextUpgradeIndex + dataLists.freeUpgradesLeft) % 12;
+        int nextUpgradeIndex = (dataLists.room.nextUpgradeIndex + dataLists.freeUpgradesLeft) % 11;
         GameObject upgradableObject = objectPrefabList[nextUpgradeIndex * 5 + (dataLists.room.currentRoomIndexes[nextUpgradeIndex] + 1)];
         upgradableObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
         if (nextUpgradeIndex > 2)
