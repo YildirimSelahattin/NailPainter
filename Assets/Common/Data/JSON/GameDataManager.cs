@@ -18,6 +18,7 @@ public class GameDataManager : MonoBehaviour
     public static string directory = "/SaveData/";
     public static string fileName = "JSONText";
     string dir;
+    public int nextOffset;
 
     void Awake()
     {
@@ -81,22 +82,16 @@ public class GameDataManager : MonoBehaviour
     public void AddUpgradeToStack()
     {
         //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
-        dataLists.stackedChangeParentIndexes.Add(dataLists.room.nextUpgradeIndex);
-        dataLists.room.nextUpgradeIndex += 1;
+        dataLists.freeUpgradesLeft++;
         Debug.Log("gel");
-        if (dataLists.room.nextUpgradeIndex == 11)
-        {
-            dataLists.room.nextUpgradeIndex = 0;
-            dataLists.room.generalThemeIndex += 1;
-            dataLists.showThemeFinishedPanel = 1;
-        }
     }
 
     public GameObject GetUpgradableObject()
     {
-        GameObject upgradableObject = objectPrefabList[(dataLists.room.nextUpgradeIndex * 5) + (dataLists.room.currentRoomIndexes[dataLists.room.nextUpgradeIndex] + 1)];
+        int nextUpgradeIndex = (dataLists.room.nextUpgradeIndex + dataLists.freeUpgradesLeft) % 12;
+        GameObject upgradableObject = objectPrefabList[nextUpgradeIndex * 5 + (dataLists.room.currentRoomIndexes[nextUpgradeIndex] + 1)];
         upgradableObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
-        if (dataLists.room.nextUpgradeIndex > 2)
+        if (nextUpgradeIndex > 2)
         {
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }

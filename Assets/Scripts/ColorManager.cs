@@ -104,6 +104,7 @@ public class ColorManager : MonoBehaviour
             //give material array back
             nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
             //diamond nail
+            
             if (nailDiamondArray[index] != 0)
             {
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);

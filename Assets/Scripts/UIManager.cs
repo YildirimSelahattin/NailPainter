@@ -234,7 +234,7 @@ public class UIManager : MonoBehaviour
         //reload number of diamonds;
         NumberOfDiamonds = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0);
         //reload number of stacked changes, if 0 , close notification tab
-        if (GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count == 0)
+        if (GameDataManager.Instance.dataLists.freeUpgradesLeft == 0)
         {
             notificationParent.gameObject.SetActive(false);
         }
