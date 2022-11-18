@@ -24,8 +24,8 @@ public class MovingPolishManager : MonoBehaviour
         transform.position = colorableObjectsParent.transform.GetChild(0).transform.position + 3 * Vector3.forward;
         startPos = transform.position;
         startTime = Time.time;
-        int index = (int)GameManager.Instance.matchRate / 2;
-        endPos = colorableObjectsParent.transform.GetChild(10).transform.position;
+        int index = ((int)GameManager.Instance.matchRate / 5) - 1;
+        endPos = colorableObjectsParent.transform.GetChild(index).transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
         camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(() => transform.DOLocalMove(endPos, 10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
