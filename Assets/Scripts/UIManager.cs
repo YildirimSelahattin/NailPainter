@@ -131,7 +131,7 @@ public class UIManager : MonoBehaviour
         endPanel.SetActive(true);
 
         //Basariya göre win-lose
-        if (matchRate >= 70)
+        if (matchRate >= 0)
         {
             winPanel.SetActive(true);
             StartCoroutine(DelayAndStartMovingLastAnim(2));
