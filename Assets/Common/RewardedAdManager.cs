@@ -8,6 +8,8 @@ public class RewardedAdManager : MonoBehaviour
 {
     public RewardedAd rewardedAd;
     public RewardedAd rewardedSkipAd;
+    public RewardedAd rewardedupgradeAd;
+    public RewardedAd rewardedmultiplierAd;
     public static RewardedAdManager Instance;
     int nextLevelNumber;
 
@@ -20,7 +22,7 @@ public class RewardedAdManager : MonoBehaviour
         }
         RequestRewarded();
         RequestSkipRewarded();
-
+        RequestUpgradeRewarded();
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
     }
 
@@ -58,7 +60,74 @@ public class RewardedAdManager : MonoBehaviour
         // Load the rewarded ad with the request.
         this.rewardedAd.LoadAd(request);
     }
+    private void RequestUpgradeRewarded()
+    {
+        string adUnitId;
+#if UNITY_ANDROID
+        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IPHONE
+            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+#else
+            adUnitId = "unexpected_platform";
+#endif
 
+        this.rewardedupgradeAd = new RewardedAd(adUnitId);
+
+        /*
+                // Called when an ad request has successfully loaded.
+                this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+                // Called when an ad request failed to load.
+                this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+                // Called when an ad is shown.
+                this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+                // Called when an ad request failed to show.
+                this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+                // Called when the user should be rewarded for interacting with the ad.
+                this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+                // Called when the ad is closed.
+                this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        */
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedupgradeAd.OnUserEarnedReward += HandleUserEarnedUpgradeReward;
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the rewarded ad with the request.
+        this.rewardedupgradeAd.LoadAd(request);
+    }
+    private void RequestMultiplierRewarded()
+    {
+        string adUnitId;
+#if UNITY_ANDROID
+        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IPHONE
+            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+#else
+            adUnitId = "unexpected_platform";
+#endif
+
+        this.rewardedmultiplierAd = new RewardedAd(adUnitId);
+
+        /*
+                // Called when an ad request has successfully loaded.
+                this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+                // Called when an ad request failed to load.
+                this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+                // Called when an ad is shown.
+                this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+                // Called when an ad request failed to show.
+                this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+                // Called when the user should be rewarded for interacting with the ad.
+                this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+                // Called when the ad is closed.
+                this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        */
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedmultiplierAd.OnUserEarnedReward += HandleUserEarnedMultiplierReward;
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the rewarded ad with the request.
+        this.rewardedmultiplierAd.LoadAd(request);
+    }
     /*
         public void HandleRewardedAdLoaded(object sender, EventArgs args)
         {
@@ -95,6 +164,20 @@ public class RewardedAdManager : MonoBehaviour
         RequestRewarded();
     }
 
+
+    public void HandleUserEarnedMultiplierReward(object sender, Reward args)
+    {
+        GameManager.Instance.MultiplyCollectedDiamond();
+        RequestMultiplierRewarded();
+    }
+
+    public void MultiplierAd()
+    {
+        if (this.rewardedmultiplierAd.IsLoaded())
+        {
+            this.rewardedmultiplierAd.Show();
+        }
+    }
     public void FurnitureRewardAd()
     {
         if (this.rewardedAd.IsLoaded())
@@ -102,7 +185,18 @@ public class RewardedAdManager : MonoBehaviour
             this.rewardedAd.Show();
         }
     }
-
+    public void UpgradeRewardAd()
+    {
+        if (this.rewardedupgradeAd.IsLoaded())
+        {
+            this.rewardedupgradeAd.Show();
+        }
+    }
+    public void HandleUserEarnedUpgradeReward(object sender, Reward args)
+    {
+        StudioUIManager.Instance.Upgrade();
+        RequestUpgradeRewarded();
+    }
     private void RequestSkipRewarded()
     {
         string adUnitId;

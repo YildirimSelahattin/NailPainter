@@ -9,12 +9,12 @@ public class GiftSlider : MonoBehaviour
 {
     // Start is called before the first frame update
     RectTransform rectTransform;
-    float[] degreeBounds = new float[] { 0.05f, 0.25f, 0.50f };
+    float[] degreeBounds = new float[] { 0.42f, 0.14f, 0.50f };
     [SerializeField]GameObject[] outlineArray;
     [SerializeField] TextMeshProUGUI multiplierText;
     [SerializeField] TextMeshProUGUI currentMoneyText;
     [SerializeField] GameObject noThanksButton;
-    int multiplier;
+    public int multiplier;
     int prevMultiplier;
     void Start()
     {
@@ -22,37 +22,15 @@ public class GiftSlider : MonoBehaviour
         rectTransform = gameObject.GetComponent<RectTransform>();
         
         DoRotateLoopMove();
-        StartCoroutine(OpenNoThanksAfterDelay(2));
+        //StartCoroutine(OpenNoThanksAfterDelay(2));
     }
 
     // Update is called once per frame
     void Update()
     {
-        /* int multiplier = GetMultiplier();
+         int multiplier = GetMultiplier();
          multiplierText.text = multiplier.ToString();
-         if (multiplier != prevMultiplier)
-         {
-             outlineArray[prevMultiplier]?.SetActive(false);
-             if (multiplier == 5)
-             {
-                 outlineArray[multiplier].SetActive(true);
-                 prevMultiplier = 5;
-             }
-             else
-             {
-                 if (rectTransform.localRotation.z > 0)
-                 {
-                     outlineArray[multiplier].SetActive(true);
-                     prevMultiplier = multiplier;
-                 }
-                 else
-                 {
-                     outlineArray[multiplier + 4].SetActive(true);
-                     prevMultiplier = multiplier+4;
-                 }
-             }
-         }*/
-        Debug.Log(rectTransform.localRotation.z);
+         
     }
     public void DoRotateLoopMove()
     {
@@ -63,27 +41,25 @@ public class GiftSlider : MonoBehaviour
     public void OnGetButtonClicked()
     {
         int multiplier  = GetMultiplier();
+        //stopRotation;
+        transform.DOKill();
         GameManager.Instance.moneyColletectedThisSession*=multiplier;
     }
 
     public int GetMultiplier()
     {
+        float sliderRotateAmount = Mathf.Abs(rectTransform.localRotation.z);
         
-        float sliderRotateAmount = 66 / 100f - Mathf.Abs(rectTransform.localRotation.z);
-        Debug.Log(sliderRotateAmount);
-        if (sliderRotateAmount < 0.05f)
+        if (sliderRotateAmount > 0.42f)
         {
-            return   2;
+            return   3;
         }
 
-        else if (sliderRotateAmount < 0.25f)
-        {
-            return 3;
-        }
-        else if (sliderRotateAmount < 0.50f)
+        if (sliderRotateAmount > 0.14f)
         {
             return 4;
         }
+        
         else
         {
             return 5;

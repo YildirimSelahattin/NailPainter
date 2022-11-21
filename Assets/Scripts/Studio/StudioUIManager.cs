@@ -37,6 +37,7 @@ public class StudioUIManager : MonoBehaviour
     public float fillAmount;
     [SerializeField] Button upgradeWithMoneyButton;
     [SerializeField] Button upgradeFreelyButton;
+    [SerializeField] Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
     float upgradableObjectsNumberPerTheme = 11;
 
@@ -82,15 +83,22 @@ public class StudioUIManager : MonoBehaviour
                 FadeInFadeOut(roomParent[upgradeParentIndex].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]).gameObject);
                 if(GameDataManager.Instance.dataLists.freeUpgradesLeft==0)// if there is no free update;
                 {
-                    upgradeWithMoneyButton.gameObject.SetActive(true);
-                    priceTextParent.SetActive(true);
-                    float price = GameDataManager.Instance.objectsByIndexArray[upgradeParentIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex] + 1].price;
-                    //show price
-                    priceText.text = price.ToString();
-                    // if overpriced UIManager.Instance.NumberOfDiamonds
-                    if (price > PlayerPrefs.GetInt("NumberOfDiamondsKey", 0))
+                    if(GameDataManager.Instance.upgradeAmountInSession < 2)
                     {
-                        upgradeWithMoneyButton.interactable = false;
+                        upgradeWithMoneyButton.gameObject.SetActive(true);
+                        priceTextParent.SetActive(true);
+                        float price = GameDataManager.Instance.objectsByIndexArray[upgradeParentIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex] + 1].price;
+                        //show price
+                        priceText.text = price.ToString();
+                        // if overpriced UIManager.Instance.NumberOfDiamonds
+                        if (price > PlayerPrefs.GetInt("NumberOfDiamondsKey", 0))
+                        {
+                            upgradeWithMoneyButton.interactable = false;
+                        }
+                    }
+                    else
+                    {
+                        upgradeWithAdButton.gameObject.SetActive(true);
                     }
                 }
                 else // if there is free upgrades
@@ -119,6 +127,7 @@ public class StudioUIManager : MonoBehaviour
 
     public void OnUpgradeWithMoneyBtnClicked()
     {
+        GameDataManager.Instance.upgradeAmountInSession++;
         // DECREASE MONEY  TDOO
         int remainingMoney = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) - GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price;
         PlayerPrefs.SetInt("NumberOfDiamondsKey", remainingMoney);
@@ -128,7 +137,8 @@ public class StudioUIManager : MonoBehaviour
 
     public void OnUpgradeWithAdButtonClicked()
     {
-        Upgrade();
+        RewardedAdManager.Instance.UpgradeRewardAd();
+        
     }
 
     public void OnUpgradeStackedBtn()
@@ -175,8 +185,9 @@ public class StudioUIManager : MonoBehaviour
         }
     }
     // Update is called once per frame
-     private void Upgrade()
+     public void Upgrade()
     {
+        
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
@@ -207,16 +218,26 @@ public class StudioUIManager : MonoBehaviour
             FadeInFadeOut(roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).gameObject);
             roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
 
-            if (GameDataManager.Instance.dataLists.freeUpgradesLeft == 1)
+            if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)
             {
                 upgradeFreelyButton.gameObject.SetActive(false);
-                priceTextParent.SetActive(true);
-                upgradeWithMoneyButton.gameObject.SetActive(true);
-                float price = GameDataManager.Instance.objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] + 1].price;
-                priceText.text = price.ToString();
-                if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
-                {
-                    upgradeWithMoneyButton.interactable = false;
+                if (GameDataManager.Instance.upgradeAmountInSession < 2)
+                { // if there is option to upgrade with money
+                    priceTextParent.SetActive(true);
+                    upgradeWithMoneyButton.gameObject.SetActive(true);
+                    float price = GameDataManager.Instance.objectsByIndexArray[parentIndexToUpgrade + 1][GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] + 1].price;
+                    priceText.text = price.ToString();
+                    if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
+                    {
+                        upgradeWithMoneyButton.interactable = false;
+
+                    }
+                }
+                else
+                { // if ad button should take place 
+                    priceTextParent.SetActive(false);
+                    upgradeWithMoneyButton.gameObject.SetActive(false);
+                    upgradeWithAdButton.gameObject.SetActive(true);
                 }
                
             }
