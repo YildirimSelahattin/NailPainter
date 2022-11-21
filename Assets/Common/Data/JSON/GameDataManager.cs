@@ -19,7 +19,7 @@ public class GameDataManager : MonoBehaviour
     public static string fileName = "JSONText";
     string dir;
     public int nextOffset;
-
+    public int upgradeAmountInSession = 0;
     void Awake()
     {
         if (Instance == null)

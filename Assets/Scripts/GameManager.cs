@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         ReadCSVAndFillTargetArrays(3);
         StartCoroutine(OffCam());
         ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
-        //open relative ring and bracelet
+        //open relative ring and bracelet TODO
         //ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
         //braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1);
     }
@@ -167,5 +167,10 @@ public class GameManager : MonoBehaviour
     public void DisableMovingPolish()
     {
         movingBrush.SetActive(false);
+    }
+
+    public void MultiplyCollectedDiamond()
+    {
+        
     }
 }

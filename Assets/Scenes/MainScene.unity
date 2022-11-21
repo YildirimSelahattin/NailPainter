@@ -124,6 +124,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1175615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1175616}
+  m_Layer: 3
+  m_Name: BraceletParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1175616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1819561057495766141}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &16076002
 GameObject:
   m_ObjectHideFlags: 0
@@ -8572,6 +8603,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977495583}
   m_CullTransparentMesh: 1
+--- !u!1 &981759002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981759003}
+  m_Layer: 3
+  m_Name: RingParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981759003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981759002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1819561057495766141}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1001474218
 GameObject:
   m_ObjectHideFlags: 0
@@ -10015,8 +10077,8 @@ MonoBehaviour:
   handModel: {fileID: 1822542282678604615}
   follower: {fileID: 1822642420259460039}
   fillImage: {fileID: 0}
-  ringParent: {fileID: 0}
-  braceletParent: {fileID: 0}
+  ringParent: {fileID: 981759002}
+  braceletParent: {fileID: 1175615}
   currentColorIndexArray: 0000000000000000000000000000000000000000
   currentPatternIndexArray: 0000000000000000000000000000000000000000
   currentDiamondIndexArray: 0000000000000000000000000000000000000000
@@ -16569,8 +16631,9 @@ MonoBehaviour:
       currentRoomIndexes: 
       generalThemeIndex: 0
       nextUpgradeIndex: 0
-    stackedChangeParentIndexes: 
-    showThemeFinishedPanel: 0
+    freeUpgradesLeft: 0
+  nextOffset: 0
+  upgradeAmountInSession: 0
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0
@@ -17616,6 +17679,8 @@ Transform:
   - {fileID: 1823616653414351019}
   - {fileID: 1828300970283926865}
   - {fileID: 2067942431}
+  - {fileID: 981759003}
+  - {fileID: 1175616}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -32.715, y: -180, z: -90}
