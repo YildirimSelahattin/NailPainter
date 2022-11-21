@@ -30,12 +30,19 @@ public class MovingPolishManager : MonoBehaviour
 
         camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(() => transform.DOLocalMove(endPos, 10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
-        transform.DOLocalRotate(new Vector3(transform.localRotation.x, transform.localRotation.y, -90f), 0.1f);
+        transform.DOLocalRotate(new Vector3(-30, 180, -90f), 0.1f);
+    }
+
+        IEnumerator DelayOpenPanel(float second)
+    {
+        yield return new WaitForSeconds(second);
+        UIManager.Instance.diamondMuliplier.SetActive(true);
     }
 
     private void CloseBrushAndOpenRewarPanel()
     {
         GameManager.Instance.DisableMovingPolish();
-        UIManager.Instance.OpenRewardPanel();
+        UIManager.Instance.AfterEndGame();
+        StartCoroutine(DelayOpenPanel(1f));
     }
 }

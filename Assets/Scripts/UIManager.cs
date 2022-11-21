@@ -29,13 +29,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameMusicObject;
     [SerializeField] TextMeshProUGUI diamondNumberText;
     [SerializeField] TextMeshProUGUI matchRateText;
-    [SerializeField] TextMeshProUGUI definationText;
     [SerializeField] TextMeshProUGUI rewardPanelObjectPrice;
     [SerializeField] TextMeshProUGUI levelCounterText;
     [SerializeField] Image notificationParent;
     [SerializeField] GameObject popArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
+    public GameObject diamondMuliplier;
 
     int CurrentLevelNumber;
 
@@ -126,20 +126,29 @@ public class UIManager : MonoBehaviour
         settingsButton.SetActive(false);
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);
+        levelCounterText.gameObject.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
-        matchRateText.text = matchRate.ToString();
+        matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
 
         //Basariya göre win-lose
         if (matchRate >= 0)
         {
             winPanel.SetActive(true);
-            StartCoroutine(DelayAndStartMovingLastAnim(2));
+            StartCoroutine(DelayAndStartMovingLastAnim(0.01f));
         }
         else
         {
             losePanel.SetActive(true);
         }
+    }
+
+    public void AfterEndGame()
+    {
+        winPanel.SetActive(false);
+        matchRateText.gameObject.SetActive(false);
+        levelCounterText.gameObject.SetActive(false);
+        endPanel.SetActive(false);
     }
 
     //Muzik ve Sound Ayarları
@@ -245,12 +254,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    IEnumerator DelayAndStartMovingLastAnim(int second)
+    IEnumerator DelayAndStartMovingLastAnim(float second)
     {
         yield return new WaitForSeconds(second);
         handModel.gameObject.SetActive(false);
-        winPanel.SetActive(false);
-        endPanel.SetActive(false);
+        //winPanel.SetActive(true);
+        //endPanel.SetActive(false);
         GameManager.Instance.EnableMovingPolish();
     }
 
@@ -280,5 +289,17 @@ public class UIManager : MonoBehaviour
         {
             popArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
+    }
+
+    public void NoTnxDiamondMuliplierPanel()
+    {
+        diamondMuliplier.SetActive(false);
+        OpenRewardPanel();
+    }
+
+    public void RewardDiamondMuliplierPanel()
+    {
+        diamondMuliplier.SetActive(false);
+        OpenRewardPanel();
     }
 }
