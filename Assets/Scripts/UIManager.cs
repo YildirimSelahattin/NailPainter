@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject popArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
+    public GameObject fireworks;
     public GameObject diamondMuliplier;
 
     int CurrentLevelNumber;

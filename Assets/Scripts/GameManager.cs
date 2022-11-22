@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
 
     public void DisableMovingPolish()
     {
+        UIManager.Instance.fireworks.SetActive(true);
         movingBrush.SetActive(false);
     }
 
