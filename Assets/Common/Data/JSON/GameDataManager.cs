@@ -104,7 +104,7 @@ public class GameDataManager : MonoBehaviour
 
     public GameObject GetGiftRing()
     {
-        GameObject ring = ringArray[0];
+        GameObject ring = ringArray[dataLists.room.generalThemeIndex];
         foreach (Transform child in ring.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
@@ -115,7 +115,7 @@ public class GameDataManager : MonoBehaviour
     public GameObject GetGiftBracelet()
     {
         //dataLists.room.generalThemeIndex
-        GameObject bracelet = braceletArray[0];
+        GameObject bracelet = braceletArray[dataLists.room.generalThemeIndex];
         foreach (Transform child in bracelet.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
@@ -125,8 +125,9 @@ public class GameDataManager : MonoBehaviour
 
     public void JSONSifirla()
     {
+        dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         File.Delete(dir + fileName);
         PlayerPrefs.DeleteAll();
-        dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
+        
     }
 }

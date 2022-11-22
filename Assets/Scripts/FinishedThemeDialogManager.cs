@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class FinishedThemeDialogManager : MonoBehaviour
 {
-    [SerializeField] Transform braceletSpawnPoint;
-    [SerializeField] Transform ringSpawnPoint;
+    [SerializeField] GameObject braceletParent;
+    [SerializeField] GameObject ringSpawnParent;
     GameObject ring;
     GameObject bracelet;
     // Start is called before the first frame update
 
     void Start()
     {
-        bracelet = Instantiate(GameDataManager.Instance.GetGiftBracelet(), braceletSpawnPoint.position, braceletSpawnPoint.rotation, braceletSpawnPoint.parent);
-        ring = Instantiate(GameDataManager.Instance.GetGiftRing(), ringSpawnPoint.position, ringSpawnPoint.rotation, ringSpawnPoint.parent);
-        //make them rotate
-        //ring.AddComponent<RotateFurniture>();
-        //bracelet.AddComponent<RotateFurniture>();
+        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+        ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+
+
+    }
+
+    private void OnDisable()
+    {
+      
+        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
+        ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
     }
 }
