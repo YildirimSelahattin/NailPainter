@@ -40,7 +40,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
     float upgradableObjectsNumberPerTheme = 11;
-
+    [SerializeField] GameObject footerContentParent;
 
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
     int UPGRADE_CHILD_INDEX = 5;
@@ -59,6 +59,18 @@ public class StudioUIManager : MonoBehaviour
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
+            
+            //FOOTER RINGS AND BRACELET JOBS
+            for(int i = 0; i <( GameDataManager.Instance.dataLists.room.generalThemeIndex*2)-2; i++)
+            {
+                //for ring
+                GameObject parent = footerContentParent.transform.GetChild(i).gameObject;
+                parent.GetComponent<Button>().interactable = true; // open button
+                parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
+                Debug.Log("sa");
+        
+            }
+            ///ROOM JOBS
             //update slider
             percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
             //write general theme index
@@ -149,10 +161,18 @@ public class StudioUIManager : MonoBehaviour
     public void OnCloseThemeFinishedPanelBtnClicked()
     {
         themeFinishedPanel.SetActive(false);
-        
-        //this theme is finished, increase general theme number
-        GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-        generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+        generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex).ToString();
+        //FOOTER CALCULATİONS 
+        //FOOTER RINGS AND BRACELET JOBS
+        for (int i = 2; i < (GameDataManager.Instance.dataLists.room.generalThemeIndex * 2) - 2; i++)
+        {
+            //for ring
+            GameObject parent = footerContentParent.transform.GetChild(i).gameObject;
+            parent.GetComponent<Button>().interactable = true; // open button
+            parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
+
+
+        }
         //if all themes finished
         if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
         {
@@ -207,6 +227,7 @@ public class StudioUIManager : MonoBehaviour
             upgradeWithMoneyButton.gameObject.SetActive(false);
             upgradeFreelyButton.gameObject.SetActive(false);
             priceTextParent.gameObject.SetActive(false);
+            GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
             themeFinishedPanel.SetActive(true);
         }
         else //prepare next update for that theme
