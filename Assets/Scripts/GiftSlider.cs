@@ -43,7 +43,10 @@ public class GiftSlider : MonoBehaviour
         int multiplier  = GetMultiplier();
         //stopRotation;
         transform.DOKill();
-        GameManager.Instance.moneyColletectedThisSession*=multiplier;
+        UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * multiplier;
+        UIManager.Instance.diamondMuliplier.SetActive(false);
+        UIManager.Instance.OpenRewardPanel();
+        //GameManager.Instance.moneyColletectedThisSession*=multiplier;
     }
 
     public int GetMultiplier()

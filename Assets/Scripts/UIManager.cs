@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     public GameObject diamondMuliplier;
 
     int CurrentLevelNumber;
+    public int currentLevelDiamond;
 
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
@@ -230,12 +231,6 @@ public class UIManager : MonoBehaviour
     public void PlayerStartMovement()
     {
         follower.GetComponent<PlayerController>().enabled = true;
-    }
-
-    //Elmasları toplayınca calisan fonk.
-    public void IncreaseGold()
-    {
-        NumberOfDiamonds++;
     }
 
     //Eger kazanılmış bir gelistirme varsa studio buttonunda bildirim veren fonk.
