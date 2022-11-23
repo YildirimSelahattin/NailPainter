@@ -40,7 +40,7 @@ public class GiftSlider : MonoBehaviour
     }
     public void DoRotateLoopMove()
     {
-        rectTransform.DOLocalRotate(new Vector3(0, 0, 60), 2f).OnComplete(() => rectTransform.DOLocalRotate(new Vector3(0, 0, -60), 2f).OnComplete(() => DoRotateLoopMove()));
+        rectTransform.DOLocalRotate(new Vector3(0, 0, 60), 1.2f).OnComplete(() => rectTransform.DOLocalRotate(new Vector3(0, 0, -60), 1.2f).OnComplete(() => DoRotateLoopMove()));
         //rectTransform.DOLocalRotate(new Vector3(0,0,14),2f).OnComplete(()=>rectTransform.DOLocalRotate( new Vector3(0,0,-14),2f));
     }
 
