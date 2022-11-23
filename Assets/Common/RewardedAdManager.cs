@@ -23,6 +23,7 @@ public class RewardedAdManager : MonoBehaviour
         RequestRewarded();
         RequestSkipRewarded();
         RequestUpgradeRewarded();
+        RequestMultiplierRewarded();
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
     }
 
@@ -128,6 +129,7 @@ public class RewardedAdManager : MonoBehaviour
         // Load the rewarded ad with the request.
         this.rewardedmultiplierAd.LoadAd(request);
     }
+
     /*
         public void HandleRewardedAdLoaded(object sender, EventArgs args)
         {
@@ -164,10 +166,9 @@ public class RewardedAdManager : MonoBehaviour
         RequestRewarded();
     }
 
-
     public void HandleUserEarnedMultiplierReward(object sender, Reward args)
     {
-        GameManager.Instance.MultiplyCollectedDiamond();
+        GiftSlider.Instance.OnGetButtonClicked();
         RequestMultiplierRewarded();
     }
 
@@ -178,6 +179,7 @@ public class RewardedAdManager : MonoBehaviour
             this.rewardedmultiplierAd.Show();
         }
     }
+
     public void FurnitureRewardAd()
     {
         if (this.rewardedAd.IsLoaded())
@@ -185,6 +187,7 @@ public class RewardedAdManager : MonoBehaviour
             this.rewardedAd.Show();
         }
     }
+
     public void UpgradeRewardAd()
     {
         if (this.rewardedupgradeAd.IsLoaded())
@@ -192,11 +195,13 @@ public class RewardedAdManager : MonoBehaviour
             this.rewardedupgradeAd.Show();
         }
     }
+
     public void HandleUserEarnedUpgradeReward(object sender, Reward args)
     {
         StudioUIManager.Instance.Upgrade();
         RequestUpgradeRewarded();
     }
+
     private void RequestSkipRewarded()
     {
         string adUnitId;

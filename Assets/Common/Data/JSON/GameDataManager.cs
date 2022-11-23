@@ -20,6 +20,7 @@ public class GameDataManager : MonoBehaviour
     string dir;
     public int nextOffset;
     public int upgradeAmountInSession = 0;
+    
     void Awake()
     {
         if (Instance == null)
@@ -79,6 +80,7 @@ public class GameDataManager : MonoBehaviour
         File.WriteAllText(dir + fileName, serializedData);
     }
 
+//AddUpgradeToStack
     public void AddUpgradeToStack()
     {
         //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable

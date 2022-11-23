@@ -298,4 +298,12 @@ public class UIManager : MonoBehaviour
         diamondMuliplier.SetActive(false);
         OpenRewardPanel();
     }
+
+    public void BuyUpgradeTotack()
+    {
+        GameDataManager.Instance.dataLists.freeUpgradesLeft++;
+        NumberOfDiamonds-=(GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
+        UIManager.Instance.rewardPanel.gameObject.SetActive(false);
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);      
+    }
 }
