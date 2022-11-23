@@ -20,7 +20,7 @@ public class HandTriggerManager : MonoBehaviour
         {
             //disable path following mode
             gameObject.transform.parent.gameObject.GetComponent<PlayerController>().enabled = false;
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
             GameDataManager.Instance.upgradeAmountInSession = 0;
             UIManager.Instance.ShowEndScreen();
         }
