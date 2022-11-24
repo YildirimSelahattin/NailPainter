@@ -55,8 +55,8 @@ public class StudioUIManager : MonoBehaviour
     float lastBraceletScrollRectValue;
     public ScrollRect ringScrollRect;
     public ScrollRect braceletScrollRect;
-    bool motionStartedRing;
-    bool motionStartedBracelet;
+    bool motionStartedRing = true;
+    bool motionStartedBracelet =true;
     public int ringIndex;
     public int braceletIndex;
     GameObject contentForRing;
@@ -67,22 +67,21 @@ public class StudioUIManager : MonoBehaviour
         {
             Instance = this;
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
+            Debug.Log("asdasd"+braceletIndex);
             ringIndex = GameDataManager.Instance.currentRingIndex;
             //RingScroll calcs
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.verticalNormalizedPosition = lastRingScrollRectValue;
-            ringScrollRect.onValueChanged.AddListener(ringScrollRectCallBack);
-            motionStartedRing = false;
-            motionStartedBracelet = false;
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener())) ;
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.verticalNormalizedPosition = lastBraceletScrollRectValue;
-            braceletScrollRect.onValueChanged.AddListener(braceletScrollRectCallBack);
-            Debug.Log("asd"+ lastBraceletScrollRectValue);           
+            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex],0.1f).OnComplete(()=> StartCoroutine(AddBraceletListener()));
+            Debug.Log("asdasd" + braceletIndex);
+           
+            motionStartedRing = false;
+            motionStartedBracelet = false;
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
-
             //FOOTER RINGS AND BRACELET JOBS
              contentForRing = ringScrollRect.transform.GetChild(0).GetChild(0).gameObject;
              contentForBracelet = braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject;
@@ -182,6 +181,18 @@ public class StudioUIManager : MonoBehaviour
         Upgrade();
     }
 
+    public IEnumerator AddRingListener()
+    {
+        yield return new WaitForEndOfFrame();
+        ringScrollRect.onValueChanged.AddListener(ringScrollRectCallBack);
+        motionStartedRing = false;
+    }
+    public IEnumerator AddBraceletListener()
+    {
+        yield return new WaitForEndOfFrame();
+        braceletScrollRect.onValueChanged.AddListener(braceletScrollRectCallBack);
+        motionStartedBracelet = false;
+    }
     public void OnCloseThemeFinishedPanelBtnClicked()
     {
         themeFinishedPanel.SetActive(false);
@@ -347,6 +358,7 @@ public class StudioUIManager : MonoBehaviour
     //Will be called when ScrollRect changes
     void ringScrollRectCallBack(Vector2 value)
     {
+        Debug.Log("asdasd");
         if (motionStartedRing == false)
         {
             motionStartedRing = true;

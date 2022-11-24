@@ -44,14 +44,12 @@ public class GiftSlider : MonoBehaviour
         //rectTransform.DOLocalRotate(new Vector3(0,0,14),2f).OnComplete(()=>rectTransform.DOLocalRotate( new Vector3(0,0,-14),2f));
     }
 
-    public void OnGetButtonClicked()
+    public void StopMovementAndCallRewarded()
     {
-        int multiplier = GetMultiplier();
-        //stopRotation;
+        Debug.Log("sasasa");
+        UIManager.Instance.multiplyAmount = GetMultiplier();
         transform.DOKill();
-        UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * multiplier;
-        UIManager.Instance.diamondMuliplier.SetActive(false);
-        UIManager.Instance.OpenRewardPanel();
+        RewardedAdManager.Instance.MultiplierAd();
         //GameManager.Instance.moneyColletectedThisSession*=multiplier;
     }
 

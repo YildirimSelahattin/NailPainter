@@ -27294,7 +27294,6 @@ MonoBehaviour:
   currentRingIndexArray: 
   isCleaned: 0
   isManicured: 0
-  moneyColletectedThisSession: 0
   CurrentCam: {fileID: 39149140}
   TargetCam: {fileID: 1196850643}
   matchRate: 0
@@ -29898,6 +29897,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 627822960}
   fireworks: {fileID: 353041548}
   diamondMuliplier: {fileID: 7941889275220417767}
+  multiplyAmount: 0
   currentLevelDiamond: 0
 --- !u!4 &1333296852
 Transform:
@@ -46219,6 +46219,8 @@ MonoBehaviour:
     freeUpgradesLeft: 0
   nextOffset: 0
   upgradeAmountInSession: 0
+  currentRingIndex: 0
+  currentBraceletIndex: 0
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0
@@ -94790,7 +94792,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7347954375143219106}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -94822,14 +94824,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 7347954375143219133}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1280078877}
-        m_TargetAssemblyTypeName: RewardedAdManager, Assembly-CSharp
-        m_MethodName: MultiplierAd
+      - m_Target: {fileID: 7242886296641391283}
+        m_TargetAssemblyTypeName: GiftSlider, Assembly-CSharp
+        m_MethodName: StopMovementAndCallRewarded
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

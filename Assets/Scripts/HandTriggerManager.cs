@@ -31,7 +31,6 @@ public class HandTriggerManager : MonoBehaviour
     {
         UIManager.Instance.currentLevelDiamond++;
         UIManager.Instance.NumberOfDiamonds++;
-        GameManager.Instance.moneyColletectedThisSession++;
         Destroy(diamond);
     }
 

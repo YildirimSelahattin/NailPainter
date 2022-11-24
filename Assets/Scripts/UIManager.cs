@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
     public GameObject fireworks;
     public GameObject diamondMuliplier;
-
+    public int multiplyAmount;
     int CurrentLevelNumber;
     public int currentLevelDiamond;
 
@@ -305,5 +305,12 @@ public class UIManager : MonoBehaviour
         NumberOfDiamonds-=(GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
         UIManager.Instance.rewardPanel.gameObject.SetActive(false);
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);      
+    }
+
+    public void GetMultiplierReward()
+    {
+        UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * (multiplyAmount-1);
+        UIManager.Instance.diamondMuliplier.SetActive(false);
+        UIManager.Instance.OpenRewardPanel();
     }
 }

@@ -168,7 +168,7 @@ public class RewardedAdManager : MonoBehaviour
 
     public void HandleUserEarnedMultiplierReward(object sender, Reward args)
     {
-        GiftSlider.Instance.OnGetButtonClicked();
+        UIManager.Instance.GetMultiplierReward();
         RequestMultiplierRewarded();
     }
 
