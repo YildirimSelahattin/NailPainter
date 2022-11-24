@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         //5 i değiştir
         ReadCSVAndFillTargetArrays(levelIndex);
         StartCoroutine(OffCam());
-        ColorManager.Instance.ColorTargetHand(currentLevel.nailTypeAfterManicure, currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
+        ColorManager.Instance.ColorTargetHand(currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
         //open relative ring and bracelet TODO
         ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);

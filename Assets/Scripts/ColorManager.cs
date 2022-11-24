@@ -1,13 +1,15 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class ColorManager : MonoBehaviour
 {
-    [SerializeField] Texture[] colorsArray;
-    [SerializeField] Texture[] patternsArray;
+    [SerializeField] Sprite[] colorsArray;
+    [SerializeField] Sprite[] patternsArray;
     //[SerializeField] Texture[] patternsColorArray;
-    [SerializeField] Texture[] diamondsArray;
+    [SerializeField] Sprite[] diamondsArray;
+    [SerializeField] GameObject[] maskArray;
     [SerializeField] Material baseMat;
     [SerializeField] Material patternSignBaseMat;
     public static ColorManager Instance;
@@ -32,7 +34,7 @@ public class ColorManager : MonoBehaviour
         //Find the Standard Shader
         Material myNewColorMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
         //Set Texture on the material
-        myNewColorMaterial.SetTexture("_BaseMap", colorsArray[colorIndex]);
+        myNewColorMaterial.SetTexture("_BaseMap", colorsArray[colorIndex].texture);
 
         //Find the Standard Shader
         return myNewColorMaterial;
@@ -45,14 +47,14 @@ public class ColorManager : MonoBehaviour
         //Set Texture on the material
         //myNewPatternColorMaterial.SetTexture("_BaseMap", patternsColorArray[patternColorIndex]);
         //myNewPatternColorMaterial.SetFloat("_Surface", 1);
-        myNewDiamondMaterial.SetTexture("_BaseMap", diamondsArray[diamondIndex]);
+        myNewDiamondMaterial.SetTexture("_BaseMap", diamondsArray[diamondIndex].texture);
         return myNewDiamondMaterial;
     }
 
     public Material GetPatternSignMaterialByIndex(int index)
     {
         Material myNewPatternMaterial = new Material(patternSignBaseMat);
-        myNewPatternMaterial.SetTexture("_MainTex", patternsArray[index]);
+        myNewPatternMaterial.SetTexture("_MainTex", patternsArray[index].texture);
         return myNewPatternMaterial;
     }
 
@@ -62,7 +64,7 @@ public class ColorManager : MonoBehaviour
         //Set Texture on the mater
         //Set Texture on the material
 
-        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex]);
+        myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex].texture);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
         myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
 
@@ -77,45 +79,20 @@ public class ColorManager : MonoBehaviour
         return myNewPatternMaterial;
     }
 
-    public void ColorTargetHand(int nailTypeIndex, int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
+    public void ColorTargetHand(int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
     {
-        //OPEN THE WANTED NAİL SHAPE
-        GameObject nailParent = targetHand.transform.GetChild(nailTypeIndex).gameObject;
-        GameObject diamondParent = targetHand.transform.GetChild(0).gameObject;
-        nailParent.SetActive(true);
-        diamondParent.SetActive(true);
         //PAİNT EVERY NAİL 
         for (int index = 0; index < 5; index++)
         {
-            //Debug.Log(nailColorArray[index] + nailPatternArray[index] + nailDiamondArray[index]);
-            //get the material array
-            Material[] matArrayForNail = nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials;
             //color nail
-            matArrayForNail[NAIL_COLOR_INDEX] = GetColorMaterialByIndex(nailColorArray[index]);
+            maskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[nailColorArray[index]];
             //pattern nail(special if for thumb because tilling)
-            if (index == 0)
-            {
-                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index], true);
-            }
-            else
-            {
-                matArrayForNail[NAIL_PATTERN_INDEX] = GetPatternMaterialByIndex(nailPatternArray[index], false);
-            }
-            //give material array back
-            nailParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().materials = matArrayForNail;
+            maskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[nailPatternArray[index]];
             //diamond nail
-            
-            if (nailDiamondArray[index] != 0)
-            {
-                diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = GetDiamondMaterialByIndex(nailDiamondArray[index]);
-                diamondParent.transform.GetChild(index).gameObject.SetActive(true);
-            }
+            maskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[nailDiamondArray[index]];
         }
-
     }
-
 }
-
 
 //to color the machine itself
 
