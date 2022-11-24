@@ -11,7 +11,6 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Diagnostics.Tracing;
 using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -42,6 +41,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] GameObject priceTextParent;
     float upgradableObjectsNumberPerTheme = 11;
     [SerializeField] GameObject footerContentParent;
+
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
     int UPGRADE_CHILD_INDEX = 5;
     [SerializeField] TextMeshProUGUI priceText;
@@ -50,49 +50,25 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] Slider percentBar;
     [SerializeField] GameObject themeFinishedPanel;
     [SerializeField] ParticleSystem cloudParticle;
-    [SerializeField] float[] scrollRectYPoss;
-    float lastRingScrollRectValue;
-    float lastBraceletScrollRectValue;
-    public ScrollRect ringScrollRect;
-    public ScrollRect braceletScrollRect;
-    bool motionStartedRing;
-    bool motionStartedBracelet;
-    public int ringIndex;
-    public int braceletIndex;
-    GameObject contentForRing;
-    GameObject contentForBracelet;
+
     void Start()
     {
         if (Instance == null)
         {
             Instance = this;
-            braceletIndex = GameDataManager.Instance.currentBraceletIndex;
-            ringIndex = GameDataManager.Instance.currentRingIndex;
-            //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.verticalNormalizedPosition = lastRingScrollRectValue;
-            ringScrollRect.onValueChanged.AddListener(ringScrollRectCallBack);
-            motionStartedRing = false;
-            motionStartedBracelet = false;
-            //Bracelet calcs
-            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.verticalNormalizedPosition = lastBraceletScrollRectValue;
-            braceletScrollRect.onValueChanged.AddListener(braceletScrollRectCallBack);
-            Debug.Log("asd"+ lastBraceletScrollRectValue);           
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
-
+            
             //FOOTER RINGS AND BRACELET JOBS
-             contentForRing = ringScrollRect.transform.GetChild(0).GetChild(0).gameObject;
-             contentForBracelet = braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject;
-            for(int i = 1;i<GameDataManager.Instance.dataLists.room.generalThemeIndex;i++ )
+            for(int i = 0; i <( GameDataManager.Instance.dataLists.room.generalThemeIndex*2)-2; i++)
             {
-                //for ring side 
-                OpenRingOrBracelet(contentForRing.transform.GetChild(i).gameObject);
-                //for braceletSide
-                OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
-              
+                //for ring
+                GameObject parent = footerContentParent.transform.GetChild(i).gameObject;
+                parent.GetComponent<Button>().interactable = true; // open button
+                parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
+                Debug.Log("sa");
+        
             }
             ///ROOM JOBS
             //update slider
@@ -154,7 +130,7 @@ public class StudioUIManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(scrollRect.verticalNormalizedPosition);
+        Debug.Log(GameDataManager.Instance.dataLists.room.generalThemeIndex);
     }
     public void PrevScene()
     {
@@ -188,10 +164,15 @@ public class StudioUIManager : MonoBehaviour
         generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex).ToString();
         //FOOTER CALCULATİONS 
         //FOOTER RINGS AND BRACELET JOBS
-        //ring
-        OpenRingOrBracelet(contentForRing.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject);
-        //bracelet
-        OpenRingOrBracelet(contentForBracelet.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject);
+        for (int i = 2; i < (GameDataManager.Instance.dataLists.room.generalThemeIndex * 2) - 2; i++)
+        {
+            //for ring
+            GameObject parent = footerContentParent.transform.GetChild(i).gameObject;
+            parent.GetComponent<Button>().interactable = true; // open button
+            parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
+
+
+        }
         //if all themes finished
         if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
         {
@@ -270,6 +251,7 @@ public class StudioUIManager : MonoBehaviour
                     if (PlayerPrefs.GetInt("NumberOfDiamondsKey", 0) < price)
                     {
                         upgradeWithMoneyButton.interactable = false;
+
                     }
                 }
                 else
@@ -280,12 +262,14 @@ public class StudioUIManager : MonoBehaviour
                 }
                
             }
-            else
+            if (GameDataManager.Instance.dataLists.freeUpgradesLeft > 0)
             {
                 GameDataManager.Instance.dataLists.freeUpgradesLeft--;
             }
+            
             //increase next upgrade parent
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
+
         }
         // increase relatve parents current child index
         GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
@@ -339,135 +323,5 @@ public class StudioUIManager : MonoBehaviour
     private void FadeInFadeOutLoop(Material mat)
     {
         mat.DOFade(0f / 255f, 1).OnComplete(() => mat.DOFade(60f / 255f, 1).OnComplete(() => FadeInFadeOutLoop(mat)));
-    }
-   
-
-
-
-    //Will be called when ScrollRect changes
-    void ringScrollRectCallBack(Vector2 value)
-    {
-        if (motionStartedRing == false)
-        {
-            motionStartedRing = true;
-            if (lastRingScrollRectValue > value.y && ringIndex !=4) // downwards
-            {
-                StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
-                if (ringIndex < 4)
-                {
-                    ringIndex += 1;
-
-                }
-                StartCoroutine(ChangeLayerToUI(contentForRing,ringIndex));
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(()=>StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition)));
-                
-            }
-            
-            else if(lastRingScrollRectValue < value.y && ringIndex != 0)//upwards
-            {
-                StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
-                if (ringIndex > 0)
-                {
-                    ringIndex -= 1;
-                }
-                StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition)));
-            }
-            else
-            {
-                motionStartedRing = false;
-            }
-        }
-    }
-    public IEnumerator ChangeLayerToUI(GameObject parent,int index)
-    {
-        yield return new WaitForSeconds(0.5f);
-        parent.transform.GetChild(index).gameObject.layer = LayerMask.NameToLayer("UI"); 
-        foreach (Transform child in parent.transform.GetChild(index))
-        {
-            child.gameObject.layer = LayerMask.NameToLayer("UI");
-            child.GetChild(0).gameObject.layer = LayerMask.NameToLayer("UI");
-        }
-    }
-    public IEnumerator ChangeLayerToDefault(GameObject parent, int index)
-    {
-        yield return new WaitForSeconds(0.2f);
-        parent.transform.GetChild(index).gameObject.layer = LayerMask.NameToLayer("Default");
-        foreach (Transform child in parent.transform.GetChild(index))
-        {
-            child.gameObject.layer = LayerMask.NameToLayer("Default");
-            child.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Default");
-        }
-    }
-    void braceletScrollRectCallBack(Vector2 value)
-    {
-        if (motionStartedBracelet == false)
-        {
-            motionStartedBracelet = true;
-            if (lastBraceletScrollRectValue > value.y &&braceletIndex!=4) // downwards
-            {
-                StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
-                if (braceletIndex < 4)
-                {
-
-                    braceletIndex += 1;
-                }
-                StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
-                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition)));
-                
-            }
-            else if (lastBraceletScrollRectValue < value.y &&braceletIndex!=0)
-            {
-                StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
-                if (braceletIndex > 0)
-                {
-                    braceletIndex -= 1;
-                }
-                StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
-                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition)));
-              
-            }
-            else
-            {
-                motionStartedBracelet = false;
-            }
-        }
-    }
-
-    void OnDisable()
-    {
-        //Un-Subscribe To ScrollRect Event
-        ringScrollRect.onValueChanged.RemoveListener(ringScrollRectCallBack);
-        braceletScrollRect.onValueChanged.RemoveListener(braceletScrollRectCallBack);
-    }
-
-    public IEnumerator OpenMotionRing(float lastPos)
-    {
-        yield return new WaitForEndOfFrame();
-        motionStartedRing = false;
-        lastRingScrollRectValue = lastPos;
-    }
-    public IEnumerator OpenMotionBracelet(float lastPos)
-    {
-        yield return new WaitForEndOfFrame();
-        motionStartedBracelet = false;
-        lastBraceletScrollRectValue = lastPos;
-    }
-
-    public void OnSelectRingByIndexButtonClicked(int ringIndex)
-    {
-        GameDataManager.Instance.currentRingIndex = ringIndex;
-        
-    }
-    public void OnSelectBraceletByIndexButtonClicked(int braceletIndex)
-    {
-        GameDataManager.Instance.currentBraceletIndex = braceletIndex;
-
-    }
-
-    private void OpenRingOrBracelet(GameObject parent)
-    {
-        parent.GetComponent<Button>().interactable = true; // open button
-        parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
     }
 }
