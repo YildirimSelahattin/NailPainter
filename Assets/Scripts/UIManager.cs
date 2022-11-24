@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject popArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
+    [SerializeField] GameObject compareHandsPanel;
     public GameObject fireworks;
     public GameObject diamondMuliplier;
 
@@ -124,7 +125,7 @@ public class UIManager : MonoBehaviour
             InterstitialAdManager.Instance.interstitialEndGame.Show();
         }
 
-        GameManager.Instance.currentRightMinimap.SetActive(false);
+        compareHandsPanel.SetActive(true);
         settingsButton.SetActive(false);
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);

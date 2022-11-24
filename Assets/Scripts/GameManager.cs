@@ -36,23 +36,14 @@ public class GameManager : MonoBehaviour
     public bool isCleaned;
     public bool isManicured;
     public int moneyColletectedThisSession;
-    [SerializeField] Camera CurrentCam;
-    [SerializeField] Camera TargetCam;
 
     [Header("No Name")]
     public float matchRate;
     public static GameManager Instance;
     [HideInInspector] public bool gameStart = false;
 
-    [Header("End Game")]
-    public GameObject targetMinimap;
-    public GameObject currentMinimap;
-    public GameObject currentRightMinimap;
-    Image currentMinimapImage;
-
     private void Start()
     {
-        currentMinimapImage = currentMinimap.GetComponent<Image>();
         if (Instance == null)
         {
             Instance = this;
@@ -61,28 +52,21 @@ public class GameManager : MonoBehaviour
         levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         //5 i değiştir
         ReadCSVAndFillTargetArrays(levelIndex);
-        StartCoroutine(OffCam());
         ColorManager.Instance.ColorTargetHand(currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
         //open relative ring and bracelet TODO
         ringParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
     }
 
-    IEnumerator OffCam()
+    void Update()
     {
-        yield return new WaitForSeconds(2);
-        TargetCam.gameObject.SetActive(false);
-        CurrentCam.gameObject.SetActive(false);
+        ColorManager.Instance.ColorCurrentHand(currentColorIndexArray, currentPatternIndexArray, currentDiamondIndexArray);
     }
 
     public float CompareTwoHands()
     {
         float totalParameterNumber = 20;
         float progress = 0;
-
-        TargetCam.gameObject.SetActive(true);
-        CurrentCam.gameObject.SetActive(true);
-        StartCoroutine(OffCam());
 
         for (int i = 0; i < 5; i++)
         {
@@ -116,7 +100,6 @@ public class GameManager : MonoBehaviour
         }
 
         matchRate = (float)((progress / totalParameterNumber) * 100);
-        currentMinimapImage.fillAmount = matchRate / 100;
         return matchRate;
     }
     //Have TO DECİDE WHETHER LEVELS STARTS 1 OR 0
@@ -168,10 +151,5 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.fireworks.SetActive(true);
         movingBrush.SetActive(false);
-    }
-
-    public void MultiplyCollectedDiamond()
-    {
-        
     }
 }

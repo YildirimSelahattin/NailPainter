@@ -9,7 +9,8 @@ public class ColorManager : MonoBehaviour
     [SerializeField] Sprite[] patternsArray;
     //[SerializeField] Texture[] patternsColorArray;
     [SerializeField] Sprite[] diamondsArray;
-    [SerializeField] GameObject[] maskArray;
+    [SerializeField] GameObject[] TargetMaskArray;
+    [SerializeField] GameObject[] CurrentMaskArray;
     [SerializeField] Material baseMat;
     [SerializeField] Material patternSignBaseMat;
     public static ColorManager Instance;
@@ -29,6 +30,11 @@ public class ColorManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+
+    }
+    
     public Material GetColorMaterialByIndex(int colorIndex)
     {
         //Find the Standard Shader
@@ -85,11 +91,24 @@ public class ColorManager : MonoBehaviour
         for (int index = 0; index < 5; index++)
         {
             //color nail
-            maskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[nailColorArray[index]];
+            TargetMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[nailColorArray[index]];
             //pattern nail(special if for thumb because tilling)
-            maskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[nailPatternArray[index]];
+            TargetMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[nailPatternArray[index]];
             //diamond nail
-            maskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[nailDiamondArray[index]];
+            TargetMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[nailDiamondArray[index]];
+        }
+    }
+
+    public void ColorCurrentHand(int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
+    {
+        for (int index = 0; index < 5; index++)
+        {
+            //color nail
+            CurrentMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[GameManager.Instance.currentColorIndexArray[index]];
+            //pattern nail(special if for thumb because tilling)
+            CurrentMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[GameManager.Instance.currentPatternIndexArray[index]];
+            //diamond nail
+            CurrentMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[GameManager.Instance.currentDiamondIndexArray[index]];
         }
     }
 }
