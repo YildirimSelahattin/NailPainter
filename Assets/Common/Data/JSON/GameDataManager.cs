@@ -20,11 +20,15 @@ public class GameDataManager : MonoBehaviour
     string dir;
     public int nextOffset;
     public int upgradeAmountInSession = 0;
+    public int currentRingIndex;
+    public int currentBraceletIndex;
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            currentRingIndex = PlayerPrefs.GetInt("CurrentRingIndexKey",0);
+            currentBraceletIndex = PlayerPrefs.GetInt("CurrentBraceletIndexKey", 0);
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
             if (!Directory.Exists(dir))
@@ -55,6 +59,8 @@ public class GameDataManager : MonoBehaviour
     private void OnDisable()
     {
         WriteToJson();
+        PlayerPrefs.SetInt("CurrentRingIndexKey",currentRingIndex);
+        PlayerPrefs.SetInt("CurrentBraceletIndexKey", currentBraceletIndex);
     }
 
     private void ReadFromJson()
