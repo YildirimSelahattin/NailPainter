@@ -11,7 +11,7 @@ public class MovingPolishTriggerManager : MonoBehaviour
     {
         if (other.transform.CompareTag("colorable"))
         {
-            Instantiate(brushParticle, other.transform.position + 2 * Vector3.up, other.transform.rotation);
+            Instantiate(brushParticle, new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z + 5), other.transform.rotation);
             Material[] matArray = other.gameObject.GetComponent<MeshRenderer>().materials;
             matArray = matArray.SkipLast(1).ToArray();
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;

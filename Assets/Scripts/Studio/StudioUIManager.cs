@@ -4,14 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using TMPro;
-using static DataLists;
 using UnityEngine.UI;
-using DG.Tweening;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Diagnostics.Tracing;
-using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class StudioUIManager : MonoBehaviour
 {
