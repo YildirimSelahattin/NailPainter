@@ -22,6 +22,12 @@ public class DiamondMachineManager : MonoBehaviour
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(GameManager.Instance.currentLevel.nailDiamondArray[index]);
                 UIManager.Instance.CreateCelebrationPopUp();
+                if (GameDataManager.Instance.playSound == 1)
+                {
+                    GameObject sound = new GameObject("sound");
+                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondMachineSound);
+                    Destroy(sound, GameDataManager.Instance.diamondMachineSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                }
             }
             GameManager.Instance.currentDiamondIndexArray[index] = GameManager.Instance.currentLevel.nailDiamondArray[index];
         }

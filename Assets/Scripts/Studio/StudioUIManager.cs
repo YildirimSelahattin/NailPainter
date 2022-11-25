@@ -72,7 +72,7 @@ public class StudioUIManager : MonoBehaviour
             ringIndex = GameDataManager.Instance.currentRingIndex;
             //RingScroll calcs
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener())) ;
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex],0.1f).OnComplete(()=> StartCoroutine(AddBraceletListener()));
@@ -82,7 +82,7 @@ public class StudioUIManager : MonoBehaviour
             //FOOTER RINGS AND BRACELET JOBS
              contentForRing = ringScrollRect.transform.GetChild(0).GetChild(0).gameObject;
              contentForBracelet = braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject;
-            for(int i = 1;i<GameDataManager.Instance.dataLists.room.generalThemeIndex;i++ )
+            for(int i = 1;i<GameDataManager.Instance.dataLists.room.generalThemeIndex;i++)
             {
                 //for ring side 
                 OpenRingOrBracelet(contentForRing.transform.GetChild(i).gameObject);
@@ -96,7 +96,7 @@ public class StudioUIManager : MonoBehaviour
             //write general theme index
             generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
             //if there is no objects to upgrade
-            if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 4)
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex >4)
             {
                 //close all buttons
                 upgradeFreelyButton.gameObject.SetActive(false);
@@ -150,7 +150,7 @@ public class StudioUIManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(scrollRect.verticalNormalizedPosition);
+        Debug.Log(ringScrollRect.verticalNormalizedPosition);
     }
     public void PrevScene()
     {
@@ -192,6 +192,13 @@ public class StudioUIManager : MonoBehaviour
     }
     public void OnCloseThemeFinishedPanelBtnClicked()
     {
+        ringIndex = GameDataManager.Instance.dataLists.room.generalThemeIndex-1;
+        braceletIndex = GameDataManager.Instance.dataLists.room.generalThemeIndex - 1;
+        lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+        ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+        //Bracelet calcs
+        lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
+        braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
         roomParentOfParents.SetActive(true);
         normalTimesUIElementParent.SetActive(true);
         GiftTimesUIElementParent.SetActive(false);
@@ -236,7 +243,12 @@ public class StudioUIManager : MonoBehaviour
     // Update is called once per frame
      public void Upgrade()
     {
-        
+        if (GameDataManager.Instance.playSound == 1)
+        {
+            GameObject sound = new GameObject("sound");
+            sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondCollected);
+            Destroy(sound, GameDataManager.Instance.diamondCollected.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+        }
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
@@ -250,6 +262,12 @@ public class StudioUIManager : MonoBehaviour
         //CONTROLL �F CURRENT THEME �S F�N�SHED 
         if (GameDataManager.Instance.dataLists.room.nextUpgradeIndex == roomParent.Count - 1)
         {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.themeFinishedSound);
+                Destroy(sound, GameDataManager.Instance.themeFinishedSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex=0;
             percentBar.DOValue(1, 1f);
             // theme finished parts done here;
@@ -258,6 +276,7 @@ public class StudioUIManager : MonoBehaviour
             priceTextParent.gameObject.SetActive(false);
             roomParentOfParents.SetActive(false);
             normalTimesUIElementParent.SetActive(false);
+            RemoveListeners();
             GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
             GiftTimesUIElementParent.SetActive(true);
         }
@@ -448,6 +467,11 @@ public class StudioUIManager : MonoBehaviour
     }
 
     void OnDisable()
+    {
+        RemoveListeners();
+    }
+
+    public void RemoveListeners()
     {
         //Un-Subscribe To ScrollRect Event
         ringScrollRect.onValueChanged.RemoveListener(ringScrollRectCallBack);

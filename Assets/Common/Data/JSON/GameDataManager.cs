@@ -22,6 +22,20 @@ public class GameDataManager : MonoBehaviour
     public int upgradeAmountInSession = 0;
     public int currentRingIndex;
     public int currentBraceletIndex;
+    public int playSound;
+    public int playMusic;
+    public AudioClip brushMachineMusic;
+    public AudioClip asetonSound;
+    public AudioClip washMachineSound;
+    public AudioClip patternMachineSound;
+    public AudioClip manicureMachineSound;
+    public AudioClip diamondMachineSound;
+    public AudioClip winSound;
+    public AudioClip loseSound;
+    public AudioClip diamondCollected;
+    public AudioClip lastAnimationSound;
+    public AudioClip upgradeSound;
+    public AudioClip themeFinishedSound;
     void Awake()
     {
         if (Instance == null)
@@ -29,6 +43,8 @@ public class GameDataManager : MonoBehaviour
             Instance = this;
             currentRingIndex = PlayerPrefs.GetInt("CurrentRingIndexKey",0);
             currentBraceletIndex = PlayerPrefs.GetInt("CurrentBraceletIndexKey", 0);
+            playSound = PlayerPrefs.GetInt("PlaySoundKey",0);
+            playMusic = PlayerPrefs.GetInt("PlayMusicKey", 0);
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
             if (!Directory.Exists(dir))
@@ -61,6 +77,8 @@ public class GameDataManager : MonoBehaviour
         WriteToJson();
         PlayerPrefs.SetInt("CurrentRingIndexKey",currentRingIndex);
         PlayerPrefs.SetInt("CurrentBraceletIndexKey", currentBraceletIndex);
+        PlayerPrefs.SetInt("PlaySoundKey", playSound);
+        PlayerPrefs.SetInt("PlayMusicKey", playMusic);
     }
 
     private void ReadFromJson()

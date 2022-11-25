@@ -14,6 +14,12 @@ public class HandTriggerManager : MonoBehaviour
         if (other.transform.CompareTag("Diamond"))
         {
             MoveMoney(other);
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondCollected);
+                Destroy(sound, GameDataManager.Instance.diamondCollected.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
         }
 
         if (other.transform.CompareTag("EndGame"))

@@ -22,6 +22,7 @@ public class ManicureMachineManager : MonoBehaviour
     public static ManicureMachineManager Instance;
     bool usedOnce = false;
     float realPos;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,12 @@ public class ManicureMachineManager : MonoBehaviour
             newNailParent.transform.GetChild(index).gameObject.SetActive(true);
             GameManager.Instance.currentNailType = nailTypeAfterManicure;
             GameManager.Instance.isManicured = true;
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.manicureMachineSound);
+                Destroy(sound, GameDataManager.Instance.manicureMachineSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
         }
     }
 
