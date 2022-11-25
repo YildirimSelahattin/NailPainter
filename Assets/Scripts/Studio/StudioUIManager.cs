@@ -33,7 +33,7 @@ public class StudioUIManager : MonoBehaviour
 
     [SerializeField] Material shiningMaterial;
     public static StudioUIManager Instance;
-
+    [SerializeField] GameObject roomParentOfParents ;
     [SerializeField] List<GameObject> roomParent;
     public float fillAmount;
     [SerializeField] Button upgradeWithMoneyButton;
@@ -61,13 +61,14 @@ public class StudioUIManager : MonoBehaviour
     public int braceletIndex;
     GameObject contentForRing;
     GameObject contentForBracelet;
+    [SerializeField]GameObject normalTimesUIElementParent;
+    [SerializeField] GameObject GiftTimesUIElementParent;
     void Start()
     {
         if (Instance == null)
         {
             Instance = this;
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
-            Debug.Log("asdasd"+braceletIndex);
             ringIndex = GameDataManager.Instance.currentRingIndex;
             //RingScroll calcs
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
@@ -75,10 +76,6 @@ public class StudioUIManager : MonoBehaviour
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex],0.1f).OnComplete(()=> StartCoroutine(AddBraceletListener()));
-            Debug.Log("asdasd" + braceletIndex);
-           
-            motionStartedRing = false;
-            motionStartedBracelet = false;
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
@@ -99,7 +96,7 @@ public class StudioUIManager : MonoBehaviour
             //write general theme index
             generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
             //if there is no objects to upgrade
-            if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
+            if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 4)
             {
                 //close all buttons
                 upgradeFreelyButton.gameObject.SetActive(false);
@@ -195,7 +192,9 @@ public class StudioUIManager : MonoBehaviour
     }
     public void OnCloseThemeFinishedPanelBtnClicked()
     {
-        themeFinishedPanel.SetActive(false);
+        roomParentOfParents.SetActive(true);
+        normalTimesUIElementParent.SetActive(true);
+        GiftTimesUIElementParent.SetActive(false);
         generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex).ToString();
         //FOOTER CALCULATİONS 
         //FOOTER RINGS AND BRACELET JOBS
@@ -257,8 +256,10 @@ public class StudioUIManager : MonoBehaviour
             upgradeWithMoneyButton.gameObject.SetActive(false);
             upgradeFreelyButton.gameObject.SetActive(false);
             priceTextParent.gameObject.SetActive(false);
+            roomParentOfParents.SetActive(false);
+            normalTimesUIElementParent.SetActive(false);
             GameDataManager.Instance.dataLists.room.generalThemeIndex += 1;
-            themeFinishedPanel.SetActive(true);
+            GiftTimesUIElementParent.SetActive(true);
         }
         else //prepare next update for that theme
         {
@@ -482,4 +483,6 @@ public class StudioUIManager : MonoBehaviour
         parent.GetComponent<Button>().interactable = true; // open button
         parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
     }
+
+
 }
