@@ -72,15 +72,15 @@ public class ColorManager : MonoBehaviour
 
         myNewPatternMaterial.SetTexture("_BaseMap", patternsArray[patternIndex].texture);
         //myNewPatternMaterial.SetFloat("_Surface", 1);
-        myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, 0f));
+        myNewPatternMaterial.SetTextureOffset("_BaseMap", new Vector2(-6.33f, -0.63f));
 
         if (forThumb == true)
         {
-            myNewPatternMaterial.DOTiling(new Vector2(1.14f, 8.8f), 0.1f);
+            myNewPatternMaterial.DOTiling(new Vector2(20f, 20f), 0.1f);
         }
         else
         {
-            myNewPatternMaterial.DOTiling(new Vector2(1.48f, 8.8f), 0.1f);
+            myNewPatternMaterial.DOTiling(new Vector2(20f, 20f), 0.1f);
         }
         return myNewPatternMaterial;
     }
