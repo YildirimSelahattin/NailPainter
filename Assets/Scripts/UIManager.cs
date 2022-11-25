@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject musicOff;
     [SerializeField] GameObject loaderCanvas;
     [SerializeField] GameObject tapToStartCanvas;
+    [SerializeField] GameObject bg;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject studioButton;
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject popArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
+    [SerializeField] GameObject compareHandsPanel;
     public GameObject fireworks;
     public GameObject diamondMuliplier;
     public int multiplyAmount;
@@ -81,6 +83,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
+        bg.gameObject.SetActive(false);
         studioButton.gameObject.SetActive(false);
         targetPicAnimator.SetBool("isStart", true);
     }
@@ -124,7 +127,7 @@ public class UIManager : MonoBehaviour
             InterstitialAdManager.Instance.interstitialEndGame.Show();
         }
 
-        GameManager.Instance.currentRightMinimap.SetActive(false);
+        compareHandsPanel.SetActive(true);
         settingsButton.SetActive(false);
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);
