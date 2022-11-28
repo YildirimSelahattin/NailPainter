@@ -73,9 +73,11 @@ public class StudioUIManager : MonoBehaviour
             //RingScroll calcs
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
             ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+            OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex],0.1f).OnComplete(()=> StartCoroutine(AddBraceletListener()));
+            OpenRingOrBracelet(contentForBracelet.transform.GetChild(braceletIndex).gameObject);
             PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
@@ -196,9 +198,11 @@ public class StudioUIManager : MonoBehaviour
         braceletIndex = GameDataManager.Instance.dataLists.room.generalThemeIndex - 1;
         lastRingScrollRectValue = scrollRectYPoss[ringIndex];
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+        OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
+        OpenRingOrBracelet(contentForBracelet.transform.GetChild(braceletIndex).gameObject);
         roomParentOfParents.SetActive(true);
         normalTimesUIElementParent.SetActive(true);
         GiftTimesUIElementParent.SetActive(false);
