@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
         UpdateSound();
         UpdateMusic();
         CurrentLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
-        levelCounterText.text = ("LEVEL-" + CurrentLevelNumber.ToString());
+        levelCounterText.text = ("LEVEL " + CurrentLevelNumber.ToString());
     }
 
     public void TapToStart()

@@ -12,7 +12,6 @@ public class GiftSlider : MonoBehaviour
     float[] degreeBounds = new float[] { 0.42f, 0.14f, 0.50f };
     [SerializeField] GameObject[] outlineArray;
     [SerializeField] TextMeshProUGUI multiplierText;
-    [SerializeField] TextMeshProUGUI currentMoneyText;
     [SerializeField] GameObject noThanksButton;
     public int multiplier;
     int prevMultiplier;
@@ -35,7 +34,7 @@ public class GiftSlider : MonoBehaviour
     void Update()
     {
         int multiplier = GetMultiplier();
-        multiplierText.text = multiplier.ToString();
+        multiplierText.text = multiplier.ToString() + "X";
 
     }
     public void DoRotateLoopMove()
