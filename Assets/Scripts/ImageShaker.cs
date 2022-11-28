@@ -6,9 +6,11 @@ public class ImageShaker : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float strenghtOfShake = 5;
+    [SerializeField] float waitForSeconds;
+    [SerializeField] float shakeDuration = 1;
     void Start()
     {
-        Shake();
+        StartCoroutine(Shake());
     }
 
     // Update is called once per frame
@@ -16,9 +18,11 @@ public class ImageShaker : MonoBehaviour
     {
         
     }
-    public void Shake()
+    public IEnumerator Shake()
     {
-        transform.DOShakeRotation(2, strenghtOfShake, 3, 30).OnComplete(()=>transform.DOShakePosition(2, strenghtOfShake, 3,30).OnComplete(()=>Shake()));
+        yield return new WaitForSeconds(waitForSeconds);
+        //transform.DOShakeRotation(shakeDuration, strenghtOfShake, 2, 30);
+        transform.DOShakePosition(shakeDuration, strenghtOfShake, 4,30).OnComplete(()=>StartCoroutine(Shake()));
 
     }
 }

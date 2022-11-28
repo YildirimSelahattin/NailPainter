@@ -139,12 +139,25 @@ public class UIManager : MonoBehaviour
         //Basariya göre win-lose
         if (matchRate >= 0)
         {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.winSound);
+                Destroy(sound, GameDataManager.Instance.winSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
             winPanel.SetActive(true);
             StartCoroutine(DelayAndStartMovingLastAnim(0.01f));
         }
         else
         {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.loseSound);
+                Destroy(sound, GameDataManager.Instance.loseSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
             losePanel.SetActive(true);
+
         }
     }
 
@@ -159,7 +172,7 @@ public class UIManager : MonoBehaviour
     //Muzik ve Sound Ayarları
     public void UpdateSound()
     {
-        isSoundOn = PlayerPrefs.GetInt("IsSoundOnKey", 1);
+        isSoundOn = GameDataManager.Instance.playSound;
         if (isSoundOn == 0)
         {
             soundOff.gameObject.SetActive(true);
@@ -174,7 +187,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMusic()
     {
-        isMusicOn = PlayerPrefs.GetInt("IsMusicOnKey", 1);
+        isMusicOn = GameDataManager.Instance.playMusic;
         if (isMusicOn == 0)
         {
             musicOff.gameObject.SetActive(true);
@@ -196,7 +209,7 @@ public class UIManager : MonoBehaviour
 
     public void MusicOff()
     {
-        PlayerPrefs.SetInt("IsMusicOnKey", 0);
+        GameDataManager.Instance.playMusic = 0;
         gameMusicObject.SetActive(false);
         musicOn.gameObject.SetActive(false);
         musicOff.gameObject.SetActive(true);
@@ -204,7 +217,7 @@ public class UIManager : MonoBehaviour
 
     public void MusicOn()
     {
-        PlayerPrefs.SetInt("IsMusicOnKey", 1);
+        GameDataManager.Instance.playMusic = 1;
         gameMusicObject.SetActive(true);
         musicOff.gameObject.SetActive(false);
         musicOn.gameObject.SetActive(true);
@@ -213,13 +226,13 @@ public class UIManager : MonoBehaviour
 
     public void SoundsOff()
     {
-        PlayerPrefs.SetInt("IsSoundOnKey", 0);
+        GameDataManager.Instance.playSound = 0;
         soundOn.gameObject.SetActive(false);
         soundOff.gameObject.SetActive(true);
     }
     public void SoundsOn()
     {
-        PlayerPrefs.SetInt("IsSoundOnKey", 1);
+        GameDataManager.Instance.playSound = 1;
         soundOff.gameObject.SetActive(false);
         soundOn.gameObject.SetActive(true);
     }

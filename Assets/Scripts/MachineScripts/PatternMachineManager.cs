@@ -11,6 +11,7 @@ public class PatternMachineManager : MonoBehaviour
     public int patternIndex;
     public static bool nail1iscollerd = false;
     // Start is called before the first frame update
+
     void Start()
     {
         gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetPatternSignMaterialByIndex(patternIndex);
@@ -40,6 +41,12 @@ public class PatternMachineManager : MonoBehaviour
             matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
             GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.patternMachineSound);
+                Destroy(sound, GameDataManager.Instance.patternMachineSound.length);// Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
             if (patternIndex == GameManager.Instance.currentLevel.nailPatternArray[index])
             {
                 UIManager.Instance.CreateCelebrationPopUp();

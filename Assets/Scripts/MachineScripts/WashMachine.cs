@@ -20,6 +20,12 @@ public class WashMachine : MonoBehaviour
             matArray[1] = transparentMat;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.isCleaned = true;
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.washMachineSound);
+                Destroy(sound, GameDataManager.Instance.washMachineSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
         }
     }
 }
