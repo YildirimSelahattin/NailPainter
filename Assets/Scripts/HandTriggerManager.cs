@@ -6,7 +6,14 @@ using DG.Tweening;
 public class HandTriggerManager : MonoBehaviour
 {
     [SerializeField] Transform diamondReachPointReference;
-
+    [SerializeField] Transform diamondImage;
+    Vector3 diamondImageScaleReach;
+    Vector3 standartScale;
+    private void Start()
+    {
+        standartScale = diamondImage.localScale;
+        diamondImageScaleReach = diamondImage.localScale * 1.1f;
+    }
     //Player(Hand) in trigger islevleri
     private void OnTriggerEnter(Collider other)
     {
@@ -37,6 +44,7 @@ public class HandTriggerManager : MonoBehaviour
     {
         UIManager.Instance.currentLevelDiamond++;
         UIManager.Instance.NumberOfDiamonds++;
+        diamondImage.DOScale(diamondImageScaleReach,0.2f).OnComplete(()=> diamondImage.DOScale(standartScale, 0.2f));
         Destroy(diamond);
     }
 

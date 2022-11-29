@@ -36,6 +36,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip lastAnimationSound;
     public AudioClip upgradeSound;
     public AudioClip themeFinishedSound;
+    public AudioClip mudMachineSound;
     void Awake()
     {
         if (Instance == null)
