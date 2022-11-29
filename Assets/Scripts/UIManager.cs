@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject studioButton;
+    [SerializeField] GameObject scoreArea;
     [SerializeField] GameObject settingsButton;
     [SerializeField] public GameObject losePanel;
     public GameObject rewardPanel;
@@ -37,6 +38,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject compareHandsPanel;
+    public GameObject minimap;
+    [SerializeField] Sprite compareHandsWinSprite;
+    [SerializeField] Sprite compareHandsLoseSprite;
+    [SerializeField] FontStyle loseFont;
+    [SerializeField] FontStyle winFont;
     public GameObject fireworks;
     public GameObject diamondMuliplier;
     public int multiplyAmount;
@@ -76,7 +82,7 @@ public class UIManager : MonoBehaviour
         UpdateSound();
         UpdateMusic();
         CurrentLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
-        levelCounterText.text = ("LEVEL " + CurrentLevelNumber.ToString());
+        levelCounterText.text = ("LEVEL " + (CurrentLevelNumber + 1).ToString());
     }
 
     public void TapToStart()
@@ -85,6 +91,7 @@ public class UIManager : MonoBehaviour
         tapToStartCanvas.gameObject.SetActive(false);
         bg.gameObject.SetActive(false);
         studioButton.gameObject.SetActive(false);
+        scoreArea.gameObject.SetActive(true);
         targetPicAnimator.SetBool("isStart", true);
     }
 
@@ -126,8 +133,8 @@ public class UIManager : MonoBehaviour
         {
             InterstitialAdManager.Instance.interstitialEndGame.Show();
         }
-
         compareHandsPanel.SetActive(true);
+        targetPicAnimator.SetBool("isEnd", true);
         settingsButton.SetActive(false);
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);
@@ -139,6 +146,8 @@ public class UIManager : MonoBehaviour
         //Basariya göre win-lose
         if (matchRate >= 0)
         {
+            matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(0, 192, 42, 255);
+            compareHandsPanel.GetComponent<Image>().sprite = compareHandsWinSprite;
             if (GameDataManager.Instance.playSound == 1)
             {
                 GameObject sound = new GameObject("sound");
@@ -150,6 +159,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(255, 0, 0, 255);
+            compareHandsPanel.GetComponent<Image>().sprite = compareHandsLoseSprite;
             if (GameDataManager.Instance.playSound == 1)
             {
                 GameObject sound = new GameObject("sound");
@@ -318,14 +329,14 @@ public class UIManager : MonoBehaviour
     public void BuyUpgradeTotack()
     {
         GameDataManager.Instance.dataLists.freeUpgradesLeft++;
-        NumberOfDiamonds-=(GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
+        NumberOfDiamonds -= (GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price);
         UIManager.Instance.rewardPanel.gameObject.SetActive(false);
-        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);      
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
     }
 
     public void GetMultiplierReward()
     {
-        UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * (multiplyAmount-1);
+        UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * (multiplyAmount - 1);
         UIManager.Instance.diamondMuliplier.SetActive(false);
         UIManager.Instance.OpenRewardPanel();
     }

@@ -37,6 +37,7 @@ public class MovingPolishManager : MonoBehaviour
     {
         yield return new WaitForSeconds(second);
         UIManager.Instance.diamondMuliplier.SetActive(true);
+        UIManager.Instance.minimap.SetActive(false);
     }
 
     private void CloseBrushAndOpenRewarPanel()
