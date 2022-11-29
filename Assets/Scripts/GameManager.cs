@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+        //levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         //5 i değiştir
         ReadCSVAndFillTargetArrays(levelIndex);
         ColorManager.Instance.ColorTargetHand(currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);

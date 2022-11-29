@@ -5,7 +5,7 @@ using UnityEngine;
 public class MudMachineManager : MonoBehaviour
 {
     [SerializeField] Material MudMaterial;
-
+    [SerializeField] ParticleSystem mudParticle;
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Hand"))
@@ -14,6 +14,16 @@ public class MudMachineManager : MonoBehaviour
             matArray[1] = MudMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.isCleaned = false;
+
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.mudMachineSound);
+                Destroy(sound, GameDataManager.Instance.mudMachineSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+            //mud particle
+            Instantiate(mudParticle, new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z + 5), other.transform.rotation);
         }
+        
     }
 }

@@ -1730,9 +1730,12 @@ MonoBehaviour:
   - {fileID: 986275963461768055, guid: 3e4c7a502886a0942a930459e884e90e, type: 3}
   - {fileID: 986275963461768055, guid: 159ef12ec0e79aa4f8937201a8c007b4, type: 3}
   - {fileID: 986275963461768055, guid: aaa2c435a57b74547b621a8428076c20, type: 3}
-  - {fileID: 2540861727907802990, guid: 01863ec26932c494ebb21be580a5b9f3, type: 3}
+  - {fileID: 2042697811632210076, guid: 66f9e1da0d4a4754fac73d342aaed0a4, type: 3}
   - {fileID: 5397631207659925492, guid: 9ed32a4f11740a342836db2b640d30f0, type: 3}
+  - {fileID: 2042697811632210076, guid: 50a0aba8ee5b4e1469b1b07a4b286470, type: 3}
+  - {fileID: 6028472772239399501, guid: 638612d255c8218408c79b0b80ee28c2, type: 3}
   LevelsParrent: {fileID: 56244887}
+  nextLevelNumber: 0
 --- !u!1 &58750143
 GameObject:
   m_ObjectHideFlags: 0
@@ -19605,7 +19608,7 @@ GameObject:
   - component: {fileID: 757109874}
   - component: {fileID: 757109873}
   m_Layer: 5
-  m_Name: Image
+  m_Name: diamondImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40134,7 +40137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1648790636
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51349,6 +51352,7 @@ MonoBehaviour:
   lastAnimationSound: {fileID: 0}
   upgradeSound: {fileID: 0}
   themeFinishedSound: {fileID: 0}
+  mudMachineSound: {fileID: 0}
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0
@@ -54773,6 +54777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diamondReachPointReference: {fileID: 1710377728}
+  diamondImage: {fileID: 757109872}
 --- !u!54 &1828300970283926868
 Rigidbody:
   m_ObjectHideFlags: 0
