@@ -57,6 +57,8 @@ public class StudioUIManager : MonoBehaviour
     GameObject contentForBracelet;
     [SerializeField] GameObject normalTimesUIElementParent;
     [SerializeField] GameObject GiftTimesUIElementParent;
+    string[] themeNames = {"BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND"};
+
     void Start()
     {
         if (Instance == null)
@@ -80,7 +82,7 @@ public class StudioUIManager : MonoBehaviour
                 OpenRingOrBracelet(braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject.transform.GetChild(braceletIndex).gameObject);
             }
 
-            PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
+            //PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
             moneyText.text = PlayerPrefs.GetInt("NumberOfDiamondsKey", 0).ToString();
             //FOOTER RINGS AND BRACELET JOBS
@@ -98,7 +100,7 @@ public class StudioUIManager : MonoBehaviour
             //update slider
             percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
             //write general theme index
-            generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).ToString();
+            generalThemeText.text = themeNames[(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1)];
             //if there is no objects to upgrade
             if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
             {
