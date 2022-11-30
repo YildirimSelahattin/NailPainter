@@ -57,7 +57,7 @@ public class StudioUIManager : MonoBehaviour
     GameObject contentForBracelet;
     [SerializeField] GameObject normalTimesUIElementParent;
     [SerializeField] GameObject GiftTimesUIElementParent;
-    string[] themeNames = {"BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND"};
+    string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND" };
 
     void Start()
     {
@@ -251,15 +251,18 @@ public class StudioUIManager : MonoBehaviour
     // Update is called once per frame
     public void Upgrade()
     {
-        if(GameDataManager.Instance.dataLists.room.freeUpgra == 1) { 
-        
+        if (GameDataManager.Instance.dataLists.freeUpgradesLeft > 0)
+        {
+            GameDataManager.Instance.dataLists.freeUpgradesLeft--;
         }
+
         if (GameDataManager.Instance.playSound == 1)
         {
             GameObject sound = new GameObject("sound");
             sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondCollected);
             Destroy(sound, GameDataManager.Instance.diamondCollected.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
         }
+
         //get parent object index 
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
@@ -320,7 +323,7 @@ public class StudioUIManager : MonoBehaviour
                     upgradeWithAdButton.gameObject.SetActive(true);
                 }
             }
-            
+
             //increase next upgrade parent
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
         }
