@@ -251,6 +251,9 @@ public class StudioUIManager : MonoBehaviour
     // Update is called once per frame
     public void Upgrade()
     {
+        if(GameDataManager.Instance.dataLists.room.freeUpgra == 1) { 
+        
+        }
         if (GameDataManager.Instance.playSound == 1)
         {
             GameObject sound = new GameObject("sound");
@@ -296,7 +299,6 @@ public class StudioUIManager : MonoBehaviour
             //roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]).gameObject.GetComponent<Outline>().enabled = true;
             FadeInFadeOut(roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).gameObject);
             roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
-
             if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)
             {
                 upgradeFreelyButton.gameObject.SetActive(false);
@@ -317,12 +319,8 @@ public class StudioUIManager : MonoBehaviour
                     upgradeWithMoneyButton.gameObject.SetActive(false);
                     upgradeWithAdButton.gameObject.SetActive(true);
                 }
-
             }
-            else
-            {
-                GameDataManager.Instance.dataLists.freeUpgradesLeft--;
-            }
+            
             //increase next upgrade parent
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex += 1;
         }
