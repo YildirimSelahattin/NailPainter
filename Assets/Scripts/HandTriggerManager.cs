@@ -9,18 +9,25 @@ public class HandTriggerManager : MonoBehaviour
     [SerializeField] Transform diamondImage;
     Vector3 diamondImageScaleReach;
     Vector3 standartScale;
+    [SerializeField] Camera mainCamera;
+    Vector3 targetPos;
+
     private void Start()
     {
         standartScale = diamondImage.localScale;
         diamondImageScaleReach = diamondImage.localScale * 1.1f;
     }
+
     //Player(Hand) in trigger islevleri
     private void OnTriggerEnter(Collider other)
     {
         //if hand hit a diamond
         if (other.transform.CompareTag("Diamond"))
         {
-            MoveMoney(other);
+            Vector3 targetPos = GetIconPosition(other.transform.position);
+
+            other.transform.DOMove(targetPos, Time.deltaTime * 50).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
+
             if (GameDataManager.Instance.playSound == 1)
             {
                 GameObject sound = new GameObject("sound");
@@ -44,16 +51,16 @@ public class HandTriggerManager : MonoBehaviour
     {
         UIManager.Instance.currentLevelDiamond++;
         UIManager.Instance.NumberOfDiamonds++;
-        diamondImage.DOScale(diamondImageScaleReach,0.2f).OnComplete(()=> diamondImage.DOScale(standartScale, 0.2f));
-        Destroy(diamond);
+        diamondImage.DOScale(diamondImageScaleReach, 0.2f).OnComplete(() => diamondImage.DOScale(standartScale, 0.2f));
+        //Destroy(diamond);
     }
 
     //Toplanan elmaslarin ekranın sag üstüne gitmesini saglayan fonk.
-    private void MoveMoney(Collider other)
+    public Vector3 GetIconPosition(Vector3 target)
     {
-        other.transform.parent = this.transform;
-        other.transform.DOLocalMove(diamondReachPointReference.localPosition, 1).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
-        Vector3 originalScale = transform.localScale;
-        other.transform.DOScale(0.02f / 4, 1);
+        Vector3 IconPos = UIManager.Instance.DiamondIcon.position;
+        IconPos.z = (target - mainCamera.transform.position).z;
+        Vector3 result = mainCamera.ScreenToWorldPoint(IconPos);
+        return result;
     }
 }
