@@ -9,7 +9,6 @@ public class GiftSlider : MonoBehaviour
 {
     // Start is called before the first frame update
     RectTransform rectTransform;
-    float[] degreeBounds = new float[] { 0.42f, 0.14f, 0.50f };
     [SerializeField] GameObject[] outlineArray;
     [SerializeField] TextMeshProUGUI multiplierText;
     [SerializeField] GameObject noThanksButton;
