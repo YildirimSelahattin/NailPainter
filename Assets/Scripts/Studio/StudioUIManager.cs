@@ -225,7 +225,7 @@ public class StudioUIManager : MonoBehaviour
             upgradeFreelyButton.gameObject.SetActive(false);
             upgradeWithMoneyButton.gameObject.SetActive(false);
         }
-        else
+       else
         {
             //reset upgrades left
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
@@ -234,18 +234,27 @@ public class StudioUIManager : MonoBehaviour
             FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject);
             //increase general theme index
             percentBar.DOValue(0, 1f);
-            if (GameDataManager.Instance.dataLists.freeUpgradesLeft == 0)//there is no free upgrade
+            if (GameDataManager.Instance.upgradeAmountInSession < 2)
             {
-                priceText.text = GameDataManager.Instance.objectsByIndexArray[0][GameDataManager.Instance.dataLists.room.currentRoomIndexes[0] + 1].price.ToString();
-                upgradeFreelyButton.gameObject.SetActive(false);
-                upgradeWithMoneyButton.gameObject.SetActive(true);
-                priceTextParent.SetActive(true);
+
+
+                if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)//there is no free upgrade
+                {
+                    priceText.text = GameDataManager.Instance.objectsByIndexArray[0][GameDataManager.Instance.dataLists.room.currentRoomIndexes[0] + 1].price.ToString();
+                    upgradeFreelyButton.gameObject.SetActive(false);
+                    upgradeWithMoneyButton.gameObject.SetActive(true);
+                    priceTextParent.SetActive(true);
+                }
+                else //there is free update
+                {
+                    priceTextParent.SetActive(false);
+                    upgradeFreelyButton.gameObject.SetActive(true);
+                    upgradeWithMoneyButton.gameObject.SetActive(false);
+                }
             }
-            else //there is free update
+            else
             {
-                priceTextParent.SetActive(false);
-                upgradeFreelyButton.gameObject.SetActive(true);
-                upgradeWithMoneyButton.gameObject.SetActive(false);
+                upgradeWithAdButton.gameObject.SetActive(false);
             }
         }
     }
@@ -392,7 +401,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedRing == false)
         {
             motionStartedRing = true;
-            if (lastRingScrollRectValue > value.y && ringIndex != 4) // downwards
+            if (lastRingScrollRectValue > value.y && ringIndex != 4 ) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
                 if (ringIndex < 4)
@@ -418,6 +427,9 @@ public class StudioUIManager : MonoBehaviour
             else
             {
                 motionStartedRing = false;
+            }
+              if(value.y < 0.186){
+                  ringScrollRect.verticalNormalizedPosition = 0.186f;
             }
         }
     }
@@ -446,7 +458,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedBracelet == false)
         {
             motionStartedBracelet = true;
-            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4) // downwards
+            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4 ) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
                 if (braceletIndex < 4)
@@ -472,6 +484,9 @@ public class StudioUIManager : MonoBehaviour
             else
             {
                 motionStartedBracelet = false;
+            }
+            if(value.y < 0.186){
+                  braceletScrollRect.verticalNormalizedPosition = 0.186f;
             }
         }
     }
