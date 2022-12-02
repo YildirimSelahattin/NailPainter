@@ -11,6 +11,7 @@ public class HandTriggerManager : MonoBehaviour
     Vector3 standartScale;
     [SerializeField] Camera mainCamera;
     Vector3 targetPos;
+    private bool isCollected = false;
 
     private void Start()
     {
@@ -18,13 +19,16 @@ public class HandTriggerManager : MonoBehaviour
         diamondImageScaleReach = diamondImage.localScale * 1.1f;
     }
 
+
     //Player(Hand) in trigger islevleri
     private void OnTriggerEnter(Collider other)
     {
         //if hand hit a diamond
         if (other.transform.CompareTag("Diamond"))
         {
-            Vector3 targetPos = GetIconPosition(other.transform.position);
+            isCollected = true;
+            
+            targetPos = GetIconPosition(other.transform.position);
 
             other.transform.DOMove(targetPos, Time.deltaTime * 50).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
 

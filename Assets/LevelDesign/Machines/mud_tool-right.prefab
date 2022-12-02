@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1163200839885632384}
-  - component: {fileID: 4719710690326986466}
+  - component: {fileID: 252833929056177205}
+  - component: {fileID: 2329691934821566244}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -33,7 +34,20 @@ Transform:
   m_Father: {fileID: 173494962194225012}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4719710690326986466
+--- !u!65 &252833929056177205
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132563644051988285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.808005, y: 9.936724, z: 1}
+  m_Center: {x: -0.21654832, y: 0.9080475, z: 0}
+--- !u!114 &2329691934821566244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +56,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 132563644051988285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3ffc9062555d9b4993439d8d172edcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 19e1594a475b2d846bd4ea230f366441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matArray:
-  - {fileID: 2100000, guid: 0262e2ef6dd0f094886e0cff82a8ac41, type: 2}
-  - {fileID: 2100000, guid: 653fc30f8eed77647b3ae90da9c3893e, type: 2}
+  MudMaterial: {fileID: 2100000, guid: 6a5b73601b504af40a62b25591c2ba18, type: 2}
+  mudParticle: {fileID: 2396430893656766934, guid: 494740ad19c84744d971b256520d13df,
+    type: 3}
 --- !u!1 &704216713840081102
 GameObject:
   m_ObjectHideFlags: 0
@@ -4870,8 +4884,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173494962194225012}
-  - component: {fileID: 8193444680630534685}
-  - component: {fileID: 3474628135337918638}
   m_Layer: 0
   m_Name: mud_tool-right
   m_TagString: Untagged
@@ -4896,34 +4908,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8193444680630534685
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859831469151726498}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3474628135337918638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859831469151726498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e1594a475b2d846bd4ea230f366441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MudMaterial: {fileID: 2100000, guid: 6a5b73601b504af40a62b25591c2ba18, type: 2}
-  mudParticle: {fileID: 2396430893656766934, guid: 494740ad19c84744d971b256520d13df,
-    type: 3}
 --- !u!1 &2658636351201397878
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,7 +4919,6 @@ GameObject:
   - component: {fileID: 3018162827439870307}
   - component: {fileID: 479867801224732051}
   - component: {fileID: 8091420136898690856}
-  - component: {fileID: 567885893803789929}
   m_Layer: 0
   m_Name: Splash
   m_TagString: Untagged
@@ -5008,17 +4991,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &567885893803789929
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2658636351201397878}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
