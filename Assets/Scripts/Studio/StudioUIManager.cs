@@ -153,12 +153,7 @@ public class StudioUIManager : MonoBehaviour
             }
         }
     }
-
-    private void Update()
-    {
-        Debug.Log("Ring: " + ringScrollRect.verticalNormalizedPosition);
-         Debug.Log("Bracelet: " + braceletScrollRect.verticalNormalizedPosition);
-    }
+    
     public void PrevScene()
     {
         SceneManager.LoadScene(0);
