@@ -337,6 +337,7 @@ public class UIManager : MonoBehaviour
 
     public void GetMultiplierReward()
     {
+        Debug.Log("asd" + multiplyAmount);
         UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * (multiplyAmount - 1);
         UIManager.Instance.diamondMuliplier.SetActive(false);
         UIManager.Instance.OpenRewardPanel();

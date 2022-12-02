@@ -34,7 +34,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] Button upgradeFreelyButton;
     [SerializeField] Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
-    float upgradableObjectsNumberPerTheme = 11;
+    float upgradableObjectsNumberPerTheme = 1;
     [SerializeField] GameObject footerContentParent;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
     int UPGRADE_CHILD_INDEX = 5;
@@ -233,18 +233,27 @@ public class StudioUIManager : MonoBehaviour
             FadeInFadeOut(roomParent[0].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[0]).gameObject);
             //increase general theme index
             percentBar.DOValue(0, 1f);
-            if (GameDataManager.Instance.dataLists.freeUpgradesLeft == 0)//there is no free upgrade
+            if (GameDataManager.Instance.upgradeAmountInSession < 2)
             {
-                priceText.text = GameDataManager.Instance.objectsByIndexArray[0][GameDataManager.Instance.dataLists.room.currentRoomIndexes[0] + 1].price.ToString();
-                upgradeFreelyButton.gameObject.SetActive(false);
-                upgradeWithMoneyButton.gameObject.SetActive(true);
-                priceTextParent.SetActive(true);
+
+
+                if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)//there is no free upgrade
+                {
+                    priceText.text = GameDataManager.Instance.objectsByIndexArray[0][GameDataManager.Instance.dataLists.room.currentRoomIndexes[0] + 1].price.ToString();
+                    upgradeFreelyButton.gameObject.SetActive(false);
+                    upgradeWithMoneyButton.gameObject.SetActive(true);
+                    priceTextParent.SetActive(true);
+                }
+                else //there is free update
+                {
+                    priceTextParent.SetActive(false);
+                    upgradeFreelyButton.gameObject.SetActive(true);
+                    upgradeWithMoneyButton.gameObject.SetActive(false);
+                }
             }
-            else //there is free update
+            else
             {
-                priceTextParent.SetActive(false);
-                upgradeFreelyButton.gameObject.SetActive(true);
-                upgradeWithMoneyButton.gameObject.SetActive(false);
+                upgradeWithAdButton.gameObject.SetActive(false);
             }
         }
     }
@@ -287,6 +296,7 @@ public class StudioUIManager : MonoBehaviour
             // theme finished parts done here;
             upgradeWithMoneyButton.gameObject.SetActive(false);
             upgradeFreelyButton.gameObject.SetActive(false);
+            upgradeWithAdButton.gameObject.SetActive(false);
             priceTextParent.gameObject.SetActive(false);
             roomParentOfParents.SetActive(false);
             normalTimesUIElementParent.SetActive(false);
@@ -391,7 +401,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedRing == false)
         {
             motionStartedRing = true;
-            if (lastRingScrollRectValue > value.y && ringIndex != 4) // downwards
+            if (lastRingScrollRectValue > value.y && ringIndex != 4 && value.y > 0.186) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
                 if (ringIndex < 4)
@@ -445,7 +455,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedBracelet == false)
         {
             motionStartedBracelet = true;
-            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4) // downwards
+            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4 && value.y >0.186) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
                 if (braceletIndex < 4)
