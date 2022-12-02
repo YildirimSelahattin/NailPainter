@@ -12,15 +12,12 @@ public class FinishedThemeDialogManager : MonoBehaviour
 
     void Start()
     {
-        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
-        ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
-
-
+        braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
+        ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-      
         braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
         ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
     }
