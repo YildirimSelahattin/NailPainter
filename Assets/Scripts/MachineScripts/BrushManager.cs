@@ -7,12 +7,15 @@ using UnityEngine.Windows;
 
 public class BrushManager : MonoBehaviour
 {
-    ParticleSystem brushParticle;
+    [SerializeField]GameObject brushParticle;
     public int colorIndex = 1;
     Material brushMaterial;
+    
     void Start()
     {
+        
         brushMaterial = ColorManager.Instance.GetColorMaterialByIndex(colorIndex);
+        
         //paint the brush
         gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = brushMaterial;
     }
@@ -27,6 +30,8 @@ public class BrushManager : MonoBehaviour
             matArray[ColorManager.NAIL_COLOR_INDEX] = brushMaterial;
             other.gameObject.GetComponent<MeshRenderer>().materials = matArray;
             GameManager.Instance.currentColorIndexArray[index] = colorIndex;
+            brushParticle.GetComponent<ParticleSystemRenderer>().material = brushMaterial;
+            Instantiate(brushParticle, other.transform.position, other.transform.rotation,other.transform);
             if (colorIndex == GameManager.Instance.currentLevel.nailColorArray[index])
             {
                 UIManager.Instance.CreateCelebrationPopUp();
