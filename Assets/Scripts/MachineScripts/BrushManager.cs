@@ -7,7 +7,7 @@ using UnityEngine.Windows;
 
 public class BrushManager : MonoBehaviour
 {
-    
+    ParticleSystem brushParticle;
     public int colorIndex = 1;
     Material brushMaterial;
     void Start()
