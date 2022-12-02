@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
 
 public class HandTriggerManager : MonoBehaviour
 {
@@ -9,13 +10,27 @@ public class HandTriggerManager : MonoBehaviour
     [SerializeField] Transform diamondImage;
     Vector3 diamondImageScaleReach;
     Vector3 standartScale;
-    [SerializeField] Camera mainCamera;
+    [SerializeField] CinemachineVirtualCamera mainCamera;
+    [SerializeField] CinemachineVirtualCamera EndGameCamera;
     Vector3 targetPos;
 
     private void Start()
     {
         standartScale = diamondImage.localScale;
         diamondImageScaleReach = diamondImage.localScale * 1.1f;
+    }
+
+    private void OnEnable()
+    {
+        CinemachineController.Instance.Register(mainCamera);
+        CinemachineController.Instance.Register(EndGameCamera);
+        CinemachineController.Instance.SwitchCam(mainCamera);
+    }
+
+    private void OnDisable()
+    {
+        CinemachineController.Instance.UnRegister(mainCamera);
+        CinemachineController.Instance.UnRegister(EndGameCamera);
     }
 
     //Player(Hand) in trigger islevleri
@@ -42,6 +57,7 @@ public class HandTriggerManager : MonoBehaviour
             gameObject.transform.parent.gameObject.GetComponent<PlayerController>().enabled = false;
             //other.gameObject.SetActive(false);
             GameDataManager.Instance.upgradeAmountInSession = 0;
+            CinemachineController.Instance.SwitchCam(EndGameCamera);
             UIManager.Instance.ShowEndScreen();
         }
     }
@@ -60,7 +76,7 @@ public class HandTriggerManager : MonoBehaviour
     {
         Vector3 IconPos = UIManager.Instance.DiamondIcon.position;
         IconPos.z = (target - mainCamera.transform.position).z;
-        Vector3 result = mainCamera.ScreenToWorldPoint(IconPos);
+        Vector3 result = new Vector3(1,1,1);
         return result;
     }
 }
