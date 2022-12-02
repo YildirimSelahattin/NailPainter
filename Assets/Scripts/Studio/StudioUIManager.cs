@@ -34,7 +34,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] Button upgradeFreelyButton;
     [SerializeField] Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
-    float upgradableObjectsNumberPerTheme = 11;
+    float upgradableObjectsNumberPerTheme = 10;
     [SerializeField] GameObject footerContentParent;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
     int UPGRADE_CHILD_INDEX = 5;
@@ -156,7 +156,8 @@ public class StudioUIManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(ringScrollRect.verticalNormalizedPosition);
+        Debug.Log("Ring: " + ringScrollRect.verticalNormalizedPosition);
+         Debug.Log("Bracelet: " + braceletScrollRect.verticalNormalizedPosition);
     }
     public void PrevScene()
     {

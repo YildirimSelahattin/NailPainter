@@ -160,15 +160,14 @@ public class RewardedAdManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        UIManager.Instance.rewardPanel.gameObject.SetActive(false);
-        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
-        GameDataManager.Instance.AddUpgradeToStack();
+        
+        StartCoroutine(GameDataManager.Instance.AddUpgradeToStack());
         RequestRewarded();
     }
 
     public void HandleUserEarnedMultiplierReward(object sender, Reward args)
     {
-        UIManager.Instance.GetMultiplierReward();
+        StartCoroutine(UIManager.Instance.GetMultiplierReward());
         RequestMultiplierRewarded();
     }
 

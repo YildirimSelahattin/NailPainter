@@ -335,8 +335,9 @@ public class UIManager : MonoBehaviour
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
     }
 
-    public void GetMultiplierReward()
+    public IEnumerator GetMultiplierReward()
     {
+        yield return new WaitForEndOfFrame();
         UIManager.Instance.NumberOfDiamonds += (UIManager.Instance.currentLevelDiamond) * (multiplyAmount - 1);
         UIManager.Instance.diamondMuliplier.SetActive(false);
         UIManager.Instance.OpenRewardPanel();

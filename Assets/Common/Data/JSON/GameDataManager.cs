@@ -42,9 +42,9 @@ public class GameDataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            currentRingIndex = PlayerPrefs.GetInt("CurrentRingIndexKey",0);
+            currentRingIndex = PlayerPrefs.GetInt("CurrentRingIndexKey", 0);
             currentBraceletIndex = PlayerPrefs.GetInt("CurrentBraceletIndexKey", 0);
-            playSound = PlayerPrefs.GetInt("PlaySoundKey",0);
+            playSound = PlayerPrefs.GetInt("PlaySoundKey", 0);
             playMusic = PlayerPrefs.GetInt("PlayMusicKey", 0);
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
@@ -76,7 +76,7 @@ public class GameDataManager : MonoBehaviour
     private void OnDisable()
     {
         WriteToJson();
-        PlayerPrefs.SetInt("CurrentRingIndexKey",currentRingIndex);
+        PlayerPrefs.SetInt("CurrentRingIndexKey", currentRingIndex);
         PlayerPrefs.SetInt("CurrentBraceletIndexKey", currentBraceletIndex);
         PlayerPrefs.SetInt("PlaySoundKey", playSound);
         PlayerPrefs.SetInt("PlayMusicKey", playMusic);
@@ -104,8 +104,11 @@ public class GameDataManager : MonoBehaviour
         File.WriteAllText(dir + fileName, serializedData);
     }
 
-    public void AddUpgradeToStack()
+    public IEnumerator AddUpgradeToStack()
     {
+        yield return new WaitForEndOfFrame();
+        UIManager.Instance.rewardPanel.gameObject.SetActive(false);
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
         //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
         dataLists.freeUpgradesLeft++;
         Debug.Log("gel");
@@ -153,6 +156,6 @@ public class GameDataManager : MonoBehaviour
         dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         File.Delete(dir + fileName);
         PlayerPrefs.DeleteAll();
-        
+
     }
 }
