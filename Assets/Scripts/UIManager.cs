@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject earnedRewardPanel;
     [SerializeField] GameObject endPanel;
     public GameObject rewardItem;
-    public Transform DiamondIcon;
+    public RectTransform DiamondIcon;
     [SerializeField] GameObject handModel;
     [SerializeField] Animator targetPicAnimator;
     [SerializeField] GameObject gameMusicObject;
