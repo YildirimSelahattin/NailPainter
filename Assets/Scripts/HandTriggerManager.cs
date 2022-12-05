@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor;
 
 public class HandTriggerManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HandTriggerManager : MonoBehaviour
     public Vector3 targetPos;
     private bool isCollected = false;
     public static HandTriggerManager Instance;
+    public GameObject diamondPrefab;
 
     void Awake()
     {
@@ -36,12 +38,10 @@ public class HandTriggerManager : MonoBehaviour
         //if hand hit a diamond
         if (other.transform.CompareTag("Diamond"))
         {
+            other.gameObject.SetActive(false);
+            Instantiate(diamondPrefab,diamondImage);
             isCollected = true;
-
-            targetPos = GetIconPosition(other.transform.position);
-
-            other.transform.DOMove(targetPos, Time.deltaTime * 100).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
-
+            Debug.Log(mainCamera.WorldToScreenPoint(other.gameObject.transform.position));
             if (GameDataManager.Instance.playSound == 1)
             {
                 GameObject sound = new GameObject("sound");
@@ -70,13 +70,7 @@ public class HandTriggerManager : MonoBehaviour
     }
 
     //Toplanan elmaslarin ekranın sag üstüne gitmesini saglayan fonk.
-    public Vector3 GetIconPosition(Vector3 target)
-    {
-        Vector3 IconPos = UIManager.Instance.DiamondIcon.position;
-        Debug.Log("IconPos: " + IconPos);
-        IconPos.z = (target - mainCamera.transform.position).z;
-        Vector3 result = mainCamera.ScreenToWorldPoint(IconPos);
-        Debug.Log("REsult: " + result);
-        return result;
-    }
+  
+
+   
 }

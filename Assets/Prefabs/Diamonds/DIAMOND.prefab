@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7250236241450005722}
   - component: {fileID: 7250236241450005725}
   - component: {fileID: 178944779441316931}
-  - component: {fileID: 5327217389618156291}
   m_Layer: 0
   m_Name: DIAMOND
   m_TagString: Diamond
@@ -120,19 +119,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 34.15134
   m_Center: {x: 1.4727354, y: 2.4434357, z: -0.00090301037}
---- !u!114 &5327217389618156291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7250236241450005724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81e43dcfc77c704d8bc054fa96831e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1517182033348684439
 PrefabInstance:
   m_ObjectHideFlags: 0
