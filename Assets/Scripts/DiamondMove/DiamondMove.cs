@@ -5,22 +5,9 @@ using DG.Tweening;
 
 public class DiamondMove : MonoBehaviour
 {
-    private bool collected = false;
-    public Vector3 targetPos;
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (collected == true)
-        {
-            targetPos = HandTriggerManager.Instance.GetIconPosition(transform.position);
-            //transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 5f);
-            transform.DOMove(targetPos, Time.deltaTime * 100).OnComplete(() => HandTriggerManager.Instance.IncreaseMoneyAndDestroy(gameObject));
-        }
-    }
-
-    public void SetCollected()
-    {
-        collected = true;
+        transform.DOLocalMove(new Vector3(0, 0, 0), 1.5f).OnComplete(() => Destroy(gameObject));
+        transform.DOScale(new Vector3(.8f, .8f, .8f), 1.5f);
     }
 }

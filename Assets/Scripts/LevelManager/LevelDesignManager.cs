@@ -20,8 +20,8 @@ public class LevelDesignManager : MonoBehaviour
 
       
         Material[] levelSkyboxMat = levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials;
-        levelSkyboxMat[0] = roadMat[nextLevelNumber % 4];
-        levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials = levelSkyboxMat;
+        //levelSkyboxMat[0] = roadMat[nextLevelNumber % 4];
+        //levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials = levelSkyboxMat;
 
         RenderSettings.skybox = skyMat[nextLevelNumber % 4];
 
