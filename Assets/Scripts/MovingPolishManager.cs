@@ -27,13 +27,20 @@ public class MovingPolishManager : MonoBehaviour
         int index = ((int)GameManager.Instance.matchRate / 5) - 1;
         endPos = colorableObjectsParent.transform.GetChild(index).transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
-
-        camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(() => transform.DOLocalMove(new Vector3(endPos.x,endPos.y+1,endPos.z), 10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
         transform.DOLocalRotate(new Vector3(-30, 180, -90f), 0.1f);
     }
 
-        IEnumerator DelayOpenPanel(float second)
+    void Update()
+    {
+        if (UIManager.Instance.isTapped == true)
+        {
+            UIManager.Instance.bg.SetActive(false);
+            camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(() => transform.DOLocalMove(new Vector3(endPos.x, endPos.y + 1, endPos.z), 10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
+        }
+    }
+
+    IEnumerator DelayOpenPanel(float second)
     {
         yield return new WaitForSeconds(second);
         UIManager.Instance.diamondMuliplier.SetActive(true);

@@ -160,7 +160,6 @@ public class RewardedAdManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        
         StartCoroutine(GameDataManager.Instance.AddUpgradeToStack());
         RequestRewarded();
     }

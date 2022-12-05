@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject musicOff;
     [SerializeField] GameObject loaderCanvas;
     [SerializeField] GameObject tapToStartCanvas;
-    [SerializeField] GameObject bg;
+    public GameObject bg;
     [SerializeField] GameObject follower;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject studioButton;
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject compareHandsPanel;
+    [SerializeField] GameObject minimapBG;
     public GameObject minimap;
     [SerializeField] Sprite compareHandsWinSprite;
     [SerializeField] Sprite compareHandsLoseSprite;
@@ -48,6 +49,8 @@ public class UIManager : MonoBehaviour
     public int multiplyAmount;
     int CurrentLevelNumber;
     public int currentLevelDiamond;
+    public bool isTapped = false;
+
 
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
@@ -142,6 +145,7 @@ public class UIManager : MonoBehaviour
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
+        bg.SetActive(true);
 
         //Basariya göre win-lose
         if (matchRate >= 0)
@@ -168,7 +172,6 @@ public class UIManager : MonoBehaviour
                 Destroy(sound, GameDataManager.Instance.loseSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
             }
             losePanel.SetActive(true);
-
         }
     }
 
@@ -275,6 +278,12 @@ public class UIManager : MonoBehaviour
             notificationParent.gameObject.SetActive(true);
             //notificationParent.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = GameDataManager.Instance.dataLists.stackedChangeParentIndexes.Count.ToString();
         }
+    }
+
+    public void TapToContinue()
+    {
+        isTapped = true;
+        minimap.SetActive(false);
     }
 
     IEnumerator DelayAndStartMovingLastAnim(float second)
