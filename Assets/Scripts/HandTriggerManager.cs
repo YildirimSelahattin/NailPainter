@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class HandTriggerManager : MonoBehaviour
 {
-    [SerializeField] Transform diamondReachPointReference;
+    [SerializeField] GameObject diamondPrefab;
     [SerializeField] Transform diamondImage;
     Vector3 diamondImageScaleReach;
     Vector3 standartScale;
@@ -36,7 +36,8 @@ public class HandTriggerManager : MonoBehaviour
         //if hand hit a diamond
         if (other.transform.CompareTag("Diamond"))
         {
-            other.GetComponent<DiamondMove>().SetCollected();
+            other.gameObject.SetActive(false);
+            Instantiate(diamondPrefab,diamondImage);
 
             if (GameDataManager.Instance.playSound == 1)
             {
@@ -65,12 +66,4 @@ public class HandTriggerManager : MonoBehaviour
         Destroy(diamond);
     }
 
-    //Toplanan elmaslarin ekranın sag üstüne gitmesini saglayan fonk.
-    public Vector3 GetIconPosition(Vector3 target)
-    {
-        Vector3 IconPos = diamondImage.position;
-        IconPos.z = (target - mainCamera.transform.position).z;
-        Vector3 result = mainCamera.ScreenToWorldPoint(IconPos);
-        return result;
-    }
 }
