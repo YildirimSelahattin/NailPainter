@@ -9,12 +9,22 @@ public class LevelDesignManager : MonoBehaviour
     public GameObject LevelsParrent;
     GameObject levelPrefab;
     [SerializeField]int nextLevelNumber;
+    [SerializeField] Material[] skyMat;
+    [SerializeField] Material[] roadMat;
 
     void Start()
     {
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         Debug.Log(nextLevelNumber);
         levelPrefab = Instantiate(Levels[nextLevelNumber], transform.position, transform.rotation);
+
+      
+        Material[] levelSkyboxMat = levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials;
+        levelSkyboxMat[0] = roadMat[nextLevelNumber % 4];
+        levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials = levelSkyboxMat;
+
+        RenderSettings.skybox = skyMat[nextLevelNumber % 4];
+
         levelPrefab.transform.parent = transform;
     }
 

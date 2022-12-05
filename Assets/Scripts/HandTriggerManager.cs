@@ -10,7 +10,7 @@ public class HandTriggerManager : MonoBehaviour
     Vector3 diamondImageScaleReach;
     Vector3 standartScale;
     [SerializeField] Camera mainCamera;
-    public Vector3 targetPos;
+
     private bool isCollected = false;
     public static HandTriggerManager Instance;
 
@@ -36,11 +36,7 @@ public class HandTriggerManager : MonoBehaviour
         //if hand hit a diamond
         if (other.transform.CompareTag("Diamond"))
         {
-            isCollected = true;
-
-            targetPos = GetIconPosition(other.transform.position);
-
-            other.transform.DOMove(targetPos, Time.deltaTime * 100).OnComplete(() => IncreaseMoneyAndDestroy(other.gameObject));
+            other.GetComponent<DiamondMove>().SetCollected();
 
             if (GameDataManager.Instance.playSound == 1)
             {
@@ -66,17 +62,15 @@ public class HandTriggerManager : MonoBehaviour
         UIManager.Instance.currentLevelDiamond++;
         UIManager.Instance.NumberOfDiamonds++;
         diamondImage.DOScale(diamondImageScaleReach, 0.2f).OnComplete(() => diamondImage.DOScale(standartScale, 0.2f));
-        //Destroy(diamond);
+        Destroy(diamond);
     }
 
     //Toplanan elmaslarin ekranın sag üstüne gitmesini saglayan fonk.
     public Vector3 GetIconPosition(Vector3 target)
     {
-        Vector3 IconPos = UIManager.Instance.DiamondIcon.position;
-        Debug.Log("IconPos: " + IconPos);
+        Vector3 IconPos = diamondImage.position;
         IconPos.z = (target - mainCamera.transform.position).z;
         Vector3 result = mainCamera.ScreenToWorldPoint(IconPos);
-        Debug.Log("REsult: " + result);
         return result;
     }
 }
