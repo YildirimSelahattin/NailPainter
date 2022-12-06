@@ -145,7 +145,7 @@ public class UIManager : MonoBehaviour
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
-        bg.SetActive(true);
+        minimapBG.SetActive(true);
 
         //Basariya göre win-lose
         if (matchRate >= 0)

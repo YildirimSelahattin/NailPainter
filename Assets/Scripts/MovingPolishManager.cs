@@ -24,10 +24,11 @@ public class MovingPolishManager : MonoBehaviour
         transform.position = colorableObjectsParent.transform.GetChild(0).transform.position + 3 * Vector3.forward;
         startPos = transform.position;
         startTime = Time.time;
-        int index = ((int)GameManager.Instance.matchRate / 5) - 1;
+        int index = (100 / 5) - 1;
         endPos = colorableObjectsParent.transform.GetChild(index).transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
+
         transform.DOLocalRotate(new Vector3(-30, 180, -90f), 0.1f);
     }
 
