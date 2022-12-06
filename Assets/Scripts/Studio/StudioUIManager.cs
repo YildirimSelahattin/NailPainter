@@ -66,21 +66,6 @@ public class StudioUIManager : MonoBehaviour
             Instance = this;
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
-            //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
-            if (ringIndex != 0)
-            {
-                OpenRingOrBracelet(ringScrollRect.transform.GetChild(0).GetChild(0).gameObject.transform.GetChild(ringIndex).gameObject);
-            }
-
-            //Bracelet calcs
-            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
-            if (braceletIndex != 0)
-            {
-                OpenRingOrBracelet(braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject.transform.GetChild(braceletIndex).gameObject);
-            }
 
             //PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
@@ -96,6 +81,21 @@ public class StudioUIManager : MonoBehaviour
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
 
             }
+            //RingScroll calcs
+            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+            if (ringIndex != 0)
+            {
+                ChangeLayerToUI(contentForRing,ringIndex);
+            }
+            //Bracelet calcs
+            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
+            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
+            if(braceletIndex != 0)
+            {
+                ChangeLayerToUI(contentForBracelet, braceletIndex);
+            }
+
             ///ROOM JOBS
             //update slider
             percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
