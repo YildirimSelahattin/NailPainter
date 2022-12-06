@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
     int CurrentLevelNumber;
     public int currentLevelDiamond;
     public bool isTapped = false;
-
+    public  GameObject mudParent;
 
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
