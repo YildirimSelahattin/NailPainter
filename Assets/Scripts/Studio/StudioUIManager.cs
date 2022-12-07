@@ -34,6 +34,8 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] Button upgradeFreelyButton;
     [SerializeField] Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
+    [SerializeField] GameObject ringCheck;
+    [SerializeField] GameObject braceletCheck;
     float upgradableObjectsNumberPerTheme = 10;
     [SerializeField] GameObject footerContentParent;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
@@ -517,12 +519,11 @@ public class StudioUIManager : MonoBehaviour
     public void OnSelectRingByIndexButtonClicked(int ringIndex)
     {
         GameDataManager.Instance.currentRingIndex = ringIndex;
-
     }
+
     public void OnSelectBraceletByIndexButtonClicked(int braceletIndex)
     {
         GameDataManager.Instance.currentBraceletIndex = braceletIndex;
-
     }
 
     private void OpenRingOrBracelet(GameObject parent)
