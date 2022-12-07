@@ -44,6 +44,11 @@ public class GiftUIManager : MonoBehaviour
     private void OnDisable()
     {
         braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
+
         ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(false);
+        finishedThemeDialog.SetActive(true);
+        tapToCollectWindow.SetActive(false);
+        collectWindow.SetActive(false);
+
     }
 }
