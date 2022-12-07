@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class AsetonMachineManager : MonoBehaviour
 {
+    GameObject UIAcidParent;
     [SerializeField] Material[] matArray;
     [SerializeField] Material[] matArrayForThumb;
     string currentTag;
     GameObject diamondParent;
+
+    private void Start()
+    {
+        UIAcidParent = UIManager.Instance.acidParent;
+    }
     private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
         if (other.transform.tag.Contains("Nail"))
@@ -31,6 +37,10 @@ public class AsetonMachineManager : MonoBehaviour
                 GameObject sound = new GameObject("sound");
                 sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.asetonSound);
                 Destroy(sound, GameDataManager.Instance.asetonSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+            foreach (Transform child in UIAcidParent.transform)
+            {
+                child.gameObject.SetActive(true);
             }
         }
     }

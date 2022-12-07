@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        ColorManager.Instance.ColorCurrentHand(currentColorIndexArray, currentPatternIndexArray, currentDiamondIndexArray);
+        
     }
 
     public float CompareTwoHands()
