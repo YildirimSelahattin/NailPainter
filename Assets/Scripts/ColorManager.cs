@@ -91,24 +91,24 @@ public class ColorManager : MonoBehaviour
         for (int index = 0; index < 5; index++)
         {
             //color nail
-            TargetMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[nailColorArray[index]];
+            TargetMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = colorsArray[nailColorArray[index]];
             //pattern nail(special if for thumb because tilling)
-            TargetMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[nailPatternArray[index]];
+            TargetMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = patternsArray[nailPatternArray[index]];
             //diamond nail
-            TargetMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[nailDiamondArray[index]];
+            TargetMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = diamondsArray[nailDiamondArray[index]];
         }
     }
 
-    public void ColorCurrentHand(int[] nailColorArray, int[] nailPatternArray, int[] nailDiamondArray)
+    public void ColorCurrentHand()
     {
         for (int index = 0; index < 5; index++)
         {
             //color nail
-            CurrentMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.colorsArray[GameManager.Instance.currentColorIndexArray[index]];
+            CurrentMaskArray[index].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = colorsArray[GameManager.Instance.currentColorIndexArray[index]];
             //pattern nail(special if for thumb because tilling)
-            CurrentMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.patternsArray[GameManager.Instance.currentPatternIndexArray[index]];
+            CurrentMaskArray[index].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = patternsArray[GameManager.Instance.currentPatternIndexArray[index]];
             //diamond nail
-            CurrentMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = ColorManager.Instance.diamondsArray[GameManager.Instance.currentDiamondIndexArray[index]];
+            CurrentMaskArray[index].transform.GetChild(2).gameObject.GetComponent<Image>().sprite = diamondsArray[GameManager.Instance.currentDiamondIndexArray[index]];
         }
     }
 }
