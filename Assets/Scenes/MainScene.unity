@@ -34163,6 +34163,7 @@ MonoBehaviour:
     type: 3}
   loseFont: 0
   winFont: 0
+  EndGameEnv: {fileID: 1842089914}
   fireworks: {fileID: 353041548}
   diamondMuliplier: {fileID: 7941889275220417767}
   multiplyAmount: 0
@@ -47078,7 +47079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1842089915}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EndGameEnv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72424,6 +72425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ExplodingObjects
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730679437728788651, guid: 2d6cf7b80a4c4724e88d5c40ab0963d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d6cf7b80a4c4724e88d5c40ab0963d4, type: 3}

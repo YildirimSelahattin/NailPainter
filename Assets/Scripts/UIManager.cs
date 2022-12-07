@@ -44,13 +44,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] Sprite compareHandsLoseSprite;
     [SerializeField] FontStyle loseFont;
     [SerializeField] FontStyle winFont;
+    [SerializeField] GameObject EndGameEnv;
     public GameObject fireworks;
     public GameObject diamondMuliplier;
     public int multiplyAmount;
     int CurrentLevelNumber;
     public int currentLevelDiamond;
     public bool isTapped = false;
-    public  GameObject mudParent;
+    public GameObject mudParent;
 
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
@@ -131,11 +132,14 @@ public class UIManager : MonoBehaviour
     //Run bittikten sonra calisan fonk.
     public void ShowEndScreen()
     {
+        EndGameEnv.SetActive(true);
+
         //Geçiş reklamı
         if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
         {
             InterstitialAdManager.Instance.interstitialEndGame.Show();
         }
+
         compareHandsPanel.SetActive(true);
         targetPicAnimator.SetBool("isEnd", true);
         settingsButton.SetActive(false);
@@ -326,7 +330,6 @@ public class UIManager : MonoBehaviour
     public void NoTnxDiamondMuliplierPanel()
     {
         diamondMuliplier.SetActive(false);
-        Debug.Log("DASDASDSDSDSDSDSDDSDSDSDS");
         OpenRewardPanel();
     }
 
