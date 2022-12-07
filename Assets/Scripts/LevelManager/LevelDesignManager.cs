@@ -16,7 +16,7 @@ public class LevelDesignManager : MonoBehaviour
     {
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         Debug.Log(nextLevelNumber);
-        levelPrefab = Instantiate(Levels[9], transform.position, transform.rotation);
+        levelPrefab = Instantiate(Levels[3], transform.position, transform.rotation);
 
       
         Material[] levelSkyboxMat = levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials;
