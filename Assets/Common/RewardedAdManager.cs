@@ -176,6 +176,10 @@ public class RewardedAdManager : MonoBehaviour
         {
             this.rewardedmultiplierAd.Show();
         }
+        else
+        {
+            RequestMultiplierRewarded();
+        }
     }
 
     public void FurnitureRewardAd()
@@ -184,6 +188,10 @@ public class RewardedAdManager : MonoBehaviour
         {
             this.rewardedAd.Show();
         }
+        else
+        {
+            RequestRewarded();
+        }
     }
 
     public void UpgradeRewardAd()
@@ -191,6 +199,10 @@ public class RewardedAdManager : MonoBehaviour
         if (this.rewardedupgradeAd.IsLoaded())
         {
             this.rewardedupgradeAd.Show();
+        }
+        else
+        {
+            RequestUpgradeRewarded();
         }
     }
 
@@ -234,6 +246,10 @@ public class RewardedAdManager : MonoBehaviour
         if (this.rewardedSkipAd.IsLoaded())
         {
             this.rewardedSkipAd.Show();
+        }
+        else
+        {
+            RequestSkipRewarded();
         }
     }
 }

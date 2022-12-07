@@ -49,6 +49,8 @@ public class HandTriggerManager : MonoBehaviour
 
         if (other.transform.CompareTag("EndGame"))
         {
+            //color the current hand image according to current arrays
+            ColorManager.Instance.ColorCurrentHand();
             //disable path following mode
             gameObject.transform.parent.gameObject.GetComponent<PlayerController>().enabled = false;
             //other.gameObject.SetActive(false);

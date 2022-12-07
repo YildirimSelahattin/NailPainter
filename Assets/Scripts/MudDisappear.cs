@@ -27,7 +27,7 @@ public class MudDisappear : MonoBehaviour
     }
     public IEnumerator DelayAndStartFading()
     {
-        yield return new WaitForSeconds(Random.Range(0.5f, 0.7f));
+        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
         gameObject.GetComponent<Image>().DOFade(0, Random.Range(1f, 2f)).OnComplete(() => ResetFadeAndDisable());
     }
 }
