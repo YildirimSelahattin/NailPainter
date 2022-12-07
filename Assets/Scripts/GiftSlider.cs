@@ -34,8 +34,8 @@ public class GiftSlider : MonoBehaviour
     {
         int multiplier = GetMultiplier();
         multiplierText.text = multiplier.ToString() + "X";
-
     }
+    
     public void DoRotateLoopMove()
     {
         rectTransform.DOLocalRotate(new Vector3(0, 0, 60), 1.2f).OnComplete(() => rectTransform.DOLocalRotate(new Vector3(0, 0, -60), 1.2f).OnComplete(() => DoRotateLoopMove()));
@@ -69,9 +69,8 @@ public class GiftSlider : MonoBehaviour
         {
             return 5;
         }
-
-
     }
+    
     private IEnumerator OpenNoThanksAfterDelay(int delay)
     {
         yield return new WaitForSeconds(delay);

@@ -28,8 +28,9 @@ public class MovingPolishManager : MonoBehaviour
         endPos = colorableObjectsParent.transform.GetChild(index).transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
-
         transform.DOLocalRotate(new Vector3(-30, 180, -90f), 0.1f);
+        //206
+        camera.transform.GetComponent<Camera>().farClipPlane = 220;
     }
 
     void Update()
@@ -37,6 +38,7 @@ public class MovingPolishManager : MonoBehaviour
         if (UIManager.Instance.isTapped == true)
         {
             UIManager.Instance.bg.SetActive(false);
+            UIManager.Instance.isTapped = false;
             camera.transform.DOLocalMove(targetCameraPosition, 1f).OnComplete(() => transform.DOLocalMove(new Vector3(endPos.x, endPos.y + 1, endPos.z), 10).OnComplete(() => CloseBrushAndOpenRewarPanel()));
         }
     }

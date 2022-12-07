@@ -326,6 +326,7 @@ public class UIManager : MonoBehaviour
     public void NoTnxDiamondMuliplierPanel()
     {
         diamondMuliplier.SetActive(false);
+        Debug.Log("DASDASDSDSDSDSDSDDSDSDSDS");
         OpenRewardPanel();
     }
 

@@ -66,21 +66,6 @@ public class StudioUIManager : MonoBehaviour
             Instance = this;
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
-            //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
-            if (ringIndex != 0)
-            {
-                OpenRingOrBracelet(ringScrollRect.transform.GetChild(0).GetChild(0).gameObject.transform.GetChild(ringIndex).gameObject);
-            }
-
-            //Bracelet calcs
-            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
-            if (braceletIndex != 0)
-            {
-                OpenRingOrBracelet(braceletScrollRect.transform.GetChild(0).GetChild(0).gameObject.transform.GetChild(braceletIndex).gameObject);
-            }
 
             //PlayerPrefs.SetInt("NumberOfDiamondsKey", 250);
             // update money text
@@ -94,8 +79,24 @@ public class StudioUIManager : MonoBehaviour
                 OpenRingOrBracelet(contentForRing.transform.GetChild(i).gameObject);
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
-
             }
+
+            //RingScroll calcs
+            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+
+            if (ringIndex != 0)
+            {
+                StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
+            }
+            //Bracelet calcs
+            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
+            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
+            if (braceletIndex != 0)
+            {
+                StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
+            }
+
             ///ROOM JOBS
             //update slider
             percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f);
@@ -153,7 +154,7 @@ public class StudioUIManager : MonoBehaviour
             }
         }
     }
-    
+
     public void PrevScene()
     {
         SceneManager.LoadScene(0);
@@ -220,7 +221,7 @@ public class StudioUIManager : MonoBehaviour
             upgradeFreelyButton.gameObject.SetActive(false);
             upgradeWithMoneyButton.gameObject.SetActive(false);
         }
-       else
+        else
         {
             //reset upgrades left
             GameDataManager.Instance.dataLists.room.nextUpgradeIndex = 0;
@@ -396,7 +397,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedRing == false)
         {
             motionStartedRing = true;
-            if (lastRingScrollRectValue > value.y && ringIndex != 4 ) // downwards
+            if (lastRingScrollRectValue > value.y && ringIndex != 4) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
                 if (ringIndex < 4)
@@ -423,8 +424,9 @@ public class StudioUIManager : MonoBehaviour
             {
                 motionStartedRing = false;
             }
-              if(value.y < 0.186){
-                  ringScrollRect.verticalNormalizedPosition = 0.186f;
+            if (value.y < 0.205)
+            {
+                ringScrollRect.verticalNormalizedPosition = 0.205f;
             }
         }
     }
@@ -453,7 +455,7 @@ public class StudioUIManager : MonoBehaviour
         if (motionStartedBracelet == false)
         {
             motionStartedBracelet = true;
-            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4 ) // downwards
+            if (lastBraceletScrollRectValue > value.y && braceletIndex != 4) // downwards
             {
                 StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
                 if (braceletIndex < 4)
@@ -480,8 +482,9 @@ public class StudioUIManager : MonoBehaviour
             {
                 motionStartedBracelet = false;
             }
-            if(value.y < 0.186){
-                  braceletScrollRect.verticalNormalizedPosition = 0.186f;
+            if (value.y < 0.205)
+            {
+                braceletScrollRect.verticalNormalizedPosition = 0.205f;
             }
         }
     }
@@ -527,6 +530,4 @@ public class StudioUIManager : MonoBehaviour
         parent.GetComponent<Button>().interactable = true; // open button
         parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
     }
-
-
 }

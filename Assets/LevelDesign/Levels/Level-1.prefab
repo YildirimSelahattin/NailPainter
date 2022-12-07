@@ -149,7 +149,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d8886fc3f686064d822c8bd0e128526, type: 2}
+  - {fileID: 2100000, guid: 4e7f14b8adb2ad241bb5f4ae5adabe08, type: 2}
   - {fileID: 2100000, guid: 8192405a98f75b74292bbab4ed81eb19, type: 2}
   - {fileID: 2100000, guid: 80a4437b21c6a014db07bb24a5d591b7, type: 2}
   m_StaticBatchInfo:
@@ -704,6 +704,11 @@ PrefabInstance:
       propertyPath: meshHolder
       value: 
       objectReference: {fileID: 3494576144191306104}
+    - target: {fileID: 6923448656855349994, guid: 0c453e216cdcdf24c8e6d62177f4a144,
+        type: 3}
+      propertyPath: roadMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e7f14b8adb2ad241bb5f4ae5adabe08, type: 2}
     - target: {fileID: 6923448656855349995, guid: 0c453e216cdcdf24c8e6d62177f4a144,
         type: 3}
       propertyPath: editorData.tabIndex
