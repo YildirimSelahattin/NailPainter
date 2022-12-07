@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -517,11 +518,14 @@ public class StudioUIManager : MonoBehaviour
     public void OnSelectRingByIndexButtonClicked(int ringIndex)
     {
         GameDataManager.Instance.currentRingIndex = ringIndex;
+        contentForRing.transform.GetChild(ringIndex).gameObject.SetActive(true);
 
     }
     public void OnSelectBraceletByIndexButtonClicked(int braceletIndex)
     {
         GameDataManager.Instance.currentBraceletIndex = braceletIndex;
+        contentForBracelet.transform.GetChild(braceletIndex).gameObject.SetActive(true);
+        
 
     }
 
