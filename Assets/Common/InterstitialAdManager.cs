@@ -55,6 +55,7 @@ public class InterstitialAdManager : MonoBehaviour
     public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
         MonoBehaviour.print("HandleFailedToReceiveAd event received with message: " + args);
+        RequestEndInterstitial();
     }
 
     public void HandleOnAdOpening(object sender, EventArgs args)
