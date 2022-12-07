@@ -201,14 +201,17 @@ public class StudioUIManager : MonoBehaviour
         lastRingScrollRectValue = scrollRectYPoss[ringIndex];
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
+        StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
+        
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
         OpenRingOrBracelet(contentForBracelet.transform.GetChild(braceletIndex).gameObject);
+        StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
         roomParentOfParents.SetActive(true);
         normalTimesUIElementParent.SetActive(true);
         GiftTimesUIElementParent.SetActive(false);
-        generalThemeText.text = (GameDataManager.Instance.dataLists.room.generalThemeIndex).ToString();
+        generalThemeText.text = themeNames[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
         //FOOTER CALCULATİONS 
         //FOOTER RINGS AND BRACELET JOBS
         //ring
