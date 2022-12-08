@@ -86,20 +86,18 @@ public class StudioUIManager : MonoBehaviour
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
             }
-
-            //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
-
             if (ringIndex != 0)
             {
+                //RingScroll calcs
+                lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
             }
-            //Bracelet calcs
-            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
             if (braceletIndex != 0)
             {
+                //Bracelet calcs
+                lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
+                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
             }
 
@@ -210,7 +208,6 @@ public class StudioUIManager : MonoBehaviour
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
         StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
-
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));

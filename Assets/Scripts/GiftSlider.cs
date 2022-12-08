@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
 using TMPro;
-
+using UnityEngine.UI;
 public class GiftSlider : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -12,6 +12,7 @@ public class GiftSlider : MonoBehaviour
     [SerializeField] GameObject[] outlineArray;
     [SerializeField] TextMeshProUGUI multiplierText;
     [SerializeField] GameObject noThanksButton;
+    [SerializeField] GameObject getButton;
     public int multiplier;
     int prevMultiplier;
     public static GiftSlider Instance;
@@ -24,9 +25,13 @@ public class GiftSlider : MonoBehaviour
         }
         //currentMoneyText.text = GameManager.Instance.moneyColletectedThisSession.ToString();
         rectTransform = gameObject.GetComponent<RectTransform>();
-
+        // cant press get multiplier if ad is not loaded
+        if (RewardedAdManager.Instance.rewardedmultiplierAd.IsLoaded() == false)
+        {
+            getButton.GetComponent<Button>().interactable = false;
+        }
         DoRotateLoopMove();
-        //StartCoroutine(OpenNoThanksAfterDelay(2));
+        StartCoroutine(OpenNoThanksAfterDelay(2));
     }
 
     // Update is called once per frame

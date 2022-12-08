@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using TMPro;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
@@ -52,7 +51,7 @@ public class UIManager : MonoBehaviour
     public bool isTapped = false;
     public  GameObject mudParent;
     public GameObject acidParent;
-
+    [SerializeField] GameObject rewardGetButton;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
 
@@ -303,6 +302,10 @@ public class UIManager : MonoBehaviour
         rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
         Transform spawnPoint = rewardItem.transform.GetChild(1);
         Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position, spawnPoint.rotation, spawnPoint);
+        if(RewardedAdManager.Instance.rewardedAd.IsLoaded() == false)
+        {
+            rewardGetButton.GetComponent<Button>().interactable = false;
+        }
         rewardItem.SetActive(true);
         rewardPanel.SetActive(true);
     }
@@ -327,7 +330,6 @@ public class UIManager : MonoBehaviour
     public void NoTnxDiamondMuliplierPanel()
     {
         diamondMuliplier.SetActive(false);
-        Debug.Log("DASDASDSDSDSDSDSDDSDSDSDS");
         OpenRewardPanel();
     }
 
