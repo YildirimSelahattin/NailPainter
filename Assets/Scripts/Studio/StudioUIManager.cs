@@ -88,18 +88,17 @@ public class StudioUIManager : MonoBehaviour
             }
 
             //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
-
             if (ringIndex != 0)
             {
+                lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
             }
             //Bracelet calcs
-            lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
-            braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
-            if (braceletIndex != 0)
+            if (braceletIndex!=0)
             {
+                lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
+                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
             }
 
