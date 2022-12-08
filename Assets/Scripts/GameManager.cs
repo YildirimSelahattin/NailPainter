@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
+        levelIndex = PlayerPrefs.GetInt("NextLevelNumberKey", 0) % 30;
         //5 i değiştir
         ReadCSVAndFillTargetArrays(levelIndex);
         ColorManager.Instance.ColorTargetHand(currentLevel.nailColorArray, currentLevel.nailPatternArray, currentLevel.nailDiamondArray);
@@ -57,10 +57,8 @@ public class GameManager : MonoBehaviour
         ringParent.transform.GetChild(GameDataManager.Instance.currentRingIndex).gameObject.SetActive(true);
         braceletParent.transform.GetChild(GameDataManager.Instance.currentBraceletIndex).gameObject.SetActive(true);
     }
-
     void Update()
     {
-        
     }
 
     public float CompareTwoHands()

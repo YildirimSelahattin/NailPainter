@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject rewardGetButton;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
-
+    
     int isSoundOn;
     int isMusicOn;
     int LevelNumber;
@@ -131,10 +131,34 @@ public class UIManager : MonoBehaviour
     //Run bittikten sonra calisan fonk.
     public void ShowEndScreen()
     {
+        int matchRate = (int)GameManager.Instance.CompareTwoHands();
         //Geçiş reklamı
         if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
         {
             InterstitialAdManager.Instance.interstitialEndGame.Show();
+        }
+        else
+        {
+            if (matchRate >= 80)
+            {
+                if (GameDataManager.Instance.playSound == 1)
+                {
+                    GameObject sound = new GameObject("sound");
+                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.winSound);
+                    Destroy(sound, GameDataManager.Instance.winSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                }
+
+            }
+            else
+            {
+                if (GameDataManager.Instance.playSound == 1)
+                {
+                    GameObject sound = new GameObject("sound");
+                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.loseSound);
+                    Destroy(sound, GameDataManager.Instance.loseSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                }
+
+            }
         }
         compareHandsPanel.SetActive(true);
         targetPicAnimator.SetBool("isEnd", true);
@@ -142,36 +166,26 @@ public class UIManager : MonoBehaviour
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);
         levelCounterText.gameObject.SetActive(false);
-        int matchRate = (int)GameManager.Instance.CompareTwoHands();
+       
         matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
         minimapBG.SetActive(true);
 
         //Basariya göre win-lose
-        if (matchRate >= 0)
+        if (matchRate >= 80)
         {
             matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(0, 192, 42, 255);
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsWinSprite;
-            if (GameDataManager.Instance.playSound == 1)
-            {
-                GameObject sound = new GameObject("sound");
-                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.winSound);
-                Destroy(sound, GameDataManager.Instance.winSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
-            }
             winPanel.SetActive(true);
             StartCoroutine(DelayAndStartMovingLastAnim(0.01f));
+           
         }
         else
         {
             matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(255, 0, 0, 255);
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsLoseSprite;
-            if (GameDataManager.Instance.playSound == 1)
-            {
-                GameObject sound = new GameObject("sound");
-                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.loseSound);
-                Destroy(sound, GameDataManager.Instance.loseSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
-            }
             losePanel.SetActive(true);
+           
         }
     }
 

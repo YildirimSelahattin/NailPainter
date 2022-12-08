@@ -46,7 +46,8 @@ public class InterstitialAdManager : MonoBehaviour
         // Load the interstitial with the request.
         this.interstitialEndGame.LoadAd(request);
     }
-
+    // if there is no internet and 
+    
     public void HandleOnAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdLoaded event received");
@@ -66,5 +67,25 @@ public class InterstitialAdManager : MonoBehaviour
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdClosed event received");
+
+        if (GameManager.Instance.matchRate >= 80)
+        {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.winSound);
+                Destroy(sound, GameDataManager.Instance.winSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+        }
+        else
+        {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.loseSound);
+                Destroy(sound, GameDataManager.Instance.loseSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+        }
+        
     }
 }

@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 9205303}
   - component: {fileID: 9205302}
   m_Layer: 5
-  m_Name: mud1
+  m_Name: acid1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1146034, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7713,7 +7713,7 @@ GameObject:
   - component: {fileID: 322390312}
   - component: {fileID: 322390311}
   m_Layer: 5
-  m_Name: mud2 (1)
+  m_Name: acid3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7764,7 +7764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1146034, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -16829,7 +16829,7 @@ GameObject:
   - component: {fileID: 628958735}
   - component: {fileID: 628958734}
   m_Layer: 5
-  m_Name: mud2
+  m_Name: acid2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16880,7 +16880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1146034, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17719,7 +17719,7 @@ RectTransform:
   m_GameObject: {fileID: 653162589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.831373, y: 8.831373, z: 8.831373}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1654163870}
@@ -17727,7 +17727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -380}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &653162591
@@ -19791,7 +19791,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c50ab5abc3eba6b408eddc403d7a781a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0b938f47f4082f469ebe8085415611e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -42103,8 +42103,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -356.49976}
+  m_SizeDelta: {x: 0, y: -713.0005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1657624473
 GameObject:
@@ -44772,7 +44772,7 @@ RectTransform:
   m_GameObject: {fileID: 1758682842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.831373, y: 8.831373, z: 8.831373}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1654163870}
@@ -44780,7 +44780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -380}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1758682844
@@ -45848,7 +45848,7 @@ GameObject:
   - component: {fileID: 1783560268}
   - component: {fileID: 1783560267}
   m_Layer: 5
-  m_Name: mud2 (2)
+  m_Name: acid4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45899,7 +45899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1146034, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -53264,19 +53264,21 @@ MonoBehaviour:
   currentBraceletIndex: 0
   playSound: 0
   playMusic: 0
-  brushMachineMusic: {fileID: 0}
-  asetonSound: {fileID: 0}
-  washMachineSound: {fileID: 0}
-  patternMachineSound: {fileID: 0}
-  manicureMachineSound: {fileID: 0}
-  diamondMachineSound: {fileID: 0}
-  winSound: {fileID: 0}
-  loseSound: {fileID: 0}
-  diamondCollected: {fileID: 0}
-  lastAnimationSound: {fileID: 0}
-  upgradeSound: {fileID: 0}
-  themeFinishedSound: {fileID: 0}
-  mudMachineSound: {fileID: 0}
+  brushMachineMusic: {fileID: 8300000, guid: d661e050b13a1cf459d4e3c3a9c470f4, type: 3}
+  asetonSound: {fileID: 8300000, guid: dd16db09bf686cb4ea8e4ab93bc0f0b7, type: 3}
+  washMachineSound: {fileID: 8300000, guid: 88e4f6e1f9276f249a868fee0dd4ea84, type: 3}
+  patternMachineSound: {fileID: 8300000, guid: 5b6e1c2cfac5d6748800318d43a077c6, type: 3}
+  manicureMachineSound: {fileID: 8300000, guid: c823419063bc2074dbb09d9e83c7d8dc,
+    type: 3}
+  diamondMachineSound: {fileID: 8300000, guid: 67d0f538ab008e14f8cab45aecf3eb7b, type: 3}
+  winSound: {fileID: 8300000, guid: 40f6b5a01eea74b4cbe1016849d110d1, type: 3}
+  loseSound: {fileID: 8300000, guid: 1b30112ac28118942bf4a312fecacb20, type: 3}
+  diamondCollected: {fileID: 8300000, guid: af9ffc376e67c9041b88820a9c1e48f5, type: 3}
+  lastAnimationSound: {fileID: 8300000, guid: 1da03956f0b378343a35e068d31d4e6e, type: 3}
+  upgradeSound: {fileID: 8300000, guid: dd16db09bf686cb4ea8e4ab93bc0f0b7, type: 3}
+  themeFinishedSound: {fileID: 8300000, guid: 1b872abc45c669a4faf543841f237ce7, type: 3}
+  mudMachineSound: {fileID: 8300000, guid: dbc7df9e2330abf4e838941970088f12, type: 3}
+  hundredPercentSound: {fileID: 8300000, guid: 2676fc2ccf2c31747afbd78831c4d767, type: 3}
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0

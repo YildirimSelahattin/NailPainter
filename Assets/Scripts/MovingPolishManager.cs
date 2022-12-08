@@ -21,6 +21,8 @@ public class MovingPolishManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // play win music
+        
         transform.position = colorableObjectsParent.transform.GetChild(0).transform.position + 3 * Vector3.forward;
         startPos = transform.position;
         startTime = Time.time;
@@ -53,6 +55,15 @@ public class MovingPolishManager : MonoBehaviour
 
     private void CloseBrushAndOpenRewarPanel()
     {
+        if(GameManager.Instance.matchRate == 100)
+        {
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.hundredPercentSound);
+                Destroy(sound, GameDataManager.Instance.hundredPercentSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+        }
         GameManager.Instance.DisableMovingPolish();
         UIManager.Instance.AfterEndGame();
         StartCoroutine(DelayOpenPanel(1f));

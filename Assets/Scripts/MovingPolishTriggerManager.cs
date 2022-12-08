@@ -7,7 +7,6 @@ using UnityEngine;
 public class MovingPolishTriggerManager : MonoBehaviour
 {
     [SerializeField] GameObject brushParticle;
-    GameObject tempSound;
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("colorable"))
@@ -19,20 +18,12 @@ public class MovingPolishTriggerManager : MonoBehaviour
             if (GameDataManager.Instance.playSound == 1)
             {
                 GameObject sound = new GameObject("sound");
-                tempSound = sound;
                 sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.lastAnimationSound);
-                
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("colorable"))
-        {
-            if(tempSound.IsDestroyed()==false)
-            {
-                tempSound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.lastAnimationSound);
-            }
-        }
+    
     }
 }
