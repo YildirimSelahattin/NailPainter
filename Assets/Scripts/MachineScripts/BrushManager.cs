@@ -37,6 +37,13 @@ public class BrushManager : MonoBehaviour
             {
                 UIManager.Instance.CreateCelebrationPopUp();
             }
+            if (GameDataManager.Instance.playSound == 1)
+            {
+                GameObject sound = new GameObject("sound");
+                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.brushMachineMusic);
+                Destroy(sound, GameDataManager.Instance.brushMachineMusic.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            }
+
         }
     }
     private void OnTriggerEnter(Collider other)
