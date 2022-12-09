@@ -184,7 +184,6 @@ public class RewardedAdManager : MonoBehaviour
 
     public void FurnitureRewardAd()
     {
-        PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
         if (this.rewardedAd.IsLoaded())
         {
             this.rewardedAd.Show();

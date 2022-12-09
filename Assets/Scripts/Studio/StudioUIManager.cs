@@ -36,7 +36,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] GameObject priceTextParent;
     [SerializeField] GameObject ringCheck;
     [SerializeField] GameObject braceletCheck;
-    float upgradableObjectsNumberPerTheme = 10;
+    float upgradableObjectsNumberPerTheme = 11;
     [SerializeField] GameObject footerContentParent;
     // bu ilk chil veya son child olabilir, upgrade buttonlar kapal� ba�lamal�
     int UPGRADE_CHILD_INDEX = 5;
@@ -45,11 +45,12 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI CongratsThemeText;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Slider percentBar;
+    [SerializeField] GameObject percentBarFillImage;
     [SerializeField] GameObject sliderHandle;
     [SerializeField] GameObject themeFinishedPanel;
     [SerializeField] ParticleSystem cloudParticle;
     [SerializeField] float[] scrollRectYPoss;
-    [SerializeField] Sprite[] sliderColorArr;
+    [SerializeField] Color[] sliderColorArr;
     float lastRingScrollRectValue;
     float lastBraceletScrollRectValue;
     public ScrollRect ringScrollRect;
@@ -70,6 +71,7 @@ public class StudioUIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
 
@@ -86,10 +88,10 @@ public class StudioUIManager : MonoBehaviour
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
             }
-            
-                //RingScroll calcs
-                lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+
+            //RingScroll calcs
+            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
             if (ringIndex != 0)
             {
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
@@ -99,15 +101,15 @@ public class StudioUIManager : MonoBehaviour
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
             if (braceletIndex != 0)
             {
-               
+
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
             }
-            
+
 
             ///ROOM JOBS
             //update slider
             sliderHandle.SetActive(true);
-            percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f).OnComplete(() => sliderHandle.SetActive(false));
+            percentBar.DOValue(((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex) / (float)upgradableObjectsNumberPerTheme, 1f).OnComplete(() => sliderHandle.SetActive(false));
             //write general theme index
             generalThemeText.text = themeNames[(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1)];
             CongratsThemeText.text = themeNamesEnd[(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1)];
@@ -209,6 +211,7 @@ public class StudioUIManager : MonoBehaviour
         braceletIndex = GameDataManager.Instance.dataLists.room.generalThemeIndex - 1;
         lastRingScrollRectValue = scrollRectYPoss[ringIndex];
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+        percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
         StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
         //Bracelet calcs
@@ -316,7 +319,7 @@ public class StudioUIManager : MonoBehaviour
         else //prepare next update for that theme
         {
             sliderHandle.SetActive(true);
-            percentBar.DOValue((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex / (float)upgradableObjectsNumberPerTheme, 1f).OnComplete(() => sliderHandle.SetActive(false));
+            percentBar.DOValue(((float)GameDataManager.Instance.dataLists.room.nextUpgradeIndex + 1) / (float)upgradableObjectsNumberPerTheme, 1f).OnComplete(() => sliderHandle.SetActive(false));
             //outline the next updates object 
             Debug.Log("parent index" + (parentIndexToUpgrade + 1) + "parent child index" + GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]);
             //roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]).gameObject.GetComponent<Outline>().enabled = true;

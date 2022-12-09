@@ -35,22 +35,23 @@ public class PatternMachineManager : MonoBehaviour
             else
             {
                 materialToAdd = patternMaterial;
+                Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
+                matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
+                other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
+                GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
+                if (GameDataManager.Instance.playSound == 1)
+                {
+                    GameObject sound = new GameObject("sound");
+                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.patternMachineSound);
+                    Destroy(sound, GameDataManager.Instance.patternMachineSound.length);// Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                }
+                if (patternIndex == GameManager.Instance.currentLevel.nailPatternArray[index])
+                {
+                    UIManager.Instance.CreateCelebrationPopUp();
+                }
             }
 
-            Material[] matArrays = other.gameObject.GetComponent<MeshRenderer>().materials;
-            matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
-            other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
-            GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
-            if (GameDataManager.Instance.playSound == 1)
-            {
-                GameObject sound = new GameObject("sound");
-                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.patternMachineSound);
-                Destroy(sound, GameDataManager.Instance.patternMachineSound.length);// Creates new object, add to it audio source, play sound, destroy this object after playing is done
-            }
-            if (patternIndex == GameManager.Instance.currentLevel.nailPatternArray[index])
-            {
-                UIManager.Instance.CreateCelebrationPopUp();
-            }
+
         }
     }
 }

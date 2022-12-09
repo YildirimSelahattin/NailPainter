@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject compareHandsPanel;
     [SerializeField] GameObject minimapBG;
+    [SerializeField] GameObject tapToContinueTxt;
     public GameObject minimap;
     [SerializeField] Sprite compareHandsWinSprite;
     [SerializeField] Sprite compareHandsLoseSprite;
@@ -139,18 +140,19 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (matchRate >= 80)
+            if (matchRate >= 69)
             {
+                tapToContinueTxt.SetActive(true);
                 if (GameDataManager.Instance.playSound == 1)
                 {
                     GameObject sound = new GameObject("sound");
                     sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.winSound);
                     Destroy(sound, GameDataManager.Instance.winSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
                 }
-
             }
             else
             {
+                tapToContinueTxt.SetActive(false);
                 if (GameDataManager.Instance.playSound == 1)
                 {
                     GameObject sound = new GameObject("sound");
@@ -172,7 +174,7 @@ public class UIManager : MonoBehaviour
         minimapBG.SetActive(true);
 
         //Basariya göre win-lose
-        if (matchRate >= 80)
+        if (matchRate >= 69)
         {
             matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(0, 192, 42, 255);
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsWinSprite;
