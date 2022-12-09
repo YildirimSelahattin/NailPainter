@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
     public  GameObject mudParent;
     public GameObject acidParent;
     [SerializeField] GameObject rewardGetButton;
+    [SerializeField] GameObject goldButton;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
     
@@ -316,6 +317,10 @@ public class UIManager : MonoBehaviour
     {
         //instantiate the relevant upgradable item
         rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
+        if(GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price > NumberOfDiamonds)
+        {
+            goldButton.GetComponent<Button>().interactable = false;
+        }
         Transform spawnPoint = rewardItem.transform.GetChild(1);
         Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position, spawnPoint.rotation, spawnPoint);
         if(RewardedAdManager.Instance.rewardedAd.IsLoaded() == false)
