@@ -87,9 +87,10 @@ public class StudioUIManager : MonoBehaviour
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
             }
             
-                //RingScroll calcs
-                lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+            //RingScroll calcs
+            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+            contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(true);
             if (ringIndex != 0)
             {
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
@@ -97,6 +98,7 @@ public class StudioUIManager : MonoBehaviour
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
+            contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
             if (braceletIndex != 0)
             {
                
@@ -413,11 +415,12 @@ public class StudioUIManager : MonoBehaviour
                 StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
                 if (ringIndex < 4)
                 {
+                    contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(false);
                     ringIndex += 1;
-
+                    
                 }
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition)));
+                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => OpenMotionRingAndOpenTick());
 
             }
 
@@ -426,10 +429,12 @@ public class StudioUIManager : MonoBehaviour
                 StartCoroutine(ChangeLayerToDefault(contentForRing, ringIndex));
                 if (ringIndex > 0)
                 {
+                    contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(false);
+                    
                     ringIndex -= 1;
                 }
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
-                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition)));
+                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => OpenMotionRingAndOpenTick());
             }
             else
             {
@@ -475,11 +480,13 @@ public class StudioUIManager : MonoBehaviour
                 StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
                 if (braceletIndex < 4)
                 {
-
+                    contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(false);
                     braceletIndex += 1;
+                    
+
                 }
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
-                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition)));
+                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => OpenMotionBraceletAndOpenTick());
 
             }
             else if (lastBraceletScrollRectValue < value.y && braceletIndex != 0)
@@ -487,10 +494,11 @@ public class StudioUIManager : MonoBehaviour
                 StartCoroutine(ChangeLayerToDefault(contentForBracelet, braceletIndex));
                 if (braceletIndex > 0)
                 {
+                    contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(false);
                     braceletIndex -= 1;
                 }
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
-                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition)));
+                braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 1).OnComplete(() => OpenMotionBraceletAndOpenTick());
 
             }
             else
@@ -508,7 +516,25 @@ public class StudioUIManager : MonoBehaviour
     {
         RemoveListeners();
     }
+    public void OpenMotionBraceletAndOpenTick()
+    {
+        StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition));
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex-1 >= braceletIndex)
+        {
+            contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
+            GameDataManager.Instance.currentBraceletIndex = braceletIndex;
+        }
 
+    }
+    public void OpenMotionRingAndOpenTick() {
+        StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition));
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex-1 >= ringIndex)
+        {
+            Debug.Log("aaaaAAAAA");
+            contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(true);
+            GameDataManager.Instance.currentRingIndex = ringIndex;
+        }
+    }
     public void RemoveListeners()
     {
         //Un-Subscribe To ScrollRect Event
@@ -529,19 +555,6 @@ public class StudioUIManager : MonoBehaviour
         motionStartedBracelet = false;
         lastBraceletScrollRectValue = lastPos;
     }
-
-    public void OnSelectRingByIndexButtonClicked(int ringIndex)
-    {
-        GameDataManager.Instance.currentRingIndex = ringIndex;
-        contentForRing.transform.GetChild(ringIndex).gameObject.SetActive(true);
-    }
-
-    public void OnSelectBraceletByIndexButtonClicked(int braceletIndex)
-    {
-        GameDataManager.Instance.currentBraceletIndex = braceletIndex;
-        contentForBracelet.transform.GetChild(braceletIndex).gameObject.SetActive(true);
-    }
-
     private void OpenRingOrBracelet(GameObject parent)
     {
         parent.GetComponent<Button>().interactable = true; // open button

@@ -16,7 +16,7 @@ public class GiftSlider : MonoBehaviour
     public int multiplier;
     int prevMultiplier;
     public static GiftSlider Instance;
-
+    private int lastAmount=10;
     void Start()
     {
         if (Instance == null)
@@ -59,9 +59,9 @@ public class GiftSlider : MonoBehaviour
     public int GetMultiplier()
     {
         float sliderRotateAmount = Mathf.Abs(rectTransform.localRotation.z);
-
         if (sliderRotateAmount > 0.42f)
         {
+            
             return 3;
         }
 
