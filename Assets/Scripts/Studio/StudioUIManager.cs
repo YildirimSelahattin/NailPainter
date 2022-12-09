@@ -86,11 +86,10 @@ public class StudioUIManager : MonoBehaviour
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
             }
-
-            //RingScroll calcs
-            lastRingScrollRectValue = scrollRectYPoss[ringIndex];
-            ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
-
+            
+                //RingScroll calcs
+                lastRingScrollRectValue = scrollRectYPoss[ringIndex];
+                ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
             if (ringIndex != 0)
             {
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
@@ -100,8 +99,10 @@ public class StudioUIManager : MonoBehaviour
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
             if (braceletIndex != 0)
             {
+               
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
             }
+            
 
             ///ROOM JOBS
             //update slider
@@ -210,7 +211,6 @@ public class StudioUIManager : MonoBehaviour
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
         StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
-
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
@@ -278,8 +278,8 @@ public class StudioUIManager : MonoBehaviour
         if (GameDataManager.Instance.playSound == 1)
         {
             GameObject sound = new GameObject("sound");
-            sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondCollected);
-            Destroy(sound, GameDataManager.Instance.diamondCollected.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+            sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.upgradeSound);
+            Destroy(sound, GameDataManager.Instance.upgradeSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
         }
 
         //get parent object index 
@@ -468,6 +468,7 @@ public class StudioUIManager : MonoBehaviour
     {
         if (motionStartedBracelet == false)
         {
+            Debug.Log("asdasdasd");
             motionStartedBracelet = true;
             if (lastBraceletScrollRectValue > value.y && braceletIndex != 4) // downwards
             {
