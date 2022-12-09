@@ -51,6 +51,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] ParticleSystem cloudParticle;
     [SerializeField] float[] scrollRectYPoss;
     [SerializeField] Color[] sliderColorArr;
+    [SerializeField] GameObject GameMusic;
     float lastRingScrollRectValue;
     float lastBraceletScrollRectValue;
     public ScrollRect ringScrollRect;
@@ -70,7 +71,12 @@ public class StudioUIManager : MonoBehaviour
     {
         if (Instance == null)
         {
+
             Instance = this;
+            if (GameDataManager.Instance.playMusic == 0)
+            {
+                GameMusic.SetActive(false);
+            }
             percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
