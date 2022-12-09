@@ -25762,7 +25762,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1354403100}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333296851}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SoundsOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1354403100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29639,7 +29651,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1555621557}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333296851}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SoundsOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1555621557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39057,14 +39081,15 @@ MonoBehaviour:
   diamondMachineSound: {fileID: 8300000, guid: 67d0f538ab008e14f8cab45aecf3eb7b, type: 3}
   winSound: {fileID: 8300000, guid: 40f6b5a01eea74b4cbe1016849d110d1, type: 3}
   loseSound: {fileID: 8300000, guid: 1b30112ac28118942bf4a312fecacb20, type: 3}
-  diamondCollected: {fileID: 8300000, guid: af9ffc376e67c9041b88820a9c1e48f5, type: 3}
-  lastAnimationSound: {fileID: 8300000, guid: 1da03956f0b378343a35e068d31d4e6e, type: 3}
+  diamondCollected: {fileID: 8300000, guid: 1da03956f0b378343a35e068d31d4e6e, type: 3}
+  lastAnimationSound: {fileID: 8300000, guid: af9ffc376e67c9041b88820a9c1e48f5, type: 3}
   upgradeSound: {fileID: 8300000, guid: ca49bb4e7fe72414f85a08dbc5ac825b, type: 3}
   themeFinishedSound: {fileID: 8300000, guid: 1b872abc45c669a4faf543841f237ce7, type: 3}
   mudMachineSound: {fileID: 8300000, guid: dbc7df9e2330abf4e838941970088f12, type: 3}
   hundredPercentSound: {fileID: 8300000, guid: 2676fc2ccf2c31747afbd78831c4d767, type: 3}
-  kittenBagShakeSound: {fileID: 0}
-  openingBagSound: {fileID: 0}
+  kittenBagShakeSound: {fileID: 8300000, guid: 9005b6b47188dac4f950ba0b40a2b859, type: 3}
+  openingBagSound: {fileID: 8300000, guid: 54f27c1a82b76604ebc7d83032a1815d, type: 3}
+  slotSound: {fileID: 8300000, guid: 8ca35ec84a7cedf48887599853300b82, type: 3}
 --- !u!4 &2050954083
 Transform:
   m_ObjectHideFlags: 0

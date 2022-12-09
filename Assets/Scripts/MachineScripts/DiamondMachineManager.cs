@@ -32,4 +32,17 @@ public class DiamondMachineManager : MonoBehaviour
             GameManager.Instance.currentDiamondIndexArray[index] = GameManager.Instance.currentLevel.nailDiamondArray[index];
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag.Contains("Nail"))
+        {
+                if (GameDataManager.Instance.playSound == 1)
+                {
+                    GameObject sound = new GameObject("sound");
+                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.diamondMachineSound);
+                    Destroy(sound, GameDataManager.Instance.diamondMachineSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                }
+        }
+    }
 }

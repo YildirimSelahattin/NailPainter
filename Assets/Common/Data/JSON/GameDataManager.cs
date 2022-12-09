@@ -40,6 +40,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip hundredPercentSound;
     public AudioClip kittenBagShakeSound;
     public AudioClip openingBagSound;
+    public AudioClip slotSound;
     void Awake()
     {
         if (Instance == null)
