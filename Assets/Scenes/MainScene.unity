@@ -2162,8 +2162,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10554049, y: 0.028575927, z: 0.1192159}
-  m_Center: {x: -0.012078953, y: 0.002720994, z: -0.02285721}
+  m_Size: {x: 0.13743356, y: 0.27437043, z: 0.1192159}
+  m_Center: {x: 0.017071828, y: -0.12017632, z: -0.022856927}
 --- !u!1 &102873577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,8 +3466,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10554049, y: 0.028575927, z: 0.1192159}
-  m_Center: {x: -0.012078953, y: 0.002720994, z: -0.02285721}
+  m_Size: {x: 0.13743356, y: 0.27437043, z: 0.1192159}
+  m_Center: {x: 0.017071828, y: -0.12017632, z: -0.022856927}
 --- !u!1 &209626289
 GameObject:
   m_ObjectHideFlags: 0
@@ -5760,8 +5760,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24197564, y: 0.089032084, z: 0.13284206}
-  m_Center: {x: -0.6749241, y: -0.061412934, z: -0.16535942}
+  m_Size: {x: 0.24197559, y: 0.35529754, z: 0.13284206}
+  m_Center: {x: -0.6749238, y: -0.19454595, z: -0.16535927}
 --- !u!1 &326481369
 GameObject:
   m_ObjectHideFlags: 0
@@ -9135,8 +9135,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24197564, y: 0.089032084, z: 0.13284206}
-  m_Center: {x: -0.6749241, y: -0.061412934, z: -0.16535942}
+  m_Size: {x: 0.24197562, y: 0.29435882, z: 0.13284206}
+  m_Center: {x: -0.6749236, y: -0.16407628, z: -0.16535857}
 --- !u!1 &465333591
 GameObject:
   m_ObjectHideFlags: 0
@@ -10129,8 +10129,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24197564, y: 0.089032084, z: 0.13284206}
-  m_Center: {x: -0.6749241, y: -0.061412934, z: -0.16535942}
+  m_Size: {x: 0.24197562, y: 0.25699005, z: 0.13284206}
+  m_Center: {x: -0.67492265, y: -0.14539206, z: -0.16535793}
 --- !u!1 &498553665
 GameObject:
   m_ObjectHideFlags: 0
@@ -13227,8 +13227,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10799406, y: 0.028575927, z: 0.1192159}
-  m_Center: {x: 0.008673463, y: 0.0027209658, z: -0.022857213}
+  m_Size: {x: 0.13743356, y: 0.27437043, z: 0.1192159}
+  m_Center: {x: 0.017071828, y: -0.12017632, z: -0.022856927}
 --- !u!1 &663883686
 GameObject:
   m_ObjectHideFlags: 0
@@ -15943,8 +15943,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.11213538, y: 0.028576056, z: 0.1582181}
-  m_Center: {x: -0.006456132, y: -0.0017638806, z: -0.028020086}
+  m_Size: {x: 0.11213538, y: 0.2520298, z: 0.15821812}
+  m_Center: {x: -0.0064561344, y: -0.113491066, z: -0.028019907}
 --- !u!1 &795216284
 GameObject:
   m_ObjectHideFlags: 0
@@ -16808,7 +16808,7 @@ GameObject:
   - component: {fileID: 851830366}
   - component: {fileID: 851830369}
   - component: {fileID: 851830368}
-  - component: {fileID: 851830367}
+  - component: {fileID: 851830370}
   m_Layer: 3
   m_Name: orta-badem
   m_TagString: Nail2
@@ -16831,20 +16831,6 @@ Transform:
   m_Father: {fileID: 974671297}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -5.928, y: 0.009, z: 0.003}
---- !u!64 &851830367
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851830365}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: ef058ed3f5d8fa94d9f361af3caf9e0d, type: 3}
 --- !u!23 &851830368
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16898,6 +16884,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851830365}
   m_Mesh: {fileID: -2432090755550338912, guid: ef058ed3f5d8fa94d9f361af3caf9e0d, type: 3}
+--- !u!65 &851830370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851830365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.109053195, y: 0.2125282, z: 0.15633206}
+  m_Center: {x: -0.0146554485, y: -0.09373838, z: -0.029329222}
 --- !u!1 &852699846
 GameObject:
   m_ObjectHideFlags: 0
@@ -18959,7 +18958,7 @@ GameObject:
   - component: {fileID: 957063435}
   - component: {fileID: 957063438}
   - component: {fileID: 957063437}
-  - component: {fileID: 957063436}
+  - component: {fileID: 957063439}
   m_Layer: 3
   m_Name: isaret-badem
   m_TagString: Nail1
@@ -18982,20 +18981,6 @@ Transform:
   m_Father: {fileID: 974671297}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -4.238, y: 0.007, z: 0.002}
---- !u!64 &957063436
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957063434}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 0a92e58c1b0757542bd57341ea69567b, type: 3}
 --- !u!23 &957063437
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19049,6 +19034,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957063434}
   m_Mesh: {fileID: -2432090755550338912, guid: 0a92e58c1b0757542bd57341ea69567b, type: 3}
+--- !u!65 &957063439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957063434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11213538, y: 0.2520298, z: 0.15821812}
+  m_Center: {x: -0.0064561344, y: -0.113491066, z: -0.028019907}
 --- !u!1 &958197209
 GameObject:
   m_ObjectHideFlags: 0
@@ -21162,7 +21160,7 @@ GameObject:
   - component: {fileID: 1083921257}
   - component: {fileID: 1083921260}
   - component: {fileID: 1083921259}
-  - component: {fileID: 1083921258}
+  - component: {fileID: 1083921261}
   m_Layer: 3
   m_Name: yuzuk-kut
   m_TagString: Nail3
@@ -21185,20 +21183,6 @@ Transform:
   m_Father: {fileID: 27348124}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -7.86, y: 0.012, z: 0.004}
---- !u!64 &1083921258
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083921256}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 5354884aa7ab10b4986ad641d826524e, type: 3}
 --- !u!23 &1083921259
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21252,6 +21236,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083921256}
   m_Mesh: {fileID: -2432090755550338912, guid: 5354884aa7ab10b4986ad641d826524e, type: 3}
+--- !u!65 &1083921261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083921256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10872933, y: 0.25475457, z: 0.15580113}
+  m_Center: {x: -0.016665068, y: -0.114851005, z: -0.029532453}
 --- !u!1 &1084133842
 GameObject:
   m_ObjectHideFlags: 0
@@ -21879,7 +21876,7 @@ GameObject:
   - component: {fileID: 1121578553}
   - component: {fileID: 1121578556}
   - component: {fileID: 1121578555}
-  - component: {fileID: 1121578554}
+  - component: {fileID: 1121578557}
   m_Layer: 3
   m_Name: orta-kut
   m_TagString: Nail2
@@ -21902,20 +21899,6 @@ Transform:
   m_Father: {fileID: 27348124}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -8.742, y: 0.013, z: 0.004}
---- !u!64 &1121578554
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121578552}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 576065c4da9125c44854469a2debac8a, type: 3}
 --- !u!23 &1121578555
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21969,6 +21952,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121578552}
   m_Mesh: {fileID: -2432090755550338912, guid: 576065c4da9125c44854469a2debac8a, type: 3}
+--- !u!65 &1121578557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121578552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.109053195, y: 0.2125282, z: 0.15633206}
+  m_Center: {x: -0.0146554485, y: -0.09373838, z: -0.029329222}
 --- !u!1 &1123905603
 GameObject:
   m_ObjectHideFlags: 0
@@ -22166,8 +22162,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13143523, y: 0.028576039, z: 0.15580113}
-  m_Center: {x: -0.005312079, y: -0.0017618602, z: -0.029532334}
+  m_Size: {x: 0.109091334, y: 0.25475457, z: 0.15580113}
+  m_Center: {x: -0.016484069, y: -0.11485097, z: -0.029532382}
 --- !u!1 &1136075164
 GameObject:
   m_ObjectHideFlags: 0
@@ -24124,8 +24120,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1273403589}
   - component: {fileID: 1273403592}
-  - component: {fileID: 1273403591}
   - component: {fileID: 1273403590}
+  - component: {fileID: 1273403591}
+  - component: {fileID: 1273403593}
   m_Layer: 3
   m_Name: isaret-kut
   m_TagString: Nail1
@@ -24215,6 +24212,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273403588}
   m_Mesh: {fileID: -2432090755550338912, guid: 5611730212e442847a38da5a027a4993, type: 3}
+--- !u!65 &1273403593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273403588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11213538, y: 0.2520298, z: 0.15821812}
+  m_Center: {x: -0.0064561344, y: -0.113491066, z: -0.028019907}
 --- !u!1 &1274809828
 GameObject:
   m_ObjectHideFlags: 0
@@ -28465,8 +28475,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.109053195, y: 0.028576037, z: 0.15633209}
-  m_Center: {x: -0.014655444, y: -0.0017619304, z: -0.029329063}
+  m_Size: {x: 0.109053195, y: 0.2125282, z: 0.15633206}
+  m_Center: {x: -0.0146554485, y: -0.09373838, z: -0.029329222}
 --- !u!1 &1475705397
 GameObject:
   m_ObjectHideFlags: 0
@@ -36677,7 +36687,7 @@ GameObject:
   - component: {fileID: 1935364934}
   - component: {fileID: 1935364937}
   - component: {fileID: 1935364936}
-  - component: {fileID: 1935364935}
+  - component: {fileID: 1935364938}
   m_Layer: 3
   m_Name: yuzuk-badem
   m_TagString: Nail3
@@ -36700,20 +36710,6 @@ Transform:
   m_Father: {fileID: 974671297}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -8.858, y: 0.014, z: 0.004}
---- !u!64 &1935364935
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935364933}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 93b268d3920cc1f4e843d03a40d9def9, type: 3}
 --- !u!23 &1935364936
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36767,6 +36763,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935364933}
   m_Mesh: {fileID: -2432090755550338912, guid: 93b268d3920cc1f4e843d03a40d9def9, type: 3}
+--- !u!65 &1935364938
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935364933}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11072183, y: 0.25475457, z: 0.15580113}
+  m_Center: {x: -0.015668789, y: -0.11485098, z: -0.029532295}
 --- !u!1 &1935973814
 GameObject:
   m_ObjectHideFlags: 0
