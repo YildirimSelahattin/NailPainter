@@ -8,14 +8,14 @@ public class LevelDesignManager : MonoBehaviour
     public List<GameObject> Levels = new List<GameObject>();
     public GameObject LevelsParrent;
     GameObject levelPrefab;
-    [SerializeField]int nextLevelNumber;
+    [SerializeField] int nextLevelNumber;
     [SerializeField] Material[] skyMat;
     [SerializeField] Material[] roadMat;
 
     void Start()
     {
-        nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0)%30;
-        
+        nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0) % 30;
+
 
         Debug.Log(nextLevelNumber);
         levelPrefab = Instantiate(Levels[nextLevelNumber], transform.position, transform.rotation);

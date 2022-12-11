@@ -50,13 +50,13 @@ public class UIManager : MonoBehaviour
     int CurrentLevelNumber;
     public int currentLevelDiamond;
     public bool isTapped = false;
-    public  GameObject mudParent;
+    public GameObject mudParent;
     public GameObject acidParent;
     [SerializeField] GameObject rewardGetButton;
     [SerializeField] GameObject goldButton;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
-    
+
     int isSoundOn;
     int isMusicOn;
     int LevelNumber;
@@ -133,6 +133,7 @@ public class UIManager : MonoBehaviour
     //Run bittikten sonra calisan fonk.
     public void ShowEndScreen()
     {
+        gameMusicObject.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
         //Geçiş reklamı
         if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
@@ -169,7 +170,7 @@ public class UIManager : MonoBehaviour
         infoPanel.SetActive(false);
         pauseScreen.SetActive(false);
         levelCounterText.gameObject.SetActive(false);
-       
+
         matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
         minimapBG.SetActive(true);
@@ -181,14 +182,14 @@ public class UIManager : MonoBehaviour
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsWinSprite;
             winPanel.SetActive(true);
             StartCoroutine(DelayAndStartMovingLastAnim(0.01f));
-           
+
         }
         else
         {
             matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(255, 0, 0, 255);
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsLoseSprite;
             losePanel.SetActive(true);
-           
+
         }
     }
 
@@ -315,20 +316,27 @@ public class UIManager : MonoBehaviour
     //Run sonrası win ile bitmişse cagirilan fonk.
     public void OpenRewardPanel()
     {
-        //instantiate the relevant upgradable item
-        rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
-        if(GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price > NumberOfDiamonds)
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
         {
-            goldButton.GetComponent<Button>().interactable = false;
+            diamondMuliplier.SetActive(true);
         }
-        Transform spawnPoint = rewardItem.transform.GetChild(1);
-        Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position, spawnPoint.rotation, spawnPoint);
-        if(RewardedAdManager.Instance.rewardedAd.IsLoaded() == false)
+        else
         {
-            rewardGetButton.GetComponent<Button>().interactable = false;
+            //instantiate the relevant upgradable item
+            rewardPanelObjectPrice.text = GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price.ToString();
+            if (GameDataManager.Instance.objectsByIndexArray[GameDataManager.Instance.dataLists.room.nextUpgradeIndex][GameDataManager.Instance.dataLists.room.currentRoomIndexes[GameDataManager.Instance.dataLists.room.nextUpgradeIndex] + 1].price > NumberOfDiamonds)
+            {
+                goldButton.GetComponent<Button>().interactable = false;
+            }
+            Transform spawnPoint = rewardItem.transform.GetChild(1);
+            Instantiate(GameDataManager.Instance.GetUpgradableObject(), spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            if (RewardedAdManager.Instance.rewardedAd.IsLoaded() == false)
+            {
+                rewardGetButton.GetComponent<Button>().interactable = false;
+            }
+            rewardItem.SetActive(true);
+            rewardPanel.SetActive(true);
         }
-        rewardItem.SetActive(true);
-        rewardPanel.SetActive(true);
     }
 
     //Studio'da elmas ile geliştirme yapmak icin upgrade button'dan cagirilan fonk.

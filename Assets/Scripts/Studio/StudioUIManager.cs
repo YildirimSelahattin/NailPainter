@@ -51,7 +51,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] ParticleSystem cloudParticle;
     [SerializeField] float[] scrollRectYPoss;
     [SerializeField] Color[] sliderColorArr;
-    [SerializeField] GameObject GameMusic;
+    public GameObject GameMusic;
     float lastRingScrollRectValue;
     float lastBraceletScrollRectValue;
     public ScrollRect ringScrollRect;
@@ -64,8 +64,8 @@ public class StudioUIManager : MonoBehaviour
     GameObject contentForBracelet;
     [SerializeField] GameObject normalTimesUIElementParent;
     [SerializeField] GameObject GiftTimesUIElementParent;
-    string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND" };
-    string[] themeNamesEnd = { "CONGRATS! BASIC COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED", "CONGRATS! EMERALD COMPLETED", "CONGRATS! RUBY COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED" };
+    string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND", "Base" };
+    string[] themeNamesEnd = { "CONGRATS! BASIC COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED", "CONGRATS! EMERALD COMPLETED", "CONGRATS! RUBY COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED" , "Base" };
 
     void Start()
     {
