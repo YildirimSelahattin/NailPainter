@@ -56,10 +56,6 @@ public class GameDataManager : MonoBehaviour
             {
                 Directory.CreateDirectory(dir);
             }
-            if (PlayerPrefs.GetString("unity.player_session_count") == "1")
-            {
-                File.Delete(dir + fileName);
-            }
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
             GameDataManager.Instance.dataLists.wall,
