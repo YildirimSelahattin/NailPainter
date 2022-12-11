@@ -318,7 +318,8 @@ public class UIManager : MonoBehaviour
     {
         if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
         {
-            diamondMuliplier.SetActive(true);
+            PlayerPrefs.SetInt("NextLevelNumberKey", PlayerPrefs.GetInt("NextLevelNumberKey" + 1));
+            UIManager.Instance.LoadScene(0);
         }
         else
         {
