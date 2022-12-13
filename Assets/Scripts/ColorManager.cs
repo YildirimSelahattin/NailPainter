@@ -41,6 +41,7 @@ public class ColorManager : MonoBehaviour
         Material myNewColorMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
         //Set Texture on the material
         myNewColorMaterial.SetTexture("_BaseMap", colorsArray[colorIndex].texture);
+        myNewColorMaterial.DOTiling(new Vector2(10.4f, 1f), 0.1f);
 
         //Find the Standard Shader
         return myNewColorMaterial;

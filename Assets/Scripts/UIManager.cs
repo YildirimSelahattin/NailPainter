@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using TMPro;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -56,6 +57,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject goldButton;
     //[SerializeField] GameObject validateCanvas;
     //[SerializeField] Image progressBar;
+    [SerializeField] Vector3 cameraRealPos = new Vector3(-8.5f, 0.2f, -5.7f);
+    [SerializeField] Vector3 cameraRealRot = new Vector3(0, 30, 90);
+    [SerializeField] GameObject camera;
+    public GameObject fasterButton;
 
     int isSoundOn;
     int isMusicOn;
@@ -98,6 +103,8 @@ public class UIManager : MonoBehaviour
         studioButton.gameObject.SetActive(false);
         scoreArea.gameObject.SetActive(true);
         targetPicAnimator.SetBool("isStart", true);
+        camera.transform.DOLocalMove(cameraRealPos, 1f);
+        camera.transform.DOLocalRotate(cameraRealRot, 1f);
     }
 
     public async void LoadScene(int sceneID)
@@ -301,6 +308,7 @@ public class UIManager : MonoBehaviour
     public void TapToContinue()
     {
         isTapped = true;
+        fasterButton.SetActive(true);
         minimap.SetActive(false);
     }
 

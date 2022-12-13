@@ -22,7 +22,7 @@ public class MovingPolishManager : MonoBehaviour
     void Start()
     {
         // play win music
-        
+
         transform.position = colorableObjectsParent.transform.GetChild(0).transform.position + 3 * Vector3.forward;
         startPos = transform.position;
         startTime = Time.time;
@@ -32,7 +32,7 @@ public class MovingPolishManager : MonoBehaviour
         camera.transform.DOLocalRotate(targetCameraRotation, 1f);
         transform.DOLocalRotate(new Vector3(-30, 180, -90f), 0.1f);
         //206
-        camera.transform.GetComponent<Camera>().farClipPlane = 220;
+        camera.transform.GetComponent<Camera>().farClipPlane = 300;
     }
 
     void Update()
@@ -55,7 +55,7 @@ public class MovingPolishManager : MonoBehaviour
 
     private void CloseBrushAndOpenRewarPanel()
     {
-        if(GameManager.Instance.matchRate == 100)
+        if (GameManager.Instance.matchRate == 100)
         {
             if (GameDataManager.Instance.playSound == 1)
             {
@@ -64,8 +64,15 @@ public class MovingPolishManager : MonoBehaviour
                 Destroy(sound, GameDataManager.Instance.hundredPercentSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
             }
         }
+        UIManager.Instance.fasterButton.SetActive(false);
         GameManager.Instance.DisableMovingPolish();
         UIManager.Instance.AfterEndGame();
         StartCoroutine(DelayOpenPanel(1f));
+    }
+
+    public void FasterPolish()
+    {
+        transform.DOKill();
+        transform.DOLocalMove(new Vector3(endPos.x, endPos.y + 1, endPos.z), 3).OnComplete(() => CloseBrushAndOpenRewarPanel());
     }
 }

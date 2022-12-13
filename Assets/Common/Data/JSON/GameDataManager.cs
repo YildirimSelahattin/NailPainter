@@ -49,8 +49,8 @@ public class GameDataManager : MonoBehaviour
             Instance = this;
             currentRingIndex = PlayerPrefs.GetInt("CurrentRingIndexKey", 0);
             currentBraceletIndex = PlayerPrefs.GetInt("CurrentBraceletIndexKey", 0);
-            playSound = PlayerPrefs.GetInt("PlaySoundKey", 0);
-            playMusic = PlayerPrefs.GetInt("PlayMusicKey", 0);
+            playSound = PlayerPrefs.GetInt("PlaySoundKey", 1);
+            playMusic = PlayerPrefs.GetInt("PlayMusicKey", 1);
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
 

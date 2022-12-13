@@ -13,15 +13,17 @@ public class GiftUIManager : MonoBehaviour
     [SerializeField] GameObject rewardPanelBG;
     [SerializeField] Sprite[] finishedRoomSprites;
     public static GiftUIManager Instance;
+    [SerializeField] GameObject collectButton;
+
     // Start is called before the first frame update
     void Start()
     {
         if (Instance == null)
         {
-            Instance=this;
+            Instance = this;
         }
         //set Image 
-        finishedThemeDialog.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = finishedRoomSprites[GameDataManager.Instance.dataLists.room.generalThemeIndex-1];
+        finishedThemeDialog.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = finishedRoomSprites[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
     }
 
     public void OnContinueButtonClicked()
@@ -56,11 +58,13 @@ public class GiftUIManager : MonoBehaviour
         finishedThemeDialog.SetActive(true);
         tapToCollectWindow.SetActive(false);
         collectWindow.SetActive(false);
+        collectButton.SetActive(false);
     }
 
     public void OpenRingAndRingAfterSpotlightGrow()
     {
         braceletParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         ringSpawnParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
+        collectButton.SetActive(true);
     }
 }

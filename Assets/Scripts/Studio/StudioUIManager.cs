@@ -165,7 +165,11 @@ public class StudioUIManager : MonoBehaviour
                     else
                     {
                         upgradeWithAdButton.gameObject.SetActive(true);
-                        upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
+                        if (RewardedAdManager.Instance.rewardedupgradeAd.IsLoaded() == false)
+                        {
+                            Debug.Log("ADSdsas");
+                            upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
+                        }
                     }
                 }
                 else // if there is free upgrades
@@ -283,7 +287,7 @@ public class StudioUIManager : MonoBehaviour
             else
             {
                 upgradeWithAdButton.gameObject.SetActive(false);
-                upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
+
             }
         }
     }
@@ -362,6 +366,11 @@ public class StudioUIManager : MonoBehaviour
                     priceTextParent.SetActive(false);
                     upgradeWithMoneyButton.gameObject.SetActive(false);
                     upgradeWithAdButton.gameObject.SetActive(true);
+                    if (RewardedAdManager.Instance.rewardedupgradeAd.IsLoaded() == false)
+                    {
+                        Debug.Log("ADSdsas");
+                        upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
+                    }
                 }
             }
             //increase next upgrade parent
