@@ -39,6 +39,7 @@ public class PatternMachineManager : MonoBehaviour
                 matArrays[ColorManager.NAIL_PATTERN_INDEX] = materialToAdd;
                 other.gameObject.GetComponent<MeshRenderer>().materials = matArrays;
                 GameManager.Instance.currentPatternIndexArray[index] = patternIndex;
+                Handheld.Vibrate();
                 if (GameDataManager.Instance.playSound == 1)
                 {
                     GameObject sound = new GameObject("sound");

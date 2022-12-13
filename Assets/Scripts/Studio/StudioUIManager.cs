@@ -65,7 +65,15 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] GameObject normalTimesUIElementParent;
     [SerializeField] GameObject GiftTimesUIElementParent;
     string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND", "Base" };
-    string[] themeNamesEnd = { "CONGRATS! BASIC COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED", "CONGRATS! EMERALD COMPLETED", "CONGRATS! RUBY COMPLETED", "CONGRATS! PINK DIAMOND COMPLETED" , "Base" };
+    string[] themeNamesEnd =
+        {
+        "CONGRATS! ROOM COMPLETED",
+        "CONGRATS! ROOM COMPLETED",
+        "CONGRATS! ROOM COMPLETED",
+        "CONGRATS! ROOM COMPLETED",
+        "CONGRATS! ROOM COMPLETED" ,
+        "Base"
+        };
 
     void Start()
     {
@@ -94,7 +102,7 @@ public class StudioUIManager : MonoBehaviour
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
             }
-            
+
             //RingScroll calcs
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
             ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
@@ -157,6 +165,7 @@ public class StudioUIManager : MonoBehaviour
                     else
                     {
                         upgradeWithAdButton.gameObject.SetActive(true);
+                        upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
                     }
                 }
                 else // if there is free upgrades
@@ -274,6 +283,7 @@ public class StudioUIManager : MonoBehaviour
             else
             {
                 upgradeWithAdButton.gameObject.SetActive(false);
+                upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
             }
         }
     }
@@ -426,7 +436,7 @@ public class StudioUIManager : MonoBehaviour
                 {
                     contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(false);
                     ringIndex += 1;
-                    
+
                 }
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
                 ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 1).OnComplete(() => OpenMotionRingAndOpenTick());
@@ -439,7 +449,7 @@ public class StudioUIManager : MonoBehaviour
                 if (ringIndex > 0)
                 {
                     contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(false);
-                    
+
                     ringIndex -= 1;
                 }
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
@@ -491,7 +501,7 @@ public class StudioUIManager : MonoBehaviour
                 {
                     contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(false);
                     braceletIndex += 1;
-                    
+
 
                 }
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
@@ -528,16 +538,17 @@ public class StudioUIManager : MonoBehaviour
     public void OpenMotionBraceletAndOpenTick()
     {
         StartCoroutine(OpenMotionBracelet(braceletScrollRect.verticalNormalizedPosition));
-        if (GameDataManager.Instance.dataLists.room.generalThemeIndex-1 >= braceletIndex)
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1 >= braceletIndex)
         {
             contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
             GameDataManager.Instance.currentBraceletIndex = braceletIndex;
         }
 
     }
-    public void OpenMotionRingAndOpenTick() {
+    public void OpenMotionRingAndOpenTick()
+    {
         StartCoroutine(OpenMotionRing(ringScrollRect.verticalNormalizedPosition));
-        if (GameDataManager.Instance.dataLists.room.generalThemeIndex-1 >= ringIndex)
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex - 1 >= ringIndex)
         {
             Debug.Log("aaaaAAAAA");
             contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(true);

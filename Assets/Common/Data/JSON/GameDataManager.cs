@@ -41,6 +41,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip kittenBagShakeSound;
     public AudioClip openingBagSound;
     public AudioClip slotSound;
+
     void Awake()
     {
         if (Instance == null)
@@ -52,6 +53,12 @@ public class GameDataManager : MonoBehaviour
             playMusic = PlayerPrefs.GetInt("PlayMusicKey", 0);
             //if it is first time playing this game, delete and write default values to the json file 
             dir = Application.persistentDataPath + directory;
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
             GameDataManager.Instance.dataLists.wall,
@@ -84,14 +91,14 @@ public class GameDataManager : MonoBehaviour
         //if there is no file, use the default values 
         if (!File.Exists(fullPath))
         {
-            Debug.Log("bötyle bir dosya yok, olustur");
+            Debug.Log("bï¿½tyle bir dosya yok, olustur");
             File.WriteAllText(fullPath, JSONText.text);
             dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         }
         //if there is file to read 
         else
         {
-            Debug.Log("bötyle bir dosya var");
+            Debug.Log("bï¿½tyle bir dosya var");
             dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(fullPath));
         }
     }
