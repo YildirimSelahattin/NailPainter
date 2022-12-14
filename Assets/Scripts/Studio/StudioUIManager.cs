@@ -234,7 +234,7 @@ public class StudioUIManager : MonoBehaviour
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
         percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
-        StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
+        StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));// change layer of selected ring
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
