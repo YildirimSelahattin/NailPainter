@@ -129,6 +129,37 @@ public class GameDataManager : MonoBehaviour
         {
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
+        if (nextUpgradeIndex == 6) //Koltuk
+        {
+            upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
+        }
+        if (nextUpgradeIndex == 5) //Komodin
+        {
+            upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        }
+        if (nextUpgradeIndex == 2) //Platform
+        {
+            upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
+        if (nextUpgradeIndex == 8) //Sandalye
+        {
+            upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        }
+        if (nextUpgradeIndex == 4)
+        {
+            upgradableObject.transform.position = new Vector3(0, -1f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        }
+        if (nextUpgradeIndex == 7)
+        {
+            upgradableObject.transform.position = new Vector3(0, -2f, 0);
+            upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        }
+
         foreach (Transform child in upgradableObject.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");

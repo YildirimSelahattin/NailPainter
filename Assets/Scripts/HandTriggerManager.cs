@@ -62,8 +62,10 @@ public class HandTriggerManager : MonoBehaviour
     //Elmas toplaninca sayiyi artıran fonk.
     public void IncreaseMoneyAndDestroy(GameObject diamond)
     {
-        UIManager.Instance.currentLevelDiamond++;
-        UIManager.Instance.NumberOfDiamonds++;
+        //UIManager.Instance.currentLevelDiamond++;
+        //UIManager.Instance.NumberOfDiamonds++;
+        UIManager.Instance.currentLevelDiamond += 50;
+        UIManager.Instance.NumberOfDiamonds += 50;
         diamondImage.DOScale(diamondImageScaleReach, 0.2f).OnComplete(() => diamondImage.DOScale(standartScale, 0.2f));
         Destroy(diamond);
     }
