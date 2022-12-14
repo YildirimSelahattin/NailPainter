@@ -29,10 +29,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float tempSpeed;
-        float moveInput = Input.GetAxis("Horizontal");
-        tempSpeed = controllerSpeed;
+        //float moveInput = Input.GetAxis("Horizontal");
+        //tempSpeed = controllerSpeed;
 
-/*
         if (Input.touchCount > 0) 
         {
             
@@ -44,14 +43,14 @@ public class PlayerController : MonoBehaviour
         {
             tempSpeed = 0;
         }
-*/
+
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
-            xOffset += moveInput * Time.deltaTime * tempSpeed * 50;
+            xOffset += h * Time.deltaTime * tempSpeed;
 
             transform.position = desiredPoint;
 

@@ -13,6 +13,7 @@ public class AsetonMachineManager : MonoBehaviour
     private void Start()
     {
         UIAcidParent = UIManager.Instance.acidParent;
+        diamondParent = GameObject.FindGameObjectWithTag("DiamondParrent");
     }
     private void OnTriggerExit(Collider other)//if one finger pass the brush
     {
@@ -22,6 +23,7 @@ public class AsetonMachineManager : MonoBehaviour
             GameManager.Instance.currentColorIndexArray[currentTag[currentTag.Length - 1] - '0'] = 0;
             GameManager.Instance.currentPatternIndexArray[currentTag[currentTag.Length - 1] - '0'] = 0;
             GameManager.Instance.currentDiamondIndexArray[currentTag[currentTag.Length - 1] - '0'] = 0;
+            diamondParent.transform.GetChild(currentTag[currentTag.Length - 1] - '0').gameObject.SetActive(false);
 
             if(currentTag[currentTag.Length - 1] - '0' == 0)//for thumb
             {
