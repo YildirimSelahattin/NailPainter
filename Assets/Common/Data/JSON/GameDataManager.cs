@@ -78,6 +78,7 @@ public class GameDataManager : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("save");
         WriteToJson();
         PlayerPrefs.SetInt("CurrentRingIndexKey", currentRingIndex);
         PlayerPrefs.SetInt("CurrentBraceletIndexKey", currentBraceletIndex);
