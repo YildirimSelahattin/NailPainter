@@ -16,7 +16,7 @@ public class GiftUIManager : MonoBehaviour
     [SerializeField] GameObject collectButton;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         if (Instance == null)
         {

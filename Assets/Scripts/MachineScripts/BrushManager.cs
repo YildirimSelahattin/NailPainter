@@ -42,7 +42,6 @@ public class BrushManager : MonoBehaviour
                 GameObject sound = new GameObject("sound");
                 sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.brushMachineMusic);
                 Destroy(sound, GameDataManager.Instance.brushMachineMusic.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
-                Handheld.Vibrate();
             }
 
         }

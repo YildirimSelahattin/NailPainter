@@ -29,11 +29,6 @@ public class ColorManager : MonoBehaviour
             Instance = this;
         }
     }
-
-    void Update()
-    {
-
-    }
     
     public Material GetColorMaterialByIndex(int colorIndex)
     {

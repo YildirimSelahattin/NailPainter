@@ -8,4 +8,9 @@ public class URLManager : MonoBehaviour
     {
         Application.OpenURL("https://digimindmarket.com/privacy.html#");
     }
+
+    public void GoServiceURL()
+    {
+        Application.OpenURL("https://digimindmarket.com/service.html");
+    }
 }

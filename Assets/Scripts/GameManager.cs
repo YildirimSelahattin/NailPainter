@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ringParent;
     [SerializeField] GameObject braceletParent;
     [Header("Transform References :")]
+    [SerializeField] GameObject LevelEnv;
+    [SerializeField] GameObject EndGameEnv;
+
     public LevelData currentLevel = new LevelData();
 
     // array that depends on players choices
@@ -141,6 +144,8 @@ public class GameManager : MonoBehaviour
 
     public void EnableMovingPolish()
     {
+        LevelEnv.SetActive(false);
+        EndGameEnv.SetActive(true);
         follower.GetComponent<MovingPolishManager>().enabled = true;
         movingBrush.SetActive(true);
     }

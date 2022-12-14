@@ -180,11 +180,12 @@ public class UIManager : MonoBehaviour
 
         matchRateText.text = "% " + matchRate.ToString();
         endPanel.SetActive(true);
-        minimapBG.SetActive(true);
+        
 
         //Basariya göre win-lose
         if (matchRate >= 69)
         {
+            minimapBG.SetActive(true);
             matchRateText.GetComponent<TextMeshProUGUI>().outlineColor = new Color32(0, 192, 42, 255);
             compareHandsPanel.GetComponent<Image>().sprite = compareHandsWinSprite;
             winPanel.SetActive(true);
@@ -326,7 +327,7 @@ public class UIManager : MonoBehaviour
     {
         if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
         {
-            PlayerPrefs.SetInt("NextLevelNumberKey", PlayerPrefs.GetInt("NextLevelNumberKey" + 1));
+            PlayerPrefs.SetInt("NextLevelNumberKey", PlayerPrefs.GetInt("NextLevelNumberKey") + 1);
             UIManager.Instance.LoadScene(0);
         }
         else
