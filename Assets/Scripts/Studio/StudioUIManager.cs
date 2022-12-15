@@ -92,8 +92,8 @@ public class StudioUIManager : MonoBehaviour
 
             //PERCENT BAR JOBS
             percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-            //leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
-            //rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
 
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
