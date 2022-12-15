@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using Unity.VisualScripting;
 
 public class StudioUIManager : MonoBehaviour
 {
@@ -64,6 +65,9 @@ public class StudioUIManager : MonoBehaviour
     GameObject contentForBracelet;
     [SerializeField] GameObject normalTimesUIElementParent;
     [SerializeField] GameObject GiftTimesUIElementParent;
+    [SerializeField] GameObject leftSliderDiamondParent;
+    [SerializeField] GameObject rightSliderDiamondParent;
+
     string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND", "Base" };
     string[] themeNamesEnd =
         {
@@ -85,7 +89,12 @@ public class StudioUIManager : MonoBehaviour
             {
                 GameMusic.SetActive(false);
             }
+
+            //PERCENT BAR JOBS
             percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+            //leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            //rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
 
@@ -101,6 +110,7 @@ public class StudioUIManager : MonoBehaviour
                 OpenRingOrBracelet(contentForRing.transform.GetChild(i).gameObject);
                 //for braceletSide
                 OpenRingOrBracelet(contentForBracelet.transform.GetChild(i).gameObject);
+                contentForBracelet.transform.GetChild(i).transform.GetChild(3).gameObject.SetActive(false);
             }
 
             //RingScroll calcs
@@ -232,14 +242,40 @@ public class StudioUIManager : MonoBehaviour
         braceletIndex = GameDataManager.Instance.dataLists.room.generalThemeIndex - 1;
         lastRingScrollRectValue = scrollRectYPoss[ringIndex];
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
+
         percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+        leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
+        rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
+
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
+
+        // change all ring layers to uı
+        for (int i = 1; i < contentForRing.transform.childCount - 1; i++)
+        {
+            ChangeLayerToDefault(contentForRing,i);
+        }
+        // open tick
+        contentForRing.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
+        GameDataManager.Instance.currentRingIndex = ringIndex;
+
         StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));// change layer of selected ring
+        
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
         OpenRingOrBracelet(contentForBracelet.transform.GetChild(braceletIndex).gameObject);
+
+        // change all bracelet layers to uı
+        for (int i = 1; i < contentForBracelet.transform.childCount - 1; i++)
+        {
+            ChangeLayerToDefault(contentForBracelet, i);
+        }
+        contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
+        GameDataManager.Instance.currentBraceletIndex = braceletIndex;
         StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
+
+
+
         roomParentOfParents.SetActive(true);
         normalTimesUIElementParent.SetActive(true);
         GiftTimesUIElementParent.SetActive(false);
@@ -378,6 +414,10 @@ public class StudioUIManager : MonoBehaviour
         }
         // increase relatve parents current child index
         GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade] += 1;
+
+
+
+        GameDataManager.Instance.WriteToJson();
     }
 
     private void OpenAndCloseObject(int parentIndex, int currentChildIndex)
@@ -415,7 +455,6 @@ public class StudioUIManager : MonoBehaviour
 
         for (int i = 0; i < relativeObject.transform.childCount; i++)
         {
-            Debug.Log("sui");
             Material[] matArray = relativeObject.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().materials;
             List<Material> matList = matArray.ToList();
             Material material = new Material(shiningMaterial);
@@ -428,7 +467,7 @@ public class StudioUIManager : MonoBehaviour
     }
     private void FadeInFadeOutLoop(Material mat)
     {
-        mat.DOFade(0f / 255f, 1).OnComplete(() => mat.DOFade(60f / 255f, 1).OnComplete(() => FadeInFadeOutLoop(mat)));
+        mat.DOFade(0f / 255f, 1).OnComplete(() => mat.DOFade(200 / 255f, 1).OnComplete(() => FadeInFadeOutLoop(mat)));
     }
 
     //Will be called when ScrollRect changes
@@ -586,7 +625,7 @@ public class StudioUIManager : MonoBehaviour
     }
     private void OpenRingOrBracelet(GameObject parent)
     {
-        parent.GetComponent<Button>().interactable = true; // open button
         parent.transform.GetChild(1).gameObject.SetActive(false);//close transparency
+        parent.transform.GetChild(3).gameObject.SetActive(false);
     }
 }
