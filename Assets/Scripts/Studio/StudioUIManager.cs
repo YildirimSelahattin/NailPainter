@@ -33,7 +33,7 @@ public class StudioUIManager : MonoBehaviour
     public float fillAmount;
     [SerializeField] Button upgradeWithMoneyButton;
     [SerializeField] Button upgradeFreelyButton;
-    [SerializeField] Button upgradeWithAdButton;
+    public  Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
     [SerializeField] GameObject ringCheck;
     [SerializeField] GameObject braceletCheck;

@@ -44,7 +44,7 @@ public class AsetonMachineManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
-            UIManager.Instance.CreateBadPopUp();
+            UIManager.Instance.CreateAsetonPopUp();
         }
     }
 }
