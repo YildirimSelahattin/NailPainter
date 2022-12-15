@@ -33,6 +33,6 @@ public class MudMachineManager : MonoBehaviour
             //mud particle
             Instantiate(mudParticle, new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z + 5), other.transform.rotation);
         }
-        UIManager.Instance.CreateBadPopUp();
+        UIManager.Instance.CreateMudPopUp();
     }
 }

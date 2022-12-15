@@ -73,10 +73,7 @@ public class RewardedAdManager : MonoBehaviour
 #endif
 
         this.rewardedupgradeAd = new RewardedAd(adUnitId);
-
         /*
-                // Called when an ad request has successfully loaded.
-                this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
                 // Called when an ad request failed to load.
                 this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
                 // Called when an ad is shown.
@@ -88,6 +85,8 @@ public class RewardedAdManager : MonoBehaviour
                 // Called when the ad is closed.
                 this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
         */
+        // Called when an ad request has successfully loaded.
+        //this.rewardedupgradeAd.OnAdLoaded += HandleRewardedUpgradeAdLoaded;
         // Called when the user should be rewarded for interacting with the ad.
         this.rewardedupgradeAd.OnUserEarnedReward += HandleUserEarnedUpgradeReward;
         // Create an empty ad request.
@@ -170,6 +169,14 @@ public class RewardedAdManager : MonoBehaviour
         RequestMultiplierRewarded();
     }
 
+    public void HandleRewardedUpgradeAdLoaded(object sender, Reward args)
+    {
+        if (SceneManager.GetActiveScene().buildIndex ==1)
+        {
+            StudioUIManager.Instance.upgradeWithAdButton.GetComponent<Button>().interactable = true;     
+        }
+        
+    }
     public void MultiplierAd()
     {
         if (this.rewardedmultiplierAd.IsLoaded())

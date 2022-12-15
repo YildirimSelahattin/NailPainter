@@ -366,15 +366,20 @@ public class UIManager : MonoBehaviour
             popArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
     }
-    public void CreateBadPopUp()
+    public void CreateAsetonPopUp()
     {
-        int index = Random.Range(0, upsArtParent.transform.childCount);
-        if (upsArtParent.transform.GetChild(index).gameObject.active == false)
+        if (upsArtParent.transform.GetChild(0).gameObject.active == false)
         {
-            upsArtParent.transform.GetChild(index).gameObject.SetActive(true);
+            upsArtParent.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
-
+    public void CreateMudPopUp()
+    {
+        if (upsArtParent.transform.GetChild(1).gameObject.active == false)
+        {
+            upsArtParent.transform.GetChild(1).gameObject.SetActive(true);
+        }
+    }
     public void NoTnxDiamondMuliplierPanel()
     {
         diamondMuliplier.SetActive(false);
