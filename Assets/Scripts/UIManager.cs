@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelCounterText;
     [SerializeField] Image notificationParent;
     [SerializeField] GameObject popArtParent;
+    [SerializeField] GameObject upsArtParent;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject compareHandsPanel;
@@ -363,6 +364,14 @@ public class UIManager : MonoBehaviour
         if (popArtParent.transform.GetChild(index).gameObject.active == false)
         {
             popArtParent.transform.GetChild(index).gameObject.SetActive(true);
+        }
+    }
+    public void CreateBadPopUp()
+    {
+        int index = Random.Range(0, upsArtParent.transform.childCount);
+        if (upsArtParent.transform.GetChild(index).gameObject.active == false)
+        {
+            upsArtParent.transform.GetChild(index).gameObject.SetActive(true);
         }
     }
 

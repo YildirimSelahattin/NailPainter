@@ -56,6 +56,7 @@ public class GameDataManager : MonoBehaviour
 
             if (!Directory.Exists(dir))
             {
+                Debug.Log("DİRECTORY EXİTS");
                 Directory.CreateDirectory(dir);
             }
 
@@ -78,7 +79,6 @@ public class GameDataManager : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("save");
         WriteToJson();
         PlayerPrefs.SetInt("CurrentRingIndexKey", currentRingIndex);
         PlayerPrefs.SetInt("CurrentBraceletIndexKey", currentBraceletIndex);
@@ -104,8 +104,9 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    private void WriteToJson()
+    public void WriteToJson()
     {
+        Debug.Log("write to json ");
         string serializedData = JsonUtility.ToJson(dataLists);
         File.WriteAllText(dir + fileName, serializedData);
     }
@@ -117,7 +118,6 @@ public class GameDataManager : MonoBehaviour
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(true);
         //add this change to stacked changes and next upgrade index, also control if upgrades are finished in that theme, increase theme and reset nextUpgrade variable
         dataLists.freeUpgradesLeft++;
-        Debug.Log("gel");
     }
 
     public GameObject GetUpgradableObject()
