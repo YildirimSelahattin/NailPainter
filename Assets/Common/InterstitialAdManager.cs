@@ -67,7 +67,7 @@ public class InterstitialAdManager : MonoBehaviour
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdClosed event received");
-
+        // only sound side 
         if (GameManager.Instance.matchRate >= 69)
         {
             if (GameDataManager.Instance.playSound == 1)
