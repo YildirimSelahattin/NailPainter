@@ -4,12 +4,14 @@ using UnityEngine;
 using DG.Tweening;
 public class DiamondMachineManager : MonoBehaviour
 {
+    [SerializeField] int diamondIndex  ;
     GameObject diamondParent;
     [SerializeField] ParticleSystem diamondParticles;
 
     private void Start()
     {
         diamondParent = GameObject.FindGameObjectWithTag("DiamondParrent");
+        diamondParticles.GetComponent<ParticleSystemRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(diamondIndex);
     }
     private void OnTriggerExit(Collider other)
     {
@@ -17,7 +19,8 @@ public class DiamondMachineManager : MonoBehaviour
         {
             string currentTag = other.transform.tag;
             int index = currentTag[currentTag.Length - 1] - '0';
-            if (GameManager.Instance.currentLevel.nailDiamondArray[index] != 0)
+            //if this is the right nail for this diamond index
+            if (GameManager.Instance.currentLevel.nailDiamondArray[index] == diamondIndex)
             {
                 diamondParent.transform.GetChild(index).gameObject.SetActive(true);
                 diamondParent.transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().material = ColorManager.Instance.GetDiamondMaterialByIndex(GameManager.Instance.currentLevel.nailDiamondArray[index]);

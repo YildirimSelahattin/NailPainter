@@ -143,12 +143,12 @@ public class UIManager : MonoBehaviour
     {
         gameMusicObject.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
-        //Geçiş reklamı
+        //Geçiş reklamı is loaded
         if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
         {
             InterstitialAdManager.Instance.interstitialEndGame.Show();
         }
-        else
+        else//geçiş reklamı is not loaded, only sound side
         {
             if (matchRate >= 69)
             {
