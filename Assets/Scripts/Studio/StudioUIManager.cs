@@ -33,7 +33,7 @@ public class StudioUIManager : MonoBehaviour
     public float fillAmount;
     [SerializeField] Button upgradeWithMoneyButton;
     [SerializeField] Button upgradeFreelyButton;
-    public  Button upgradeWithAdButton;
+    public Button upgradeWithAdButton;
     [SerializeField] GameObject priceTextParent;
     [SerializeField] GameObject ringCheck;
     [SerializeField] GameObject braceletCheck;
@@ -47,6 +47,8 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Slider percentBar;
     [SerializeField] GameObject percentBarFillImage;
+    [SerializeField] GameObject percentBarBgImage;
+    [SerializeField] GameObject percentBarHandleImage;
     [SerializeField] GameObject sliderHandle;
     [SerializeField] GameObject themeFinishedPanel;
     [SerializeField] ParticleSystem cloudParticle;
@@ -92,8 +94,10 @@ public class StudioUIManager : MonoBehaviour
 
             //PERCENT BAR JOBS
             percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-            //leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
-            //rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+            percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+            leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
 
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
@@ -244,6 +248,8 @@ public class StudioUIManager : MonoBehaviour
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
 
         percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+        percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+        percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
         leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
 
@@ -252,14 +258,14 @@ public class StudioUIManager : MonoBehaviour
         // change all ring layers to uı
         for (int i = 1; i < contentForRing.transform.childCount - 1; i++)
         {
-            ChangeLayerToDefault(contentForRing,i);
+            ChangeLayerToDefault(contentForRing, i);
         }
         // open tick
         contentForRing.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
         GameDataManager.Instance.currentRingIndex = ringIndex;
 
         StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));// change layer of selected ring
-        
+
         //Bracelet calcs
         lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
