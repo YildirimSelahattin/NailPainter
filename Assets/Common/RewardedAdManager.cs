@@ -86,7 +86,6 @@ public class RewardedAdManager : MonoBehaviour
                 this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
         */
         // Called when an ad request has successfully loaded.
-        //this.rewardedupgradeAd.OnAdLoaded += HandleRewardedUpgradeAdLoaded;
         // Called when the user should be rewarded for interacting with the ad.
         this.rewardedupgradeAd.OnUserEarnedReward += HandleUserEarnedUpgradeReward;
         // Create an empty ad request.
@@ -175,6 +174,7 @@ public class RewardedAdManager : MonoBehaviour
         {
             StudioUIManager.Instance.upgradeWithAdButton.GetComponent<Button>().interactable = true;     
         }
+
         
     }
     public void MultiplierAd()
