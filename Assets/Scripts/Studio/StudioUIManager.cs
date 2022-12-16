@@ -69,6 +69,7 @@ public class StudioUIManager : MonoBehaviour
     [SerializeField] GameObject GiftTimesUIElementParent;
     [SerializeField] GameObject leftSliderDiamondParent;
     [SerializeField] GameObject rightSliderDiamondParent;
+    [SerializeField] GameObject queenCrown;
 
     string[] themeNames = { "BASIC", "YELLOW TOPAZ", "EMERALD", "RUBY", "PINK DIAMOND", "Base" };
     string[] themeNamesEnd =
@@ -146,10 +147,9 @@ public class StudioUIManager : MonoBehaviour
             //if there is no objects to upgrade
             if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
             {
+                percentBar.gameObject.SetActive(false);
+                queenCrown.SetActive(true);
                 //close all buttons
-                percentBar.DOKill();
-                percentBar.DOValue(1f, .2f);
-                percentBarHandleImage.SetActive(false);
                 upgradeFreelyButton.gameObject.SetActive(false);
                 upgradeWithMoneyButton.gameObject.SetActive(false);
                 priceTextParent.gameObject.SetActive(false);
@@ -159,7 +159,7 @@ public class StudioUIManager : MonoBehaviour
 
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
                 // open the relative arrows
-                roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+                //roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
                 //current object outline opened
                 //  OUTL�NE CODE BELOW
                 //roomParent[upgradeParentIndex].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]).gameObject.GetComponent<Outline>().enabled = true;
@@ -182,11 +182,7 @@ public class StudioUIManager : MonoBehaviour
                     else
                     {
                         upgradeWithAdButton.gameObject.SetActive(true);
-                        if (RewardedAdManager.Instance.rewardedupgradeAd.IsLoaded() == false)
-                        {
-                            Debug.Log("ADSdsas");
-                            upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
-                        }
+                        
                     }
                 }
                 else // if there is free upgrades
@@ -255,13 +251,15 @@ public class StudioUIManager : MonoBehaviour
         percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
         leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
-
+        leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 2).gameObject.SetActive(false);
+        rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 2).gameObject.SetActive(false);
         OpenRingOrBracelet(contentForRing.transform.GetChild(ringIndex).gameObject);
 
-        // change all ring layers to uı
+        // change all ring layers to default
         for (int i = 1; i < contentForRing.transform.childCount - 1; i++)
         {
-            ChangeLayerToDefault(contentForRing, i);
+           
+            StartCoroutine(ChangeLayerToDefault(contentForRing, i));
         }
         // open tick
         contentForRing.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
@@ -274,10 +272,10 @@ public class StudioUIManager : MonoBehaviour
         braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
         OpenRingOrBracelet(contentForBracelet.transform.GetChild(braceletIndex).gameObject);
 
-        // change all bracelet layers to uı
+        // change all bracelet layers to default
         for (int i = 1; i < contentForBracelet.transform.childCount - 1; i++)
         {
-            ChangeLayerToDefault(contentForBracelet, i);
+            StartCoroutine(ChangeLayerToDefault(contentForBracelet, i));
         }
         contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
         GameDataManager.Instance.currentBraceletIndex = braceletIndex;
@@ -298,9 +296,8 @@ public class StudioUIManager : MonoBehaviour
         //if all themes finished
         if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
         {
-            percentBar.DOKill();
-            percentBar.DOValue(1f, 0.2f);
-            percentBarHandleImage.SetActive(false);
+            percentBar.gameObject.SetActive(false);
+            queenCrown.SetActive(true);
             priceText.gameObject.SetActive(false);
             upgradeFreelyButton.gameObject.SetActive(false);
             upgradeWithMoneyButton.gameObject.SetActive(false);
@@ -359,7 +356,7 @@ public class StudioUIManager : MonoBehaviour
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
         //disable current parents arrow and outline
-        roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
+        //roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
         //OUTL�NE CODE BELOW
         //roomParent[parentIndexToUpgrade].transform.GetChild(upgradableParentsCurrentObjectIndex).gameObject.GetComponent<Outline>().enabled = false;
         // open and close indexes 
@@ -394,7 +391,7 @@ public class StudioUIManager : MonoBehaviour
             Debug.Log("parent index" + (parentIndexToUpgrade + 1) + "parent child index" + GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]);
             //roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]).gameObject.GetComponent<Outline>().enabled = true;
             FadeInFadeOut(roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).gameObject);
-            roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            //roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
             if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)
             {
                 upgradeFreelyButton.gameObject.SetActive(false);
@@ -414,11 +411,7 @@ public class StudioUIManager : MonoBehaviour
                     priceTextParent.SetActive(false);
                     upgradeWithMoneyButton.gameObject.SetActive(false);
                     upgradeWithAdButton.gameObject.SetActive(true);
-                    if (RewardedAdManager.Instance.rewardedupgradeAd.IsLoaded() == false)
-                    {
-                        Debug.Log("ADSdsas");
-                        upgradeWithAdButton.gameObject.GetComponent<Button>().interactable = false;
-                    }
+                    
                 }
             }
             //increase next upgrade parent
@@ -479,7 +472,7 @@ public class StudioUIManager : MonoBehaviour
     }
     private void FadeInFadeOutLoop(Material mat)
     {
-        mat.DOFade(0f / 255f, 1).OnComplete(() => mat.DOFade(200 / 255f, 1).OnComplete(() => FadeInFadeOutLoop(mat)));
+        mat.DOFade(0f / 255f, 1).OnComplete(() => mat.DOFade(80 / 255f, 1).OnComplete(() => FadeInFadeOutLoop(mat)));
     }
 
     //Will be called when ScrollRect changes
