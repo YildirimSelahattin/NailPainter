@@ -170,12 +170,10 @@ public class RewardedAdManager : MonoBehaviour
 
     public void HandleRewardedUpgradeAdLoaded(object sender, Reward args)
     {
-        if (SceneManager.GetActiveScene().buildIndex ==1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            StudioUIManager.Instance.upgradeWithAdButton.GetComponent<Button>().interactable = true;     
+            StudioUIManager.Instance.upgradeWithAdButton.GetComponent<Button>().interactable = true;
         }
-
-        
     }
     public void MultiplierAd()
     {

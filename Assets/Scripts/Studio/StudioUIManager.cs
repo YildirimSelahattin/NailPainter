@@ -159,7 +159,7 @@ public class StudioUIManager : MonoBehaviour
 
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
                 // open the relative arrows
-                //roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+                roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
                 //current object outline opened
                 //  OUTL�NE CODE BELOW
                 //roomParent[upgradeParentIndex].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[upgradeParentIndex]).gameObject.GetComponent<Outline>().enabled = true;
@@ -356,7 +356,7 @@ public class StudioUIManager : MonoBehaviour
         int parentIndexToUpgrade = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
         int upgradableParentsCurrentObjectIndex = GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade];
         //disable current parents arrow and outline
-        //roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
+        roomParent[parentIndexToUpgrade].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(false);
         //OUTL�NE CODE BELOW
         //roomParent[parentIndexToUpgrade].transform.GetChild(upgradableParentsCurrentObjectIndex).gameObject.GetComponent<Outline>().enabled = false;
         // open and close indexes 
@@ -391,7 +391,7 @@ public class StudioUIManager : MonoBehaviour
             Debug.Log("parent index" + (parentIndexToUpgrade + 1) + "parent child index" + GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]);
             //roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade+1]).gameObject.GetComponent<Outline>().enabled = true;
             FadeInFadeOut(roomParent[parentIndexToUpgrade + 1].transform.GetChild(GameDataManager.Instance.dataLists.room.currentRoomIndexes[parentIndexToUpgrade + 1]).gameObject);
-            //roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
+            roomParent[parentIndexToUpgrade + 1].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
             if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)
             {
                 upgradeFreelyButton.gameObject.SetActive(false);
