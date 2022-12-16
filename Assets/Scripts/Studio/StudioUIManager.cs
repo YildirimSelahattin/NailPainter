@@ -93,11 +93,11 @@ public class StudioUIManager : MonoBehaviour
             }
 
             //PERCENT BAR JOBS
-            percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-            percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-            percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-            leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
-            rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex-1).gameObject.SetActive(true);
+            percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
+            percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
+            percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
+            leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
+            rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
 
             braceletIndex = GameDataManager.Instance.currentBraceletIndex;
             ringIndex = GameDataManager.Instance.currentRingIndex;
@@ -147,6 +147,9 @@ public class StudioUIManager : MonoBehaviour
             if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
             {
                 //close all buttons
+                percentBar.DOKill();
+                percentBar.DOValue(1f, .2f);
+                percentBarHandleImage.SetActive(false);
                 upgradeFreelyButton.gameObject.SetActive(false);
                 upgradeWithMoneyButton.gameObject.SetActive(false);
                 priceTextParent.gameObject.SetActive(false);
@@ -247,9 +250,9 @@ public class StudioUIManager : MonoBehaviour
         lastRingScrollRectValue = scrollRectYPoss[ringIndex];
         ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
 
-        percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-        percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
-        percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex];
+        percentBarFillImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
+        percentBarBgImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
+        percentBarHandleImage.GetComponent<Image>().color = sliderColorArr[GameDataManager.Instance.dataLists.room.generalThemeIndex - 1];
         leftSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
         rightSliderDiamondParent.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject.SetActive(true);
 
@@ -293,8 +296,11 @@ public class StudioUIManager : MonoBehaviour
         //bracelet
         OpenRingOrBracelet(contentForBracelet.transform.GetChild(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1).gameObject);
         //if all themes finished
-        if (GameDataManager.Instance.dataLists.room.generalThemeIndex == 5)
+        if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
         {
+            percentBar.DOKill();
+            percentBar.DOValue(1f, 0.2f);
+            percentBarHandleImage.SetActive(false);
             priceText.gameObject.SetActive(false);
             upgradeFreelyButton.gameObject.SetActive(false);
             upgradeWithMoneyButton.gameObject.SetActive(false);
