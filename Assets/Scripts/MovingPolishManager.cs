@@ -74,6 +74,7 @@ public class MovingPolishManager : MonoBehaviour
     {
         UIManager.Instance.fasterButton.SetActive(false);
         transform.DOKill();
-        transform.DOLocalMove(new Vector3(endPos.x, endPos.y + 1, endPos.z), 3).OnComplete(() => CloseBrushAndOpenRewarPanel());
+        camera.transform.DOKill();
+         transform.DOLocalMove(new Vector3(endPos.x, endPos.y + 1, endPos.z), 3).OnComplete(() => CloseBrushAndOpenRewarPanel());
     }
 }

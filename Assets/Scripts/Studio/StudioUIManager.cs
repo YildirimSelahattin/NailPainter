@@ -122,20 +122,21 @@ public class StudioUIManager : MonoBehaviour
             lastRingScrollRectValue = scrollRectYPoss[ringIndex];
             ringScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[ringIndex], 0.1f).OnComplete(() => StartCoroutine(AddRingListener()));
             contentForRing.transform.GetChild(ringIndex).transform.GetChild(2).gameObject.SetActive(true);
+
             if (ringIndex != 0)
             {
                 StartCoroutine(ChangeLayerToUI(contentForRing, ringIndex));
             }
+
             //Bracelet calcs
             lastBraceletScrollRectValue = scrollRectYPoss[braceletIndex];
             braceletScrollRect.DOVerticalNormalizedPos(scrollRectYPoss[braceletIndex], 0.1f).OnComplete(() => StartCoroutine(AddBraceletListener()));
             contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
+
             if (braceletIndex != 0)
             {
-
                 StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
             }
-
 
             ///ROOM JOBS
             //update slider
@@ -144,6 +145,7 @@ public class StudioUIManager : MonoBehaviour
             //write general theme index
             generalThemeText.text = themeNames[(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1)];
             CongratsThemeText.text = themeNamesEnd[(GameDataManager.Instance.dataLists.room.generalThemeIndex - 1)];
+
             //if there is no objects to upgrade
             if (GameDataManager.Instance.dataLists.room.generalThemeIndex > 4)
             {
@@ -156,7 +158,6 @@ public class StudioUIManager : MonoBehaviour
             }
             else // if there is objects left to upgrade //stacked changes TODO
             {
-
                 int upgradeParentIndex = GameDataManager.Instance.dataLists.room.nextUpgradeIndex;
                 // open the relative arrows
                 roomParent[upgradeParentIndex].transform.GetChild(UPGRADE_CHILD_INDEX).gameObject.SetActive(true);
@@ -182,7 +183,6 @@ public class StudioUIManager : MonoBehaviour
                     else
                     {
                         upgradeWithAdButton.gameObject.SetActive(true);
-                        
                     }
                 }
                 else // if there is free upgrades
@@ -258,7 +258,7 @@ public class StudioUIManager : MonoBehaviour
         // change all ring layers to default
         for (int i = 1; i < contentForRing.transform.childCount - 1; i++)
         {
-           
+
             StartCoroutine(ChangeLayerToDefault(contentForRing, i));
         }
         // open tick
@@ -280,8 +280,6 @@ public class StudioUIManager : MonoBehaviour
         contentForBracelet.transform.GetChild(braceletIndex).transform.GetChild(2).gameObject.SetActive(true);
         GameDataManager.Instance.currentBraceletIndex = braceletIndex;
         StartCoroutine(ChangeLayerToUI(contentForBracelet, braceletIndex));
-
-
 
         roomParentOfParents.SetActive(true);
         normalTimesUIElementParent.SetActive(true);
@@ -313,8 +311,6 @@ public class StudioUIManager : MonoBehaviour
             percentBar.DOValue(0, 1f);
             if (GameDataManager.Instance.upgradeAmountInSession < 2)
             {
-
-
                 if (GameDataManager.Instance.dataLists.freeUpgradesLeft < 1)//there is no free upgrade
                 {
                     priceText.text = GameDataManager.Instance.objectsByIndexArray[0][GameDataManager.Instance.dataLists.room.currentRoomIndexes[0] + 1].price.ToString();
@@ -332,7 +328,6 @@ public class StudioUIManager : MonoBehaviour
             else
             {
                 upgradeWithAdButton.gameObject.SetActive(false);
-
             }
         }
     }
@@ -411,7 +406,7 @@ public class StudioUIManager : MonoBehaviour
                     priceTextParent.SetActive(false);
                     upgradeWithMoneyButton.gameObject.SetActive(false);
                     upgradeWithAdButton.gameObject.SetActive(true);
-                    
+
                 }
             }
             //increase next upgrade parent
