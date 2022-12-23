@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,14 +10,19 @@ public class PlayerController : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction;
     public float speed = 5;
     float distanceTravelled;
-    float xOffset, yOffset;
-    [SerializeField] float maxDisatance;
+     public float xOffset, yOffset;
+    public float maxDisatance;
     [SerializeField] float controllerSpeed = 5;
-    float h;
+    public float h;
     [SerializeField] GameObject LevelParrent;
-
+    public static PlayerController Instance;
+    public bool handsFree =true;
     void Start()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
         pathCreator = LevelParrent.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<PathCreator>();
 
         if (pathCreator != null)
@@ -28,23 +34,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float tempSpeed;
-        float moveInput = Input.GetAxis("Horizontal");
-        tempSpeed = controllerSpeed;
+        float tempSpeed = 0 ;
+        //float moveInput = Input.GetAxis("Horizontal");
+        //tempSpeed = controllerSpeed;
 
-        
         if (Input.touchCount > 0) 
         {
-            
+            handsFree = false;
             Touch curTouch = Input.GetTouch(0);
             h = curTouch.deltaPosition.x;
             tempSpeed = controllerSpeed;
         }
         else
         {
-            tempSpeed = 0;
+            h = 0;
         }
-        
+
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
@@ -52,7 +57,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
             xOffset += h * Time.deltaTime * tempSpeed;
-            //xOffset += moveInput * Time.deltaTime * tempSpeed * 50 ;
+
             transform.position = desiredPoint;
 
             xOffset = Mathf.Clamp(xOffset, -maxDisatance, maxDisatance);
