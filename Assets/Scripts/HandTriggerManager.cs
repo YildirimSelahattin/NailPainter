@@ -27,8 +27,23 @@ public class HandTriggerManager : MonoBehaviour
     {
         standartScale = diamondImage.localScale;
         diamondImageScaleReach = diamondImage.localScale * 1.1f;
-    }
 
+
+    }
+    private void Update()
+    {
+       
+        if(PlayerController.Instance!=null)
+        {
+            Quaternion tempRotation = transform.localRotation;
+            float  a = Mathf.Clamp( PlayerController.Instance.h/600,-10,10);
+            Debug.Log("aaa"+a);
+            tempRotation.x = a;
+            transform.localRotation = tempRotation;
+          
+        }
+      
+    }
 
     //Player(Hand) in trigger islevleri
     private void OnTriggerEnter(Collider other)
