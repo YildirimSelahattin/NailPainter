@@ -18256,7 +18256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17.28003, y: -11.159912}
+  m_AnchoredPosition: {x: 17.28125, y: -11.15625}
   m_SizeDelta: {x: 2321.75, y: 2281.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927076658
@@ -20992,7 +20992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -199.99976}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 0, y: -400.0005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1063492128
@@ -31259,7 +31259,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 56244889}
         m_TargetAssemblyTypeName: LevelDesignManager, Assembly-CSharp
-        m_MethodName: StuidoScene
+        m_MethodName: HomeToStuidoScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31383,7 +31383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -199.99976}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 0, y: -400.0005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1657624473
@@ -38946,7 +38946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 50
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.85
   m_ReferenceResolution: {x: 1080, y: 2400}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -39465,20 +39465,10 @@ MonoBehaviour:
   JSONText: {fileID: 4900000, guid: 0aa8c408e1dfc3644835d30e1e47387d, type: 3}
   objectPrefabList:
   - {fileID: 0}
-  - {fileID: 919132149155446097, guid: 88e3deb0512e93d4aadeb5cf7f6b807c, type: 3}
-  - {fileID: 919132149155446097, guid: 167cbf7c7c77a9d42840d1e2cc411e74, type: 3}
-  - {fileID: 919132149155446097, guid: b7af6dc59a13b91418dd0e31a2c2bb90, type: 3}
-  - {fileID: 919132149155446097, guid: 12ed744dd3f0fda47a5d25734ce03424, type: 3}
-  - {fileID: 0}
-  - {fileID: 919132149155446097, guid: cc06209834b9f8343b53440ecd1a3d3b, type: 3}
-  - {fileID: 7106532809723153270, guid: 6c34d6f9a068e904d9869e16e18a8536, type: 3}
-  - {fileID: 919132149155446097, guid: 05b62eb9f40605546ba362db501165fb, type: 3}
-  - {fileID: 7028718253037790016, guid: daf07775d35fc81469444c3eb26b166b, type: 3}
-  - {fileID: 0}
-  - {fileID: 919132149155446097, guid: bd1e601a6c724044f9d155e27fb033d5, type: 3}
-  - {fileID: 919132149155446097, guid: 12793813b027ead47a560a68fef5484f, type: 3}
-  - {fileID: 919132149155446097, guid: cee73ef0bab87df468a643bdba02d8af, type: 3}
-  - {fileID: 919132149155446097, guid: d0428eaac7dcb9d4683c02ab8b6da050, type: 3}
+  - {fileID: 919132149155446097, guid: fb0d6a67dc907ff449dd5cea82225fe5, type: 3}
+  - {fileID: 919132149155446097, guid: 7a37ede197f42af4f98bab75396f4878, type: 3}
+  - {fileID: 919132149155446097, guid: 61880b505e779b74b982413f027e3f81, type: 3}
+  - {fileID: 919132149155446097, guid: c9e957c982b1897489ab8a7845a456b1, type: 3}
   - {fileID: 0}
   - {fileID: 919132149155446097, guid: 4d356a00096b1524b8c83c06762da417, type: 3}
   - {fileID: 919132149155446097, guid: fb01ca00ed18a2445a7680968637ac54, type: 3}
@@ -39495,10 +39485,10 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 63256eea671795d49a5ecdf1e71ff9d3, type: 3}
   - {fileID: 919132149155446097, guid: 88adf162b0c3ef44e977363ddb5b3e1a, type: 3}
   - {fileID: 0}
-  - {fileID: 919132149155446097, guid: fb0d6a67dc907ff449dd5cea82225fe5, type: 3}
-  - {fileID: 919132149155446097, guid: 7a37ede197f42af4f98bab75396f4878, type: 3}
-  - {fileID: 919132149155446097, guid: 61880b505e779b74b982413f027e3f81, type: 3}
-  - {fileID: 919132149155446097, guid: c9e957c982b1897489ab8a7845a456b1, type: 3}
+  - {fileID: 919132149155446097, guid: bd1e601a6c724044f9d155e27fb033d5, type: 3}
+  - {fileID: 919132149155446097, guid: 12793813b027ead47a560a68fef5484f, type: 3}
+  - {fileID: 919132149155446097, guid: cee73ef0bab87df468a643bdba02d8af, type: 3}
+  - {fileID: 919132149155446097, guid: d0428eaac7dcb9d4683c02ab8b6da050, type: 3}
   - {fileID: 0}
   - {fileID: 919132149155446097, guid: c97fa8cecdd7fe44d9f2172f1358f16b, type: 3}
   - {fileID: 919132149155446097, guid: c2dba0e2b781bc744b7eb66fc3201d79, type: 3}
@@ -39519,6 +39509,16 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 8a91ce90e8e22f84286c1959fa6f39f3, type: 3}
   - {fileID: 919132149155446097, guid: 7e98471385e67f24f90fbfa6621cd5f4, type: 3}
   - {fileID: 919132149155446097, guid: bff5f627516b53c4ab790ef0baf6b073, type: 3}
+  - {fileID: 0}
+  - {fileID: 919132149155446097, guid: 88e3deb0512e93d4aadeb5cf7f6b807c, type: 3}
+  - {fileID: 919132149155446097, guid: 167cbf7c7c77a9d42840d1e2cc411e74, type: 3}
+  - {fileID: 919132149155446097, guid: b7af6dc59a13b91418dd0e31a2c2bb90, type: 3}
+  - {fileID: 919132149155446097, guid: 12ed744dd3f0fda47a5d25734ce03424, type: 3}
+  - {fileID: 0}
+  - {fileID: 919132149155446097, guid: cc06209834b9f8343b53440ecd1a3d3b, type: 3}
+  - {fileID: 7106532809723153270, guid: 6c34d6f9a068e904d9869e16e18a8536, type: 3}
+  - {fileID: 919132149155446097, guid: 05b62eb9f40605546ba362db501165fb, type: 3}
+  - {fileID: 7028718253037790016, guid: daf07775d35fc81469444c3eb26b166b, type: 3}
   ringArray: []
   braceletArray: []
   dataLists:

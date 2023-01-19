@@ -15,8 +15,7 @@ public class LevelDesignManager : MonoBehaviour
     void Start()
     {
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0) % 30;
-
-
+        
         Debug.Log(nextLevelNumber);
         levelPrefab = Instantiate(Levels[nextLevelNumber], transform.position, transform.rotation);
         Material[] levelSkyboxMat = levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials;
@@ -38,6 +37,14 @@ public class LevelDesignManager : MonoBehaviour
     }
 
     public void StuidoScene()
+    {
+        PlayerPrefs.SetInt("NextLevelNumberKey", nextLevelNumber + 1);
+        UIManager.Instance.rewardItem.gameObject.SetActive(false);
+        UIManager.Instance.earnedRewardPanel.gameObject.SetActive(false);
+        UIManager.Instance.LoadScene(1);
+    }
+    
+    public void HomeToStuidoScene()
     {
         UIManager.Instance.rewardItem.gameObject.SetActive(false);
         UIManager.Instance.earnedRewardPanel.gameObject.SetActive(false);

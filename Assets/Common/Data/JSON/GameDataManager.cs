@@ -5,6 +5,7 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using static DataLists;
+
 //THE ONLY DATA READER , READS FROM JSONTEXT
 public class GameDataManager : MonoBehaviour
 {
@@ -56,23 +57,25 @@ public class GameDataManager : MonoBehaviour
 
             if (!Directory.Exists(dir))
             {
-                Debug.Log("DİRECTORY EXİTS");
+                Debug.Log("DIRECTORY EXITS");
                 Directory.CreateDirectory(dir);
             }
 
             ReadFromJson();
-            objectsByIndexArray = new GeneralDataStructure[][] {
-            GameDataManager.Instance.dataLists.wall,
-            GameDataManager.Instance.dataLists.floor,
-            GameDataManager.Instance.dataLists.platform,
-            GameDataManager.Instance.dataLists.picture,
-            GameDataManager.Instance.dataLists.tabure,
-            GameDataManager.Instance.dataLists.komodin,
-            GameDataManager.Instance.dataLists.sofa,
-            GameDataManager.Instance.dataLists.flower,
-            GameDataManager.Instance.dataLists.chair,
-            GameDataManager.Instance.dataLists.table,
-            GameDataManager.Instance.dataLists.mirror};
+            objectsByIndexArray = new GeneralDataStructure[][]
+            {
+                GameDataManager.Instance.dataLists.sofa,
+                GameDataManager.Instance.dataLists.platform,
+                GameDataManager.Instance.dataLists.picture,
+                GameDataManager.Instance.dataLists.tabure,
+                GameDataManager.Instance.dataLists.komodin,
+                GameDataManager.Instance.dataLists.flower,
+                GameDataManager.Instance.dataLists.chair,
+                GameDataManager.Instance.dataLists.table,
+                GameDataManager.Instance.dataLists.mirror,
+                GameDataManager.Instance.dataLists.wall,
+                GameDataManager.Instance.dataLists.floor
+            };
             DontDestroyOnLoad(this.gameObject);
         }
     }
@@ -123,38 +126,50 @@ public class GameDataManager : MonoBehaviour
     public GameObject GetUpgradableObject()
     {
         int nextUpgradeIndex = (dataLists.room.nextUpgradeIndex + dataLists.freeUpgradesLeft) % 11;
-        GameObject upgradableObject = objectPrefabList[nextUpgradeIndex * 5 + (dataLists.room.currentRoomIndexes[nextUpgradeIndex] + 1)];
+        GameObject upgradableObject =
+            objectPrefabList[nextUpgradeIndex * 5 + (dataLists.room.currentRoomIndexes[nextUpgradeIndex] + 1)];
         upgradableObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
-        if (nextUpgradeIndex > 1)
+        if (nextUpgradeIndex == 7)
         {
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
-        if (nextUpgradeIndex == 6) //Koltuk
+
+        if (nextUpgradeIndex == 1)
+        {
+            upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
+        }
+
+        if (nextUpgradeIndex == 0) //Koltuk
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
-        if (nextUpgradeIndex == 5) //Komodin
+
+        if (nextUpgradeIndex == 3) //Komodin
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
-        if (nextUpgradeIndex == 2) //Platform
+
+        if (nextUpgradeIndex == 4) //Platform
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
-        if (nextUpgradeIndex == 8) //Sandalye
+
+        if (nextUpgradeIndex == 6) //Sandalye
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         }
-        if (nextUpgradeIndex == 4)
+
+        if (nextUpgradeIndex == 2)
         {
             upgradableObject.transform.position = new Vector3(0, -1f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         }
-        if (nextUpgradeIndex == 7)
+
+        if (nextUpgradeIndex == 5)
         {
             upgradableObject.transform.position = new Vector3(0, -2f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
@@ -164,6 +179,7 @@ public class GameDataManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
+
         return upgradableObject;
     }
 
@@ -174,6 +190,7 @@ public class GameDataManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
+
         return ring;
     }
 
@@ -185,6 +202,7 @@ public class GameDataManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("UI");
         }
+
         return bracelet;
     }
 
@@ -193,6 +211,5 @@ public class GameDataManager : MonoBehaviour
         dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         File.Delete(dir + fileName);
         PlayerPrefs.DeleteAll();
-
     }
 }
