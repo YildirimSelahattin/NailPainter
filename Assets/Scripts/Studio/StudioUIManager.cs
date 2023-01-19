@@ -26,6 +26,19 @@ public class StudioUIManager : MonoBehaviour
         int mirrorParentIndex = 10;
     */
 
+    /*
+       int sofaParentIndex = 0;
+       int platformParentIndex = 1;
+       int pictureParentIndex = 2;
+       int tabureParentIndex = 3;
+       int komodinParentIndex = 4;
+       int flowerParentIndex = 5;
+       int chairParentIndex = 6;
+       int tableParentIndex = 7;
+       int mirrorParentIndex = 8;
+        int wallParentIndex = 9;
+       int floorParentIndex = 10;
+   */
     [SerializeField] Material shiningMaterial;
     public static StudioUIManager Instance;
     [SerializeField] GameObject roomParentOfParents;

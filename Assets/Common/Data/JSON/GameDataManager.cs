@@ -62,17 +62,17 @@ public class GameDataManager : MonoBehaviour
 
             ReadFromJson();
             objectsByIndexArray = new GeneralDataStructure[][] {
-            GameDataManager.Instance.dataLists.wall,
-            GameDataManager.Instance.dataLists.floor,
+            GameDataManager.Instance.dataLists.sofa,
             GameDataManager.Instance.dataLists.platform,
             GameDataManager.Instance.dataLists.picture,
             GameDataManager.Instance.dataLists.tabure,
             GameDataManager.Instance.dataLists.komodin,
-            GameDataManager.Instance.dataLists.sofa,
             GameDataManager.Instance.dataLists.flower,
             GameDataManager.Instance.dataLists.chair,
             GameDataManager.Instance.dataLists.table,
-            GameDataManager.Instance.dataLists.mirror};
+            GameDataManager.Instance.dataLists.mirror,
+            GameDataManager.Instance.dataLists.wall,
+            GameDataManager.Instance.dataLists.floor};
             DontDestroyOnLoad(this.gameObject);
         }
     }
@@ -129,32 +129,32 @@ public class GameDataManager : MonoBehaviour
         {
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
-        if (nextUpgradeIndex == 6) //Koltuk
+        if (nextUpgradeIndex == 0) //Koltuk
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.40f, 0.40f, 0.40f);
         }
-        if (nextUpgradeIndex == 5) //Komodin
+        if (nextUpgradeIndex == 3) //Komodin
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
-        if (nextUpgradeIndex == 2) //Platform
+        if (nextUpgradeIndex == 4) //Platform
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
-        if (nextUpgradeIndex == 8) //Sandalye
+        if (nextUpgradeIndex == 6) //Sandalye
         {
             upgradableObject.transform.position = new Vector3(0, -1.5f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         }
-        if (nextUpgradeIndex == 4)
+        if (nextUpgradeIndex == 2)
         {
             upgradableObject.transform.position = new Vector3(0, -1f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         }
-        if (nextUpgradeIndex == 7)
+        if (nextUpgradeIndex == 5)
         {
             upgradableObject.transform.position = new Vector3(0, -2f, 0);
             upgradableObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);

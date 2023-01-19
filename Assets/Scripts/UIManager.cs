@@ -100,12 +100,21 @@ public class UIManager : MonoBehaviour
     {
         PlayerStartMovement();
         tapToStartCanvas.gameObject.SetActive(false);
-        bg.gameObject.SetActive(false);
+        //bg.gameObject.SetActive(false);
+        bg.GetComponent<Image>().color = new Vector4(0,0,0,0.5f);
+        targetPicAnimator.SetBool("isStart", true);
         studioButton.gameObject.SetActive(false);
         scoreArea.gameObject.SetActive(true);
-        targetPicAnimator.SetBool("isStart", true);
+        StartCoroutine(CloseBlackBgAfterDelay());
         camera.transform.DOLocalMove(cameraRealPos, 1f);
         camera.transform.DOLocalRotate(cameraRealRot, 1f);
+    }
+    public IEnumerator CloseBlackBgAfterDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
+        bg.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
+        bg.SetActive(false);
+        follower.GetComponent<PlayerController>().speed = 10;
     }
 
     public async void LoadScene(int sceneID)
