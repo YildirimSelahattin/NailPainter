@@ -95,14 +95,14 @@ public class GameDataManager : MonoBehaviour
         //if there is no file, use the default values 
         if (!File.Exists(fullPath))
         {
-            Debug.Log("b�tyle bir dosya yok, olustur");
+            Debug.Log("btyle bir dosya yok, olustur");
             File.WriteAllText(fullPath, JSONText.text);
             dataLists = JsonUtility.FromJson<DataLists>(JSONText.text);
         }
         //if there is file to read 
         else
         {
-            Debug.Log("b�tyle bir dosya var");
+            Debug.Log("btyle bir dosya var");
             dataLists = JsonUtility.FromJson<DataLists>(File.ReadAllText(fullPath));
         }
     }

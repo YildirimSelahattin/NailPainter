@@ -152,6 +152,11 @@ public class UIManager : MonoBehaviour
     {
         gameMusicObject.SetActive(false);
         int matchRate = (int)GameManager.Instance.CompareTwoHands();
+        bool isUserCompleteLevel = true;
+        
+        
+        TinySauce.OnGameFinished(isUserCompleteLevel, matchRate,(CurrentLevelNumber + 1).ToString());
+        
         //Geçiş reklamı is loaded
         if (InterstitialAdManager.Instance.interstitialEndGame.IsLoaded())
         {

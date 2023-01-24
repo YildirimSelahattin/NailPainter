@@ -60,9 +60,6 @@ public class GameManager : MonoBehaviour
         ringParent.transform.GetChild(GameDataManager.Instance.currentRingIndex).gameObject.SetActive(true);
         braceletParent.transform.GetChild(GameDataManager.Instance.currentBraceletIndex).gameObject.SetActive(true);
     }
-    void Update()
-    {
-    }
 
     public float CompareTwoHands()
     {

@@ -11,12 +11,16 @@ public class LevelDesignManager : MonoBehaviour
     [SerializeField] int nextLevelNumber;
     [SerializeField] Material[] skyMat;
     [SerializeField] Material[] roadMat;
+    int trackLevelNumber;
 
     void Start()
     {
         nextLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0) % 30;
+
+        trackLevelNumber = PlayerPrefs.GetInt("NextLevelNumberKey", 0);
         
-        Debug.Log(nextLevelNumber);
+        TinySauce.OnGameStarted(trackLevelNumber.ToString());
+        
         levelPrefab = Instantiate(Levels[nextLevelNumber], transform.position, transform.rotation);
         Material[] levelSkyboxMat = levelPrefab.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().materials;
         levelSkyboxMat[0] = roadMat[nextLevelNumber % 4];

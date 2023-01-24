@@ -8,10 +8,6 @@ public class StartScreenRes : MonoBehaviour
     void Start()
     {
         int _width = Display.main.systemWidth;
-        int _width2 = Screen.width;
-
-        Debug.Log("Width: " + _width);
-        Debug.LogError("Width: " + _width2);
 
         if (_width > 1060)
         {
